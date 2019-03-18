@@ -1,18 +1,20 @@
 package Map;
 import utilityClasses.Pair;
+import Map.Map.Status;
 
 public class MapTile {
 
 	Pair<Integer,Integer> position;
-	boolean status;
+	Status status;
 	
 	/**
      * Constructor
      */
 	public MapTile(int o1,int o2) {
 		
-		Pair<Integer,Integer> tmp = new Pair<>(o1,o2);
-		position=tmp;
+		position = new Pair<>(o1,o2);
+		status = Status.EMPTY;
+		.
 	}
 	
 	public Pair<Integer, Integer> getPosition() {
@@ -23,11 +25,11 @@ public class MapTile {
 		this.position = position;
 	}
 	
-	public boolean getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 	
-	public void setStatus(boolean status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	
