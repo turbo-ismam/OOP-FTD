@@ -14,7 +14,6 @@ public class MapTile {
 		
 		position = new Pair<>(o1,o2);
 		status = Status.EMPTY;
-		.
 	}
 	
 	public Pair<Integer, Integer> getPosition() {
