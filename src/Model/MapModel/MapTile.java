@@ -1,8 +1,10 @@
-package Map;
+package Model.MapModel;
+
+import Model.MapModel.MapModel.Status;
 import utilityClasses.Pair;
-import Map.Map.Status;
 
 public class MapTile {
+
 
 	Pair<Integer,Integer> position;
 	Status status;
