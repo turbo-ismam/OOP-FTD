@@ -1,25 +1,32 @@
 package View.MainMenu;
 
+import java.io.FileNotFoundException;
+
+import View.GameView.GameView;
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainMenu extends Application{
-	
+	Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 	Button buttonStart, buttonExit, b3;
 	Scene menu, gameWindow;
 	
 	public void start(Stage stage){
 		
 			stage.setTitle("FantasyTD 1.0");
-			
 			buttonStart = new Button();
 			buttonStart.setText("Start game");
-			buttonStart.setOnAction(e -> stage.setScene(gameWindow));
-			
+			//buttonStart.setOnAction(e -> stage.setScene(gameWindow));
+			buttonStart.setOnAction(e ->{
+				stage.setScene(new GameView());
+				stage.centerOnScreen();
+			});
 			buttonExit = new Button();
 			buttonExit.setText("Exit");
 			buttonExit.setOnAction(e -> stage.close());
