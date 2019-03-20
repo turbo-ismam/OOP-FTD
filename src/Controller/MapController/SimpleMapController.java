@@ -18,7 +18,7 @@ public class SimpleMapController implements MapController {
 	 */
 	public SimpleMapController() {
 		this.tilelist = mapModel.tileList();
-		this.gridSize = mapModel.getGridSize();
+		gridSize = mapModel.getGridSize();
 	}
 
 	@Override
