@@ -3,7 +3,7 @@ package Controller.MapController;
 import java.util.ArrayList; 
 import java.util.List;
 
-import Model.MapModel.MapModel.Status;
+import Model.MapModel.MapTile.Status;
 import Model.MapModel.MapTile;
 import Model.MapModel.SimpleMapModel;
 

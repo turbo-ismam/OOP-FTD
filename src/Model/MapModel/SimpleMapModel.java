@@ -2,8 +2,7 @@ package Model.MapModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import utilityClasses.Pair;
+import Model.MapModel.MapTile.Status;
 
 public class SimpleMapModel implements MapModel{
 
@@ -19,7 +18,7 @@ public class SimpleMapModel implements MapModel{
 
 		for (int i=0;i<gridSize;i++) {
 			for (int j=0;j<gridSize;j++) {
-				MapTile tile = new MapTile(i,j);
+				MapTile tile = new MapTileImpl(i,j);
 				grid.add(tile);
 			}
 		}
