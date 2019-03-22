@@ -7,12 +7,6 @@ import utilityClasses.Pair;
 
 public interface MapModel {
 	
-	public enum Status {
-		EMPTY,
-		PATH,
-		WITHTOWER,
-	}
-	
 	/**
 	 * @return an ArrayList that contain all the tiles
 	 */
