@@ -3,6 +3,7 @@ package Model.MapModel;
 import utilityClasses.Pair;
 
 public interface MapTile {
+	
 		public enum Status {
 			EMPTY,
 			PATH,
