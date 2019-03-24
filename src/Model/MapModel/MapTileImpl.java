@@ -11,9 +11,9 @@ public class MapTileImpl implements MapTile {
 	/**
      * Constructor
      */
-	public MapTileImpl(int o1,int o2) {
+	public MapTileImpl(int x,int y) {
 		
-		position = new Pair<>(o1,o2);
+		position = new Pair<>(x,y);
 		status = Status.EMPTY;
 	}
 	

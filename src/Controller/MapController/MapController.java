@@ -1,6 +1,7 @@
 package Controller.MapController;
 
 import Model.MapModel.MapTile;
+import utilityClasses.Pair;
 
 public interface MapController {
 		
@@ -29,15 +30,35 @@ public interface MapController {
 	public boolean isWITHTOWER(int position);
 	
 	/**
+	 * @param position
+	 * @return true if the tile is taken by an enemy
+	 */
+	public boolean isWITHENEMY(int position);
+	
+	/**
 	 * @param position: index of the requested tile
-	 * @return requested tile8
+	 * @return requested tile
 	 */
 	public MapTile getTile(int position);
 	
 	/**
-	 * Method to generate and place a new tower in the map
+	 * Method to set a tile
 	 */
-	public void placeTowerMap();
+	public void setTile(MapTile tile);
 	
+	/**
+	 * from the arraylist position return a Pair
+	 * @param position
+	 * @return Pair<Integer,Integer>
+	 */
+	public Pair<Integer,Integer> fromIntToPair(int position);
+	
+	/**
+	 * from the pair position return the position in the arraylist
+	 * @param position
+	 * @return
+	 */
+	public int fromPairToInt(Pair<Integer,Integer> position);
+
 	
 }
