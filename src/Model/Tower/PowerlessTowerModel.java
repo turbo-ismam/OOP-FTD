@@ -2,9 +2,9 @@ package Model.Tower;
 
 import utilityClasses.Pair;
 
-public class PowerLessTowerModel implements Tower{
+public class PowerlessTowerModel implements Tower{
 
-	public PowerLessTowerModel() {
+	public PowerlessTowerModel() {
 		
 	}
 	

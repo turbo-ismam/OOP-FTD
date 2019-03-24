@@ -1,8 +1,8 @@
 package Controller.Tower;
 
-import Controller.MapController.MapController;
+import Controller.MapController.MapController; 
 import Model.Player.Player;
-import Model.Tower.PowerLessTowerModel;
+import Model.Tower.PowerlessTowerModel;
 import Model.Tower.Tower;
 import utilityClasses.Pair;
 
@@ -21,7 +21,7 @@ public class PowerlessTower implements TowerController {
 	public Tower buyTower() {
 		
 		if (this.player.getCoins()>this.tower.getCost()) {
-			PowerLessTowerModel tower = new PowerLessTowerModel();
+			PowerlessTowerModel tower = new PowerlessTowerModel();
 			player.setCoins(player.getCoins()-tower.getCost());
 			return tower;
 		} else return null;

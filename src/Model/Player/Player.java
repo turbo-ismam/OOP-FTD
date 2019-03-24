@@ -1,5 +1,10 @@
 package Model.Player;
 
+/**
+ * 
+ * @author SCRIVI IL TUO NOME
+ *
+ */
 public interface Player {
 
 	String getName();
