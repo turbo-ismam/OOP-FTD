@@ -16,4 +16,5 @@ public interface MapModel {
 	 * @return the map size
 	 */
 	public int getGridSize();
+	
 }

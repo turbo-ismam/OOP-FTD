@@ -60,9 +60,20 @@ public class SimpleMapController implements MapController {
 	} 
 
 	@Override
-	public MapTile getTile(int position) {
+	public MapTile getTileInt(int position) {
 		
 		return tilelist.get(position);
+	}
+	
+	@Override
+	public MapTile getTilePair(Pair<Integer, Integer> position) {
+
+		for (int i=0;i<this.gridSize*this.gridSize;i++) {
+			if(this.tilelist.get(i).getPosition().getX()==position.getX() && this.tilelist.get(i).getPosition().getY()==position.getY()) {
+				return this.tilelist.get(i);
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -74,9 +85,11 @@ public class SimpleMapController implements MapController {
 	}
 
 	@Override
-	public Pair<Integer, Integer> fromIntToPair(int position) {
+	public Pair<Integer, Integer> fromIntToPair(int position) {			//by marcopacco
 		
-		return null; //TROVA UN MODO, se esiste
+		int x = position/this.gridSize;
+		int y = position%this.gridSize;
+		return new Pair<>(x,y);
 	}
 
 	@Override
@@ -84,6 +97,8 @@ public class SimpleMapController implements MapController {
 		
 		return position.getX()*this.gridSize+position.getY()+1;
 	}
+
+	
 
 
 
