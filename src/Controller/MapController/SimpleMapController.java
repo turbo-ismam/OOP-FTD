@@ -22,6 +22,22 @@ public class SimpleMapController implements MapController {
 		gridSize = mapModel.getGridSize();
 	}
 
+	public SimpleMapModel getMapModel() {
+		return mapModel;
+	}
+
+	public void setMapModel(SimpleMapModel mapModel) {
+		this.mapModel = mapModel;
+	}
+
+	public int getGridSize() {
+		return gridSize;
+	}
+
+	public void setGridSize(int gridSize) {
+		this.gridSize = gridSize;
+	}
+
 	@Override
 	public boolean positionable(int position) {
 		
@@ -84,7 +100,6 @@ public class SimpleMapController implements MapController {
 		
 		return position.getX()*this.gridSize+position.getY()+1;
 	}
-
 
 
 	
