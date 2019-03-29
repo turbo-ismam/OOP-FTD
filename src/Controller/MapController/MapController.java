@@ -39,7 +39,14 @@ public interface MapController {
 	 * @param position: index of the requested tile
 	 * @return requested tile
 	 */
-	public MapTile getTile(int position);
+	public MapTile getTileInt(int position);
+	
+	/**
+	 * 
+	 * @param position: tile coordinates
+	 * @return requested tile
+	 */
+	public MapTile getTilePair(Pair<Integer,Integer> position);
 	
 	/**
 	 * Method to set a tile
