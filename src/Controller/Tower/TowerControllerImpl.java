@@ -17,7 +17,7 @@ public class TowerControllerImpl implements TowerController{
 		
 		Tower tw = new TowerModelImpl(position);	//gestire con enum se vuoi piu torri
 		int p = map.fromPairToInt(position);
-		map.setTile(map.getTile(p));
+		map.setTile(map.getTileInt(p));
 		
 		
 	}
