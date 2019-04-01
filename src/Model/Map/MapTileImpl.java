@@ -1,4 +1,4 @@
-package Model.MapModel;
+package Model.Map;
 
 import utilityClasses.Pair;
 
