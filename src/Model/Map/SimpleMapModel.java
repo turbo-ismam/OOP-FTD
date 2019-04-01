@@ -57,4 +57,10 @@ public class SimpleMapModel implements MapModel{
 		return enemyPath.get(enemyPath.size());
 	}
 
+	@Override
+	public List<MapTile> getEnemyPath() {
+		return enemyPath;
+	}
+	
+
 }

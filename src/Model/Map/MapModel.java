@@ -33,5 +33,7 @@ public interface MapModel {
 	 * @return the end of the path
 	 */
 	public MapTile finalPosition();
+
+	List<MapTile> getEnemyPath();
 	
 }
