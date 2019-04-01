@@ -1,11 +1,12 @@
 package Controller.MapController;
 
 import java.util.ArrayList; 
+
 import java.util.List;
 
-import Model.MapModel.MapTile.Status;
-import Model.MapModel.MapTile;
-import Model.MapModel.SimpleMapModel;
+import Model.Map.MapTile.Status;
+import Model.Map.MapTile;
+import Model.Map.SimpleMapModel;
 import utilityClasses.Pair;
 
 public class SimpleMapController implements MapController {

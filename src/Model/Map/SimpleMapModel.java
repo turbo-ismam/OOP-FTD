@@ -1,13 +1,15 @@
-package Model.MapModel;
+package Model.Map;
 
 import java.util.ArrayList;
+
 import java.util.List;
-import Model.MapModel.MapTile.Status;
+import Model.Map.MapTile.Status;
 import utilityClasses.Pair;
 
 public class SimpleMapModel implements MapModel{
 
 	private List<MapTile> grid = new ArrayList<>();
+	private List<MapTile> enemyPath = new ArrayList<>();
 	private final int gridSize = 20;
 	
 	/**
@@ -27,6 +29,7 @@ public class SimpleMapModel implements MapModel{
 		for (int i=0;i<gridSize*gridSize;i++) {			//provalo, non sono convinto
 			if (grid.get(i).getPosition().getY()==10) {
 				grid.get(i).setStatus(Status.PATH);
+				enemyPath.add(grid.get(i));	//aggiungo alla lista il path
 			}
 		}
 	}
@@ -40,6 +43,18 @@ public class SimpleMapModel implements MapModel{
 	public ArrayList<MapTile> tileList() {
 
 		return (ArrayList<MapTile>) this.grid;
+	}
+
+	@Override
+	public MapTile initialPosition() {
+		
+		return enemyPath.get(0);
+	}
+
+	@Override
+	public MapTile finalPosition() {
+		
+		return enemyPath.get(enemyPath.size());
 	}
 
 }
