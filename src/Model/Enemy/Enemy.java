@@ -6,7 +6,7 @@ package Model.Enemy;
 import Model.Entity.Entity;
 
 /**
- * @author QUALCUNO
+ * @author Vlad
  *
  */
 public interface Enemy extends Entity {

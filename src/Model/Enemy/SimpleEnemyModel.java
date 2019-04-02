@@ -1,8 +1,5 @@
 package Model.Enemy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import Model.Map.MapModel;
 import Model.Map.MapTile;
 import Model.Map.MapTileImpl;
@@ -10,6 +7,10 @@ import Model.Map.SimpleMapModel;
 import utilityClasses.Pair;
 
 public class SimpleEnemyModel implements Enemy{
+	
+	private static final int MAX_HP = 100;
+	private static final int MAX_SPEED = 5;
+	private static final int DEFAULT_VALUE = 20;
 	
 	private int hp;
 	private int damage;
@@ -26,6 +27,10 @@ public class SimpleEnemyModel implements Enemy{
 
 	public SimpleEnemyModel() {
 		super();
+		this.hp = MAX_HP;
+		this.speed = MAX_SPEED;
+		this.value = DEFAULT_VALUE;
+		this.alive = false;
 	}
 
 	@Override
@@ -40,6 +45,12 @@ public class SimpleEnemyModel implements Enemy{
 
 	@Override
 	public void walk() {
+		
+		if(x > map.getEnemyPath().size()) {
+			this.despawn();
+		}
+		
+		if(this.alive == true) {
 		MapTile next = new MapTileImpl(map.getEnemyPath().get(x).getPosition().getX(),map.getEnemyPath().get(x).getPosition().getY());
 		if(next.getPosition().getX() > actual.getPosition().getX()) {
 			actual = next;
@@ -58,6 +69,7 @@ public class SimpleEnemyModel implements Enemy{
 			direction = Direction.UP;
 		}
 		x++;
+		}
 	}
 
 	@Override
