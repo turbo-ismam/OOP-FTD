@@ -22,7 +22,11 @@ public class SimpleEnemyModel implements Enemy{
 	private MapTile actual = new MapTileImpl(map.initialPosition().getPosition().getX(),map.initialPosition().getPosition().getY());
 	
 	private int x = 1;
-	private int y;
+	
+
+	public SimpleEnemyModel() {
+		super();
+	}
 
 	@Override
 	public Pair<Integer, Integer> getLocation() {
@@ -31,7 +35,7 @@ public class SimpleEnemyModel implements Enemy{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		this.walk();
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class SimpleEnemyModel implements Enemy{
 
 	@Override
 	public void death() {
-		if(hp == 0) {
+		if(hp <= 0) {
 			alive = false;
 		}
 	}
@@ -84,13 +88,12 @@ public class SimpleEnemyModel implements Enemy{
 	}
 
 	@Override
-	public int getDamage() {
-		return this.damage;
-	}
-
-	@Override
 	public void setDamage(int damage) {
 		this.damage = damage;
+		this.hp -= this.damage;
+		if(this.hp <= 0) {
+			this.death();
+		}
 	}
 
 	@Override

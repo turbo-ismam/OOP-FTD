@@ -29,8 +29,6 @@ public interface Enemy extends Entity {
 	
 	void setHP(int hp);
 	
-	int getDamage();
-	
 	void setDamage(int damage);
 	
 	int getValue(); //gold dropped when killed
