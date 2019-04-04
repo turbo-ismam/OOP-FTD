@@ -1,8 +1,9 @@
-package Model.MapModel;
+package Model.Map;
 
 import java.util.ArrayList;
 import java.util.List;
-import Model.MapModel.MapTile.Status;
+
+import Model.Map.MapTile.Status;
 
 public class SimpleMapModel implements MapModel{
 
@@ -24,7 +25,7 @@ public class SimpleMapModel implements MapModel{
 		}
 		//dovrebbe creare un percorso, in questo caso una linea orizzontale dritta
 		for (int i=0;i<gridSize*gridSize;i++) {			//provalo, non sono convinto
-			if (grid.get(i).getPosition().getX()==10) {
+			if (grid.get(i).getPosition().getY()==10) {
 				grid.get(i).setStatus(Status.PATH);
 			}
 		}

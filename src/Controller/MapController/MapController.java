@@ -1,6 +1,6 @@
 package Controller.MapController;
 
-import Model.MapModel.MapTile;
+import Model.Map.MapTile;
 
 public interface MapController {
 		
