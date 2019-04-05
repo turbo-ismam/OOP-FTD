@@ -2,6 +2,11 @@ package Model.Map;
 
 import utilityClasses.Pair;
 
+/**
+ * 
+ * @author ismam
+ *
+ */
 public class MapTileImpl implements MapTile {
 
 

@@ -1,6 +1,5 @@
 package Controller.Tower;
 
-import Controller.MapController.MapController; 
 import Model.Player.Player;
 import Model.Tower.PowerlessTowerModel;
 import Model.Tower.Tower;
@@ -9,7 +8,6 @@ import utilityClasses.Pair;
 public class PowerlessTower implements TowerController {
 
 	Tower tower;
-	MapController map;
 	Player player;
 	
 	@Override
