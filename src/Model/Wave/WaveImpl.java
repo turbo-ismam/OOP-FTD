@@ -17,11 +17,15 @@ public class WaveImpl implements Wave{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void addEnemy(Enemy e) {
+		
+	}
 
 	@Override
-	public int getEnemies(ArrayList<Enemy> enemyList) {
+	public ArrayList<Enemy> getEnemies() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }

@@ -3,13 +3,16 @@ package Model.Map;
 import java.util.ArrayList;
 
 import java.util.List;
+
+import Model.Entity.Entity;
 import Model.Map.MapTile.Status;
 import utilityClasses.Pair;
 
-public class SimpleMapModel implements MapModel{
+public class SimpleMapModel implements Map{
 
 	private List<MapTile> grid = new ArrayList<>();
 	private List<MapTile> enemyPath = new ArrayList<>();
+	private ArrayList<Entity> entities = new ArrayList<>();
 	private final int gridSize = 20;
 	
 	/**
@@ -55,6 +58,27 @@ public class SimpleMapModel implements MapModel{
 	public MapTile finalPosition() {
 		
 		return enemyPath.get(enemyPath.size());
+	}
+
+	@Override
+	public ArrayList<Entity> getEntities() {
+		// TODO Auto-generated method stub
+		return entities;
+	}
+
+	@Override
+	public void addEntity(Entity e) {
+		this.entities.add(e);
+		
+	}
+
+	@Override
+	public void removeEntity(Pair<Integer, Integer> location) {
+		entities.removeIf(e -> e.getLocation().equals(location));
+		for (Entity e : entities) {
+			System.out.println(e.getLocation() + " " + location);
+		}
+		
 	}
 
 }

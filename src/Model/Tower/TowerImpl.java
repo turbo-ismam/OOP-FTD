@@ -2,16 +2,18 @@ package Model.Tower;
 
 import utilityClasses.Pair;
 
-public class TowerModelImpl implements Tower{
+public class TowerImpl implements Tower{
+	
+	public Pair<Integer, Integer> location;
 
-	public TowerModelImpl(Pair<Integer,Integer> position) {
-		
+	public TowerImpl(Pair<Integer,Integer> position) {
+		this.location= position;
 	}
 	
 	@Override
 	public Pair<Integer, Integer> getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.location;
 	}
 
 	@Override

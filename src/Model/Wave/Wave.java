@@ -14,5 +14,7 @@ public interface Wave {
 	
 	void setWave(int wave);
 	
-	int getEnemies(ArrayList<Enemy> enemyList); /*da cambiare, penso*/
+	void addEnemy(Enemy e);
+	
+	ArrayList<Enemy> getEnemies();
 }

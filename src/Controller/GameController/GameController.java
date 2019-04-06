@@ -1,5 +1,7 @@
 package Controller.GameController;
 
+import utilityClasses.Pair;
+
 /**
  * 
  * @author ismam.abu
@@ -7,6 +9,12 @@ package Controller.GameController;
  */
 public interface GameController {
 	
+	public void init();
+	
 	public void startWave();
+	
+	public void placeTower(Pair<Integer, Integer> location);
+	
+	
 	
 }
