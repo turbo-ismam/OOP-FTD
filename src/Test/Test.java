@@ -4,7 +4,6 @@ import java.util.*;
 
 import Model.Enemy.Enemy;
 import Model.Enemy.SimpleEnemyModel;
-import Model.Enemy.WaveSpawner;
 import Model.Map.MapModel;
 import Model.Map.SimpleMapModel;
 
@@ -33,12 +32,6 @@ public class Test {
 		monster.walk();
 		assertEquals(monster.getLocation().getY().intValue(),10);
 		assertEquals(monster.getLocation().getX().intValue(),5);
-    }
-	
-	@org.junit.Test
-    public void spawn() {
-		WaveSpawner spawner = new WaveSpawner();
-		spawner.getSpawn().add(monster);
     }
 	
 }

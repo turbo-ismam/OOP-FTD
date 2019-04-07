@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Model.Enemy.Enemy;
 /**
  * 
- * @author SCRIVI IL TUO NOME
+ * @author Vlad
  *
  */
 public interface Wave {
@@ -14,5 +14,7 @@ public interface Wave {
 	
 	void setWave(int wave);
 	
-	int getEnemies(ArrayList<Enemy> enemyList); /*da cambiare, penso*/
+	void populate(int quantity, Enemy nemico);
+	
+	void spawn();
 }
