@@ -1,44 +1,25 @@
 package Controller.GameController;
 
-import Model.Map.Map;
-import Model.Tower.Tower;
-import Model.Tower.TowerImpl;
-import Model.Map.SimpleMapModel;
-import Model.Player.Player;
-import Model.Player.PlayerImpl;
-import Model.Wave.Wave;
-import Model.Wave.WaveImpl;
-import utilityClasses.Pair;
+import Model.GameModel;
+import Model.GameModelImpl;
 
 public class GameControllerImpl implements GameController {
 	
-	private Map m;
-	private Player p;
-	private Wave w;
+	//View v;
+	private GameModel gm;
 	
-	//private View v; La view va implementata
+	public GameControllerImpl(GameModel gm) {
+		this.gm=gm;
+	}
 	
+
 	@Override
-	public void startWave() {
-		w.getEnemies();
+	public void startGame() {
+		System.out.println("hello world");
 		
-	}
+		GameLoop gl = new GameLoop(gm);
+		gl.start();
 
-	@Override
-	public void init() {
-		m = new SimpleMapModel();
-		p = new PlayerImpl();
-		w = new WaveImpl();
 	}
-
-	@Override
-	public void placeTower(Pair<Integer, Integer> location) {
-		Tower t = new TowerImpl(location);
-		m.addEntity(t);
-	}
-
-	
-	
-	
 
 }

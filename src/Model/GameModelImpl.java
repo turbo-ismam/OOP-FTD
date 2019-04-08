@@ -25,14 +25,14 @@ public class GameModelImpl implements GameModel {
 	private Player p;
 	private Wave w;
 	private GameStatus gs;
+	private int tick = 0;
 	
     
 	public GameModelImpl(){
 		m = new SimpleMapModel();
 		p = new PlayerImpl();
 		p.setWave(1);
-		w = new WaveImpl();
-		w.setWave(1);
+		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
 		
 	}
@@ -61,18 +61,26 @@ public class GameModelImpl implements GameModel {
 	public GameStatus getGameStatus() {
 		return this.gs;
 	}
+	
+	public void nextWave() {
+		w.nextWave();
+	}
 
 	@Override
 	public void update() {
 		m.getEntities().forEach(e->e.update());
+		
+		if(!w.isEmpty() && tick==100) {
+			this.tick=0;
+			w.spawn();
+		}
+		this.tick++;
+		
 		if (p.getHp()<=0) {
 			this.gs=GameStatus.LOST;
 		}
 		if (p.getWave()>20) {
 			this.gs=GameStatus.WON;
-		}
-		if (w.getEnemies().iterator().hasNext()) {
-			w.getEnemies().iterator().next().spawn();
 		}
 		
 	}

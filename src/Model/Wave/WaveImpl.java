@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import Model.Enemy.Enemy;
 
 public class WaveImpl implements Wave{
+	
+	int wave;
+
+	public WaveImpl(int i) {
+		this.wave=i;
+	}
 
 	@Override
 	public int getWave() {
@@ -23,9 +29,20 @@ public class WaveImpl implements Wave{
 	}
 
 	@Override
-	public ArrayList<Enemy> getEnemies() {
+	public void nextWave() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void spawn() {
+		// TODO Auto-generated method stub
+		
+	}
 }

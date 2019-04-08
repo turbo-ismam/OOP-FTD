@@ -15,6 +15,10 @@ public interface Wave {
 	void setWave(int wave);
 	
 	void addEnemy(Enemy e);
-	
-	ArrayList<Enemy> getEnemies();
+
+	void nextWave();
+
+	boolean isEmpty();
+
+	void spawn();
 }
