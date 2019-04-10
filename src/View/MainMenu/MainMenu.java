@@ -1,6 +1,5 @@
 package View.MainMenu;
 
-
 import View.GameView.GameView;
 import View.Options.Options;
 import View.SceneChanger.SceneChanger;

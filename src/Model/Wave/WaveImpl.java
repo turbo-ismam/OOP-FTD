@@ -30,6 +30,10 @@ public class WaveImpl implements Wave{
 			ondata.add(nemico);
 		}
 	}
+	
+	public void addEnemy(Enemy e) {
+		
+	}
 
 	@Override
 	public void spawn() {
@@ -43,10 +47,4 @@ public class WaveImpl implements Wave{
 		return ondata;
 	}
 	
-
-	
-
-
-	
-
 }
