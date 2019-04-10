@@ -1,9 +1,10 @@
 package Model.Enemy;
 
-import Model.Map.MapModel;
+import Model.Map.Map;
+
 import Model.Map.MapTile;
 import Model.Map.MapTileImpl;
-import Model.Map.SimpleMapModel;
+import Model.Map.SimpleMap;
 import utilityClasses.Pair;
 
 public class SimpleEnemyModel implements Enemy{
@@ -19,7 +20,7 @@ public class SimpleEnemyModel implements Enemy{
 	private boolean alive;
 	public Direction direction;
 	
-	private MapModel map = new SimpleMapModel();
+	private Map map = new SimpleMap();
 	private MapTile actual = new MapTileImpl(map.initialPosition().getPosition().getX(),map.initialPosition().getPosition().getY());
 	
 	private int x = 1;
@@ -46,12 +47,12 @@ public class SimpleEnemyModel implements Enemy{
 	@Override
 	public void walk() {
 		
-		if(x > map.getEnemyPath().size()) {
+		if(x > map.pathList().size()) {
 			this.despawn();
 		}
 		
 		if(this.alive == true) {
-		MapTile next = new MapTileImpl(map.getEnemyPath().get(x).getPosition().getX(),map.getEnemyPath().get(x).getPosition().getY());
+		MapTile next = new MapTileImpl(map.pathList().get(x).getPosition().getX(),map.pathList().get(x).getPosition().getY());
 		if(next.getPosition().getX() > actual.getPosition().getX()) {
 			actual = next;
 			direction = Direction.RIGHT;
@@ -126,6 +127,12 @@ public class SimpleEnemyModel implements Enemy{
 	@Override
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	@Override
+	public boolean IsArrived() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

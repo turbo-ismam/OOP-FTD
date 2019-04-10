@@ -1,11 +1,12 @@
 package Test;
 import static org.junit.Assert.*;
+
 import java.util.*;
 
 import Model.Enemy.Enemy;
 import Model.Enemy.SimpleEnemyModel;
-import Model.Map.MapModel;
-import Model.Map.SimpleMapModel;
+import Model.Map.HardMap;
+import Model.Map.SimpleMap;
 
 public class Test {
 	
@@ -22,7 +23,7 @@ public class Test {
 	// verifica dello split in fromRange()
 	@org.junit.Test
     public void testRangeAndSplit() {
-		MapModel mappa = new SimpleMapModel();
+		HardMap mappa = new HardMap();
 		monster.walk();
 		assertEquals(monster.getLocation().getY().intValue(),10);
 		assertEquals(monster.getLocation().getX().intValue(),1);

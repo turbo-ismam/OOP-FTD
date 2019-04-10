@@ -39,4 +39,6 @@ public interface Enemy extends Entity {
 	
 	void setSpeed(int speed);
 	
+	public void despawn();
+	
 }

@@ -46,5 +46,17 @@ public class WaveImpl implements Wave{
 	public ArrayList<Enemy> getOndata() {
 		return ondata;
 	}
+
+	@Override
+	public void nextWave() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

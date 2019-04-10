@@ -10,56 +10,6 @@ import utilityClasses.Pair;
  * @author ismam
  *
  */
-public interface Map{
-	
-	/**
-	 * @return an ArrayList that contain all the tiles
-	 */
-	public ArrayList<MapTile> tileList();
-	
-	/**
-	 * @return the map size
-	 */
-	public int getGridSize();
-	
-	/**
-	 * 
-	 * @return the initial position
-	 */
-	public MapTile initialPosition();
-	
-	/**
-	 * 
-	 * @return the end of the path
-	 */
-	public MapTile finalPosition();
-	/**
-	 * 
-	 * @return ArrayList of entities
-	 */
-	public ArrayList<Entity> getEntities();
-	
-	public void addEntity(Entity e);
-	
-	public void removeEntity(Pair<Integer, Integer> location);
-	
-	
-}
-=======
-package Model.Map;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import Model.Enemy.Enemy;
-import Model.Entity.Entity;
-import utilityClasses.Pair;
-
-/**
- * 
- * @author ismam
- *
- */
 public interface Map {
 	
 	/**
@@ -69,6 +19,7 @@ public interface Map {
 	public ArrayList<Entity> entityList();
 	
 	/**
+	 * 
 	 * @return an ArrayList that contain all the tiles in the map
 	 */
 	public ArrayList<MapTile> tileList();
@@ -78,6 +29,18 @@ public interface Map {
 	 * @return an ArrayList that contain the path of the enemy
 	 */
 	public ArrayList<MapTile> pathList();
+	
+	/**
+	 * Method to add entity to the EntityList
+	 * @param e 
+	 */
+	public void addEntity(Entity e);
+	
+	/**
+	 * Method to remove an entity from the EntityList
+	 * @param location
+	 */
+	public void removeEntity(Pair<Integer, Integer> location);
 	
 	/**
 	 * @return the map size

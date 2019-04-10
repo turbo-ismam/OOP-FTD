@@ -14,7 +14,7 @@ import utilityClasses.Pair;
  * @author ismam
  *
  */
-public abstract class AbstractMapModel implements MapModel{
+public abstract class AbstractMapModel implements Map{
 
 	protected List<MapTile> grid = new ArrayList<>();
 	protected List<MapTile> enemyPath = new ArrayList<>();
@@ -66,6 +66,21 @@ public abstract class AbstractMapModel implements MapModel{
 	public ArrayList<MapTile> pathList() {
 
 		return (ArrayList<MapTile>) this.enemyPath;
+	}
+	
+	@Override
+	public void addEntity(Entity e) {
+		this.entity.add(e);
+		
+	}
+
+	@Override
+	public void removeEntity(Pair<Integer, Integer> location) {
+		entity.removeIf(e -> e.getLocation().equals(location));
+		for (Entity e : entity) {
+			//System.out.println(e.getLocation() + " " + location);
+		}
+		
 	}
 
 	@Override

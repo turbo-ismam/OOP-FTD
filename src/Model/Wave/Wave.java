@@ -17,4 +17,8 @@ public interface Wave {
 	void populate(int quantity, Enemy nemico);
 	
 	void spawn();
+	
+	void nextWave();
+	
+	boolean isEmpty();
 }

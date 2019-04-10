@@ -6,7 +6,7 @@ package Model.Player;
  *
  */
 
-public class PlayerModel{
+public class PlayerImpl{
 
 	/**
 	 * 
@@ -23,7 +23,7 @@ public class PlayerModel{
 	 * @param coins
 	 * @param wave
 	 */
-	public PlayerModel(String name,int hp,int coins) {
+	public PlayerImpl(String name,int hp,int coins) {
 		this.name=name;
 		this.hp=hp;
 		this.coins=coins;
@@ -38,16 +38,16 @@ public class PlayerModel{
 		return hp;
 	}
 	
-	public void setHp(int hp) {
-		this.hp = hp;
+	public void takeDamage(int damage) {
+		this.hp = this.getHp()-damage;
 	}
 	
 	public int getCoins() {
 		return coins;
 	}
 	
-	public void setCoins(int coins) {
-		this.coins = coins;
+	public void incrementCoins(int coins) {
+		this.coins = this.coins + coins;
 	}
 	
 	public int getWave() {

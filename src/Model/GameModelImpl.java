@@ -1,15 +1,13 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import Model.Entity.Entity;
+import Model.Map.HardMap;
 import Model.Map.Map;
-import Model.Map.SimpleMapModel;
-import Model.Player.Player;
 import Model.Player.PlayerImpl;
-import Model.Tower.TowerImpl;
+import Model.Tower.BasicTower;
+import Model.Tower.TowerType;
 import Model.Wave.Wave;
 import Model.Wave.WaveImpl;
 import utilityClasses.Pair;
@@ -22,15 +20,15 @@ import utilityClasses.Pair;
 public class GameModelImpl implements GameModel {
 	
 	private Map m;
-	private Player p;
+	private PlayerImpl p;
 	private Wave w;
 	private GameStatus gs;
 	private int tick = 0;
 	
     
 	public GameModelImpl(){
-		m = new SimpleMapModel();
-		p = new PlayerImpl();
+		m = new HardMap();
+		p = new PlayerImpl("SexyIsmy",1000,300);
 		p.setWave(1);
 		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
@@ -42,8 +40,8 @@ public class GameModelImpl implements GameModel {
 		if (p.getCoins()<cost){
 			return;
 		}
-		p.setCoins(cost); //player PAGA la torre
-		m.addEntity(new TowerImpl(location));
+		p.incrementCoins(cost); //player PAGA la torre
+		m.addEntity(new BasicTower(location, TowerType.BASIC));
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class GameModelImpl implements GameModel {
 
 	@Override
 	public ArrayList<Entity> getEntities() {
-		return m.getEntities();
+		return m.entityList();
 	}
 	
 	@Override
@@ -68,7 +66,7 @@ public class GameModelImpl implements GameModel {
 
 	@Override
 	public void update() {
-		m.getEntities().forEach(e->e.update());
+		m.entityList().forEach(e->e.update());
 		
 		if(!w.isEmpty() && tick==100) {
 			this.tick=0;
