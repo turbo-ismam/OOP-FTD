@@ -1,9 +1,6 @@
 package Model.Map;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import utilityClasses.Pair;
 
 public interface MapModel {
 	
