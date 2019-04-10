@@ -21,9 +21,9 @@ public interface Enemy extends Entity {
 	
 	void spawn(); //enemy appearing on the map, ready to walk
 	
-	void despawn(); //ugual a quel di sotto,
+	boolean IsArrived(); //ugual a quel di sotto,
 	
-	void death();// vedi sopra (?)
+	void death();// muore
 	
 	int getHP();
 	

@@ -1,56 +1,43 @@
 package View.MainMenu;
 
-import java.io.FileNotFoundException;
 
 import View.GameView.GameView;
-import javafx.application.Application;
+import View.Options.Options;
+import View.SceneChanger.SceneChanger;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class MainMenu extends Application{
-	Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-	Button buttonStart, buttonExit, b3;
-	Scene menu, gameWindow;
+public class MainMenu extends Scene{
+	private final static Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+	private final static double SCENE_HEIGHT = primScreenBounds.getHeight();
+	private final static double SCENE_WIDTH = primScreenBounds.getWidth();
+	private final static Stage stage = SceneChanger.getStage();
 	
-	public void start(Stage stage){
-		
-			stage.setTitle("FantasyTD 1.0");
-			buttonStart = new Button();
-			buttonStart.setText("Start game");
-			//buttonStart.setOnAction(e -> stage.setScene(gameWindow));
-			buttonStart.setOnAction(e ->{
-				stage.setScene(new GameView());
-				stage.centerOnScreen();
-			});
-			buttonExit = new Button();
-			buttonExit.setText("Exit");
-			buttonExit.setOnAction(e -> stage.close());
+	Button buttonStart, buttonExit, buttonOptions;
+	Scene menu;
+	
+	public MainMenu(){
+		super( new StackPane(), SCENE_WIDTH/2, SCENE_HEIGHT/2);
 			
-			b3 = new Button();
-			b3.setText("Back to main menu");
-			b3.setOnAction(e -> stage.setScene(menu));
+			buttonStart = new Button("Start game");
+			buttonStart.setOnAction(e -> stage.setScene(new GameView()));
+			
+			buttonOptions = new Button("Options");
+			buttonOptions.setOnAction(e -> stage.setScene(new Options()));
+			
+			buttonExit = new Button("Exit");
+			buttonExit.setOnAction(e -> SceneChanger.getStage().close());
 			
 			VBox layout = new VBox(10);
 			layout.setAlignment(Pos.CENTER);
-			layout.getChildren().add(buttonStart);
-			layout.getChildren().add(buttonExit);
-			
-			VBox layout2 = new VBox();
-			layout2.setAlignment(Pos.CENTER);
-			layout2.getChildren().add(b3);
-			
-			
-			menu= new Scene(layout, 300, 300);
-			stage.setScene(menu);
-			stage.show();
-			
-			gameWindow= new Scene(layout2, 300, 300);
-			
+			layout.getChildren().addAll(buttonStart, buttonOptions, buttonExit);
+			this.setRoot(layout);
 		}
 
 }
