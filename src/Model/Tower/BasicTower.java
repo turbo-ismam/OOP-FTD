@@ -4,26 +4,33 @@ package Model.Tower;
 import java.util.ArrayList;
 
 import Model.Enemy.Enemy;
+import Model.Tower.Projectile;
 import utilityClasses.Pair;
 
 public class BasicTower implements Tower{
-	Pair<Integer,Integer> position ; 
-	private int damage;
-	private float firingSpeed, timeSinceLastShot;
+	Pair<Integer,Integer> position; 
+	private int damage = 10;
+	private float shootTime;
 	private ArrayList<Projectile> projectiles;
+	private Enemy target;
+	private TowerType type;
+	private boolean isShooting;
+	private boolean isInRange;
 	
 	
-	public BasicTower(Pair<Integer, Integer> position, int damage) {
-		this.damage = damage;
+	public BasicTower(Pair<Integer, Integer> position, TowerType type) {
+		
 		this.position = position;
-		this.firingSpeed = 30;
-		this.timeSinceLastShot = 0;
+		//this.target = target;
+		this.shootTime = 20;
 		this.projectiles = new ArrayList<Projectile>();
+		this.type = type;
+		this.isShooting = false;
 	}
 
 	@Override
 	public Pair<Integer, Integer> getLocation() {
-		// TODO Auto-generated method stub
+		
 	
 		return position;
 	}
@@ -34,81 +41,53 @@ public class BasicTower implements Tower{
 		
 	}
 
-	@Override
-	public int getCost() {
-		// TODO Auto-generated method stub
-		
-		return 0;
-	}
 
 	@Override
-	public void setCost(int cost) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+	public TowerType getType() {
+		return type;
 	}
-
+	
 	@Override
-	public void setType(String type) {
-		// TODO Auto-generated method stub
-		
+	public void setType(TowerType type) {
+		this.type = type;
 	}
-
-	@Override
-	public int getDamage() {
-		// TODO Auto-generated method stub
-		return damage;
-	}
-
-	@Override
-	public void setDamage(int damage) {
-		// TODO Auto-generated method stub
-		this.damage=damage;
-	}
+	
 
 	@Override
 	public float getShootTime() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setShootTime() {
-		// TODO Auto-generated method stub
 		
+		return shootTime;
 	}
 
+	
 	@Override
 	public void shoot() {
-		// TODO Auto-generated method stub
-		timeSinceLastShot = 0;
-		projectiles.add(new Projectile(position, null, damage, firingSpeed)); 
+		projectiles.add(new Projectile(position, target, damage, 600));
+	
+		
 	}
 
 	@Override
 	public boolean isShooting() {
-		// TODO Auto-generated method stub
-		
-		return false;
+				
+		return isShooting;
 	}
 
 	@Override
 	public boolean isInRange() {
-		// TODO Auto-generated method stub
 		
-		return false;
+		
+		return isInRange;
 	}
 
 	@Override
 	public Enemy getTarget() {
-		// TODO Auto-generated method stub
 		
-		return null;
+		return target;
+		
 	}
+	
+	
 	
 }

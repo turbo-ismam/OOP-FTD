@@ -1,12 +1,14 @@
 package Model.Tower;
 
+
+
 import Model.Enemy.Enemy;
 import utilityClasses.Pair;
 
 public class Projectile {
 	Pair<Integer,Integer> position;
 	
-	private float speed;
+	private float x, y, speed, xVelocity, yVelocity;
 	private int damage;
 	private Enemy enemy;
 	
@@ -15,14 +17,13 @@ public class Projectile {
 		this.damage = damage;
 		this.speed = speed;
 		this.enemy = enemy;
+		this.xVelocity = 0f;
+		this.yVelocity = 0f;
 	}
 	
 	public void update() {
-		draw();
-	}
-	
-	public void draw() {
-		
+		x += xVelocity * speed ;
+		y += yVelocity * speed ;
 	}
 	
 }
