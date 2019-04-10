@@ -2,6 +2,11 @@ package Model.Map;
 
 import utilityClasses.Pair;
 
+/**
+ * 
+ * @author ismam
+ *
+ */
 public interface MapTile {
 	
 		public enum Status {
