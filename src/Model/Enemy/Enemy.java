@@ -6,7 +6,7 @@ package Model.Enemy;
 import Model.Entity.Entity;
 
 /**
- * @author QUALCUNO
+ * @author Vlad
  *
  */
 public interface Enemy extends Entity {
@@ -28,8 +28,6 @@ public interface Enemy extends Entity {
 	int getHP();
 	
 	void setHP(int hp);
-	
-	int getDamage();
 	
 	void setDamage(int damage);
 	
