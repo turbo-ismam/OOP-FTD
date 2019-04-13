@@ -3,7 +3,10 @@
  */
 package Model.Enemy;
 
+import java.util.ArrayList;
+
 import Model.Entity.Entity;
+import Model.Map.MapTile;
 
 /**
  * @author Vlad
@@ -38,5 +41,11 @@ public interface Enemy extends Entity {
 	int getSpeed();
 	
 	void setSpeed(int speed);
+
+	void setPath(ArrayList<MapTile> sentiero);
+	
+	boolean isAlive();
+	
+	Direction Direzione();
 	
 }

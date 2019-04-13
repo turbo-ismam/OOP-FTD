@@ -1,5 +1,7 @@
 package Model.Enemy;
 
+import java.util.ArrayList;
+
 import Model.Map.MapModel;
 import Model.Map.MapTile;
 import Model.Map.MapTileImpl;
@@ -18,12 +20,12 @@ public class SimpleEnemyModel implements Enemy{
 	private int value;
 	private boolean alive;
 	public Direction direction;
+	private ArrayList<MapTile> path = null;
 	
-	private MapModel map = new SimpleMapModel();
-	private MapTile actual = new MapTileImpl(map.initialPosition().getPosition().getX(),map.initialPosition().getPosition().getY());
+	private MapTile actual = new MapTileImpl(path.get(0).getPosition().getX(),path.get(0).getPosition().getY());
 	
 	private int x = 1;
-	
+	private int tick = 0;
 
 	public SimpleEnemyModel() {
 		super();
@@ -40,18 +42,29 @@ public class SimpleEnemyModel implements Enemy{
 
 	@Override
 	public void update() {
+		this.death();
+		if(tick == 100) {
 		this.walk();
+		tick = 0;
+		}
+		else {
+		tick++;
+		}
 	}
 
 	@Override
 	public void walk() {
 		
-		if(x > map.getEnemyPath().size()) {
+		if(path == null) {
+			throw new NullPointerException();
+		}
+		else {
+		if(x > path.size()) {
 			this.despawn();
 		}
 		
 		if(this.alive == true) {
-		MapTile next = new MapTileImpl(map.getEnemyPath().get(x).getPosition().getX(),map.getEnemyPath().get(x).getPosition().getY());
+		MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),path.get(x).getPosition().getY());
 		if(next.getPosition().getX() > actual.getPosition().getX()) {
 			actual = next;
 			direction = Direction.RIGHT;
@@ -71,6 +84,7 @@ public class SimpleEnemyModel implements Enemy{
 		x++;
 		}
 	}
+}
 
 	@Override
 	public void spawn() {
@@ -128,4 +142,19 @@ public class SimpleEnemyModel implements Enemy{
 		this.speed = speed;
 	}
 
+	@Override
+	public void setPath(ArrayList<MapTile> sentiero) {
+		this.path = sentiero;		
+	}
+	
+	public boolean isAlive() {
+		return alive;
+	}
+
+	@Override
+	public Direction Direzione() {
+		return direction;
+	}
+	
+	
 }

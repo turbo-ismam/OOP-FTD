@@ -20,11 +20,6 @@ public class WaveImpl implements Wave{
 	}
 
 	@Override
-	public void setWave(int wave) {
-		this.Numero_Ondata = wave;
-	}
-
-	@Override
 	public void populate(int quantity, Enemy nemico) {
 		for(int a=0; a<quantity; a++) {
 			ondata.add(nemico);
@@ -34,7 +29,7 @@ public class WaveImpl implements Wave{
 	@Override
 	public void spawn() {
 		if(!ondata.isEmpty()) {
-		ondata.get(0).spawn();
+		 ondata.get(0);
 		ondata.remove(0);
 		}
 	}
@@ -44,7 +39,9 @@ public class WaveImpl implements Wave{
 	}
 	
 
-	
+	public Wave nextWave() {
+		return new WaveImpl(this.getWave()+1);
+	}
 
 
 	

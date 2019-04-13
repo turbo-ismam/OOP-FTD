@@ -12,9 +12,9 @@ public interface Wave {
 
 	int getWave();
 	
-	void setWave(int wave);
-	
 	void populate(int quantity, Enemy nemico);
 	
 	void spawn();
+	
+	Wave nextWave();
 }
