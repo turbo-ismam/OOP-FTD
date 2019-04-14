@@ -22,6 +22,10 @@ public class MapTileImpl implements MapTile {
 		status = Status.EMPTY;
 	}
 	
+	public MapTileImpl() {
+		
+	}
+	
 	public Pair<Integer, Integer> getPosition() {
 		return position;
 	}
