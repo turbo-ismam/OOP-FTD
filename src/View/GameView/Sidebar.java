@@ -37,15 +37,27 @@ public class Sidebar extends Region {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static final double width = screenSize.getWidth();
     static final double height = screenSize.getHeight();
+    static final double buttonSize = height/42;
+    static final double sidebarHeight = (height/41.5)*gridSize;
     
 	//MainMenu test = new MainMenu();
 	
 	public Parent createContent() throws IOException {
-        Pane root = new Pane();
-        root.setPrefSize(1500, 800);
+		
+        Pane root = new Pane(); //finestra
+        root.setPrefSize(this.width/2, this.height/2);
+        InputStream is = Files.newInputStream(Paths.get("res/gameMenuImage.png"));
+		Image img = new Image(is);
+		is.close();
+		
+		ImageView imgv = new ImageView(img);
+		imgv.setFitWidth(this.width/2);
+		imgv.setFitHeight(this.height/2);
+		root.setOpacity(1);
+		root.getChildren().add(imgv);
         
         FlowPane flow = new FlowPane();
-        flow.setPrefSize(500, 800);
+        flow.setPrefSize(500, this.sidebarHeight-this.sidebarHeight*0.025); //sidebar
         
         flow.setBackground(Background.EMPTY);
         String style = "-fx-background-color: rgba(150, 100, 50, 0.5);";
@@ -57,7 +69,7 @@ public class Sidebar extends Region {
         String style4 = "-fx-background-color: rgba(200, 50, 100, 0.5);";
         HBox menu1 = new HBox(10);        
         menu1.setPrefSize(300, 200);
-        menu1.setTranslateY(-35);
+        menu1.setTranslateY(0);
         menu1.setTranslateX(25);
         menu1.setSpacing(10);
         MenuButton start = new MenuButton("start");
@@ -76,8 +88,8 @@ public class Sidebar extends Region {
         menu1.getChildren().add(menu);
         
         VBox menu2 = new VBox();
-        menu2.setPrefSize(450, 300);
-        menu2.setTranslateY(-80);
+        menu2.setPrefSize(450, 400);
+        menu2.setTranslateY(this.buttonSize*0.5);
         menu2.setTranslateX(25);
         menu2.setBackground(Background.EMPTY);
         String style2 = "-fx-background-color: rgba(50, 100, 200, 0.5);";
@@ -85,9 +97,9 @@ public class Sidebar extends Region {
         flow.getChildren().add(menu2);
         
         FlowPane menu3 = new FlowPane();
-        menu3.setPrefSize(450, 260);
-        menu3.setTranslateY(-75);
-        menu3.setTranslateX(25);
+        menu3.setPrefSize(buttonSize*9,buttonSize* 5);
+        menu3.setTranslateY(this.buttonSize*2);
+        menu3.setTranslateX(buttonSize/2.5);
         menu3.setBackground(Background.EMPTY);
         String style3 = "-fx-background-color: rgba(75, 250, 30, 0.5);";
         menu3.setStyle(style3);
@@ -103,7 +115,7 @@ public class Sidebar extends Region {
 
         
         GridPane grid = new GridPane();
-        grid.setPrefSize(800, 300);
+        grid.setPrefSize(buttonSize*20, buttonSize*20);
 
         for (Integer i=0;i<gridSize;i++) {
         	for(Integer j=0;j<gridSize;j++) {
@@ -117,8 +129,18 @@ public class Sidebar extends Region {
         	}
         }
         
-        flow.setTranslateX(800);
+        flow.setTranslateY(this.buttonSize);
+        flow.setTranslateX(this.buttonSize*25);
+        
+        grid.setTranslateX(this.buttonSize/2);
+        grid.setTranslateY(this.buttonSize/2);
         root.getChildren().addAll(grid,flow);
+        
+        
+        
+        System.out.println(this.height);
+        System.out.println(this.width);
+        
         return root;
 	}
 	
@@ -204,8 +226,8 @@ private static class Button extends StackPane {
 			text.setFill(Color.DEEPPINK);
 			
 			/* REALIZZAZIONE DI OGNI TILE */
-			Rectangle bg = new Rectangle((height/23),(height/23));
-			bg.setOpacity(0.3);
+			Rectangle bg = new Rectangle(buttonSize,buttonSize);
+			bg.setOpacity(100);
 			/* grass image */
 			InputStream is = Files.newInputStream(Paths.get("res/grass.jpg"));
 			Image logo = new Image(is);

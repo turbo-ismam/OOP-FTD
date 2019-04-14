@@ -1,5 +1,7 @@
 package View.MainMenu;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +44,9 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private Sidebar game = new Sidebar();
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    static final double width = screenSize.getWidth();
+    static final double height = screenSize.getHeight();
 	
 	 public Parent createContent() throws IOException {
 		 
@@ -51,7 +56,7 @@ public class MainMenu extends Application{
 			mediaPlayer1.setVolume(0.1);
 			
 			Pane root = new Pane();
-			root.setPrefSize(1500, 800);
+			root.setPrefSize(this.width/2, this.height/2);
 			
 			InputStream is = Files.newInputStream(Paths.get("res/62266.jpg"));
 			Image img = new Image(is);
@@ -335,6 +340,7 @@ public class MainMenu extends Application{
 		 Scene scene = new Scene(createContent());
 	        primaryStage.setTitle("Jojo Menu");
 	        primaryStage.setScene(scene);
+	        primaryStage.setResizable(false);
 	        primaryStage.show();
 		
 	}
