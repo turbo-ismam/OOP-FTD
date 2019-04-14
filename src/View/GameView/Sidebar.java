@@ -1,18 +1,19 @@
 package View.GameView;
 
 import java.io.IOException;
+
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import View.MainMenu.MainMenu;
-import View.MainMenu.MainMenu.MenuButton;
-import javafx.application.Application;
+import Model.Map.Map;
+import Model.Map.MapTile;
+import Model.Map.MapTileImpl;
+import Model.Map.MapTile.Status;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -30,12 +31,13 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import utilityClasses.Pair;
 
 public class Sidebar extends Region {
 	
 	private static final int gridSize=20;
 	private ArrayList<Button> btList = new ArrayList<>();
+	private Map grid;
 	//MainMenu test = new MainMenu();
 	
 	public Parent createContent() throws IOException {
@@ -100,6 +102,8 @@ public class Sidebar extends Region {
         flow.getChildren().add(menu3);
 
         
+        /* GRID */
+        
         GridPane grid = new GridPane();
         grid.setPrefSize(800, 800);
 
@@ -107,6 +111,9 @@ public class Sidebar extends Region {
         	for(Integer j=0;j<gridSize;j++) {
         		Button bt = new Button("");
         		bt.position= i.toString() + " " + j.toString();
+        		bt.tile.setPosition(new Pair<Integer,Integer>(i,j));
+        		
+        		bt.tile.setStatus(Status.EMPTY);
         		bt.setOnMouseClicked(event -> {
         			System.out.println(bt.position);
         		});
@@ -116,6 +123,7 @@ public class Sidebar extends Region {
         }
         flow.setTranslateX(950);
         root.getChildren().addAll(grid,flow);
+        
         return root;
 	}
 	
@@ -193,6 +201,7 @@ private static class Button extends StackPane {
 		
 		private Text text;
 		private String position;
+		public MapTile tile = new MapTileImpl();
 		
 		public Button(String name) throws IOException {
 			
