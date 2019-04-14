@@ -3,38 +3,56 @@ package Model;
 import java.util.ArrayList;
 
 import Model.Entity.Entity;
+import Model.Player.Player;
+import Model.Tower.TowerType;
+import Model.Wave.Wave;
 import utilityClasses.Pair;
 
 public interface GameModel {
+	
 	/**
 	 * Places a Tower in the current playing map
 	 * @param location x, y position of the Tower
-	 * @param cost Cost of the tower
+	 * @param tt Type of the tower that is going to be placed
 	 */
+	public void placeTower(Pair<Integer, Integer> location, TowerType tt);
 	
-	public void placeTower(Pair<Integer, Integer> location, int cost);
 	/**
 	 * Removes a Tower from the map
 	 * @param location x, y position of the Tower
 	 */
 	public void removeTower(Pair<Integer, Integer> location);
+	
 	/**
 	 * 
 	 * @return list of all entities in the map
 	 */
 	
 	public ArrayList<Entity> getEntities();
+	
 	/**
 	 * 
 	 * @return the GameStatus
 	 */
-	
 	public GameStatus getGameStatus();
+	
+	/**
+	 * 
+	 * @return return the Player
+	 */
+	public Player getPlayer();
+	
+	/**
+	 * 
+	 * @return return the Current Wave
+	 */
+	public Wave getCurrentWave();
+	
 	/**
 	 * Starts the next Wave
 	 */
-	
 	public void nextWave();
+	
 	/**
 	 * Update everything and moves the game forward by one tick
 	 */

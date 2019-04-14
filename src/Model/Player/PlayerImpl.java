@@ -6,7 +6,7 @@ package Model.Player;
  *
  */
 
-public class PlayerImpl{
+public class PlayerImpl implements Player{
 
 	/**
 	 * 
