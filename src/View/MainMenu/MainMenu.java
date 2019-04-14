@@ -379,11 +379,5 @@ public class MainMenu extends Application{
 	            setOnMouseReleased(event -> setEffect(null));  
 		}
 	}
-	
-	
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 
 }

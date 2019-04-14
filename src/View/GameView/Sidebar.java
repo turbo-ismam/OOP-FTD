@@ -6,13 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import View.MainMenu.MainMenu;
-import View.MainMenu.MainMenu.MenuButton;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -30,12 +26,18 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class Sidebar extends Region {
 	
 	private static final int gridSize=20;
 	private ArrayList<Button> btList = new ArrayList<>();
+	
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    static final double width = screenSize.getWidth();
+    static final double height = screenSize.getHeight();
+    
 	//MainMenu test = new MainMenu();
 	
 	public Parent createContent() throws IOException {
@@ -46,7 +48,7 @@ public class Sidebar extends Region {
         flow.setPrefSize(500, 800);
         
         flow.setBackground(Background.EMPTY);
-        String style = "-fx-background-color: rgba(150, 100, 50, 1);";
+        String style = "-fx-background-color: rgba(150, 100, 50, 0.5);";
         flow.setStyle(style);
         
         //flow.setPadding(new Insets(50,50,50,50));
@@ -101,7 +103,7 @@ public class Sidebar extends Region {
 
         
         GridPane grid = new GridPane();
-        grid.setPrefSize(800, 800);
+        grid.setPrefSize(800, 300);
 
         for (Integer i=0;i<gridSize;i++) {
         	for(Integer j=0;j<gridSize;j++) {
@@ -114,7 +116,8 @@ public class Sidebar extends Region {
             	grid.add(bt, j, i);
         	}
         }
-        flow.setTranslateX(950);
+        
+        flow.setTranslateX(800);
         root.getChildren().addAll(grid,flow);
         return root;
 	}
@@ -197,13 +200,11 @@ private static class Button extends StackPane {
 		public Button(String name) throws IOException {
 			
 			text = new Text(name);
-			text.setFont(text.getFont().font(10));
-			//text.setFont(Font.loadFont("file:res/JOJO__.ttf", 30));
 
 			text.setFill(Color.DEEPPINK);
 			
 			/* REALIZZAZIONE DI OGNI TILE */
-			Rectangle bg = new Rectangle(50,50);
+			Rectangle bg = new Rectangle((height/23),(height/23));
 			bg.setOpacity(0.3);
 			/* grass image */
 			InputStream is = Files.newInputStream(Paths.get("res/grass.jpg"));
