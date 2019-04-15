@@ -47,7 +47,8 @@ public class MainMenu extends Application{
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static final double width = screenSize.getWidth();
     static final double height = screenSize.getHeight();
-    static final double buttonSize = height/30;
+    static final double buttonSize = height/42;
+    static final int offset = 400;
 	
 	 public Parent createContent() throws IOException {
 		 
@@ -65,7 +66,7 @@ public class MainMenu extends Application{
 			
 			ImageView imgv = new ImageView(img);
 			imgv.setFitWidth(buttonSize*39);
-			imgv.setFitHeight(buttonSize*22);
+			imgv.setFitHeight(buttonSize*23);
 			
 			//gameMenu = new GameMenu();
 			
@@ -85,7 +86,7 @@ public class MainMenu extends Application{
             VBox menu5 = new VBox(20);
             VBox menu6 = new VBox(20);
             
-            Rectangle bg = new Rectangle(1500, 800);
+            Rectangle bg = new Rectangle(buttonSize*39, buttonSize*23);
             bg.setFill(Color.GREY);
             bg.setOpacity(0.4);
             
@@ -102,39 +103,41 @@ public class MainMenu extends Application{
     		Image logo2 = new Image(is1);
     		is1.close();
     		ImageView imgv2 = new ImageView(logo2);
-    		imgv2.setFitWidth(1500);
-    		imgv2.setFitHeight(800);
+    		imgv2.setFitWidth(buttonSize*39);
+    		imgv2.setFitHeight(buttonSize*23);
+    		imgv2.setTranslateX(-buttonSize*3.25);
     		
     		InputStream is3 = Files.newInputStream(Paths.get("res/jotaro.png"));
     		Image logo3 = new Image(is3);
     		is3.close();
     		ImageView imgv3 = new ImageView(logo3);
-    		imgv3.setFitWidth(1500);
-    		imgv3.setFitHeight(800);
+    		imgv3.setFitWidth(buttonSize*39);
+    		imgv3.setFitHeight(buttonSize*23);
+    		imgv3.setTranslateX(-buttonSize*3.25);
             	    		
-            menu2.setTranslateX(500);
-            menu2.setTranslateY(80);
+            //menu2.setTranslateX(500);
+            //menu2.setTranslateY(80);
             menu2.getChildren().add(imgv1);
             menu4.getChildren().addAll(imgv2);
             menu5.getChildren().add(bg);
             menu6.getChildren().add(imgv3);
             
-
-            menu0.setTranslateX(600);
-            menu0.setTranslateY(375);
-
-            menu1.setTranslateY(300);
             
-            menu4.setTranslateX(1500);
-            menu6.setTranslateX(1500);
+            menu0.setTranslateX(buttonSize*15); //start-play-option, prima schermata
+            menu0.setTranslateY(buttonSize*12);
+
+            menu1.setTranslateY(buttonSize*12);	//options
             
-            menu3.setTranslateX(900);
-            menu3.setTranslateY(300);
+            //menu4.setTranslateX(buttonSize*39);  //giorno
+            //menu6.setTranslateX(buttonSize*39);  //jotaro
+            
+            menu3.setTranslateX(buttonSize*15);  // difficoltá
+            menu3.setTranslateY(buttonSize*12);
 
-            final int offset = 400;
+            
 
-            menu1.setTranslateX(offset);
-            menu1.setTranslateX(900);
+            //menu1.setTranslateX(offset);
+            //menu1.setTranslateX(900);
 
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
@@ -148,6 +151,7 @@ public class MainMenu extends Application{
             	mediaPlayer1.stop();
             });
 
+            /* ANIMAZIONI BOTTONI */
             MenuButton btnOptions = new MenuButton("options");
             btnOptions.setOnMouseClicked(event -> {
             	mediaPlayer.stop();
