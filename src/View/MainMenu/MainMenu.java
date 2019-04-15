@@ -1,5 +1,7 @@
 package View.MainMenu;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +44,10 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private Sidebar game = new Sidebar();
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    static final double width = screenSize.getWidth();
+    static final double height = screenSize.getHeight();
+    static final double buttonSize = height/30;
 	
 	 public Parent createContent() throws IOException {
 		 
@@ -51,42 +57,19 @@ public class MainMenu extends Application{
 			mediaPlayer1.setVolume(0.1);
 			
 			Pane root = new Pane();
-			root.setPrefSize(1500, 800);
+			root.setPrefSize(buttonSize*38, buttonSize*22);
 			
 			InputStream is = Files.newInputStream(Paths.get("res/62266.jpg"));
 			Image img = new Image(is);
 			is.close();
 			
 			ImageView imgv = new ImageView(img);
-			imgv.setFitWidth(1500);
-			imgv.setFitHeight(800);
+			imgv.setFitWidth(buttonSize*39);
+			imgv.setFitHeight(buttonSize*22);
 			
 			//gameMenu = new GameMenu();
 			
 			root.getChildren().add(imgv);
-			//root.getChildren().addAll(imgv,gameMenu);
-			
-
-	  
-
-//	        MenuItem itemNew = new MenuItem("NEW", 250);
-//	        itemNew.setOnAction(() -> {
-//	            FadeTransition ft = new FadeTransition(Duration.seconds(1.5), masker);
-//	            ft.setToValue(1);
-//
-//	            ft.setOnFinished(e -> {
-//	                root.getChildren().setAll(new LoadingScreen(1280, 720, () -> {
-//	                    masker.setOpacity(0);
-//	                    root.getChildren().setAll(imageView, menuBox, menuBox2, masker);
-//	                }));
-//	            });
-//
-//	            ft.play();
-//	        });
-//	    
-//
-//	        root.getChildren().addAll(imageView, menuBox, menuBox2, masker);
-			
 			
 			String musicFile1 = "res/ZA WARUDO.mp3";
 			Media sound1 = new Media(new File(musicFile1).toURI().toString());
@@ -155,33 +138,11 @@ public class MainMenu extends Application{
 
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            	
-//            	String path = "res/Jojopoze.mp4";
-//            	Media media = new Media(new File(path).toURI().toString());
-//            	MediaPlayer mediaPlayer2 = new MediaPlayer(media);
-//            	MediaView mediaView = new MediaView(mediaPlayer2);
-//            	mediaPlayer2.setAutoPlay(true);
-//            	VBox root1 = new VBox(); 
-//            	root1.prefHeight(800);
-//            	root1.prefWidth(1500);           	
-                //root1.getChildren().add(mediaView); 	              
-//                Scene scene = new Scene(root1,1250,720);
-//                Stage primaryStage = new Stage();
-//                primaryStage.setScene(scene);  
-//                primaryStage.setTitle("Playing video");  
-//                primaryStage.show();  
-            	
-            	
-//                FadeTransition ft = new FadeTransition(Duration.seconds(0.5), root);
-//                ft.setFromValue(1);
-//                ft.setToValue(0);
-//                ft.setOnFinished(evt -> root.setVisible(false));
-//                ft.play();
-                //gioco.createUI(root);
+            
             	try {
 					root.getChildren().setAll(game.createContent());
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
             	mediaPlayer1.stop();
@@ -335,6 +296,7 @@ public class MainMenu extends Application{
 		 Scene scene = new Scene(createContent());
 	        primaryStage.setTitle("Jojo Menu");
 	        primaryStage.setScene(scene);
+	        primaryStage.setResizable(false);
 	        primaryStage.show();
 		
 	}
@@ -346,7 +308,6 @@ public class MainMenu extends Application{
 		public MenuButton(String name) {
 			
 			text = new Text(name);
-			//text.setFont(text.getFont().font(20));
 			text.setFont(Font.loadFont("file:res/JOJO____.ttf", 30));
 			text.setFill(Color.DEEPPINK);
 			
@@ -378,12 +339,6 @@ public class MainMenu extends Application{
 	            setOnMousePressed(event -> setEffect(drop));
 	            setOnMouseReleased(event -> setEffect(null));  
 		}
-	}
-	
-	
-	
-	public static void main(String[] args) {
-		launch(args);
 	}
 
 }
