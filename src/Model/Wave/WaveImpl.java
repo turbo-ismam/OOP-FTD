@@ -3,6 +3,8 @@ package Model.Wave;
 import java.util.ArrayList;
 
 import Model.Enemy.Enemy;
+import Model.Enemy.SimpleEnemyModel;
+import Model.Enemy.Tank;
 
 public class WaveImpl implements Wave{
 	
@@ -20,16 +22,19 @@ public class WaveImpl implements Wave{
 	}
 
 	@Override
-	public void populate(int quantity, Enemy nemico) {
+	public void populate(int quantity, Enemy.enemyType type) {
 		for(int a=0; a<quantity; a++) {
-			ondata.add(nemico);
+			if(type == Enemy.enemyType.BASIC) {
+				Enemy basic = new SimpleEnemyModel();
+				ondata.add(basic);
+			}
+			if(type == Enemy.enemyType.TANK) {
+				Enemy tank = new Tank();
+				ondata.add(tank);
+			}
 		}
 	}
 	
-	public void addEnemy(Enemy e) {
-		
-	}
-
 	@Override
 	public void spawn() {
 		if(!ondata.isEmpty()) {
@@ -46,10 +51,4 @@ public class WaveImpl implements Wave{
 	public Wave nextWave() {
 		return new WaveImpl(this.getWave()+1);
 	}
-
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 }

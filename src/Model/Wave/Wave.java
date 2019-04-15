@@ -9,7 +9,7 @@ public interface Wave {
 
 	int getWave();
 	
-	void populate(int quantity, Enemy nemico);
+	void populate(int quantity, Enemy.enemyType type);
 	
 	void spawn();
 	
