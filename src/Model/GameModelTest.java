@@ -1,14 +1,12 @@
 package Model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 
 import utilityClasses.Pair;
 
 class GameModelTest {
 
-	@Test
+	@org.junit.Test
 	void test() {
 		GameModel gm = new GameModelImpl();
 		gm.placeTower(new Pair<>(2, 6), 0);
