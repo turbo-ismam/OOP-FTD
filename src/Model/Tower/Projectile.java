@@ -1,7 +1,5 @@
 package Model.Tower;
 
-
-
 import Model.Enemy.Enemy;
 import utilityClasses.Pair;
 

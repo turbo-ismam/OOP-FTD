@@ -1,15 +1,14 @@
 package Model.Tower;
 
-
 import java.util.ArrayList;
 
 import Model.Enemy.Enemy;
-import Model.Tower.Projectile;
 import utilityClasses.Pair;
 
-public class BasicTower implements Tower{
+public class RangedTower implements Tower{
+
 	Pair<Integer,Integer> position; 
-	private int damage = 10;
+	private int damage = 30;
 	private float shootTime;
 	private ArrayList<Projectile> projectiles;
 	private Enemy target;
@@ -18,7 +17,7 @@ public class BasicTower implements Tower{
 	private boolean isInRange;
 	
 	
-	public BasicTower(Pair<Integer, Integer> position, TowerType type) {
+	public RangedTower(Pair<Integer, Integer> position, TowerType type) {
 		
 		this.position = position;
 		//this.target = target;
@@ -37,7 +36,7 @@ public class BasicTower implements Tower{
 
 	@Override
 	public void update() {
-		
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -87,7 +86,5 @@ public class BasicTower implements Tower{
 		return target;
 		
 	}
-	
-	
 	
 }
