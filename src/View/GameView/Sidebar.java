@@ -29,6 +29,7 @@ import javafx.scene.text.Text;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+
 public class Sidebar extends Region {
 	
 	private static final int gridSize=20;
@@ -37,83 +38,79 @@ public class Sidebar extends Region {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     static final double width = screenSize.getWidth();
     static final double height = screenSize.getHeight();
-    static final double buttonSize = height/42;
-    static final double sidebarHeight = (height/41.5)*gridSize;
+    static final double buttonSize = height/30;
     
 	//MainMenu test = new MainMenu();
 	
 	public Parent createContent() throws IOException {
 		
-        Pane root = new Pane(); //finestra
-        root.setPrefSize(this.width/2, this.height/2);
+		 String style3 = "-fx-background-color: rgba(75, 250, 30, 0.5);"; //verde
+		 String style2 = "-fx-background-color: rgba(50, 100, 200, 0.5);"; //trasparente
+		 String style4 = "-fx-background-color: rgba(200, 50, 100, 0.5);"; //rosso
+		 String style = "-fx-background-color: rgba(150, 100, 50, 0.5);"; //marrone
+		
+		/* FINESTRA GENERALE */
+        Pane root = new Pane(); 
+        root.setPrefSize(buttonSize*38, buttonSize*25);
         InputStream is = Files.newInputStream(Paths.get("res/gameMenuImage.png"));
 		Image img = new Image(is);
 		is.close();
-		
 		ImageView imgv = new ImageView(img);
-		imgv.setFitWidth(this.width/2);
-		imgv.setFitHeight(this.height/2);
+		imgv.setFitWidth(buttonSize*40);
+		imgv.setFitHeight(buttonSize*26);
 		root.setOpacity(1);
 		root.getChildren().add(imgv);
         
+		/* SIDEBAR */
         FlowPane flow = new FlowPane();
-        flow.setPrefSize(500, this.sidebarHeight-this.sidebarHeight*0.025); //sidebar
-        
+        flow.setPrefSize(buttonSize*15, buttonSize*20);
+        flow.setTranslateX(buttonSize*22);
+        flow.setTranslateY(buttonSize);
         flow.setBackground(Background.EMPTY);
-        String style = "-fx-background-color: rgba(150, 100, 50, 0.5);";
-        flow.setStyle(style);
-        
-        //flow.setPadding(new Insets(50,50,50,50));
         flow.setVgap(4);
         flow.setHgap(4);
-        String style4 = "-fx-background-color: rgba(200, 50, 100, 0.5);";
-        HBox menu1 = new HBox(10);        
-        menu1.setPrefSize(300, 200);
-        menu1.setTranslateY(0);
-        menu1.setTranslateX(25);
-        menu1.setSpacing(10);
+        flow.setStyle(style);
+        
+         /* MENU1: START AND OPTION */
+        HBox menu1 = new HBox(buttonSize);
+        menu1.setPrefSize(buttonSize, buttonSize);
+        menu1.setTranslateY(buttonSize);
+        menu1.setTranslateX(buttonSize);
+        menu1.setSpacing(buttonSize);
         MenuButton start = new MenuButton("start");
         menu1.getChildren().add(start);
         flow.getChildren().add(menu1);
         MenuButton menu = new MenuButton("menu");
         menu.setOnMouseClicked(event -> {
-        	
-        	
-        	
-        	
-        	
+        	//TODO ACTIN LISTENER DEI BOTTONI
         });
-       //menu1.setBackground(Background.EMPTY);
-        //menu1.setStyle(style4);
         menu1.getChildren().add(menu);
         
+        /* MENU2: INFO HP, COINS, WAVE */
         VBox menu2 = new VBox();
-        menu2.setPrefSize(450, 400);
-        menu2.setTranslateY(this.buttonSize*0.5);
-        menu2.setTranslateX(25);
+        menu2.setPrefSize(buttonSize*13, buttonSize*9);
+        menu2.setTranslateY(buttonSize*2);
+        menu2.setTranslateX(buttonSize);
         menu2.setBackground(Background.EMPTY);
-        String style2 = "-fx-background-color: rgba(50, 100, 200, 0.5);";
+       
         menu2.setStyle(style2);
         flow.getChildren().add(menu2);
         
-        FlowPane menu3 = new FlowPane();
-        menu3.setPrefSize(buttonSize*9,buttonSize* 5);
+        /* MENU3: TOWERS */
+        HBox menu3 = new HBox();
+        menu3.setPrefSize(buttonSize*14,buttonSize* 6);
+        menu3.setTranslateX(buttonSize);
         menu3.setTranslateY(this.buttonSize*2);
-        menu3.setTranslateX(buttonSize/2.5);
-        menu3.setBackground(Background.EMPTY);
-        String style3 = "-fx-background-color: rgba(75, 250, 30, 0.5);";
-        menu3.setStyle(style3);
-        menu3.setPadding(new Insets(25,0,0,15));
-        menu3.setHgap(15);
-        menu3.setVgap(15);
+        menu3.setSpacing(buttonSize);
+        //menu3.setBackground(Background.EMPTY);
+        //menu3.setPadding(new Insets(25,0,0,15));
         MenuButton1 tower1 = new MenuButton1("type 1");
+        menu3.getChildren().add(tower1);
         MenuButton1 tower2 = new MenuButton1("type 2");
-        MenuButton1 tower3 = new MenuButton1("type 3");
-        MenuButton1 tower4 = new MenuButton1("type 4");
-        menu3.getChildren().addAll(tower1,tower2,tower3,tower4);
+        menu3.getChildren().add(tower2);
         flow.getChildren().add(menu3);
 
-        
+        /* GRIGLIA DI GIOCO */
         GridPane grid = new GridPane();
         grid.setPrefSize(buttonSize*20, buttonSize*20);
 
@@ -128,12 +125,8 @@ public class Sidebar extends Region {
             	grid.add(bt, j, i);
         	}
         }
-        
-        flow.setTranslateY(this.buttonSize);
-        flow.setTranslateX(this.buttonSize*25);
-        
-        grid.setTranslateX(this.buttonSize/2);
-        grid.setTranslateY(this.buttonSize/2);
+        grid.setTranslateX(this.buttonSize);
+        grid.setTranslateY(this.buttonSize);
         root.getChildren().addAll(grid,flow);
         
         
@@ -144,16 +137,17 @@ public class Sidebar extends Region {
         return root;
 	}
 	
+	/* START AND OPTION BUTTONS */
 	private static class MenuButton extends StackPane {
 		private Text text;
 		
 		public MenuButton(String name) {
 			
 			text = new Text(name);
-			text.setFont(Font.loadFont("file:res/JOJO____.ttf", 30));
+			text.setFont(Font.loadFont("file:res/JOJO____.ttf", 22));
 			text.setFill(Color.DEEPPINK);
 			
-			Rectangle bg = new Rectangle(220,110);
+			Rectangle bg = new Rectangle(buttonSize*6,buttonSize*3);
 			bg.setOpacity(0.8);
 			bg.setFill(Color.CYAN);
 			
@@ -179,16 +173,17 @@ public class Sidebar extends Region {
 		}
 	}
 	
+	/* TOWER BUTTONS */
 	private static class MenuButton1 extends StackPane {
 		private Text text;
 		
 		public MenuButton1(String name) {
 			
 			text = new Text(name);
-			text.setFont(Font.loadFont("file:res/JOJO____.ttf", 30));
+			text.setFont(Font.loadFont("file:res/JOJO____.ttf", 22));
 			text.setFill(Color.BLACK);
 			
-			Rectangle bg = new Rectangle(200,100);
+			Rectangle bg = new Rectangle(buttonSize*6,buttonSize*3);
 			bg.setOpacity(0.8);
 			bg.setFill(Color.DARKORANGE);
 			
@@ -214,7 +209,8 @@ public class Sidebar extends Region {
 		}
 	}
 	
-private static class Button extends StackPane {
+	/* GRID BUTTONS */
+	private static class Button extends StackPane {
 		
 		private Text text;
 		private String position;
@@ -235,7 +231,6 @@ private static class Button extends StackPane {
     		ImageView img = new ImageView(logo);
     		img.setFitWidth(50);
     		img.setFitHeight(50);
-			//Image logo = new Image("grass.png", 30, 30, true, true);
 			bg.setFill(new ImagePattern(logo));
 			
 			
@@ -244,7 +239,6 @@ private static class Button extends StackPane {
 	            getChildren().addAll(bg, text);
 
 	            setOnMouseEntered(event -> {
-	                //bg.setTranslateX(10);
 	                text.setTranslateX(10);
 	                bg.setFill(Color.CYAN);
 	                text.setFill(Color.BLACK);
