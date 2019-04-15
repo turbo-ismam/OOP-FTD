@@ -1,7 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
-
+import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 import Model.Map.HardMap;
 import Model.Map.Map;

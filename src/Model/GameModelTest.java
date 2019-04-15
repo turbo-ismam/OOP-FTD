@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import Model.Tower.TowerType;
 import utilityClasses.Pair;
 
-class GameModelTest {
+public class GameModelTest {
 	
 	GameModel gm = new GameModelImpl();
 
 
 	@org.junit.Test
-	void PlaceAndRemoveTowersTest() {
+	public void PlaceAndRemoveTowersTest() {
 		
 		gm.placeTower(new Pair<>(1,2), TowerType.BASIC);
 		assertTrue(gm.getGameStatus()==GameStatus.PLAYING);
@@ -22,18 +22,18 @@ class GameModelTest {
 	}
 	
 	@org.junit.Test
-	void SpawnEnemiesTest() {
+	public void SpawnEnemiesTest() {
 		gm.nextWave();
 	}
 	
 	@org.junit.Test
-	void GoToNextWaveTest() {
+	public void GoToNextWaveTest() {
 		gm.nextWave();
 	}
 	
 	
 	@org.junit.Test
-	void GameWinTest() {
+	public void GameWinTest() {
 		
 		gm.getPlayer().setWave(21);
 		gm.update();
@@ -41,7 +41,7 @@ class GameModelTest {
 	}
 
 	@org.junit.Test
-	void GameLostTest() {
+	public void GameLostTest() {
 		
 		gm.getPlayer().takeDamage(9999);
 		gm.update();
