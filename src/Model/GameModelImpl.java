@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Model.Entity.Entity;
 import Model.Map.HardMap;
 import Model.Map.Map;
+import Model.Player.Player;
 import Model.Player.PlayerImpl;
 import Model.Tower.BasicTower;
 import Model.Tower.TowerType;
@@ -20,7 +21,7 @@ import utilityClasses.Pair;
 public class GameModelImpl implements GameModel {
 	
 	private Map m;
-	private PlayerImpl p;
+	private Player p;
 	private Wave w;
 	private GameStatus gs;
 	private int tick = 0;
@@ -36,12 +37,12 @@ public class GameModelImpl implements GameModel {
 	}
 
 	@Override
-	public void placeTower(Pair<Integer, Integer> location, int cost) {
-		if (p.getCoins()<cost){
+	public void placeTower(Pair<Integer, Integer> location, TowerType tt) {
+		if (p.getCoins()<tt.getCost()){
 			return;
 		}
-		p.incrementCoins(cost); //player PAGA la torre
-		m.addEntity(new BasicTower(location, TowerType.BASIC));
+		p.incrementCoins(tt.getCost()); //player PAGA la torre
+		m.addEntity(new BasicTower(location, tt));
 	}
 
 	@Override
@@ -60,6 +61,17 @@ public class GameModelImpl implements GameModel {
 		return this.gs;
 	}
 	
+	@Override
+	public Player getPlayer() {
+		return this.p;
+	}
+	
+	@Override
+	public Wave getCurrentWave() {
+		return this.w;
+	}
+	
+	@Override
 	public void nextWave() {
 		w.nextWave();
 	}
@@ -68,19 +80,23 @@ public class GameModelImpl implements GameModel {
 	public void update() {
 		m.entityList().forEach(e->e.update());
 		
-		if(!w.isEmpty() && tick==100) {
-			this.tick=0;
-			w.spawn();
+		/*m.entityList().forEach(e -> {
+			if(e instanceof Enemy) {
+				e.
+			}
+				
+				));
 		}
-		this.tick++;
-		
+		*/
 		if (p.getHp()<=0) {
 			this.gs=GameStatus.LOST;
+			return;
 		}
 		if (p.getWave()>20) {
 			this.gs=GameStatus.WON;
+			return;
 		}
-		
+		this.tick++;
 	}
 	
 }
