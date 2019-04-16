@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import Model.GameModel;
 import Model.GameModelImpl;
 import Model.Tower.TowerType;
+import View.Input.Input;
 import utilityClasses.Pair;
 
 public class GameControllerImpl implements GameController {
@@ -40,8 +41,7 @@ public class GameControllerImpl implements GameController {
 	}
 	
 	@Override
-	public void handleInput() {
-		// TODO Auto-generated method stub
+	public void handleInput(Input i) {
 		
 	}
 	
