@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import Model.Map.MapTile;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -33,13 +35,15 @@ public class Sidebar extends Region {
 	
 	private static final int gridSize=20;
 	private ArrayList<Button> btList = new ArrayList<>();
+	private ArrayList<MapTile> path = new ArrayList<>(); 
 	
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         static final double width = screenSize.getWidth();
         static final double height = screenSize.getHeight();
-        static final double buttonSize = height/30;
-	//MainMenu test = new MainMenu();
-	
+        static final double buttonSize = height/42;
+        
+	//MainMenu test = new MainMenu();    
+        
 	public Parent createContent() throws IOException {
 		
 		 String style3 = "-fx-background-color: rgba(75, 250, 30, 0.5);"; //verde
