@@ -20,6 +20,11 @@ public interface Enemy extends Entity {
 		LEFT,
 		RIGHT
 	}
+	
+	public enum enemyType {
+		BASIC,
+		TANK
+	}
 	void walk(); //moving logics
 	
 	void spawn(); //enemy appearing on the map, ready to walk
