@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 import Model.Entity.Entity;
+import Model.Map.Map;
 import Model.Player.Player;
 import Model.Tower.TowerType;
 import Model.Wave.Wave;
@@ -22,13 +23,6 @@ public interface GameModel {
 	 * @param location x, y position of the Tower
 	 */
 	public void removeTower(Pair<Integer, Integer> location);
-	
-	/**
-	 * 
-	 * @return list of all entities in the map
-	 */
-	
-	public ArrayList<Entity> getEntities();
 	
 	/**
 	 * 
@@ -57,5 +51,7 @@ public interface GameModel {
 	 * Update everything and moves the game forward by one tick
 	 */
 	public void update();
+
+    public Map getMap();
 	
 }

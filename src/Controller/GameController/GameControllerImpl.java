@@ -58,9 +58,6 @@ public class GameControllerImpl implements GameController {
 			e.printStackTrace();
 		}
 		gc.resumeGame();
-		System.out.println(gm.getEntities());
-		gm.placeTower(new Pair<Integer,Integer>(2,3), TowerType.BASIC);
-		System.out.println(gm.getEntities());
 		
 	
 	}

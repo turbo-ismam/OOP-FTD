@@ -21,7 +21,7 @@ public interface Enemy extends Entity {
 		RIGHT
 	}
 	
-	public enum enemyType {
+	public enum EnemyType {
 		BASIC,
 		TANK
 	}

@@ -3,6 +3,8 @@ package Model.Wave;
 import java.util.ArrayList;
 
 import Model.Enemy.Enemy;
+import Model.Enemy.Enemy.EnemyType;
+import Model.Map.MapTile;
 import Model.Enemy.SimpleEnemyModel;
 import Model.Enemy.Tank;
 
@@ -22,25 +24,31 @@ public class WaveImpl implements Wave{
 	}
 
 	@Override
-	public void populate(int quantity, Enemy.enemyType type) {
+	public void populate(int quantity, EnemyType type, ArrayList<MapTile> path) {
 		for(int a=0; a<quantity; a++) {
-			if(type == Enemy.enemyType.BASIC) {
+			if(type == EnemyType.BASIC) {
 				Enemy basic = new SimpleEnemyModel();
+				basic.setPath(path);
 				ondata.add(basic);
 			}
-			if(type == Enemy.enemyType.TANK) {
+			if(type == EnemyType.TANK) {
 				Enemy tank = new Tank();
+				tank.setPath(path);
 				ondata.add(tank);
 			}
 		}
 	}
 	
 	@Override
-	public void spawn() {
+	public Enemy spawn() {
+	    Enemy e = null;
 		if(!ondata.isEmpty()) {
-		 ondata.get(0);
+		e = ondata.get(0);
+		e.spawn();
 		ondata.remove(0);
 		}
+		return e;
+		
 	}
 
 	public ArrayList<Enemy> getOndata() {

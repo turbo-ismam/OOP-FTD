@@ -23,7 +23,7 @@ public class Tank implements Enemy {
 	public Direction direction;
 	private ArrayList<MapTile> path = null;
 	
-	private MapTile actual = new MapTileImpl(path.get(0).getPosition().getX(),path.get(0).getPosition().getY());
+	private MapTile actual;
 	
 	private int x = 1;
 	private int tick = 0;
@@ -143,6 +143,7 @@ public class Tank implements Enemy {
 	@Override
 	public void setPath(ArrayList<MapTile> sentiero) {
 		this.path = sentiero;		
+		this.actual = sentiero.get(0);
 	}
 	
 	public boolean isAlive() {

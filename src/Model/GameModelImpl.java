@@ -50,11 +50,6 @@ public class GameModelImpl implements GameModel {
 		m.removeEntity(location);
 		
 	}
-
-	@Override
-	public ArrayList<Entity> getEntities() {
-		return m.entityList();
-	}
 	
 	@Override
 	public GameStatus getGameStatus() {
@@ -72,14 +67,23 @@ public class GameModelImpl implements GameModel {
 	}
 	
 	@Override
+	public Map getMap() {
+	    return this.m;
+	}
+	
+	@Override
 	public void nextWave() {
-		w.nextWave();
+		w=w.nextWave();
+	}
+	
+	private void addEnemy(Enemy e) {
+	    m.addEntity(e);
 	}
 
 	@Override
 	public void update() {
 		m.entityList().forEach(e->e.update());
-		
+		addEnemy(w.spawn());
 		/*m.entityList().forEach(e -> {
 			if(e instanceof Enemy) {
 				e.
