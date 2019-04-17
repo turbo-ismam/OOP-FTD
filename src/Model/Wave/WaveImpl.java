@@ -10,11 +10,12 @@ import Model.Enemy.Tank;
 
 public class WaveImpl implements Wave{
 	
-	private ArrayList<Enemy> ondata = new ArrayList<>();
+	private ArrayList<Enemy> ondata;
 	private int Numero_Ondata;
 
 	public WaveImpl(int numero_Ondata) {
 		super();
+		ondata = new ArrayList<>();
 		Numero_Ondata = numero_Ondata;
 	}
 
@@ -41,18 +42,23 @@ public class WaveImpl implements Wave{
 	
 	@Override
 	public Enemy spawn() {
-	    Enemy e = null;
+		Enemy e = null;
 		if(!ondata.isEmpty()) {
 		e = ondata.get(0);
 		e.spawn();
 		ondata.remove(0);
 		}
-		return e;
-		
+		if(e!=null) {
+			return e;
+		}
+		else {
+			throw new NullPointerException();
+		}
 	}
-
-	public ArrayList<Enemy> getOndata() {
-		return ondata;
+	
+	@Override
+	public boolean hasEnemies() {
+		return !ondata.isEmpty();
 	}
 	
 	@Override

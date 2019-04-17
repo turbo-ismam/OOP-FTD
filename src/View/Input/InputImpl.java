@@ -44,5 +44,11 @@ public class InputImpl implements Input{
 		
 		return this.inputType;
 	}
+	
+	@Override
+	public String toString() {
+		return inputType.toString() + " "+ x + " " + y;
+		
+	}
 
 }
