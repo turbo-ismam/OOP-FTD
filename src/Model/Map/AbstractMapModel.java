@@ -2,18 +2,13 @@ package Model.Map;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
-import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 import Model.Map.MapTile.Status;
 import utilityClasses.Pair;
 
-/**
- * 
- * @author ismam
- *
- */
 public abstract class AbstractMapModel implements Map{
 
 	protected List<MapTile> grid = new ArrayList<>();
@@ -77,9 +72,6 @@ public abstract class AbstractMapModel implements Map{
 	@Override
 	public void removeEntity(Pair<Integer, Integer> location) {
 		entity.removeIf(e -> e.getLocation().equals(location));
-		for (Entity e : entity) {
-			//System.out.println(e.getLocation() + " " + location);
-		}
 		
 	}
 

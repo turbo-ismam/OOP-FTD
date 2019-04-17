@@ -1,53 +1,41 @@
+
 package View.MainMenu;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javax.imageio.stream.ImageInputStream;
 
-import View.GameView.Sidebar;
-import javafx.animation.FadeTransition;
+import Constants.GameConstants;
+import View.GameView.GameScreen;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
-import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenu extends Application{
 	
-	private Sidebar game = new Sidebar();
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    static final double width = screenSize.getWidth();
-    static final double height = screenSize.getHeight();
-    static final double buttonSize = height/42;
+	private GameScreen game = new GameScreen();
+	
+    static final double buttonSize = GameConstants.buttonSize;
     static final int offset = 400;
 	
 	 public Parent createContent() throws IOException {
