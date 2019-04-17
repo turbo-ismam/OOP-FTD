@@ -1,12 +1,13 @@
 package Model.Tower;
 
 import Model.Enemy.Enemy;
+import Model.Entity.Entity;
 import utilityClasses.Pair;
 
-public class Projectile {
+public class Projectile implements Entity {
 	Pair<Integer,Integer> position;
 	
-	private float x, y, speed, xVelocity, yVelocity;
+	private float x, y, speed, tick;
 	private int damage;
 	private Enemy enemy;
 	
@@ -15,13 +16,17 @@ public class Projectile {
 		this.damage = damage;
 		this.speed = speed;
 		this.enemy = enemy;
-		this.xVelocity = 0f;
-		this.yVelocity = 0f;
+		
 	}
 	
+	@Override
 	public void update() {
-		x += xVelocity * speed ;
-		y += yVelocity * speed ;
+		
 	}
-	
+
+	@Override
+	public Pair<Integer, Integer> getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
