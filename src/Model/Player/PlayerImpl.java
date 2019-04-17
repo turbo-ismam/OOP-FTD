@@ -1,53 +1,63 @@
 package Model.Player;
 
+/**
+ * 
+ * @author ismam
+ *
+ */
+
 public class PlayerImpl implements Player{
 
-	@Override
+	/**
+	 * 
+	 */
+	private String name;
+	private int hp;
+	private int coins;
+	private int wave;
+	
+	/**
+	 * Constructor
+	 * @param name
+	 * @param hp
+	 * @param coins
+	 * @param wave
+	 */
+	public PlayerImpl(String name,int hp,int coins) {
+		this.name=name;
+		this.hp=hp;
+		this.coins=coins;
+		this.wave=1;
+	}
+	
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
-
-	@Override
-	public void setName() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	
 	public int getHp() {
-		// TODO Auto-generated method stub
-		return 0;
+		return hp;
 	}
-
-	@Override
-	public void setHp(int hp) {
-		// TODO Auto-generated method stub
-		
+	
+	public void takeDamage(int damage) {
+		this.hp = this.getHp()-damage;
 	}
-
-	@Override
+	
 	public int getCoins() {
-		// TODO Auto-generated method stub
-		return 0;
+		return coins;
 	}
-
-	@Override
-	public void setCoins(int coin) {
-		// TODO Auto-generated method stub
-		
+	
+	public void incrementCoins(int coins) {
+		this.coins = this.coins + coins;
 	}
-
-	@Override
+	
 	public int getWave() {
-		// TODO Auto-generated method stub
-		return 0;
+		return wave;
 	}
-
-	@Override
+	
 	public void setWave(int wave) {
-		// TODO Auto-generated method stub
-		
+		this.wave = wave;
 	}
+	
+	
 
 }

@@ -2,24 +2,30 @@ package Model.Player;
 
 /**
  * 
- * @author SCRIVI IL TUO NOME
+ * @author ismam
  *
  */
 public interface Player {
 
-	String getName();
+	public String getName();
 	
-	void setName();
 	
-	int getHp();
+	public int getHp();
 	
-	void setHp(int hp);
 	
-	int getCoins();
+	public void takeDamage(int damage);
 	
-	void setCoins(int coin);
 	
-	int getWave();
+	public int getCoins();
 	
-	void setWave(int wave);
+	
+	public void incrementCoins(int coins);
+	
+	
+	public int getWave();
+	
+	
+	public void setWave(int wave);
+	
+	
 }

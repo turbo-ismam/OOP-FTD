@@ -3,10 +3,13 @@
  */
 package Model.Enemy;
 
+import java.util.ArrayList;
+
 import Model.Entity.Entity;
+import Model.Map.MapTile;
 
 /**
- * @author QUALCUNO
+ * @author Vlad
  *
  */
 public interface Enemy extends Entity {
@@ -21,15 +24,11 @@ public interface Enemy extends Entity {
 	
 	void spawn(); //enemy appearing on the map, ready to walk
 	
-	void despawn(); //ugual a quel di sotto,
-	
-	void death();// vedi sopra (?)
+	void death();// muore
 	
 	int getHP();
 	
 	void setHP(int hp);
-	
-	int getDamage();
 	
 	void setDamage(int damage);
 	
@@ -40,5 +39,13 @@ public interface Enemy extends Entity {
 	int getSpeed();
 	
 	void setSpeed(int speed);
+
+	void setPath(ArrayList<MapTile> sentiero);
+	
+	boolean isAlive();
+	
+	Direction Direzione();
+	
+	public void despawn();
 	
 }
