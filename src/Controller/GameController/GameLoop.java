@@ -4,16 +4,20 @@ import java.util.ArrayList;
 
 import Model.GameModel;
 import Model.Tower.TowerType;
+import View.Input.Input;
+import View.Input.InputType;
 import utilityClasses.Pair;
 
 public class GameLoop implements Runnable {
 	private GameModel gm;
 	private boolean running;
 	private int i;
+	private ArrayList<Input> inputList;
 	//private View v;
  
 	public GameLoop(GameModel gm) {
 		this.gm=gm;
+		this.inputList = new ArrayList<>();
 	}
 	
 	@Override
@@ -21,7 +25,7 @@ public class GameLoop implements Runnable {
 				if(running) {
 
 				//input process
-				this.processInput(new ArrayList<>());
+				this.processInput();
 				//model update
 				gm.update();
 				System.out.println("hello thread" +i);
@@ -32,7 +36,7 @@ public class GameLoop implements Runnable {
 				else {
 					try {
 						Thread.sleep(500);
-						System.out.println("im pausing but im running");
+						System.out.println("Pause..");
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -46,15 +50,18 @@ public class GameLoop implements Runnable {
 	public void pause() {
 		this.running=false;
 	}
-	private void processInput(ArrayList<Integer> input) {
+	public void addInput(Input input) {
+	    this.inputList.add(input);
+	}
+	private void processInput() {
 		
-		input.stream().forEach(e -> {
-            switch (e.intValue()) {
-            case 1 :
-            	gm.placeTower(new Pair<Integer,Integer>(1,1), TowerType.BASIC);
+		inputList.stream().forEach(e -> {
+            switch (e.getInputType()) {
+            case ADD_TOWER :
+            	gm.placeTower(new Pair<Integer,Integer>(e.getX(), e.getY()), TowerType.BASIC);
                 break;
-            case 2:
-            	gm.removeTower(new Pair<Integer,Integer>(1,1));
+            case REMOVE_TOWER :
+            	gm.removeTower(new Pair<Integer,Integer>(e.getX(), e.getY()));
                 break;
             default:
                 break;

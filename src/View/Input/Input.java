@@ -17,14 +17,14 @@ public interface Input {
      * 
      * @return x position
      */
-    double getX();
+    int getX();
 
     /**
      * Returns the vertical position of the player's click in the window.
      * 
      * @return y position
      */
-    double getY();
+    int getY();
 
     /**
      * Method to return the type of the Input.

@@ -28,13 +28,13 @@ public class InputImpl implements Input{
 	}
 	
 	@Override
-	public double getX() {
+	public int getX() {
 		
 		return this.x;
 	}
 
 	@Override
-	public double getY() {
+	public int getY() {
 
 		return this.y;
 	}

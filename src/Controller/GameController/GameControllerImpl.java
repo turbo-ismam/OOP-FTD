@@ -24,7 +24,7 @@ public class GameControllerImpl implements GameController {
 	public void startGame() {
 		if (!running) {
 			ses.scheduleWithFixedDelay(gl, 0, 1, TimeUnit.SECONDS);
-			System.out.println("hello world2");
+			System.out.println("Game is running...");
 			this.running=true;
 		}
 		
@@ -42,7 +42,7 @@ public class GameControllerImpl implements GameController {
 	
 	@Override
 	public void handleInput(Input i) {
-		
+		gl.addInput(i);
 	}
 	
 	public static void main(String[] args) {
