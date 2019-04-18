@@ -9,6 +9,13 @@ import java.nio.file.Paths;
 
 
 import Constants.GameConstants;
+import Controller.GameController.GameControllerImpl;
+import Model.GameModel;
+import Model.GameModelImpl;
+import Model.Map.AbstractMapModel;
+import Model.Map.HardMap;
+import Model.Map.NormalMap;
+import Model.Map.SimpleMap;
 import View.GameView.GameScreen;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -33,7 +40,9 @@ import javafx.util.Duration;
 
 public class MainMenu extends Application{
 	
-	private GameScreen game = new GameScreen();
+	private GameScreen game;
+	private GameModel gm = new GameModelImpl();
+	private AbstractMapModel map;
 	
     static final double buttonSize = GameConstants.buttonSize;
     static final int offset = 400;
@@ -129,7 +138,7 @@ public class MainMenu extends Application{
 
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            
+            	game = new GameScreen(new GameControllerImpl(gm),gm,map);
             	try {
 					root.getChildren().setAll(game.createContent());
 				} catch (IOException e) {
@@ -267,6 +276,22 @@ public class MainMenu extends Application{
                     root.getChildren().remove(menu3);
                     root.getChildren().remove(menu6);
                 });
+            });
+            
+
+            btnEasy.setOnMouseClicked(event -> {
+            	map = new SimpleMap();
+            	System.out.println("facile");
+            });
+
+            btnMedium.setOnMouseClicked(event -> {
+            	map = new NormalMap();
+            	System.out.println("normale");
+            });
+            
+            btnHard.setOnMouseClicked(event -> {
+            	map = new HardMap();
+            	System.out.println("difficile");
             });
 
             menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
