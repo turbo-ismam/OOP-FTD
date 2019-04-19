@@ -10,7 +10,7 @@ import utilityClasses.Pair;
 
 public class GameModelTest {
 	
-	GameModel gm = new GameModelImpl();
+	GameModel gm = new GameModelImpl(1);
 
 
 	@org.junit.Test

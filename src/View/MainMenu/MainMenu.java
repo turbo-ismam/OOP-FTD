@@ -9,9 +9,11 @@ import java.nio.file.Paths;
 
 
 import Constants.GameConstants;
+import Controller.GameController.GameController;
 import Controller.GameController.GameControllerImpl;
 import Model.GameModel;
 import Model.GameModelImpl;
+import Model.Enemy.Enemy.EnemyType;
 import Model.Map.AbstractMapModel;
 import Model.Map.HardMap;
 import Model.Map.NormalMap;
@@ -41,8 +43,7 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private GameScreen game;
-	private GameModel gm = new GameModelImpl();
-	private AbstractMapModel map;
+	private GameController gc = new GameControllerImpl();
 	
     static final double buttonSize = GameConstants.buttonSize;
     static final int offset = 400;
@@ -138,7 +139,8 @@ public class MainMenu extends Application{
 
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            	game = new GameScreen(new GameControllerImpl(gm),gm,map);
+            	gc.startGame();
+            	game = new GameScreen(gc);
             	try {
 					root.getChildren().setAll(game.createContent());
 				} catch (IOException e) {
@@ -280,17 +282,17 @@ public class MainMenu extends Application{
             
 
             btnEasy.setOnMouseClicked(event -> {
-            	map = new SimpleMap();
+            	gc.setDifficulty(1);
             	System.out.println("facile");
             });
 
             btnMedium.setOnMouseClicked(event -> {
-            	map = new NormalMap();
+            	gc.setDifficulty(2);
             	System.out.println("normale");
             });
             
             btnHard.setOnMouseClicked(event -> {
-            	map = new HardMap();
+            	gc.setDifficulty(3);
             	System.out.println("difficile");
             });
 

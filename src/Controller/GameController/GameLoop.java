@@ -7,13 +7,14 @@ import Model.Tower.TowerType;
 import utilityClasses.Pair;
 
 public class GameLoop implements Runnable {
-	private GameModel gm;
+	private final GameModel gm;
 	private boolean running;
 	private int i;
-	//private View v;
+	
  
 	public GameLoop(GameModel gm) {
 		this.gm=gm;
+		this.running= true;
 	}
 	
 	@Override
@@ -24,15 +25,16 @@ public class GameLoop implements Runnable {
 				this.processInput(new ArrayList<>());
 				//model update
 				gm.update();
-				System.out.println("hello thread" +i);
+				System.out.println("Update " +i);
+				System.out.println(gm.getMap().entityList());
 				
 				//render view
-				i++;
+				i++; //variabili di debug
 				}
 				else {
 					try {
 						Thread.sleep(500);
-						System.out.println("im pausing but im running");
+						System.out.println("PAUSED");
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

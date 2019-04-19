@@ -9,15 +9,11 @@ import java.util.ArrayList;
 
 import Constants.GameConstants;
 import Controller.GameController.GameController;
-import Model.GameModel;
-import Model.Map.AbstractMapModel;
+import Model.Map.Map;
 import Model.Map.MapTile;
 import Model.Tower.TowerType;
-import View.Input.Input;
 import View.Input.InputImpl;
 import View.Input.InputType;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -29,26 +25,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import utilityClasses.Pair;
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
 public class GameScreen extends Region {
 	
 	private static final int gridSize=20;
 	private ArrayList<GridButton> btList = new ArrayList<>();
 	private ArrayList<MapTile> via;
-	private GameController gm;
-	private GameModel gc;
-	private AbstractMapModel mappa; 
+	private GameController gc;
+	private Map mappa; 
 	private boolean type1=false;
 	private boolean type2=false;
 	
@@ -99,7 +86,7 @@ public class GameScreen extends Region {
         flow.getChildren().add(menu1);
         MenuButton pause = new MenuButton("pause");
         pause.setOnMouseClicked(event -> {
-        	gm.pauseGame();
+        	gc.pauseGame();
         });
         menu1.getChildren().add(pause);
         
@@ -137,16 +124,16 @@ public class GameScreen extends Region {
         		bt.position= new Pair<Integer,Integer>(i,j);
         		bt.setOnMouseClicked(event -> {
         			System.out.println(bt.position);
-        			if(gm == null) {
+        			if(gc == null) {
         				throw new NullPointerException();
         			}
         			else {
         				if(this.type1) {
-        					gm.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
         				System.out.println("droppo torre 1");////////////////DROPPO LA TORRE
         				}
         				else if(this.type2) {
-        					gm.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
         					System.out.println("droppo torre 2");
         				}        				
         				for(GridButton n:this.btList) {  /////////////////////TOLGO L ILLUMINAZIONE
@@ -186,7 +173,7 @@ public class GameScreen extends Region {
         System.out.println(GameConstants.width);
         
         start.setOnMouseClicked(event -> {
-        	gm.startGame();
+        	gc.startGame();
         	
         	if(this.mappa == null) {
         	for(MapTile m:this.via) {
@@ -223,12 +210,11 @@ public class GameScreen extends Region {
         return root;
 	}
 	
-	public GameScreen(GameController gm,GameModel gc,AbstractMapModel map) {
-		super();
-		this.gm = gm;
+	public GameScreen(GameController gc) {
+
 		this.gc = gc;
-		this.via = gc.getMap().pathList();
-		this.mappa = map;
+		this.mappa = gc.getModel().getMap();
+		this.via= gc.getModel().getMap().pathList();
 	}
 
 }

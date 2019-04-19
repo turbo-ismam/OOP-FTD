@@ -1,10 +1,10 @@
 package Model;
 
-import java.util.ArrayList;
 import Model.Enemy.Enemy;
-import Model.Entity.Entity;
 import Model.Map.HardMap;
 import Model.Map.Map;
+import Model.Map.NormalMap;
+import Model.Map.SimpleMap;
 import Model.Player.Player;
 import Model.Player.PlayerImpl;
 import Model.Tower.BasicTower;
@@ -24,16 +24,29 @@ public class GameModelImpl implements GameModel {
 	private Player p;
 	private Wave w;
 	private GameStatus gs;
-	private int tick = 0;
 	
     
-	public GameModelImpl(){
-		m = new HardMap();
+	public GameModelImpl(int difficulty){
+		
 		p = new PlayerImpl("SexyIsmy",1000,300);
 		p.setWave(1);
 		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
+		m = createMap(difficulty);
 		
+	}
+
+	private Map createMap(int difficulty) {
+		switch(difficulty) {
+		case 1:
+			return new SimpleMap();
+		case 2:
+			return new NormalMap();
+		case 3:
+			return new HardMap();
+		default:
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Override
@@ -100,7 +113,6 @@ public class GameModelImpl implements GameModel {
 			this.gs=GameStatus.WON;
 			return;
 		}
-		this.tick++;
 	}
 	
 }

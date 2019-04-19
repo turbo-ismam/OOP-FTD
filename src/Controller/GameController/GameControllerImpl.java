@@ -4,27 +4,28 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import Model.GameModel;
 import Model.GameModelImpl;
-import Model.Tower.TowerType;
+import Model.Enemy.Enemy.EnemyType;
 import View.Input.Input;
-import utilityClasses.Pair;
 
 public class GameControllerImpl implements GameController {
-	private final GameModel gm;
-	public final ScheduledThreadPoolExecutor ses;
+	private GameModel gm;
+	private final ScheduledThreadPoolExecutor ses;
 	private boolean running; 
+	private int difficulty =1;
 	GameLoop gl;
 	
-	public GameControllerImpl(GameModel gm) {
+	public GameControllerImpl() {
 		this.ses =new ScheduledThreadPoolExecutor(1);
-		this.gm=gm;
 		this.running = false;
-		gl = new GameLoop(gm);
+		
 	}
 	@Override
 	public void startGame() {
+		gm = new GameModelImpl(difficulty);
+		gl = new GameLoop(gm);
 		if (!running) {
 			ses.scheduleWithFixedDelay(gl, 0, 1, TimeUnit.SECONDS);
-			System.out.println("hello world2");
+			System.out.println("Game is starting");
 			this.running=true;
 		}
 		
@@ -45,12 +46,22 @@ public class GameControllerImpl implements GameController {
 		
 	}
 	
-	public static void main(String[] args) {
-		GameModel gm = new GameModelImpl();
-		GameController gc = new GameControllerImpl(gm);
-		gc.startGame();
+	@Override
+	public GameModel getModel() {
+		return this.gm;
+	}
+	@Override
+	public void setDifficulty(int d) {
+		this.difficulty=d;
 		
-		gc.pauseGame();
+	}
+	
+	public static void main(String[] args) {
+		GameController gc = new GameControllerImpl();
+		gc.startGame();
+		gc.getModel().getCurrentWave().populate(5, EnemyType.TANK, gc.getModel().getMap().pathList());
+		
+		/**gc.pauseGame();
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -58,6 +69,7 @@ public class GameControllerImpl implements GameController {
 			e.printStackTrace();
 		}
 		gc.resumeGame();
+		*/
 		
 	
 	}
