@@ -13,7 +13,7 @@ public interface Wave {
 
 	int getWave();
 	
-	void populate(int quantity, EnemyType type, ArrayList<MapTile> path);
+	void populate(int quantity, EnemyType type);
 	
 	Enemy spawn();
 	

@@ -26,7 +26,7 @@ public class GameModelTest {
 	@org.junit.Test
 	public void SpawnEnemiesTest() {
 	        Wave w = gm.getCurrentWave();
-		w.populate(5, EnemyType.BASIC, gm.getMap().pathList());
+		w.populate(5, EnemyType.BASIC);
 		gm.update();
 		gm.update();
 		System.out.println(gm.getMap().entityList());
@@ -37,7 +37,7 @@ public class GameModelTest {
 	public void GoToNextWaveTest() {
 		gm.nextWave();
 		Wave w =gm.getCurrentWave();
-		w.populate(1, EnemyType.TANK, gm.getMap().pathList());	
+		w.populate(1, EnemyType.TANK);	
 		assertEquals(w.getWave(),2);
 	}
 	
@@ -45,7 +45,7 @@ public class GameModelTest {
         public void EnemyWalkTest() {
                 gm.nextWave();
                 Wave w =gm.getCurrentWave();
-                w.populate(5, EnemyType.TANK, gm.getMap().pathList());  
+                w.populate(5, EnemyType.TANK);  
                 assertEquals(w.getWave(),2);
                 gm.update();
                 gm.update();

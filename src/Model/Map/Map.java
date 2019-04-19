@@ -97,5 +97,7 @@ public interface Map {
 	 * @return
 	 */
 	public int fromPairToInt(Pair<Integer,Integer> position);
+
+	public void removeEntity(Entity e);
 	
 }

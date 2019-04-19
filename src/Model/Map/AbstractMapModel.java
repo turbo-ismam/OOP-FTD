@@ -1,8 +1,7 @@
 package Model.Map;
 
 import java.util.ArrayList;
-
-
+import java.util.Arrays;
 import java.util.List;
 
 import Model.Entity.Entity;
@@ -13,7 +12,7 @@ public abstract class AbstractMapModel implements Map{
 
 	protected List<MapTile> grid = new ArrayList<>();
 	protected List<MapTile> enemyPath = new ArrayList<>();
-	private List<Entity> entity = new ArrayList<>();
+	private ArrayList<Entity> entity = new ArrayList<>();
 	protected final int gridSize = 20;
 	
 	/**
@@ -47,8 +46,8 @@ public abstract class AbstractMapModel implements Map{
 	}
 
 	public ArrayList<Entity> entityList(){
-		
-		return (ArrayList<Entity>) this.entity;
+		ArrayList<Entity> copia = new ArrayList<>(entity);
+		return copia;
 	}
 	
 	@Override
@@ -73,6 +72,11 @@ public abstract class AbstractMapModel implements Map{
 	public void removeEntity(Pair<Integer, Integer> location) {
 		entity.removeIf(e -> e.getLocation().equals(location));
 		
+	}
+	
+	@Override
+	public void removeEntity(Entity e) {
+		entity.remove(e);
 	}
 
 	@Override

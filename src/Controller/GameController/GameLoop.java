@@ -6,7 +6,6 @@ import Model.GameModel;
 import Model.Enemy.Enemy;
 import Model.Tower.TowerType;
 import View.Input.Input;
-import View.Input.InputType;
 import utilityClasses.Pair;
 
 public class GameLoop implements Runnable {
@@ -41,12 +40,11 @@ public class GameLoop implements Runnable {
 				//render view
 				i++; //variabili di debug
 				}
-				else {
+				else { //pause block
 					try {
 						Thread.sleep(500);
 						System.out.println("PAUSED");
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -65,9 +63,6 @@ public class GameLoop implements Runnable {
 	}
 	
 	private void processInput() {
-		
-		System.out.println("inputList : ");
-		inputList.forEach(e -> System.out.println(e.toString()));
 		
 		if(!inputList.isEmpty()) {
 			inputList.forEach(e -> {

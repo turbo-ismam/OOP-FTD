@@ -28,12 +28,14 @@ public class GameModelImpl implements GameModel {
 	
     
 	public GameModelImpl(int difficulty){
-		
 		p = new PlayerImpl("SexyIsmy",1000,300);
+		m = createMap(difficulty);
+		WaveImpl.setPath(m.pathList());
 		p.setWave(1);
 		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
-		m = createMap(difficulty);
+		
+		
 		
 	}
 
@@ -97,18 +99,19 @@ public class GameModelImpl implements GameModel {
 	@Override
 	public void update() {
 		m.entityList().forEach(e->e.update());
-		if(w.hasEnemies() && tick==150) {
+		if(w.hasEnemies() && tick==10) {
 			addEnemy(w.spawn());
 			tick=0;
 		}
-		/*m.entityList().forEach(e -> {
+		m.entityList().forEach(e -> {
 			if(e instanceof Enemy) {
-				e.
+				System.out.println("nemico status:" +((Enemy)e).isAlive());
+				if(!((Enemy) e).isAlive()) {
+					m.removeEntity(e);
+					System.out.println("hello?!?!" + m.entityList().stream().count());
+				}
 			}
-				
-				));
-		}
-		*/
+		});
 		if (p.getHp()<=0) {
 			this.gs=GameStatus.LOST;
 			return;

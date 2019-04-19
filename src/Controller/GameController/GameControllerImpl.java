@@ -15,7 +15,7 @@ public class GameControllerImpl implements GameController {
 	private GameModel gm;
 	private final ScheduledThreadPoolExecutor ses;
 	private boolean running; 
-	private int difficulty =1;
+	private int difficulty =3;
 	GameLoop gl;
 	
 	public GameControllerImpl() {
@@ -28,7 +28,7 @@ public class GameControllerImpl implements GameController {
 		gm = new GameModelImpl(difficulty);
 		gl = new GameLoop(gm);
 		if (!running) {
-			ses.scheduleWithFixedDelay(gl, 0, 1, TimeUnit.SECONDS);
+			ses.scheduleWithFixedDelay(gl, 0, 1, TimeUnit.MILLISECONDS);
 			System.out.println("Game is starting");
 			this.running=true;
 		}
@@ -64,13 +64,12 @@ public class GameControllerImpl implements GameController {
 		GameController gc = new GameControllerImpl();
 		gc.startGame();
 		Wave w=gc.getModel().getCurrentWave();
-		gc.getModel().getCurrentWave().populate(5, EnemyType.TANK, gc.getModel().getMap().pathList());
+		w.populate(5, EnemyType.TANK);
 		
 		/**gc.pauseGame();
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		w.populate(5, EnemyType.TANK, gm.getMap().pathList());  

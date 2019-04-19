@@ -44,7 +44,7 @@ public class Tank implements Enemy {
 	@Override
 	public void update() {
 		this.death();
-		if(tick == 100) {
+		if(tick == 10) {
 		this.walk();
 		tick = 0;
 		}
@@ -57,7 +57,7 @@ public class Tank implements Enemy {
 			throw new NullPointerException();
 		}
 		else {
-		if(x > path.size()) {
+		if(x >= path.size()) {
 			this.despawn();
 		}
 		

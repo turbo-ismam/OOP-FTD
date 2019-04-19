@@ -42,7 +42,7 @@ public class SimpleEnemyModel implements Enemy{
 	@Override
 	public void update() {
 		this.death();
-		if(tick == 100) {
+		if(tick == 10) {
 		this.walk();
 		tick = 0;
 		}
@@ -57,28 +57,25 @@ public class SimpleEnemyModel implements Enemy{
 			throw new NullPointerException();
 		}
 		else {
-		if(x > path.size()) {
+		if(x >= path.size()) {
 			this.despawn();
 		}
 		
 		if(this.alive == true) {
 		MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),path.get(x).getPosition().getY());
 		if(next.getPosition().getX() > actual.getPosition().getX()) {
-			actual = next;
 			direction = Direction.RIGHT;
 		}
 		if(next.getPosition().getX() < actual.getPosition().getX()) {
-			actual = next;
 			direction = Direction.LEFT;
 		}
 		if(next.getPosition().getY() > actual.getPosition().getY()) {
-			actual = next;
 			direction = Direction.DOWN;
 		}
 		if(next.getPosition().getY() < actual.getPosition().getY()) {
-			actual = next;
 			direction = Direction.UP;
 		}
+		actual = next;
 		x++;
 		}
 	}
