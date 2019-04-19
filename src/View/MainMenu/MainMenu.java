@@ -43,6 +43,7 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private GameScreen game;
+	private Difficulty avviso = new Difficulty(buttonSize);
 	private GameController gc = new GameControllerImpl();
 	
     static final double buttonSize = GameConstants.buttonSize;
@@ -284,16 +285,37 @@ public class MainMenu extends Application{
             btnEasy.setOnMouseClicked(event -> {
             	gc.setDifficulty(1);
             	System.out.println("facile");
+            	Stage stage = new Stage();
+            	try {
+					avviso.start(stage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             });
 
             btnMedium.setOnMouseClicked(event -> {
             	gc.setDifficulty(2);
             	System.out.println("normale");
+            	Stage stage = new Stage();
+            	try {
+					avviso.start(stage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             });
             
             btnHard.setOnMouseClicked(event -> {
             	gc.setDifficulty(3);
             	System.out.println("difficile");
+            	Stage stage = new Stage();
+            	try {
+					avviso.start(stage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             });
 
             menu0.getChildren().addAll(btnResume, btnOptions, btnExit);

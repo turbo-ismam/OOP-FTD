@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import Constants.GameConstants;
 import Controller.GameController.GameController;
+import Model.Enemy.Enemy;
 import Model.Map.Map;
 import Model.Map.MapTile;
 import Model.Tower.TowerType;
@@ -147,6 +148,38 @@ public class GameScreen extends Region {
             	grid.add(bt, j, i);
         	}
         }
+        
+    	if(this.mappa == null) {
+    	for(MapTile m:this.via) {
+    		for(GridButton b:this.btList) {
+    			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
+						PathButton b2 = null;
+						try {
+							b2 = new PathButton("");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						grid.add(b2,b.position.getX(),b.position.getY());
+        		}
+    		}
+    	}
+    }
+    	else {
+    		for(MapTile m:this.mappa.pathList()) {
+        		for(GridButton b:this.btList) {
+        			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
+							PathButton b2 = null;
+							try {
+								b2 = new PathButton("");
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							grid.add(b2,b.position.getX(),b.position.getY());
+            		}
+        		}
+        	}
+    	}
+        
         grid.setTranslateX(buttonSize);
         grid.setTranslateY(buttonSize);
         root.getChildren().addAll(grid,flow);
@@ -173,39 +206,13 @@ public class GameScreen extends Region {
         System.out.println(GameConstants.width);
         
         start.setOnMouseClicked(event -> {
-        	gc.startGame();
-        	
-        	if(this.mappa == null) {
-        	for(MapTile m:this.via) {
-        		for(GridButton b:this.btList) {
-        			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
-							PathButton b2 = null;
-							try {
-								b2 = new PathButton("");
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							grid.add(b2,b.position.getX(),b.position.getY());
-            		}
-        		}
+        	while(this.gc.getModel().getCurrentWave().hasEnemies()) {
+        	mappa.addEntity(gc.getModel().getCurrentWave().spawn());
         	}
-        }
-        	else {
-        		for(MapTile m:this.mappa.pathList()) {
-            		for(GridButton b:this.btList) {
-            			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
-    							PathButton b2 = null;
-    							try {
-    								b2 = new PathButton("");
-    							} catch (IOException e) {
-    								e.printStackTrace();
-    							}
-    							grid.add(b2,b.position.getX(),b.position.getY());
-                		}
-            		}
-            	}
-        	}
+        	this.gc.getModel().nextWave();
         });
+        
+        this.gc.getModel().getCurrentWave().populate(10, Enemy.EnemyType.BASIC, via);  ///////PRIMA WAVE DI PROVA
         
         return root;
 	}
