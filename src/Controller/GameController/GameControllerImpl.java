@@ -10,22 +10,28 @@ import Model.Wave.Wave;
 import View.Input.Input;
 import View.Input.InputImpl;
 import View.Input.InputType;
-import utilityClasses.Pair;
 
 public class GameControllerImpl implements GameController {
-	private final GameModel gm;
-	public final ScheduledThreadPoolExecutor ses;
+	private GameModel gm;
+	private final ScheduledThreadPoolExecutor ses;
+	private boolean running; 
+	private int difficulty =1;
 	GameLoop gl;
 	
-	public GameControllerImpl(GameModel gm) {
+	public GameControllerImpl() {
 		this.ses =new ScheduledThreadPoolExecutor(1);
-		this.gm=gm;
-		gl = new GameLoop(gm);
+		this.running = false;
+		
 	}
 	@Override
 	public void startGame() {
-			ses.scheduleWithFixedDelay(gl, 0, 16, TimeUnit.MILLISECONDS);
-			System.out.println("Game is running...");
+		gm = new GameModelImpl(difficulty);
+		gl = new GameLoop(gm);
+		if (!running) {
+			ses.scheduleWithFixedDelay(gl, 0, 1, TimeUnit.SECONDS);
+			System.out.println("Game is starting");
+			this.running=true;
+		}
 		
 	}
 	
@@ -44,11 +50,23 @@ public class GameControllerImpl implements GameController {
 		gl.addInput(i);
 	}
 	
+	@Override
+	public GameModel getModel() {
+		return this.gm;
+	}
+	@Override
+	public void setDifficulty(int d) {
+		this.difficulty=d;
+		
+	}
+	
 	public static void main(String[] args) {
-		GameModel gm = new GameModelImpl();
-		GameController gc = new GameControllerImpl(gm);
+		GameController gc = new GameControllerImpl();
 		gc.startGame();
-		Wave w=gm.getCurrentWave();
+		Wave w=gc.getModel().getCurrentWave();
+		gc.getModel().getCurrentWave().populate(5, EnemyType.TANK, gc.getModel().getMap().pathList());
+		
+		/**gc.pauseGame();
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -56,11 +74,13 @@ public class GameControllerImpl implements GameController {
 			e.printStackTrace();
 		}
 		w.populate(5, EnemyType.TANK, gm.getMap().pathList());  
+		gc.resumeGame();
+		*/
 		
-		Input i1 = new InputImpl(InputType.ADD_TOWER, 1, 1);
-		Input i2 = new InputImpl(InputType.ADD_TOWER, 1, 2);
-		Input i3 = new InputImpl(InputType.ADD_TOWER, 1, 3);
-		Input i4 = new InputImpl(InputType.REMOVE_TOWER, 1, 1);
+		Input i1 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, 1, 1);
+		Input i2 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC,1, 2);
+		Input i3 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, 1, 3);
+		Input i4 = new InputImpl(InputType.REMOVE_TOWER, TowerType.BASIC, 1, 1);
 		gc.handleInput(i1);
 		gc.handleInput(i2);
 		gc.handleInput(i3);

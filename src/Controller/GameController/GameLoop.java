@@ -10,9 +10,10 @@ import View.Input.InputType;
 import utilityClasses.Pair;
 
 public class GameLoop implements Runnable {
-	private GameModel gm;
+	private final GameModel gm;
 	private boolean running;
 	private int i;
+
 	private ArrayList<Input> inputList;
 	//private View v;
  
@@ -30,7 +31,6 @@ public class GameLoop implements Runnable {
 				this.processInput();
 				//model update
 				gm.update();
-				
 				System.out.println("update N-" +i);
 				System.out.println("oggetti nella mappa : " + gm.getMap().entityList().stream().count());
 				if(!gm.getMap().entityList().isEmpty()) {
@@ -39,12 +39,12 @@ public class GameLoop implements Runnable {
 					.forEach(e -> System.out.println("posizione nemico"+ e.getLocation()));				
 				}
 				//render view
-				i++;
+				i++; //variabili di debug
 				}
 				else {
 					try {
 						Thread.sleep(500);
-						System.out.println("Pause..");
+						System.out.println("PAUSED");
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

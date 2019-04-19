@@ -8,9 +8,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Constants.GameConstants;
+import Controller.GameController.GameController;
+import Model.Map.Map;
 import Model.Map.MapTile;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import Model.Tower.TowerType;
+import View.Input.InputImpl;
+import View.Input.InputType;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -22,21 +25,22 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import utilityClasses.Pair;
 
 public class GameScreen extends Region {
 	
 	private static final int gridSize=20;
 	private ArrayList<GridButton> btList = new ArrayList<>();
-	private ArrayList<MapTile> path = new ArrayList<>(); 
+	private ArrayList<MapTile> via;
+	private GameController gc;
+	private Map mappa; 
+	private boolean type1=false;
+	private boolean type2=false;
+	
+	private Integer i;
+	private Integer j;
 	
     private static final double buttonSize = GameConstants.buttonSize;
         
@@ -80,11 +84,11 @@ public class GameScreen extends Region {
         MenuButton start = new MenuButton("start");
         menu1.getChildren().add(start);
         flow.getChildren().add(menu1);
-        MenuButton menu = new MenuButton("menu");
-        menu.setOnMouseClicked(event -> {
-        	//TODO ACTIN LISTENER DEI BOTTONI
+        MenuButton pause = new MenuButton("pause");
+        pause.setOnMouseClicked(event -> {
+        	gc.pauseGame();
         });
-        menu1.getChildren().add(menu);
+        menu1.getChildren().add(pause);
         
         /* MENU2: INFO HP, COINS, WAVE */
         VBox menu2 = new VBox();
@@ -114,12 +118,30 @@ public class GameScreen extends Region {
         GridPane grid = new GridPane();
         grid.setPrefSize(buttonSize*20, buttonSize*20);
 
-        for (Integer i=0;i<gridSize;i++) {
-        	for(Integer j=0;j<gridSize;j++) {
+        for (i=0;i<gridSize;i++) {
+        	for(j=0;j<gridSize;j++) {
         		GridButton bt = new GridButton("");
-        		bt.position= i.toString() + " " + j.toString();
+        		bt.position= new Pair<Integer,Integer>(i,j);
         		bt.setOnMouseClicked(event -> {
         			System.out.println(bt.position);
+        			if(gc == null) {
+        				throw new NullPointerException();
+        			}
+        			else {
+        				if(this.type1) {
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
+        				System.out.println("droppo torre 1");////////////////DROPPO LA TORRE
+        				}
+        				else if(this.type2) {
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
+        					System.out.println("droppo torre 2");
+        				}        				
+        				for(GridButton n:this.btList) {  /////////////////////TOLGO L ILLUMINAZIONE
+        					n.setEffect(null);
+        				}
+        				this.type1 = false;
+        				this.type2 = false;
+        			}
         		});
         		btList.add(bt);
             	grid.add(bt, j, i);
@@ -129,10 +151,70 @@ public class GameScreen extends Region {
         grid.setTranslateY(buttonSize);
         root.getChildren().addAll(grid,flow);
         
+        tower1.setOnMouseClicked(event -> {
+        	this.type1 = true;
+        	for(GridButton b:this.btList) {
+        		 DropShadow drop = new DropShadow(10, Color.WHITE); /////////////HO AGGIUNTO L ILLUMINAZIONE CASELLE DOPO CHE PREMO TYPE1
+ 	            drop.setInput(new Glow());
+ 	            b.setEffect(drop); 
+        	}
+        });
+        
+        tower2.setOnMouseClicked(event -> {
+        	this.type2 = true;
+        	for(GridButton b:this.btList) {
+        		 DropShadow drop = new DropShadow(10, Color.WHITE); /////////////HO AGGIUNTO L ILLUMINAZIONE CASELLE DOPO CHE PREMO TYPE2
+ 	            drop.setInput(new Glow());
+ 	            b.setEffect(drop); 
+        	}
+        });
+        
         System.out.println(GameConstants.height);
         System.out.println(GameConstants.width);
         
+        start.setOnMouseClicked(event -> {
+        	gc.startGame();
+        	
+        	if(this.mappa == null) {
+        	for(MapTile m:this.via) {
+        		for(GridButton b:this.btList) {
+        			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
+							PathButton b2 = null;
+							try {
+								b2 = new PathButton("");
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							grid.add(b2,b.position.getX(),b.position.getY());
+            		}
+        		}
+        	}
+        }
+        	else {
+        		for(MapTile m:this.mappa.pathList()) {
+            		for(GridButton b:this.btList) {
+            			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
+    							PathButton b2 = null;
+    							try {
+    								b2 = new PathButton("");
+    							} catch (IOException e) {
+    								e.printStackTrace();
+    							}
+    							grid.add(b2,b.position.getX(),b.position.getY());
+                		}
+            		}
+            	}
+        	}
+        });
+        
         return root;
+	}
+	
+	public GameScreen(GameController gc) {
+
+		this.gc = gc;
+		this.mappa = gc.getModel().getMap();
+		this.via= gc.getModel().getMap().pathList();
 	}
 
 }

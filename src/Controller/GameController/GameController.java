@@ -1,5 +1,6 @@
 package Controller.GameController;
 
+import Model.GameModel;
 import View.Input.Input;
 
 public interface GameController {
@@ -18,6 +19,10 @@ public interface GameController {
 	 * resumes the game
 	 */
 	void resumeGame();
+
+	GameModel getModel();
+
+	void setDifficulty(int d);
 	
 	/**
 	 * 	This method gets the input from the View and passes it to the GameLoop

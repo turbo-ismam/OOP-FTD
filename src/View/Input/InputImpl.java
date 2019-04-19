@@ -1,5 +1,7 @@
 package View.Input;
 
+import Model.Tower.TowerType;
+
 /**
  * Public Class fot inputs
  *
@@ -21,7 +23,7 @@ public class InputImpl implements Input{
      * @param y
      *            the y position of the tower
      */
-	public InputImpl(final InputType iType, final int x, final int y) {
+	public InputImpl(final InputType iType,TowerType tType, final int x, final int y) {
 		this.x = x;
 		this.y = y;
 		this.inputType = iType;

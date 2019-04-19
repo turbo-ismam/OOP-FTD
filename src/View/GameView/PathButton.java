@@ -18,12 +18,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import utilityClasses.Pair;
 
-public class GridButton extends StackPane{
-
+public class PathButton extends StackPane {
+	
 	private Text text;
 	public Pair<Integer,Integer> position;
 	
-	public GridButton(String name) throws IOException {
+	public PathButton(String name) throws IOException {
 		
 		text = new Text(name);
 
@@ -33,7 +33,7 @@ public class GridButton extends StackPane{
 		Rectangle bg = new Rectangle(GameConstants.buttonSize,GameConstants.buttonSize);
 		bg.setOpacity(100);
 		/* grass image */
-		InputStream is = Files.newInputStream(Paths.get("res/grass.jpg"));
+		InputStream is = Files.newInputStream(Paths.get("res/path.png"));
 		Image logo = new Image(is);
 		is.close();
 		ImageView img = new ImageView(logo);
@@ -65,5 +65,6 @@ public class GridButton extends StackPane{
             setOnMousePressed(event -> setEffect(drop));
             setOnMouseReleased(event -> setEffect(null));  
 	}
-}
 
+
+}

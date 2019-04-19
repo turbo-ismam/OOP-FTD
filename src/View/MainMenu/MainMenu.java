@@ -9,6 +9,15 @@ import java.nio.file.Paths;
 
 
 import Constants.GameConstants;
+import Controller.GameController.GameController;
+import Controller.GameController.GameControllerImpl;
+import Model.GameModel;
+import Model.GameModelImpl;
+import Model.Enemy.Enemy.EnemyType;
+import Model.Map.AbstractMapModel;
+import Model.Map.HardMap;
+import Model.Map.NormalMap;
+import Model.Map.SimpleMap;
 import View.GameView.GameScreen;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
@@ -33,7 +42,8 @@ import javafx.util.Duration;
 
 public class MainMenu extends Application{
 	
-	private GameScreen game = new GameScreen();
+	private GameScreen game;
+	private GameController gc = new GameControllerImpl();
 	
     static final double buttonSize = GameConstants.buttonSize;
     static final int offset = 400;
@@ -129,7 +139,8 @@ public class MainMenu extends Application{
 
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            
+            	gc.startGame();
+            	game = new GameScreen(gc);
             	try {
 					root.getChildren().setAll(game.createContent());
 				} catch (IOException e) {
@@ -267,6 +278,22 @@ public class MainMenu extends Application{
                     root.getChildren().remove(menu3);
                     root.getChildren().remove(menu6);
                 });
+            });
+            
+
+            btnEasy.setOnMouseClicked(event -> {
+            	gc.setDifficulty(1);
+            	System.out.println("facile");
+            });
+
+            btnMedium.setOnMouseClicked(event -> {
+            	gc.setDifficulty(2);
+            	System.out.println("normale");
+            });
+            
+            btnHard.setOnMouseClicked(event -> {
+            	gc.setDifficulty(3);
+            	System.out.println("difficile");
             });
 
             menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
