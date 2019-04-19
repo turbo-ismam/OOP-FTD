@@ -14,12 +14,11 @@ import utilityClasses.Pair;
 public class BasicTower extends Observarble implements Tower {
 	private static final int gridSize = 20;
 	Pair<Integer,Integer> position; 
-	private int damage = 10;
+	private int damage, range;
 	private float shootTime;
 	private Enemy target;
 	private TowerType type;
 	private boolean isShooting;
-	private int range = 2;
 	private ArrayList<Pair<Integer, Integer>> shootingZone;
 	private List<Entity> enemies; 
 	private Projectile projectiles;
@@ -30,9 +29,11 @@ public class BasicTower extends Observarble implements Tower {
 	}
 
 
-	public BasicTower(Pair<Integer, Integer> position, TowerType type) {
+	public BasicTower(Pair<Integer, Integer> position, TowerType type, int damage, int range) {
 		
 		this.position = position;
+		this.damage = type.getDamage();
+		this.range = type.getRange();
 		this.target = null;
 		this.shootTime = 20;
 		this.type = type;
