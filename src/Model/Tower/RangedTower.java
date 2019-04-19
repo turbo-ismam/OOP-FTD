@@ -110,7 +110,7 @@ public class RangedTower implements Tower{
 	
 
 	private void shoot() {
-		projectiles.add(new Projectile(position, target, damage, 600));
+		projectiles.add(new Projectile(position, target, damage));
 	
 		
 	}
