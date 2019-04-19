@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 import Model.Observer.Observarble;
-import Model.Tower.Projectile;
+import Model.Projectile.Projectile;
 import utilityClasses.Pair;
 
 public class BasicTower extends Observarble implements Tower {
