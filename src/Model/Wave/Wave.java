@@ -19,4 +19,6 @@ public interface Wave {
 	
 	Wave nextWave();
 
+	boolean hasEnemies();
+
 }

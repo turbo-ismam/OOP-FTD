@@ -83,7 +83,10 @@ public class GameModelImpl implements GameModel {
 	@Override
 	public void update() {
 		m.entityList().forEach(e->e.update());
-		addEnemy(w.spawn());
+		if(w.hasEnemies() && tick==150) {
+			addEnemy(w.spawn());
+			tick=0;
+		}
 		/*m.entityList().forEach(e -> {
 			if(e instanceof Enemy) {
 				e.

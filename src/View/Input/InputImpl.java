@@ -28,13 +28,13 @@ public class InputImpl implements Input{
 	}
 	
 	@Override
-	public double getX() {
+	public int getX() {
 		
 		return this.x;
 	}
 
 	@Override
-	public double getY() {
+	public int getY() {
 
 		return this.y;
 	}
@@ -43,6 +43,12 @@ public class InputImpl implements Input{
 	public InputType getInputType() {
 		
 		return this.inputType;
+	}
+	
+	@Override
+	public String toString() {
+		return inputType.toString() + " "+ x + " " + y;
+		
 	}
 
 }

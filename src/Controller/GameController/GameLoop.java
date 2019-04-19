@@ -3,36 +3,48 @@ package Controller.GameController;
 import java.util.ArrayList;
 
 import Model.GameModel;
+import Model.Enemy.Enemy;
 import Model.Tower.TowerType;
+import View.Input.Input;
+import View.Input.InputType;
 import utilityClasses.Pair;
 
 public class GameLoop implements Runnable {
 	private GameModel gm;
 	private boolean running;
 	private int i;
+	private ArrayList<Input> inputList;
 	//private View v;
  
 	public GameLoop(GameModel gm) {
 		this.gm=gm;
+		this.inputList = new ArrayList<>();
+		this.running=true;
 	}
 	
 	@Override
 	public void run() {
 				if(running) {
 
-				//input process
-				this.processInput(new ArrayList<>());
+				//input process	
+				this.processInput();
 				//model update
 				gm.update();
-				System.out.println("hello thread" +i);
 				
+				System.out.println("update N-" +i);
+				System.out.println("oggetti nella mappa : " + gm.getMap().entityList().stream().count());
+				if(!gm.getMap().entityList().isEmpty()) {
+					gm.getMap().entityList().stream()
+					.filter(e -> e instanceof Enemy)
+					.forEach(e -> System.out.println("posizione nemico"+ e.getLocation()));				
+				}
 				//render view
 				i++;
 				}
 				else {
 					try {
 						Thread.sleep(500);
-						System.out.println("im pausing but im running");
+						System.out.println("Pause..");
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -43,22 +55,35 @@ public class GameLoop implements Runnable {
 	public void resume() {
 		this.running=true;
 	}
+	
 	public void pause() {
 		this.running=false;
 	}
-	private void processInput(ArrayList<Integer> input) {
+	
+	public void addInput(Input input) {
+	    this.inputList.add(input);
+	}
+	
+	private void processInput() {
 		
-		input.stream().forEach(e -> {
-            switch (e.intValue()) {
-            case 1 :
-            	gm.placeTower(new Pair<Integer,Integer>(1,1), TowerType.BASIC);
-                break;
-            case 2:
-            	gm.removeTower(new Pair<Integer,Integer>(1,1));
-                break;
-            default:
-                break;
-            }
-        });
+		System.out.println("inputList : ");
+		inputList.forEach(e -> System.out.println(e.toString()));
+		
+		if(!inputList.isEmpty()) {
+			inputList.forEach(e -> {
+	            switch (e.getInputType()) {
+	            case ADD_TOWER :
+	            	gm.placeTower(new Pair<Integer,Integer>(e.getX(), e.getY()), TowerType.BASIC);
+	                break;
+	            case REMOVE_TOWER :
+	            	gm.removeTower(new Pair<Integer,Integer>(e.getX(), e.getY()));
+	                break;
+	            default:
+	                break;
+	            }
+	        });
+			inputList.clear();
+		}
+		
 	}
 }
