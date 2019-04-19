@@ -118,7 +118,7 @@ public class BasicTower extends Observarble implements Tower {
 	
 
 	private Projectile shoot() {
-		return new Projectile(position, target, damage, 600);
+		return new Projectile(position, target, damage);
 			
 	}
 

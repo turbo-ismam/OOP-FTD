@@ -1,32 +1,47 @@
 package Model.Tower;
 
+import utilityClasses.*;
 import Model.Enemy.Enemy;
 import Model.Entity.Entity;
-import utilityClasses.Pair;
 
-public class Projectile implements Entity {
+public class Projectile implements Entity  {
 	Pair<Integer,Integer> position;
 	
-	private float x, y, speed, tick;
-	private int damage;
 	private Enemy enemy;
+	Pair<Integer, Integer> enemyPosition;
+	private int damage, tick;
+	private boolean alive;
 	
-	public Projectile(Pair <Integer,Integer> position, Enemy enemy, int damage, float speed){
+	public Projectile(Pair <Integer,Integer> position, Enemy enemy, int damage){
 		this.position = position;
 		this.damage = damage;
-		this.speed = speed;
 		this.enemy = enemy;
+		this.alive = true;
+		this.enemyPosition = enemy.getLocation();
+	}
+	
+	public static boolean CheckCollision(Pair <Integer,Integer> position, Pair<Integer, Integer> enemyPosition) {
+		if(position == enemyPosition)
+			return true;
+		return false;
 		
 	}
 	
 	@Override
 	public void update() {
-		
+		if(alive) {
+			tick++;
+		if(tick == 50)
+			this.position = enemyPosition;
+			tick=0;
+		if(CheckCollision(position, enemyPosition))
+			alive = false;
+		}	
 	}
 
 	@Override
 	public Pair<Integer, Integer> getLocation() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return position;
 	}
 }
