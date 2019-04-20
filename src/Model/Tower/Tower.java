@@ -1,31 +1,62 @@
 package Model.Tower;
 
+import java.util.ArrayList;
+
 import Model.Enemy.Enemy;
+
 import Model.Entity.Entity;
-import utilityClasses.Pair;
+
+/**
+ * 
+ * @author zheliang
+ *
+ */
 
 public interface Tower extends Entity {
 
+	/**
+	 * 
+	 * @return
+	 */
+	float getShootTime(); 
+			
 	
-	float getShootTime(); //non so a cosa serva, ora
-		
-	void shoot(); 		/*	si potrebbe valutare un metodo
-						*	"target" opzionale, per cui :
-						*	if (target is null) then
-						*find target,
-						*else shoot();*/
-	
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isShooting();
 	
-	boolean isInRange();
 	
+	/**
+	 * 
+	 * @return target
+	 */
 	Enemy getTarget();
 
-
+	/**
+	 * set type of tower
+	 * @param type
+	 */
 	void setType(TowerType type);
 
-
+	/**
+	 * choose type of tower
+	 * @return
+	 */
 	TowerType getType();
+	
+	/**
+	 * filter of enemies
+	 * @param entities
+	 */
+	public void setEnemies(ArrayList<Entity> entities);
+
+	/**
+	 * to verify the presence of the target
+	 * @return
+	 */
+	boolean isTargetSet();
 	
 	
 	
