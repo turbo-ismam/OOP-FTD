@@ -1,13 +1,16 @@
 package Model;
 
 import Model.Enemy.Enemy;
+import Model.Entity.Entity;
 import Model.Map.HardMap;
 import Model.Map.Map;
 import Model.Map.NormalMap;
 import Model.Map.SimpleMap;
+import Model.Observer.Observer;
 import Model.Player.Player;
 import Model.Player.PlayerImpl;
 import Model.Tower.BasicTower;
+import Model.Tower.Tower;
 import Model.Tower.TowerType;
 import Model.Wave.Wave;
 import Model.Wave.WaveImpl;
@@ -25,6 +28,7 @@ public class GameModelImpl implements GameModel {
 	private Wave w;
 	private GameStatus gs;
 	private int tick=0;
+	private boolean readyToSpawn;
 	
     
 	public GameModelImpl(int difficulty){
@@ -34,6 +38,7 @@ public class GameModelImpl implements GameModel {
 		p.setWave(1);
 		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
+		this.readyToSpawn=false;
 		
 		
 		
@@ -58,7 +63,10 @@ public class GameModelImpl implements GameModel {
 			return;
 		}
 		p.incrementCoins(tt.getCost()); //player PAGA la torre
-		m.addEntity(new BasicTower(location, tt));
+		BasicTower t = new BasicTower(location, tt);
+		t.setObserver((Observer) m);
+		m.addEntity(t);
+		
 	}
 
 	@Override
@@ -91,25 +99,29 @@ public class GameModelImpl implements GameModel {
 	public void nextWave() {
 		w=w.nextWave();
 	}
+	@Override
+	public void setReadyToSpawn(boolean b) {
+		this.readyToSpawn=b;
+	}
 	
 	private void addEnemy(Enemy e) {
 	    m.addEntity(e);
 	}
 
+
 	@Override
 	public void update() {
 		m.entityList().forEach(e->e.update());
-		if(w.hasEnemies() && tick==10) {
+		if(w.hasEnemies() && tick>=10 && readyToSpawn) {
 			addEnemy(w.spawn());
 			tick=0;
 		}
+		m.entityList().stream()
+		.filter(e -> e.ShouldBeRemoved())
+		.forEach(e -> m.removeEntity(e));
 		m.entityList().forEach(e -> {
-			if(e instanceof Enemy) {
-				System.out.println("nemico status:" +((Enemy)e).isAlive());
-				if(!((Enemy) e).isAlive()) {
-					m.removeEntity(e);
-					System.out.println("hello?!?!" + m.entityList().stream().count());
-				}
+			if (e instanceof Tower) {
+				((Tower) e).setEnemies(m.entityList());
 			}
 		});
 		if (p.getHp()<=0) {

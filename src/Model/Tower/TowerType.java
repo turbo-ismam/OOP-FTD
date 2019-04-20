@@ -15,6 +15,7 @@ public enum TowerType {
     	 this.cost = towerCost;
          this.canAttack = canAttack;
          this.damage = damage;
+         this.range=range;
     }
     
     public int getCost() {

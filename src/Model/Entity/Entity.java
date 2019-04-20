@@ -7,4 +7,6 @@ public interface Entity {
 	Pair<Integer, Integer> getLocation();
 
 	void update();
+	
+	boolean ShouldBeRemoved();
 }

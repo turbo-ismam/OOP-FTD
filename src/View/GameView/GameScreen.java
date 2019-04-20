@@ -173,7 +173,7 @@ public class GameScreen extends Region {
         System.out.println(GameConstants.width);
         
         start.setOnMouseClicked(event -> {
-        	gc.startGame();
+        	gc.handleInput(new InputImpl(InputType.START_WAVE,TowerType.RANGED,1,2));
         	
         	if(this.mappa == null) {
         	for(MapTile m:this.via) {

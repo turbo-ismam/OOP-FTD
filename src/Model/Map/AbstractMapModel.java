@@ -1,14 +1,16 @@
 package Model.Map;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import Model.Observer.Observable;
+import Model.Observer.Observer;
+import Model.Tower.Tower;
 import Model.Entity.Entity;
 import Model.Map.MapTile.Status;
 import utilityClasses.Pair;
 
-public abstract class AbstractMapModel implements Map{
+public abstract class AbstractMapModel implements Map, Observer {
 
 	protected List<MapTile> grid = new ArrayList<>();
 	protected List<MapTile> enemyPath = new ArrayList<>();
@@ -136,6 +138,14 @@ public abstract class AbstractMapModel implements Map{
 	public int fromPairToInt(Pair<Integer, Integer> position) {
 		
 		return position.getX()*this.gridSize+position.getY();
+	}
+	
+	@Override
+	public void update(Observable subject) {
+		if (subject instanceof Tower) {
+			addEntity(((Tower) subject).getProjectile());
+		}
+		
 	}
 
 }

@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import Model.Enemy.Enemy;
 import Model.Entity.Entity;
-import Model.Observer.Observarble;
+import Model.Observer.Observable;
 import Model.Projectile.Projectile;
 import utilityClasses.Pair;
 
-public class BasicTower extends Observarble implements Tower {
+public class BasicTower extends Observable implements Tower {
 	private static final int gridSize = 20;
 	Pair<Integer,Integer> position; 
 	private int damage, range;
@@ -21,15 +21,15 @@ public class BasicTower extends Observarble implements Tower {
 	private boolean isShooting;
 	private ArrayList<Pair<Integer, Integer>> shootingZone;
 	private List<Entity> enemies; 
-	private Projectile projectiles;
+	private Projectile projectile;
 	
-	
-	public Projectile getProjectiles() {
-		return projectiles;
+	@Override
+	public Projectile getProjectile() {
+		return projectile;
 	}
 
 
-	public BasicTower(Pair<Integer, Integer> position, TowerType type, int damage, int range) {
+	public BasicTower(Pair<Integer, Integer> position, TowerType type) {
 		
 		this.position = position;
 		this.damage = type.getDamage();
@@ -47,6 +47,7 @@ public class BasicTower extends Observarble implements Tower {
 		for(Entity e: enemies) {
 			for(int i = 0; i < shootingZone.size(); i++) {
 				if (e.getLocation().equals(shootingZone.get(i))) {
+					
 					if(e instanceof Enemy) {
 						this.target =(Enemy) e;
 						return;
@@ -62,7 +63,7 @@ public class BasicTower extends Observarble implements Tower {
 	private void setRange() {
 		
 		for(int i = position.getX() - range; i <= position.getX() + range; i++) {
-			for(int j = position.getY() - range; j <= position.getX() + range; j++) {				
+			for(int j = position.getY() - range; j <= position.getY() + range; j++) {				
 				if(position.getX() < gridSize && position.getY() < gridSize) {
 					shootingZone.add(new Pair<>(i,j));
 				}
@@ -91,9 +92,12 @@ public class BasicTower extends Observarble implements Tower {
 	@Override
 	public void update() {
 		findTarget();
-		if(isTargetSet())
-			this.projectiles = shoot();
-		notify();
+		if(isTargetSet()) {
+			this.projectile = shoot();
+			this.notifyObservers();
+			
+		}
+			
 		
 	}
 
@@ -142,6 +146,12 @@ public class BasicTower extends Observarble implements Tower {
 		
 		return target;
 		
+	}
+
+
+	@Override
+	public boolean ShouldBeRemoved() {
+		return false;
 	}
 	
 }

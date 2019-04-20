@@ -30,12 +30,13 @@ public class Projectile implements Entity  {
 	@Override
 	public void update() {
 		if(alive) {
-			tick++;
-		if(tick == 50)
-			enemy.setDamage(damage);
-			tick=0;
-		if(CheckCollision(position, enemyPosition))
-			alive = false;
+				tick++;
+			if(tick == 4) {
+				enemy.setDamage(damage);
+				tick=0;
+				alive = false;
+			}
+				
 		}	
 	}
 
@@ -43,5 +44,10 @@ public class Projectile implements Entity  {
 	public Pair<Integer, Integer> getLocation() {
 		
 		return position;
+	}
+
+	@Override
+	public boolean ShouldBeRemoved() {
+		return !alive;
 	}
 }

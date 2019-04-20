@@ -53,5 +53,7 @@ public interface GameModel {
 	public void update();
 
     public Map getMap();
+
+	void setReadyToSpawn(boolean b);
 	
 }

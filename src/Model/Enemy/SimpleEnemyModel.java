@@ -142,13 +142,19 @@ public class SimpleEnemyModel implements Enemy{
 		this.path = sentiero;	
 		this.actual= sentiero.get(0);
 	}
-	
-	public boolean isAlive() {
-		return alive;
-	}
 
 	@Override
 	public Direction Direzione() {
 		return direction;
+	}
+
+	@Override
+	public boolean ShouldBeRemoved() {
+		return !alive;
+	}
+
+	@Override
+	public boolean isAlive() {
+		return alive;
 	}
 }

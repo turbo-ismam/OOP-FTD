@@ -28,7 +28,7 @@ public class GameControllerImpl implements GameController {
 		gm = new GameModelImpl(difficulty);
 		gl = new GameLoop(gm);
 		if (!running) {
-			ses.scheduleWithFixedDelay(gl, 0, 1, TimeUnit.MILLISECONDS);
+			ses.scheduleWithFixedDelay(gl, 0, 50, TimeUnit.MILLISECONDS);
 			System.out.println("Game is starting");
 			this.running=true;
 		}
@@ -64,7 +64,6 @@ public class GameControllerImpl implements GameController {
 		GameController gc = new GameControllerImpl();
 		gc.startGame();
 		Wave w=gc.getModel().getCurrentWave();
-		w.populate(5, EnemyType.TANK);
 		
 		/**gc.pauseGame();
 		try {
@@ -76,13 +75,14 @@ public class GameControllerImpl implements GameController {
 		gc.resumeGame();
 		*/
 		
-		Input i1 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, 1, 1);
-		Input i2 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC,1, 2);
+		Input i1 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, gc.getModel().getMap().pathList().get(0).getPosition().getX()+1,gc.getModel().getMap().pathList().get(0).getPosition().getY()+1);
+		Input i2 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC,1, 1);
 		Input i3 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, 1, 3);
 		Input i4 = new InputImpl(InputType.REMOVE_TOWER, TowerType.BASIC, 1, 1);
 		gc.handleInput(i1);
 		gc.handleInput(i2);
 		gc.handleInput(i3);
-		gc.handleInput(i4);  
+		gc.handleInput(i4); 
+		
 	}
 }

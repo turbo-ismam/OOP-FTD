@@ -34,8 +34,7 @@ public class GameLoop implements Runnable {
 				System.out.println("oggetti nella mappa : " + gm.getMap().entityList().stream().count());
 				if(!gm.getMap().entityList().isEmpty()) {
 					gm.getMap().entityList().stream()
-					.filter(e -> e instanceof Enemy)
-					.forEach(e -> System.out.println("posizione nemico"+ e.getLocation()));				
+					.forEach(e -> System.out.println(e));		
 				}
 				//render view
 				i++; //variabili di debug
@@ -73,6 +72,9 @@ public class GameLoop implements Runnable {
 	            case REMOVE_TOWER :
 	            	gm.removeTower(new Pair<Integer,Integer>(e.getX(), e.getY()));
 	                break;
+	            case START_WAVE :
+	            	gm.setReadyToSpawn(true);
+	            	break;
 	            default:
 	                break;
 	            }

@@ -146,13 +146,19 @@ public class Tank implements Enemy {
 		this.actual = sentiero.get(0);
 	}
 	
-	public boolean isAlive() {
-		return alive;
-	}
-
 	@Override
 	public Direction Direzione() {
 		return direction;
+	}
+
+	@Override
+	public boolean ShouldBeRemoved() {
+		return alive;
+	}
+	
+	@Override
+	public boolean isAlive() {
+		return alive;
 	}
 
 }

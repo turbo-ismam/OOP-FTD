@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Model.Enemy.Enemy;
 
 import Model.Entity.Entity;
+import Model.Projectile.Projectile;
 
 /**
  * 
@@ -57,6 +58,12 @@ public interface Tower extends Entity {
 	 * @return
 	 */
 	boolean isTargetSet();
+	
+	/**
+	 * 
+	 * @return the projectile that the tower has just shot
+	 */
+	Projectile getProjectile();
 	
 	
 	
