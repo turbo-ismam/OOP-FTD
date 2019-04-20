@@ -15,7 +15,7 @@ public class NormalMap extends AbstractMapModel{
 		}
 		
 		for (int i=0;i<gridSize*gridSize;i++) {			// da 5,10 a 15,10 da sopra a sotto
-			if (grid.get(i).getPosition().getX()>=5 && grid.get(i).getPosition().getX()<=115 && grid.get(i).getPosition().getY()==10) {
+			if (grid.get(i).getPosition().getX()>=5 && grid.get(i).getPosition().getX()<=15 && grid.get(i).getPosition().getY()==10) {
 				grid.get(i).setStatus(Status.PATH);
 				enemyPath.add(grid.get(i));	//aggiungo alla lista il path
 			}
