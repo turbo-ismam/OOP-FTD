@@ -12,7 +12,7 @@ import Model.Map.MapTile;
  * @author Vlad
  *
  */
-public interface Enemy extends Entity {
+public interface Enemy extends Entity{
 	
 	public enum Direction {
 		UP,
@@ -21,10 +21,6 @@ public interface Enemy extends Entity {
 		RIGHT
 	}
 	
-	public enum EnemyType {
-		BASIC,
-		TANK
-	}
 	void walk(); //moving logics
 	
 	void spawn(); //enemy appearing on the map, ready to walk
@@ -33,24 +29,18 @@ public interface Enemy extends Entity {
 	
 	int getHP();
 	
-	void setHP(int hp);
-	
-	void setDamage(int damage);
-	
 	int getValue(); //gold dropped when killed
-	
-	void setValue(int value);
 	
 	int getSpeed();
 	
-	void setSpeed(int speed);
+	public void setDamage(int damage);
 
 	void setPath(ArrayList<MapTile> sentiero);
 	
-	boolean isAlive();
-	
-	Direction Direzione();
+	Direction getDirezione();
 	
 	public void despawn();
+
+	
 	
 }

@@ -68,6 +68,7 @@ public class GameLoop implements Runnable {
 	            switch (e.getInputType()) {
 	            case ADD_TOWER :
 	            	gm.placeTower(new Pair<Integer,Integer>(e.getX(), e.getY()), TowerType.BASIC);
+	            	System.out.println("torre piazzata in" + e.getX() + ","+ e.getY());
 	                break;
 	            case REMOVE_TOWER :
 	            	gm.removeTower(new Pair<Integer,Integer>(e.getX(), e.getY()));

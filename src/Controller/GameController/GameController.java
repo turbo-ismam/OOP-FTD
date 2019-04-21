@@ -29,5 +29,7 @@ public interface GameController {
 	 * @param i
 	 */
 	void handleInput(Input i);
+
+	void killGameLoop();
 	
 }

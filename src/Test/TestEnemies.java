@@ -1,16 +1,15 @@
 package Test;
 import static org.junit.Assert.*;
 
-import java.util.*;
 
 import Model.Enemy.Enemy;
-import Model.Enemy.SimpleEnemyModel;
+import Model.Enemy.EnemyImpl;
+import Model.Enemy.EnemyType;
 import Model.Map.HardMap;
-import Model.Map.SimpleMap;
 
-public class Test {
+public class TestEnemies {
 	
-	private Enemy monster = new SimpleEnemyModel();
+	private Enemy monster = new EnemyImpl(EnemyType.SIMPLE);
 	
 	// verifica base di fromRange()
 	@org.junit.Test
@@ -24,7 +23,10 @@ public class Test {
 	@org.junit.Test
     public void testRangeAndSplit() {
 		HardMap mappa = new HardMap();
+		monster.setPath(mappa.pathList());
+		monster.spawn();
 		monster.walk();
+		
 		assertEquals(monster.getLocation().getY().intValue(),10);
 		assertEquals(monster.getLocation().getX().intValue(),1);
 		monster.walk();

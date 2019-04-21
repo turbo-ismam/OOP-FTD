@@ -4,7 +4,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import Model.GameModel;
 import Model.GameModelImpl;
-import Model.Enemy.Enemy.EnemyType;
 import Model.Tower.TowerType;
 import Model.Wave.Wave;
 import View.Input.Input;
@@ -46,6 +45,11 @@ public class GameControllerImpl implements GameController {
 	}
 	
 	@Override
+	public void killGameLoop() {
+		ses.shutdown();
+	}
+	
+	@Override
 	public void handleInput(Input i) {
 		gl.addInput(i);
 	}
@@ -83,6 +87,7 @@ public class GameControllerImpl implements GameController {
 		gc.handleInput(i2);
 		gc.handleInput(i3);
 		gc.handleInput(i4); 
+		gc.handleInput(new InputImpl(InputType.START_WAVE, TowerType.BASIC, 2, 4));
 		
 	}
 }

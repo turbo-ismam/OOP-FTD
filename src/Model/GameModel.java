@@ -1,8 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
-
-import Model.Entity.Entity;
 import Model.Map.Map;
 import Model.Player.Player;
 import Model.Tower.TowerType;
@@ -15,8 +12,9 @@ public interface GameModel {
 	 * Places a Tower in the current playing map
 	 * @param location x, y position of the Tower
 	 * @param tt Type of the tower that is going to be placed
+	 * @return  True if the player has enought money, false otherwise
 	 */
-	public void placeTower(Pair<Integer, Integer> location, TowerType tt);
+	public boolean placeTower(Pair<Integer, Integer> location, TowerType tt);
 	
 	/**
 	 * Removes a Tower from the map

@@ -1,6 +1,6 @@
 package Model.Observer;
-import Model.Observer.Observable;
+import Model.Observer.ObservableEntity;
 public interface Observer {
 	
-	public void update(Observable subject);
+	public void update(ObservableEntity subject);
 }

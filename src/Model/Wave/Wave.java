@@ -1,9 +1,7 @@
 package Model.Wave;
-import java.util.ArrayList;
 
 import Model.Enemy.Enemy;
-import Model.Enemy.Enemy.EnemyType;
-import Model.Map.MapTile;
+import Model.Enemy.EnemyType;
 /**
  * 
  * @author Vlad
