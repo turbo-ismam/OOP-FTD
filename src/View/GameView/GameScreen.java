@@ -33,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import utilityClasses.Pair;
 
 public class GameScreen extends Region {
@@ -103,6 +104,10 @@ public class GameScreen extends Region {
         menu2.setTranslateY(buttonSize*2);
         menu2.setTranslateX(buttonSize);
         menu2.setBackground(Background.EMPTY);
+        
+        
+        
+        //menu2.getChildren().add();
        
         menu2.setStyle(style2);
         flow.getChildren().add(menu2);
@@ -178,12 +183,8 @@ public class GameScreen extends Region {
     	for(MapTile m:this.via) {
     		for(GridButton b:this.btList) {
     			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
-						PathButton b2 = null;
-						try {
-							b2 = new PathButton("");
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						PathButton b2 = new PathButton("");
+						b2.position= new Pair<Integer,Integer>(b.position.getX(),b.position.getY());
 						grid.add(b2,b.position.getX(),b.position.getY());
 						btlist2.add(b2);
         		}
@@ -194,12 +195,8 @@ public class GameScreen extends Region {
     		for(MapTile m:this.mappa.pathList()) {
         		for(GridButton b:this.btList) {
         			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
-							PathButton b2 = null;
-							try {
-								b2 = new PathButton("");
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
+							PathButton b2 = new PathButton("");
+							b2.position= new Pair<Integer,Integer>(b.position.getX(),b.position.getY());
 							grid.add(b2,b.position.getX(),b.position.getY());
 							btlist2.add(b2);
             		}
@@ -240,38 +237,21 @@ public class GameScreen extends Region {
         AnimationTimer gameLoop = new AnimationTimer() {
 
 			@Override
-			public void handle(long now) {
-				
-            	// add random enemies
-            	
+			public void handle(long now) {				
 
-				// check if target is still valid
-				
-
-            	// tower movement: find target
-        		//render(mappa.entityList());
+        		try {
+					render(mappa.entityList());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         		
-				// movement
-				
-				
-				// check collisions
-				
-				
-				// update sprites in scene
-				
-				
-            	// check if sprite can be removed
-				
-            	
-            	// remove removables from list, layer, etc
-            	
-
-            	// update score, health, etc
             	
 			}
 			
 		};
 		gameLoop.start();
+					
         
         return root;
 	}
@@ -283,20 +263,31 @@ public class GameScreen extends Region {
 		this.via= gc.getModel().getMap().pathList();
 	}
 	
-	public void render(ArrayList<Entity> entityList) {
-		Rectangle r = new Rectangle();
-		r.setFill(Color.RED);
-		r.setHeight(buttonSize);
-		r.setWidth(buttonSize);
+	public void render(ArrayList<Entity> entityList) throws IOException {
 		
 		for(Entity e:entityList) {
 			if(e instanceof Enemy) {
 				for(PathButton b:btlist2) {
+					
+					Rectangle r = new Rectangle();
+					r.setFill(Color.RED);
+					r.setHeight(buttonSize);
+					r.setWidth(buttonSize);
+					
+					InputStream is = Files.newInputStream(Paths.get("res/path.png"));
+					Image logo = new Image(is);
+					
+					ImageView img = new ImageView(logo);
+					img.setFitWidth(buttonSize);
+					img.setFitHeight(buttonSize);
+					
 					if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
 						b.getChildren().add(r);
 					}
-				}
-				
+					else {
+						b.getChildren().setAll(img);
+					}
+				}				
 			}
 		}
 	}

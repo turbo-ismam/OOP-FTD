@@ -115,7 +115,7 @@ public class GameModelImpl implements GameModel, Observer {
 		m.entityList().forEach(e->e.update());
 		
 		if(w.hasEnemies()) {
-			if (tick>=10 && readyToSpawn) {
+			if (tick>=50 && readyToSpawn) {
 				Enemy e = w.spawn();
 				((ObservableEntity) e).addObserver(this);
 				this.addEntity(e);
