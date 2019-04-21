@@ -2,11 +2,13 @@ package Model.Observer;
 
 import java.util.ArrayList;
 
-public abstract class Observable {
+import Model.Entity.Entity;
+
+public abstract class ObservableEntity implements Entity {
 	
 	private ArrayList<Observer> observers = new ArrayList<>();
 	
-	public void setObserver(Observer o) {
+	public void addObserver(Observer o) {
 		this.observers.add(o);
 	}
 	

@@ -1,22 +1,20 @@
 package Model.Enemy;
 
 import java.util.ArrayList;
-import Model.Map.Map;
+
 import Model.Map.MapTile;
 import Model.Map.MapTileImpl;
-import Model.Map.SimpleMap;
+import Model.Observer.ObservableEntity;
 import utilityClasses.Pair;
 
-public class SimpleEnemyModel implements Enemy{
+public class EnemyImpl extends ObservableEntity implements Enemy{
 	
-	private static final int MAX_HP = 100;
-	private static final int MAX_SPEED = 5;
-	private static final int DEFAULT_VALUE = 20;
-	
+	private static final int TICKS_BEFORE_WALKING = 10;
 	private int hp;
 	private int damage;
 	private int speed;
 	private int value;
+	EnemyType type;
 	private boolean alive;
 	public Direction direction;
 	private ArrayList<MapTile> path = null;
@@ -26,11 +24,11 @@ public class SimpleEnemyModel implements Enemy{
 	private int x = 1;
 	private int tick = 0;
 
-	public SimpleEnemyModel() {
-		super();
-		this.hp = MAX_HP;
-		this.speed = MAX_SPEED;
-		this.value = DEFAULT_VALUE;
+	public EnemyImpl(EnemyType type) {
+		this.type=type;
+		this.hp = type.getHealth();
+		this.speed = type.getSpeed();
+		this.value = type.getValue();
 		this.alive = false;
 	}
 
@@ -38,13 +36,13 @@ public class SimpleEnemyModel implements Enemy{
 	public Pair<Integer, Integer> getLocation() {
 		return actual.getPosition();
 	}
-
+	
 	@Override
 	public void update() {
 		this.death();
-		if(tick == 10) {
-		this.walk();
-		tick = 0;
+		if(tick == TICKS_BEFORE_WALKING) {
+			this.walk();
+			tick = 0;
 		}
 		else {
 		tick++;
@@ -57,29 +55,30 @@ public class SimpleEnemyModel implements Enemy{
 			throw new NullPointerException();
 		}
 		else {
-		if(x >= path.size()) {
-			this.despawn();
-		}
-		
-		if(this.alive == true) {
-		MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),path.get(x).getPosition().getY());
-		if(next.getPosition().getX() > actual.getPosition().getX()) {
-			direction = Direction.RIGHT;
-		}
-		if(next.getPosition().getX() < actual.getPosition().getX()) {
-			direction = Direction.LEFT;
-		}
-		if(next.getPosition().getY() > actual.getPosition().getY()) {
-			direction = Direction.DOWN;
-		}
-		if(next.getPosition().getY() < actual.getPosition().getY()) {
-			direction = Direction.UP;
-		}
-		actual = next;
-		x++;
+			if(x >= path.size()) {
+				this.despawn();
+			}
+			
+			if(this.alive == true) {
+				MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),
+											   path.get(x).getPosition().getY());
+				if(next.getPosition().getX() > actual.getPosition().getX()) {
+					direction = Direction.RIGHT;
+				}
+				if(next.getPosition().getX() < actual.getPosition().getX()) {
+					direction = Direction.LEFT;
+				}
+				if(next.getPosition().getY() > actual.getPosition().getY()) {
+					direction = Direction.DOWN;
+				}
+				if(next.getPosition().getY() < actual.getPosition().getY()) {
+					direction = Direction.UP;
+				}
+			actual = next;
+			x++;
+			}
 		}
 	}
-}
 
 	@Override
 	public void spawn() {
@@ -89,6 +88,7 @@ public class SimpleEnemyModel implements Enemy{
 	@Override
 	public void despawn() {
 		alive = false;
+		notifyObservers();
 	}
 
 	@Override
@@ -104,16 +104,12 @@ public class SimpleEnemyModel implements Enemy{
 	}
 
 	@Override
-	public void setHP(int hp) {
-		this.hp = hp;
-	}
-
-	@Override
 	public void setDamage(int damage) {
 		this.damage = damage;
 		this.hp -= this.damage;
 		if(this.hp <= 0) {
 			this.death();
+			notifyObservers();
 		}
 	}
 
@@ -123,18 +119,8 @@ public class SimpleEnemyModel implements Enemy{
 	}
 
 	@Override
-	public void setValue(int value) {
-		this.value = value;
-	}
-
-	@Override
 	public int getSpeed() {
 		return this.speed;
-	}
-
-	@Override
-	public void setSpeed(int speed) {
-		this.speed = speed;
 	}
 
 	@Override
@@ -144,16 +130,15 @@ public class SimpleEnemyModel implements Enemy{
 	}
 
 	@Override
-	public Direction Direzione() {
+	public Direction getDirezione() {
 		return direction;
 	}
 
 	@Override
 	public boolean ShouldBeRemoved() {
-		return !alive;
+		return !isAlive();
 	}
 
-	@Override
 	public boolean isAlive() {
 		return alive;
 	}

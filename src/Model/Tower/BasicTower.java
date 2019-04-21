@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import Model.Enemy.Enemy;
 import Model.Entity.Entity;
-import Model.Observer.Observable;
+import Model.Observer.ObservableEntity;
 import Model.Projectile.Projectile;
 import utilityClasses.Pair;
 
-public class BasicTower extends Observable implements Tower {
+public class BasicTower extends ObservableEntity implements Tower {
 	private static final int gridSize = 20;
 	Pair<Integer,Integer> position; 
 	private int damage, range;
@@ -50,6 +50,7 @@ public class BasicTower extends Observable implements Tower {
 					
 					if(e instanceof Enemy) {
 						this.target =(Enemy) e;
+						System.out.println("target acquired");
 						return;
 					}else {
 						throw new IllegalArgumentException();

@@ -2,14 +2,17 @@ package Model;
 
 import static org.junit.Assert.*;
 
-import Model.Enemy.Enemy;
-import Model.Enemy.Enemy.EnemyType;
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
+import Model.Enemy.EnemyType;
 import Model.Tower.TowerType;
 import Model.Wave.Wave;
 import utilityClasses.Pair;
 
 public class GameModelTest {
 	
+	private static final int TICKS_TO_SPAWN_ENEMY = 10+1;
+	private static final int TICKS_ENEMY_WALK = 10+1;
 	GameModel gm = new GameModelImpl(1);
 
 
@@ -26,10 +29,12 @@ public class GameModelTest {
 	@org.junit.Test
 	public void SpawnEnemiesTest() {
 	        Wave w = gm.getCurrentWave();
-		w.populate(5, EnemyType.BASIC);
-		gm.update();
-		gm.update();
-		System.out.println(gm.getMap().entityList());
+		w.populate(5, EnemyType.SIMPLE);
+		assertEquals(true, w.hasEnemies());
+		gm.setReadyToSpawn(true);
+		for(int i=0; i<=TICKS_ENEMY_WALK*2; i++) {
+        	gm.update();
+        }
 		assertEquals(gm.getMap().entityList().stream().count(), 2);
 	}
 	
@@ -44,17 +49,15 @@ public class GameModelTest {
 	@org.junit.Test
         public void EnemyWalkTest() {
                 gm.nextWave();
-                Wave w =gm.getCurrentWave();
-                w.populate(5, EnemyType.TANK);  
+                Wave w =gm.getCurrentWave(); 
+                gm.setReadyToSpawn(true);
                 assertEquals(w.getWave(),2);
-                gm.update();
-                gm.update();
-                System.out.println(gm.getMap().entityList());
-                assertEquals(gm.getMap().entityList().stream().count(), 2);
-                System.out.println("hi ther");
-                gm.getMap().entityList().stream().filter(e-> e instanceof Enemy).forEach(e-> System.out.println(e.getLocation()));
-                gm.update();
-                gm.getMap().entityList().stream().filter(e-> e instanceof Enemy).forEach(e-> System.out.println(e.getLocation()));
+                
+                for(int i=0; i<=TICKS_TO_SPAWN_ENEMY*2; i++) {
+                	gm.update();
+                	
+                }
+                assertEquals(2,gm.getMap().entityList().stream().count());
         }
 	
 	
@@ -68,9 +71,13 @@ public class GameModelTest {
 
 	@org.junit.Test
 	public void GameLostTest() {
-		
-		gm.getPlayer().takeDamage(9999);
-		gm.update();
+        gm.setReadyToSpawn(true);
+        for(int i=0; i<=TICKS_TO_SPAWN_ENEMY*4; i++) {
+        	gm.update();
+        }
+        for(int i=0; i<=TICKS_ENEMY_WALK*gm.getMap().pathList().size()-1; i++) {
+        	gm.update();
+        }
 		assertTrue(gm.getGameStatus()==GameStatus.LOST);
 	}
 }

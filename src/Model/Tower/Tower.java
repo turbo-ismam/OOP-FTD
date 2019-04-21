@@ -3,7 +3,6 @@ package Model.Tower;
 import java.util.ArrayList;
 
 import Model.Enemy.Enemy;
-
 import Model.Entity.Entity;
 import Model.Projectile.Projectile;
 

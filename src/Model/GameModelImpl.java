@@ -6,6 +6,7 @@ import Model.Map.HardMap;
 import Model.Map.Map;
 import Model.Map.NormalMap;
 import Model.Map.SimpleMap;
+import Model.Observer.ObservableEntity;
 import Model.Observer.Observer;
 import Model.Player.Player;
 import Model.Player.PlayerImpl;
@@ -21,7 +22,7 @@ import utilityClasses.Pair;
  * @author ismam.abu
  *
  */
-public class GameModelImpl implements GameModel {
+public class GameModelImpl implements GameModel, Observer {
 	
 	private Map m;
 	private Player p;
@@ -32,7 +33,7 @@ public class GameModelImpl implements GameModel {
 	
     
 	public GameModelImpl(int difficulty){
-		p = new PlayerImpl("SexyIsmy",1000,300);
+		p = new PlayerImpl("SexyIsmy",1,300);
 		m = createMap(difficulty);
 		WaveImpl.setPath(m.pathList());
 		p.setWave(1);
@@ -56,18 +57,17 @@ public class GameModelImpl implements GameModel {
 			throw new IllegalArgumentException();
 		}
 	}
-
 	@Override
-	public void placeTower(Pair<Integer, Integer> location, TowerType tt) {
+	public boolean placeTower(Pair<Integer, Integer> location, TowerType tt) {
 		if (p.getCoins()<tt.getCost()){
-			return;
+			return false;
 		}
 		p.incrementCoins(tt.getCost()); //player PAGA la torre
-		BasicTower t = new BasicTower(location, tt);
-		t.setObserver((Observer) m);
+		Tower t = new BasicTower(location, tt);
+		((ObservableEntity) t).addObserver(this);
 		m.addEntity(t);
-		
-	}
+		return true;
+		}
 
 	@Override
 	public void removeTower(Pair<Integer, Integer> location) {
@@ -104,18 +104,29 @@ public class GameModelImpl implements GameModel {
 		this.readyToSpawn=b;
 	}
 	
-	private void addEnemy(Enemy e) {
+	private void addEntity(Entity e) {
 	    m.addEntity(e);
+
 	}
 
 
 	@Override
 	public void update() {
 		m.entityList().forEach(e->e.update());
-		if(w.hasEnemies() && tick>=10 && readyToSpawn) {
-			addEnemy(w.spawn());
-			tick=0;
+		
+		if(w.hasEnemies()) {
+			if (tick>=10 && readyToSpawn) {
+				Enemy e = w.spawn();
+				((ObservableEntity) e).addObserver(this);
+				this.addEntity(e);
+				tick=0;
+
+			}
 		}
+		else {
+			setReadyToSpawn(false);
+		}
+		this.tick++;
 		m.entityList().stream()
 		.filter(e -> e.ShouldBeRemoved())
 		.forEach(e -> m.removeEntity(e));
@@ -132,7 +143,25 @@ public class GameModelImpl implements GameModel {
 			this.gs=GameStatus.WON;
 			return;
 		}
-		this.tick++;
+	}
+
+	@Override
+	public void update(ObservableEntity subject) {
+		if (subject instanceof Tower) {
+			addEntity(((Tower) subject).getProjectile());
+		}
+		else if (subject instanceof Enemy ) {
+			Enemy e = (Enemy) subject;
+			if(e.getLocation().equals(m.pathList().get(m.pathList().size()-1).getPosition())) {
+				p.takeDamage(1);
+				System.out.println("player took 1 damage");
+			}
+			else {
+				p.incrementCoins(e.getValue());
+			}
+			
+		}
+		
 	}
 	
 }
