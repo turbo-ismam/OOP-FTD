@@ -22,7 +22,7 @@ public class Difficulty extends Region{
 	public void start(Stage primaryStage) throws Exception {
 		
 		Pane pane = new Pane();
-    	pane.setPrefSize(size*9.5, size*2);
+    	pane.setPrefSize(size*12.5, size*2.25);
     	Text text = new Text("Difficulty changed");
     	text.setFont(Font.loadFont("file:res/JOJO____.ttf", 15));
 		text.setFill(Color.DARKVIOLET);
@@ -35,7 +35,7 @@ public class Difficulty extends Region{
     	space.getChildren().add(text);
     	space.getChildren().add(b);
     	text.setTranslateY(size/3.5);
-    	b.setTranslateX(size*4.5);
+    	b.setTranslateX(size*5.5);
     	b.setTranslateY(size/2.5);
     	pane.getChildren().add(space);
     	

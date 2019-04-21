@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import Constants.GameConstants;
 import Controller.GameController.GameController;
 import Model.Enemy.Enemy;
+import Model.Entity.Entity;
 import Model.Map.Map;
 import Model.Map.MapTile;
+import Model.Tower.Tower;
 import Model.Tower.TowerType;
 import View.Input.InputImpl;
 import View.Input.InputType;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -28,6 +31,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import utilityClasses.Pair;
 
 public class GameScreen extends Region {
@@ -42,6 +47,7 @@ public class GameScreen extends Region {
 	
 	private Integer i;
 	private Integer j;
+	private ArrayList<PathButton> btlist2 = new ArrayList<>();
 	
     private static final double buttonSize = GameConstants.buttonSize;
         
@@ -130,7 +136,26 @@ public class GameScreen extends Region {
         			}
         			else {
         				if(this.type1) {
+        					InputStream ist = null;
+							try {
+								ist = Files.newInputStream(Paths.get("res/tower.png"));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					Image logo = new Image(ist);
+        					try {
+								ist.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					ImageView imgt = new ImageView(logo);
+        					imgt.setFitWidth(buttonSize);
+        					imgt.setFitHeight(buttonSize);
+        					bt.getChildren().add(imgt);
         					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
+        					
         				System.out.println("droppo torre 1");////////////////DROPPO LA TORRE
         				}
         				else if(this.type2) {
@@ -160,6 +185,7 @@ public class GameScreen extends Region {
 							e.printStackTrace();
 						}
 						grid.add(b2,b.position.getX(),b.position.getY());
+						btlist2.add(b2);
         		}
     		}
     	}
@@ -175,6 +201,7 @@ public class GameScreen extends Region {
 								e.printStackTrace();
 							}
 							grid.add(b2,b.position.getX(),b.position.getY());
+							btlist2.add(b2);
             		}
         		}
         	}
@@ -209,6 +236,43 @@ public class GameScreen extends Region {
         	gc.handleInput(new InputImpl(InputType.START_WAVE,TowerType.RANGED,1,2));
         	this.gc.getModel().nextWave();
         });
+        
+        AnimationTimer gameLoop = new AnimationTimer() {
+
+			@Override
+			public void handle(long now) {
+				
+            	// add random enemies
+            	
+
+				// check if target is still valid
+				
+
+            	// tower movement: find target
+        		//render(mappa.entityList());
+        		
+				// movement
+				
+				
+				// check collisions
+				
+				
+				// update sprites in scene
+				
+				
+            	// check if sprite can be removed
+				
+            	
+            	// remove removables from list, layer, etc
+            	
+
+            	// update score, health, etc
+            	
+			}
+			
+		};
+		gameLoop.start();
+        
         return root;
 	}
 	
@@ -217,6 +281,24 @@ public class GameScreen extends Region {
 		this.gc = gc;
 		this.mappa = gc.getModel().getMap();
 		this.via= gc.getModel().getMap().pathList();
+	}
+	
+	public void render(ArrayList<Entity> entityList) {
+		Rectangle r = new Rectangle();
+		r.setFill(Color.RED);
+		r.setHeight(buttonSize);
+		r.setWidth(buttonSize);
+		
+		for(Entity e:entityList) {
+			if(e instanceof Enemy) {
+				for(PathButton b:btlist2) {
+					if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
+						b.getChildren().add(r);
+					}
+				}
+				
+			}
+		}
 	}
 
 }
