@@ -18,6 +18,7 @@ import Model.Tower.TowerType;
 import View.Input.InputImpl;
 import View.Input.InputType;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -92,17 +93,23 @@ public class GameScreen extends Region {
         menu1.setSpacing(buttonSize);
         MenuButton start = new MenuButton("start");
         menu1.getChildren().add(start);
-        flow.getChildren().add(menu1);
         MenuButton pause = new MenuButton("pause");
         pause.setOnMouseClicked(event -> {
         	gc.pauseGame();
         });
         menu1.getChildren().add(pause);
+        MenuButton resume = new MenuButton("resume");
+        menu1.getChildren().add(resume);
+        resume.setOnMouseClicked(event -> {
+        	gc.resumeGame();
+        });
+        flow.getChildren().add(menu1);
         
         /* MENU2: INFO HP, COINS, WAVE */
         VBox menu2 = new VBox();
+        
         menu2.setSpacing(buttonSize);
-        menu2.setPrefSize(buttonSize*13, buttonSize*9);
+        menu2.setPrefSize(buttonSize*13, buttonSize*8);
         menu2.setTranslateY(buttonSize*2);
         menu2.setTranslateX(buttonSize);
         menu2.setBackground(Background.EMPTY);
@@ -131,17 +138,23 @@ public class GameScreen extends Region {
         flow.getChildren().add(menu2);
         
         /* MENU3: TOWERS */
-        HBox menu3 = new HBox();
+        FlowPane menu3 = new FlowPane();
         menu3.setPrefSize(buttonSize*14,buttonSize* 6);
-        menu3.setTranslateX(buttonSize);
-        menu3.setTranslateY(buttonSize*2);
-        menu3.setSpacing(buttonSize);
-        //menu3.setBackground(Background.EMPTY);
-        //menu3.setPadding(new Insets(25,0,0,15));
+        menu3.setTranslateX(buttonSize*2.125);
+        menu3.setTranslateY(buttonSize*2.5);
+        //menu3.setSpacing(buttonSize); //se usi hbox
+        menu3.setBackground(Background.EMPTY);
+        //menu3.setPadding(new Insets(buttonSize,buttonSize,buttonSize,buttonSize));
+        menu3.setHgap(buttonSize);
+        menu3.setVgap(buttonSize);
         PlaceTowerButton tower1 = new PlaceTowerButton("type 1");
         menu3.getChildren().add(tower1);
         PlaceTowerButton tower2 = new PlaceTowerButton("type 2");
         menu3.getChildren().add(tower2);
+        PlaceTowerButton tower3 = new PlaceTowerButton("Type 3");
+        menu3.getChildren().add(tower3);
+        PlaceTowerButton remove = new PlaceTowerButton("remove");
+        menu3.getChildren().add(remove);
         flow.getChildren().add(menu3);
         
         /* GRIGLIA DI GIOCO */
@@ -178,8 +191,7 @@ public class GameScreen extends Region {
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
         					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
-        					
-        				System.out.println("droppo torre 1");////////////////DROPPO LA TORRE
+        				System.out.println("droppo torre 1");
         				}
         				else if(this.type2) {
         				     
@@ -205,7 +217,7 @@ public class GameScreen extends Region {
         					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
         					System.out.println("droppo torre 2");
         				}        				
-        				for(GridButton n:this.btList) {  /////////////////////TOLGO L ILLUMINAZIONE
+        				for(GridButton n:this.btList) {  
         					n.setEffect(null);
         				}
         				this.type1 = false;
@@ -228,7 +240,7 @@ public class GameScreen extends Region {
         		}
     		}
     	}
-    }
+    	}
     	else {
     		for(MapTile m:this.mappa.pathList()) {
         		for(GridButton b:this.btList) {
@@ -249,7 +261,7 @@ public class GameScreen extends Region {
         tower1.setOnMouseClicked(event -> {
         	this.type1 = true;
         	for(GridButton b:this.btList) {
-        		 DropShadow drop = new DropShadow(10, Color.WHITE); /////////////HO AGGIUNTO L ILLUMINAZIONE CASELLE DOPO CHE PREMO TYPE1
+        		 DropShadow drop = new DropShadow(10, Color.WHITE); 
  	            drop.setInput(new Glow());
  	            b.setEffect(drop); 
         	}
@@ -258,7 +270,16 @@ public class GameScreen extends Region {
         tower2.setOnMouseClicked(event -> {
         	this.type2 = true;
         	for(GridButton b:this.btList) {
-        		 DropShadow drop = new DropShadow(10, Color.WHITE); /////////////HO AGGIUNTO L ILLUMINAZIONE CASELLE DOPO CHE PREMO TYPE2
+        		 DropShadow drop = new DropShadow(10, Color.WHITE);
+ 	            drop.setInput(new Glow());
+ 	            b.setEffect(drop); 
+        	}
+        });
+        
+        tower3.setOnMouseClicked(event -> {
+        	this.type2 = true;
+        	for(GridButton b:this.btList) {
+        		 DropShadow drop = new DropShadow(10, Color.WHITE); 
  	            drop.setInput(new Glow());
  	            b.setEffect(drop); 
         	}
