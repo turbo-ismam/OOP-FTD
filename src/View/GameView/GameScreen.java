@@ -33,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import utilityClasses.Pair;
 
@@ -100,14 +101,31 @@ public class GameScreen extends Region {
         
         /* MENU2: INFO HP, COINS, WAVE */
         VBox menu2 = new VBox();
+        menu2.setSpacing(buttonSize);
         menu2.setPrefSize(buttonSize*13, buttonSize*9);
         menu2.setTranslateY(buttonSize*2);
         menu2.setTranslateX(buttonSize);
         menu2.setBackground(Background.EMPTY);
         
+        Text text = new Text("COINS"+"  "+ this.gc.getModel().getPlayer().getCoins());
+    	text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+		text.setFill(Color.GOLD);
+        text.setTranslateY(buttonSize*2);
+        //text.setTranslateX(buttonSize*2);
         
+        Text text1 = new Text("HP" +"  "+ this.gc.getModel().getPlayer().getHp());
+    	text1.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+		text1.setFill(Color.LAWNGREEN);
+        text1.setTranslateY(buttonSize*2);
+        //text1.setTranslateX(buttonSize*2);
         
-        //menu2.getChildren().add();
+        Text text2 = new Text("WAVE" + "  " +this.gc.getModel().getPlayer().getWave());
+    	text2.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+		text2.setFill(Color.DARKRED);
+        text2.setTranslateY(buttonSize*2);
+        //text2.setTranslateX(buttonSize*2);
+        
+        menu2.getChildren().addAll(text,text1,text2);
        
         menu2.setStyle(style2);
         flow.getChildren().add(menu2);
@@ -164,6 +182,26 @@ public class GameScreen extends Region {
         				System.out.println("droppo torre 1");////////////////DROPPO LA TORRE
         				}
         				else if(this.type2) {
+        				     
+        					InputStream ist = null;
+							try {
+								ist = Files.newInputStream(Paths.get("res/tower.png"));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					Image logo = new Image(ist);
+        					try {
+								ist.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					ImageView imgt = new ImageView(logo);
+        					imgt.setFitWidth(buttonSize);
+        					imgt.setFitHeight(buttonSize);
+        					bt.getChildren().add(imgt);
+        					
         					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
         					System.out.println("droppo torre 2");
         				}        				
@@ -245,8 +283,9 @@ public class GameScreen extends Region {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-        		
-            	
+        		text.setText("COINS"+"  "+ gc.getModel().getPlayer().getCoins());
+        		text1.setText("HP"+"  "+ gc.getModel().getPlayer().getHp());
+        		text2.setText("WAVE"+"  "+ gc.getModel().getPlayer().getWave());
 			}
 			
 		};
@@ -263,12 +302,13 @@ public class GameScreen extends Region {
 		this.via= gc.getModel().getMap().pathList();
 	}
 	
-	public void render(ArrayList<Entity> entityList) throws IOException {
+	public void render(ArrayList<Entity> entityList) throws IOException {	
+		ArrayList<Enemy> p = new ArrayList<Enemy>();
 		
-		for(Entity e:entityList) {
+		for(Entity e:entityList) {		
 			if(e instanceof Enemy) {
+				p.add((Enemy) e);
 				for(PathButton b:btlist2) {
-					
 					Rectangle r = new Rectangle();
 					r.setFill(Color.RED);
 					r.setHeight(buttonSize);
@@ -282,10 +322,16 @@ public class GameScreen extends Region {
 					img.setFitHeight(buttonSize);
 					
 					if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
-						b.getChildren().add(r);
+						b.getChildren().setAll(r);
+						
 					}
 					else {
 						b.getChildren().setAll(img);
+						for(Enemy q:p) {
+							if(q.getLocation().getX() == b.position.getX() && q.getLocation().getY() == b.position.getY()){
+								b.getChildren().setAll(r);
+							}
+						}
 					}
 				}				
 			}
