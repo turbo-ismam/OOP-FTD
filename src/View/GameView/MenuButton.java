@@ -17,7 +17,7 @@ public class MenuButton extends StackPane{
 	public MenuButton(String name) {
 		
 		text = new Text(name);
-		text.setFont(Font.loadFont("file:res/JOJO____.ttf", 18));
+		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.buttonSize/2));
 		text.setFill(Color.BLACK);
 		
 		Rectangle bg = new Rectangle(GameConstants.buttonSize*3.75,GameConstants.buttonSize*3.75);

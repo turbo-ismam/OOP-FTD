@@ -51,4 +51,14 @@ public class LayoutImages {
 		return imgv.getImage();
 		
 	}
+	
+	public ImageView getImgv7() throws IOException {
+		
+		ImageLoader imgv7 = new ImageLoader("res/sound.jpg");
+		imgv7.getImage().setFitWidth(buttonSize*39);
+		imgv7.getImage().setFitHeight(buttonSize*23);
+		imgv7.getImage().setTranslateX(buttonSize*1.45);
+		return imgv7.getImage();
+		
+	}
 }

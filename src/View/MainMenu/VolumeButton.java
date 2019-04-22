@@ -10,11 +10,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class MenuButton extends StackPane {
+public class VolumeButton extends StackPane{
 	
-	private Text text;
+private Text text;
 	
-	public MenuButton(String name) {
+	public VolumeButton(String name) {
 		
 		text = new Text(name);
 		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.buttonSize/2));
@@ -48,5 +48,5 @@ public class MenuButton extends StackPane {
             setOnMousePressed(event -> setEffect(drop));
             setOnMouseReleased(event -> setEffect(null));  
 	}
-}
 
+}

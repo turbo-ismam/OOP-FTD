@@ -57,6 +57,12 @@ public class PlayerImpl implements Player{
 	public void setWave(int wave) {
 		this.wave = wave;
 	}
+
+	@Override
+	public void setName(String text) {
+
+		this.name=text;
+	}
 	
 	
 

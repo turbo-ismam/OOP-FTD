@@ -26,6 +26,9 @@ public interface Player {
 	
 	
 	public void setWave(int wave);
+
+
+	public void setName(String text);
 	
 	
 }
