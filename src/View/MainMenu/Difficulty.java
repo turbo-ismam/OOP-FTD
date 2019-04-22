@@ -1,6 +1,7 @@
 package View.MainMenu;
 
 import Constants.GameConstants;
+import View.GameView.GameScreen;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
@@ -22,12 +23,12 @@ public class Difficulty extends Region{
 		Pane pane = new Pane();
     	pane.setPrefSize(GameConstants.gameWidth/2, GameConstants.gameHeight/2);
     	Text text = new Text("Difficulty changed!");
-    	text.setFont(Font.loadFont("file:res/JOJO____.ttf", 15));
-		text.setFill(Color.DARKVIOLET);
+    	text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+		text.setFill(Color.WHITE);
 		
     	VBox space = new VBox();
     	space.setTranslateX((GameConstants.gameWidth/2)/2-GameConstants.buttonSize*2.75);
-    	space.setTranslateY((GameConstants.gameHeight/2)/2-GameConstants.buttonSize*2);
+    	space.setTranslateY((GameConstants.gameHeight/2)/2-GameConstants.buttonSize*1.5);
     	
     	ImageLoader im = new ImageLoader("res/difficoulty.jpg");
     	im.getImage().prefHeight(GameConstants.gameHeight/8);
@@ -36,22 +37,30 @@ public class Difficulty extends Region{
     	pane.getChildren().add(im.getImage());
     	 String style3 = "-fx-background-color: rgba(0, 0, 0, 0.5);"; //verde
     	 pane.setStyle(style3);
-
-    	
+    	 
     	ButtonD bt = new ButtonD("Ok");
     	bt.setOnMouseClicked(event -> {
     		primaryStage.close();
-    	});
+    		
+    	});    	
     	
-    	
-    	space.getChildren().add(bt);
+    	 Rectangle bg = new Rectangle(GameConstants.gameWidth,GameConstants.gameHeight);
+         bg.setFill(Color.GREY);
+         bg.setOpacity(0.5);
+         bg.setTranslateX(-GameConstants.buttonSize*10);
+     	 bg.setTranslateY(-GameConstants.buttonSize*10);
+         
+    	bt.setTranslateX(-GameConstants.buttonSize*16);
+    	bt.setTranslateY(-GameConstants.buttonSize*22);
+    	text.setTranslateX(-GameConstants.buttonSize*5);
+    	text.setTranslateY(-GameConstants.buttonSize*23.5);
+    	space.getChildren().addAll(bg,text,bt);
     	pane.getChildren().add(space);
-    	
 
 		 Scene scene = new Scene(pane);
 	        primaryStage.setTitle("Difficulty");
 	        primaryStage.setScene(scene);
-	        primaryStage.setResizable(false);
+	        primaryStage.setResizable(true);
 	        primaryStage.show();
 		
 	}

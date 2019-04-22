@@ -12,6 +12,7 @@ public class InputImpl implements Input{
 	private final int x;
 	private final int y;
 	private final InputType inputType;
+	private final TowerType tType;
 	
 	/**
      * Public constructor.
@@ -27,6 +28,7 @@ public class InputImpl implements Input{
 		this.x = x;
 		this.y = y;
 		this.inputType = iType;
+		this.tType = tType;
 	}
 	
 	@Override
@@ -51,6 +53,11 @@ public class InputImpl implements Input{
 	public String toString() {
 		return inputType.toString() + " "+ x + " " + y;
 		
+	}
+
+	@Override
+	public TowerType getTowerType() {
+		return this.tType;
 	}
 
 }

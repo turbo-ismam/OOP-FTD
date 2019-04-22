@@ -36,6 +36,7 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private GameScreen game;
+	private PlayerName name = new PlayerName();
 	private Difficulty avviso = new Difficulty();
 	private GameController gc = new GameControllerImpl();
 	
@@ -65,7 +66,7 @@ public class MainMenu extends Application{
 			String musicFile1 = "res/ZA WARUDO.mp3";
 			Media sound1 = new Media(new File(musicFile1).toURI().toString());
 			MediaPlayer mediaPlayer = new MediaPlayer(sound1);
-			mediaPlayer.setVolume(0.1);
+			mediaPlayer.setVolume(1);
 			mediaPlayer.setStopTime(Duration.seconds(1.5));
 			
 			
@@ -89,6 +90,7 @@ public class MainMenu extends Application{
             VBox menu2 = new VBox(buttonSize);	// logo prima schermata
             VBox menu5 = new VBox(buttonSize);	// rettangolo grigio per rendere bello tutti gli sfondi
             VBox menu6 = new VBox(buttonSize);	// sfondo jotaro
+            VBox menu7 = new VBox(buttonSize);  // sfondo ******
             
             Rectangle bg = new Rectangle(width+buttonSize,height+buttonSize);
             bg.setFill(Color.GREY);
@@ -100,13 +102,12 @@ public class MainMenu extends Application{
             menu5.getChildren().add(bg);
             menu6.getChildren().add(im.getImgv3());
             
-            
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            	gc.startGame();
-            	game = new GameScreen(gc);
+            	//gc.startGame();
+            	//game = new GameScreen(gc);
             	try {
-					root.getChildren().setAll(game.createContent());
+					root.getChildren().setAll(name.createContent());
 				} catch (IOException e) {
 					
 					e.printStackTrace();
@@ -186,6 +187,21 @@ public class MainMenu extends Application{
             btnSound.setOnMouseClicked(event -> {
             	mediaPlayer.stop();
             	mediaPlayer.play();
+            	root.getChildren().add(menu7);
+            	
+            	TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
+                tt.setToX(menu1.getTranslateX() - offset);
+                
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu7);
+                tt1.setToX(menu1.getTranslateX());
+                
+            	tt.play();
+            	tt1.play();
+                
+            	tt.setOnFinished(evt -> {
+                    root.getChildren().remove(menu1);                 
+                    
+                });
             });
             
             
