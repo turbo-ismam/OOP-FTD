@@ -91,7 +91,7 @@ public class MapTest {
 		Pair<Integer,Integer> a = new Pair<>(5,0);
 		Pair<Integer,Integer> b = new Pair<>(5,10);
 		Pair<Integer,Integer> c = new Pair<>(15,10);
-		Pair<Integer,Integer> d = new Pair<>(15,19);
+		Pair<Integer,Integer> d = new Pair<>(15,15);
 		Pair<Integer,Integer> e = new Pair<>(2,15);
 		
 		assertTrue(s.tileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
@@ -106,9 +106,27 @@ public class MapTest {
 		System.out.print("Normal path complete");
 	}
 	
-	
-	
-	
+	public void HardMapCheck() {
+		
+		//linea dritta
+		final AbstractMapModel s = new NormalMap();
+		Pair<Integer,Integer> a = new Pair<>(5,0);
+		Pair<Integer,Integer> b = new Pair<>(5,10);
+		Pair<Integer,Integer> c = new Pair<>(15,10);
+		Pair<Integer,Integer> d = new Pair<>(15,10);
+		Pair<Integer,Integer> e = new Pair<>(2,15);
+		
+		assertTrue(s.tileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
+		System.out.print("5,10 ok\n");
+		assertTrue(s.tileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
+		System.out.print("10,10 ok\n");
+		assertTrue(s.tileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
+		System.out.print("10,5 ok\n");
+		assertTrue(s.tileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
+		System.out.print("15,5 ok\n");
+		assertFalse(s.tileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
+		System.out.print("Normal path complete");
+	}
 
 }
 

@@ -17,12 +17,12 @@ public class MenuButton extends StackPane{
 	public MenuButton(String name) {
 		
 		text = new Text(name);
-		text.setFont(Font.loadFont("file:res/JOJO____.ttf", 22));
-		text.setFill(Color.DEEPPINK);
+		text.setFont(Font.loadFont("file:res/JOJO____.ttf", 18));
+		text.setFill(Color.BLACK);
 		
-		Rectangle bg = new Rectangle(GameConstants.buttonSize*6,GameConstants.buttonSize*3);
+		Rectangle bg = new Rectangle(GameConstants.buttonSize*3.75,GameConstants.buttonSize*3.75);
 		bg.setOpacity(0.8);
-		bg.setFill(Color.CYAN);
+		bg.setFill(Color.CRIMSON);
 		
 		  setAlignment(Pos.CENTER);
             setRotate(-0.5);
@@ -34,8 +34,8 @@ public class MenuButton extends StackPane{
             });
 
             setOnMouseExited(event -> {
-                bg.setFill(Color.CYAN);
-                text.setFill(Color.DEEPPINK);
+                bg.setFill(Color.CRIMSON);
+                text.setFill(Color.BLACK);
             });
 
             DropShadow drop = new DropShadow(50, Color.WHITE);

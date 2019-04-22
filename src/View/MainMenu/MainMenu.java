@@ -36,10 +36,14 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private GameScreen game;
-	private Difficulty avviso = new Difficulty(buttonSize);
+	private Difficulty avviso = new Difficulty();
 	private GameController gc = new GameControllerImpl();
 	
     static final double buttonSize = GameConstants.buttonSize;
+    static final double width = GameConstants.gameWidth;
+    static final double height = GameConstants.gameHeight;
+    private double vol;
+    
     static final int offset = 400;
 	
 	 public Parent createContent() throws IOException {
@@ -47,90 +51,56 @@ public class MainMenu extends Application{
 	        String musicFile = "res/Jojo.mp3";
 			Media sound = new Media(new File(musicFile).toURI().toString());
 			MediaPlayer mediaPlayer1 = new MediaPlayer(sound);
-			mediaPlayer1.setVolume(0.1);
+			this.vol=0.1;
+			mediaPlayer1.setVolume(this.vol);	//SISTEMA QUI IL VOLUME
 			
 			Pane root = new Pane();
-			root.setPrefSize(buttonSize*38, buttonSize*22);
+			root.setPrefSize(width, height);
 			
-			InputStream is = Files.newInputStream(Paths.get("res/62266.jpg"));
-			Image img = new Image(is);
-			is.close();
+			LayoutImages im = new LayoutImages();
 			
-			ImageView imgv = new ImageView(img);
-			imgv.setFitWidth(buttonSize*39);
-			imgv.setFitHeight(buttonSize*23);
+			root.getChildren().add(im.getImgv());
 			
-			//gameMenu = new GameMenu();
-			
-			root.getChildren().add(imgv);
-			
+			/* Effetto sonoro per i bottoni */
 			String musicFile1 = "res/ZA WARUDO.mp3";
 			Media sound1 = new Media(new File(musicFile1).toURI().toString());
 			MediaPlayer mediaPlayer = new MediaPlayer(sound1);
-			mediaPlayer.setVolume(1);
-			mediaPlayer.setStopTime(Duration.seconds(1.9));
+			mediaPlayer.setVolume(0.1);
+			mediaPlayer.setStopTime(Duration.seconds(1.5));
 			
-            VBox menu0 = new VBox(20);
-            VBox menu1 = new VBox(20);
-            VBox menu2 = new VBox(20);
-            VBox menu3 = new VBox(20);
-            VBox menu4 = new VBox(20);
-            VBox menu5 = new VBox(20);
-            VBox menu6 = new VBox(20);
+			
+            VBox menu0 = new VBox(buttonSize);	// box bottoni start-options-exit
+            menu0.setPrefSize(buttonSize*10, buttonSize*3);
+            menu0.setTranslateX(buttonSize*19.5-buttonSize*5); 
+            menu0.setTranslateY(buttonSize*11.5-buttonSize*2);
             
-            Rectangle bg = new Rectangle(buttonSize*39, buttonSize*23);
+            VBox menu1 = new VBox(buttonSize);	// box bottoni back-sound-difficoulty
+            menu1.setTranslateY(buttonSize*12);
+            menu1.setTranslateX(buttonSize*19.5-buttonSize*5); 
+            menu1.setTranslateY(buttonSize*11.5-buttonSize*2);
+            
+            VBox menu3 = new VBox(buttonSize);	//box bottoni back-easy-medium-hard
+            menu3.setTranslateX(buttonSize*15);  // difficoltá
+            menu3.setTranslateY(buttonSize*12);
+            menu3.setTranslateX(buttonSize*19.5-buttonSize*5); 
+            menu3.setTranslateY(buttonSize*11.5-buttonSize*2);
+            
+            VBox menu4 = new VBox(buttonSize);	// sfondo giorno
+            VBox menu2 = new VBox(buttonSize);	// logo prima schermata
+            VBox menu5 = new VBox(buttonSize);	// rettangolo grigio per rendere bello tutti gli sfondi
+            VBox menu6 = new VBox(buttonSize);	// sfondo jotaro
+            
+            Rectangle bg = new Rectangle(width+buttonSize,height+buttonSize);
             bg.setFill(Color.GREY);
             bg.setOpacity(0.4);
             
-
-            
-            InputStream is2 = Files.newInputStream(Paths.get("res/logo.png"));
-    		Image logo = new Image(is2);
-    		is2.close();
-    		ImageView imgv1 = new ImageView(logo);
-    		imgv1.setFitWidth(550);
-    		imgv1.setFitHeight(250);
     		
-    		InputStream is1 = Files.newInputStream(Paths.get("res/giorno.jpg"));
-    		Image logo2 = new Image(is1);
-    		is1.close();
-    		ImageView imgv2 = new ImageView(logo2);
-    		imgv2.setFitWidth(buttonSize*39);
-    		imgv2.setFitHeight(buttonSize*23);
-    		imgv2.setTranslateX(-buttonSize*3.25);
-    		
-    		InputStream is3 = Files.newInputStream(Paths.get("res/jotaro.png"));
-    		Image logo3 = new Image(is3);
-    		is3.close();
-    		ImageView imgv3 = new ImageView(logo3);
-    		imgv3.setFitWidth(buttonSize*39);
-    		imgv3.setFitHeight(buttonSize*23);
-    		imgv3.setTranslateX(-buttonSize*3.25);
-            	    		
-            //menu2.setTranslateX(500);
-            //menu2.setTranslateY(80);
-            menu2.getChildren().add(imgv1);
-            menu4.getChildren().addAll(imgv2);
+            menu2.getChildren().add(im.getimgv1());
+            menu4.getChildren().addAll(im.getImgv2());
             menu5.getChildren().add(bg);
-            menu6.getChildren().add(imgv3);
+            menu6.getChildren().add(im.getImgv3());
             
             
-            menu0.setTranslateX(buttonSize*15); //start-play-option, prima schermata
-            menu0.setTranslateY(buttonSize*12);
-
-            menu1.setTranslateY(buttonSize*12);	//options
-            
-            //menu4.setTranslateX(buttonSize*39);  //giorno
-            //menu6.setTranslateX(buttonSize*39);  //jotaro
-            
-            menu3.setTranslateX(buttonSize*15);  // difficoltá
-            menu3.setTranslateY(buttonSize*12);
-
-            
-
-            //menu1.setTranslateX(offset);
-            //menu1.setTranslateX(900);
-
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
             	gc.startGame();
@@ -335,44 +305,9 @@ public class MainMenu extends Application{
 		
 	}
 	
-	
-	public static class MenuButton extends StackPane {
-		private Text text;
-		
-		public MenuButton(String name) {
-			
-			text = new Text(name);
-			text.setFont(Font.loadFont("file:res/JOJO____.ttf", 30));
-			text.setFill(Color.DEEPPINK);
-			
-			Rectangle bg = new Rectangle(300,70);
-			bg.setOpacity(0.8);
-			bg.setFill(Color.CYAN);
-			
-			  setAlignment(Pos.CENTER);
-	            setRotate(-0.5);
-	            getChildren().addAll(bg, text);
-
-	            setOnMouseEntered(event -> {
-	                bg.setTranslateX(10);
-	                text.setTranslateX(10);
-	                bg.setFill(Color.WHITE);
-	                text.setFill(Color.BLACK);
-	            });
-
-	            setOnMouseExited(event -> {
-	                bg.setTranslateX(0);
-	                text.setTranslateX(0);
-	                bg.setFill(Color.CYAN);
-	                text.setFill(Color.DEEPPINK);
-	            });
-
-	            DropShadow drop = new DropShadow(50, Color.WHITE);
-	            drop.setInput(new Glow());
-
-	            setOnMousePressed(event -> setEffect(drop));
-	            setOnMouseReleased(event -> setEffect(null));  
-		}
+	public void setVol(double volume) {
+		this.vol=volume;
 	}
+	
 
 }

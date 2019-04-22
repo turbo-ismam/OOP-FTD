@@ -14,5 +14,9 @@ public final class GameConstants {
     
     public static final double height = screenSize.getHeight();
     
-    public static final double buttonSize = height/40;
+    public static final double buttonSize = height/30;
+    
+    public static final double gameWidth = buttonSize*38;
+    
+    public final static double gameHeight = buttonSize*22;
 }
