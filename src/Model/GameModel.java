@@ -5,6 +5,11 @@ import Model.Player.Player;
 import Model.Tower.TowerType;
 import Model.Wave.Wave;
 import utilityClasses.Pair;
+/**
+ * 
+ * @author marco
+ *
+ */
 
 public interface GameModel {
 	
@@ -49,9 +54,17 @@ public interface GameModel {
 	 * Update everything and moves the game forward by one tick
 	 */
 	public void update();
-
+	
+	/**
+	 *  Returns the map of the game
+	 * @return the current Map
+	 */
     public Map getMap();
-
+    
+    /**
+     *  if true, starts the current wave
+     * @param b boolean
+     */
 	void setReadyToSpawn(boolean b);
 	
 }

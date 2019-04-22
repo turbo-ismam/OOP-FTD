@@ -19,7 +19,7 @@ import utilityClasses.Pair;
 
 /**
  * 
- * @author ismam.abu
+ * @author marco
  *
  */
 public class GameModelImpl implements GameModel, Observer {

@@ -156,7 +156,7 @@ public class GameScreen extends Region {
         PlaceTowerButton remove = new PlaceTowerButton("remove");
         menu3.getChildren().add(remove);
         flow.getChildren().add(menu3);
-        
+
         /* GRIGLIA DI GIOCO */
         GridPane grid = new GridPane();
         grid.setPrefSize(buttonSize*20, buttonSize*20);
