@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import Constants.GameConstants;
 import Controller.GameController.GameController;
-import Model.Enemy.Enemy;
 import Model.Map.Map;
 import Model.Map.MapTile;
 import Model.Tower.TowerType;
@@ -114,7 +113,7 @@ public class GameScreen extends Region {
         PlaceTowerButton tower2 = new PlaceTowerButton("type 2");
         menu3.getChildren().add(tower2);
         flow.getChildren().add(menu3);
-        
+
         /* GRIGLIA DI GIOCO */
         GridPane grid = new GridPane();
         grid.setPrefSize(buttonSize*20, buttonSize*20);

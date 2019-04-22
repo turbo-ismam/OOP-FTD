@@ -1,6 +1,7 @@
 package Controller.GameController;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 import java.util.concurrent.TimeUnit;
 import Model.GameModel;
 import Model.GameModelImpl;
@@ -10,6 +11,11 @@ import View.Input.Input;
 import View.Input.InputImpl;
 import View.Input.InputType;
 
+/**
+ * 
+ * @author marco
+ *
+ */
 public class GameControllerImpl implements GameController {
 	private GameModel gm;
 	private final ScheduledThreadPoolExecutor ses;
