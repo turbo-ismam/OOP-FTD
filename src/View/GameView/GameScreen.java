@@ -1,10 +1,5 @@
 package View.GameView;
 
-import java.io.IOException;
-
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Constants.GameConstants;
@@ -13,12 +8,10 @@ import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 import Model.Map.Map;
 import Model.Map.MapTile;
-import Model.Tower.Tower;
 import Model.Tower.TowerType;
 import View.Input.InputImpl;
 import View.Input.InputType;
 import javafx.animation.AnimationTimer;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -32,14 +25,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import utilityClasses.Pair;
 
 public class GameScreen extends Region {
-	
+	private static final Image logo = new Image("path.png");
+	private static final Image towerlogo = new Image("tower.png");
 	private static final int gridSize=20;
 	private ArrayList<GridButton> btList = new ArrayList<>();
 	private ArrayList<MapTile> via;
@@ -63,7 +56,7 @@ public class GameScreen extends Region {
         
 	//MainMenu test = new MainMenu();    
         
-	public Parent createContent() throws IOException {
+	public Parent createContent(){
 		
 		 String style3 = "-fx-background-color: rgba(75, 250, 30, 0.5);"; //verde
 		 String style2 = "-fx-background-color: rgba(50, 100, 200, 0.5);"; //trasparente
@@ -73,9 +66,7 @@ public class GameScreen extends Region {
 	/* FINESTRA GENERALE */
         Pane root = new Pane(); 
         root.setPrefSize(buttonSize*38, buttonSize*25);
-        InputStream is = Files.newInputStream(Paths.get("res/gameMenuImage.png"));
-	Image img = new Image(is);
-	is.close();
+	Image img = new Image("gameMenuImage.png");
 	ImageView imgv = new ImageView(img);
 	imgv.setFitWidth(buttonSize*40);
 	imgv.setFitHeight(buttonSize*26);
@@ -177,21 +168,7 @@ public class GameScreen extends Region {
         			}
         			else {
         				if(this.type1) {
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/tower.png"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(towerlogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -199,22 +176,7 @@ public class GameScreen extends Region {
         				System.out.println("droppo torre 1");
         				}
         				else if(this.type2) {
-        				     
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/tower.png"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(towerlogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -224,22 +186,7 @@ public class GameScreen extends Region {
         				}   
         				
         				else if(this.type3) {
-       				     
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/tower.png"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(towerlogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -249,21 +196,6 @@ public class GameScreen extends Region {
         				}
         				
         				else if(this.remove) {
-          				     
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/grass.jpg"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
         					ImageView imgt = new ImageView(logo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
@@ -361,13 +293,7 @@ public class GameScreen extends Region {
 
 			@Override
 			public void handle(long now) {				
-
-        		try {
 					render(mappa.entityList());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 			
 		};
@@ -387,7 +313,7 @@ public class GameScreen extends Region {
 	}
 	
 	
-	public void render(ArrayList<Entity> entityList) throws IOException  {	
+	public void render(ArrayList<Entity> entityList)  {	
 		ArrayList<Enemy> p = new ArrayList<Enemy>();
 		
 		for(Entity e:entityList) {		
@@ -398,10 +324,6 @@ public class GameScreen extends Region {
 					r.setFill(Color.RED);
 					r.setHeight(buttonSize);
 					r.setWidth(buttonSize);
-					
-					InputStream is = Files.newInputStream(Paths.get("res/path.png"));
-					Image logo = new Image(is);
-					is.close();
 					ImageView img = new ImageView(logo);
 					img.setFitWidth(buttonSize);
 					img.setFitHeight(buttonSize);
