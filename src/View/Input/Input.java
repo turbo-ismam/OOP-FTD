@@ -1,7 +1,5 @@
 package View.Input;
 
-import java.util.Optional;
-
 import Model.Tower.TowerType;
 
 /**

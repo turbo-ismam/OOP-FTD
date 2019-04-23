@@ -24,7 +24,7 @@ public class InputImpl implements Input{
      * @param y
      *            the y position of the tower
      */
-	public InputImpl(final InputType iType,TowerType tType, final int x, final int y) {
+	public InputImpl(InputType iType,TowerType tType, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.inputType = iType;

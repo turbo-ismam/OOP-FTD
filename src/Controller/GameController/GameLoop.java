@@ -41,7 +41,7 @@ public class GameLoop implements Runnable {
 					.forEach(e -> System.out.println(e));		
 				}
 				//render view
-				//v.render(gm.getMap().entityList());
+				v.render(gm.getMap().entityList());
 				i++; //variabili di debug
 				}
 				else { //pause block

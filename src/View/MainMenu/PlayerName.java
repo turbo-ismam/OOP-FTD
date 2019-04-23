@@ -60,12 +60,7 @@ public class PlayerName extends Region{
 			gc.init();
 			game = new GameScreen(gc);
 			gc.getModel().getPlayer().setName(box.getText());
-			try {
 				root.getChildren().setAll(game.createContent());
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
 		});
 		
 		
