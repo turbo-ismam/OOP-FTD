@@ -23,8 +23,7 @@ public class Projectile implements Entity  {
 	public static boolean CheckCollision(Pair <Integer,Integer> position, Pair<Integer, Integer> enemyPosition) {
 		if(position == enemyPosition)
 			return true;
-		return false;
-		
+		return false;	
 	}
 	
 	@Override
