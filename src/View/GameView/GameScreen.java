@@ -346,9 +346,16 @@ public class GameScreen extends Region {
 							b.getChildren().setAll(img1);
 							
 							for(Tower v:t) {
-								if(v.getLocation().equals(b.getPosition())){
-								
-									b.getChildren().add(img3);
+								if(v.getLocation().equals(b.getPosition())){								
+									if(v.getType() == TowerType.BASIC) {
+										b.getChildren().add(img3);
+									}
+									if(v.getType() == TowerType.CANNON) {
+										ImageView img4 = new ImageView(towerlogo2);
+										img4.setFitWidth(buttonSize);
+										img4.setFitHeight(buttonSize);
+										b.getChildren().add(img4);
+									}									
 								}
 							}
 							for(Projectile q:j) {
@@ -375,11 +382,28 @@ public class GameScreen extends Region {
 							ImageView img2 = new ImageView(towerlogo);
 							img2.setFitWidth(buttonSize);
 							img2.setFitHeight(buttonSize);
+							
+							ImageView img3 = new ImageView(towerlogo2);
+							img3.setFitWidth(buttonSize);
+							img3.setFitHeight(buttonSize);
+							
+							ImageView img5 = new ImageView(towerlogo1);
+							img5.setFitWidth(buttonSize);
+							img5.setFitHeight(buttonSize);
+							
 							ImageView img4 = new ImageView(grasslogo);
 							img4.setFitWidth(buttonSize);
 							img4.setFitHeight(buttonSize);
-							d.getChildren().setAll(img4);
-							d.getChildren().add(img2);
+							d.getChildren().setAll(img4);					
+							if(v.getType() == TowerType.BASIC) {
+								d.getChildren().add(img2);
+							}
+							if(v.getType() == TowerType.CANNON) {
+								d.getChildren().add(img3);
+							}
+							if(v.getType() == TowerType.RANGED) {
+								d.getChildren().add(img5);
+							}
 						}
 					}
 				}
