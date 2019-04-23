@@ -6,12 +6,11 @@ import Constants.GameConstants;
 import Controller.GameController.GameController;
 import Model.Enemy.Enemy;
 import Model.Entity.Entity;
-import Model.Map.Map;
 import Model.Map.MapTile;
+import Model.Map.MapTile.Status;
 import Model.Tower.TowerType;
 import View.Input.InputImpl;
 import View.Input.InputType;
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
@@ -35,11 +34,9 @@ public class GameScreen extends Region {
 	private static final Image logo = new Image("path.png");
 	private static final Image towerlogo = new Image("tower.png");
 	private static final Image grasslogo = new Image("grass.jpg");
-	private static final int gridSize=20;
 	private ArrayList<GridButton> btList = new ArrayList<>();
-	private ArrayList<MapTile> via;
+	private ArrayList<MapTile> mappa;
 	private GameController gc;
-	private Map mappa; 
 	private boolean type1=false;
 	private boolean type2=false;
 	private boolean type3=false;
@@ -49,9 +46,6 @@ public class GameScreen extends Region {
 	 private Text text1 = new Text("HP" +"  "+ 0);
 	 private Text text2 = new Text("WAVE" + "  " + 0);
 	 private Text text3 = new Text("NAME" + "  " + 0);
-	
-	private Integer i;
-	private Integer j;
 	private ArrayList<PathButton> btlist2 = new ArrayList<>();
 	
     private static final double buttonSize = GameConstants.buttonSize;
@@ -159,12 +153,20 @@ public class GameScreen extends Region {
         GridPane grid = new GridPane();
         grid.setPrefSize(buttonSize*20, buttonSize*20);
 
-        for (i=0;i<gridSize;i++) {
-        	for(j=0;j<gridSize;j++) {
+        for(MapTile m:this.mappa){
+        	int x = m.getPosition().getX();
+    		int y = m.getPosition().getY();
+    		/*se è un percorso*/
+        	if(m.getStatus()==Status.PATH) {
+				PathButton b2 = new PathButton("");
+				b2.setPosition(new Pair<Integer,Integer>(x,y));
+				btlist2.add(b2);
+            	grid.add(b2,x,y);
+        	}
+        	else { /*se non è percorso*/
         		GridButton bt = new GridButton("");
-        		bt.position= new Pair<Integer,Integer>(i,j);
+        		bt.setPosition(new Pair<Integer,Integer>(x, y));
         		bt.setOnMouseClicked(event -> {
-        			System.out.println(bt.position);
         			if(gc == null) {
         				throw new NullPointerException();
         			}
@@ -174,8 +176,8 @@ public class GameScreen extends Region {
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
-        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
-        				System.out.println("droppo torre 1 in" +i + " " + j);
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, x, y));
+        				System.out.println("droppo torre 1 in");
         				}
         				else if(this.type2) {
         					ImageView imgt = new ImageView(towerlogo);
@@ -183,7 +185,7 @@ public class GameScreen extends Region {
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
         					
-        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, x, y));
         					System.out.println("droppo torre 2");
         				}   
         				
@@ -193,7 +195,7 @@ public class GameScreen extends Region {
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
         					
-        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.CANNON, i, j));
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.CANNON, x, y));
         					System.out.println("droppo torre 3");
         				}
         				
@@ -203,7 +205,7 @@ public class GameScreen extends Region {
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().setAll(imgt);
         					
-        					gc.handleInput(new InputImpl(InputType.REMOVE_TOWER, null, i, j));
+        					gc.handleInput(new InputImpl(InputType.REMOVE_TOWER, null, x, y));
         					System.out.println("rimuovo torre");
         				}
         				
@@ -217,35 +219,9 @@ public class GameScreen extends Region {
         			}
         		});
         		btList.add(bt);
-            	grid.add(bt,i,j);
+            	grid.add(bt,x,y);
         	}
         }
-        
-    	if(this.mappa == null) {
-    	for(MapTile m:this.via) {
-    		for(GridButton b:this.btList) {
-    			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
-						PathButton b2 = new PathButton("");
-						b2.position= new Pair<Integer,Integer>(b.position.getX(),b.position.getY());
-						grid.add(b2,b.position.getX(),b.position.getY());
-						btlist2.add(b2);
-        		}
-    		}
-    	}
-    	}
-    	else {
-    		for(MapTile m:this.mappa.pathList()) {
-        		for(GridButton b:this.btList) {
-        			if(b.position.getX() == m.getPosition().getX() && b.position.getY() == m.getPosition().getY()) {
-							PathButton b2 = new PathButton("");
-							b2.position= new Pair<Integer,Integer>(b.position.getX(),b.position.getY());
-							grid.add(b2,b.position.getX(),b.position.getY());
-							btlist2.add(b2);
-            		}
-        		}
-        	}
-    	}
-        
         grid.setTranslateX(buttonSize);
         grid.setTranslateY(buttonSize);
         root.getChildren().addAll(grid,flow);
@@ -297,8 +273,7 @@ public class GameScreen extends Region {
 	public GameScreen(GameController gc) {
 
 		this.gc = gc;
-		this.mappa = gc.getModel().getMap();
-		this.via= gc.getModel().getMap().pathList();
+		this.mappa = gc.getModel().getMap().getTileList();
 		gc.startLoop(this);
 
 	}
@@ -320,14 +295,14 @@ public class GameScreen extends Region {
 						img.setFitWidth(buttonSize);
 						img.setFitHeight(buttonSize);
 						
-						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
+						if(e.getLocation().equals(b.getPosition())) {
 							b.getChildren().setAll(r);
 							
 						}
 						else {
 							b.getChildren().setAll(img);
 							for(Enemy q:p) {
-								if(q.getLocation().getX() == b.position.getX() && q.getLocation().getY() == b.position.getY()){
+								if(q.getLocation().equals(b.getPosition())){
 									b.getChildren().setAll(r);
 								}
 							}

@@ -58,5 +58,13 @@ public class GridButton extends StackPane{
             setOnMousePressed(event -> setEffect(drop));
             setOnMouseReleased(event -> setEffect(null));  
 	}
+	
+	public void setPosition(Pair<Integer, Integer> p){
+		this.position=p;
+	}
+	
+	public Pair<Integer, Integer> getPosition() {
+		return this.position;
+	}
 }
 

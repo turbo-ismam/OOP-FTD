@@ -29,29 +29,29 @@ public class MapTest {
 		Pair<Integer,Integer> a = new Pair<>(10,10);
 		boolean b=true;
 		System.out.println("test");
-		assertTrue(sa.tileList().get(0).getStatus()==Status.EMPTY);
-		assertTrue(sa.tileList().get(154).getStatus()==Status.EMPTY);
-		assertTrue(sa.tileList().get(190).getStatus()==Status.PATH);
+		assertTrue(sa.getTileList().get(0).getStatus()==Status.EMPTY);
+		assertTrue(sa.getTileList().get(154).getStatus()==Status.EMPTY);
+		assertTrue(sa.getTileList().get(190).getStatus()==Status.PATH);
 		//assertTrue(sa.tileList().get(sa.fromPairToInt(a)).getStatus()==Status.PATH);
 		for (int i=0;i<sa.getGridSize()*sa.getGridSize();i++) {
-			if (sa.tileList().get(i).getStatus()==Status.PATH) {
+			if (sa.getTileList().get(i).getStatus()==Status.PATH) {
 				b=false;
-				Pair<Integer,Integer> q = new Pair<>(sa.tileList().get(i).getPosition().getX(),sa.tileList().get(i).getPosition().getY());
+				Pair<Integer,Integer> q = new Pair<>(sa.getTileList().get(i).getPosition().getX(),sa.getTileList().get(i).getPosition().getY());
 				System.out.println(q.getX().toString() + " " + q.getY().toString());		
 			}
 		};
 		assertTrue(b==false);
-		assertTrue(sa.tileList().get(10).getStatus()==Status.PATH);
+		assertTrue(sa.getTileList().get(10).getStatus()==Status.PATH);
 		int test = sa.fromPairToInt(a);
 		System.out.println(test);
-		assertTrue(sa.tileList().get(test).getStatus()==Status.PATH);
-		assertTrue(sa.pathList().get(0)== sa.tileList().get(10));
+		assertTrue(sa.getTileList().get(test).getStatus()==Status.PATH);
+		assertTrue(sa.getPathList().get(0)== sa.getTileList().get(10));
 		
 		//Creo un nuovo tile da inserire nella mappa 
 		MapTile tile = new MapTileImpl(0,0);
 		tile.setStatus(Status.WITHTOWER);
 		sa.setTile(tile);
-		assertTrue(sa.tileList().get(0).getStatus()==Status.WITHTOWER);
+		assertTrue(sa.getTileList().get(0).getStatus()==Status.WITHTOWER);
 		
 		assertFalse(sa.positionable(sa.fromPairToInt(a)));
 		assertTrue(sa.positionable(1));
@@ -71,15 +71,15 @@ public class MapTest {
 		Pair<Integer,Integer> d = new Pair<>(15,5);
 		Pair<Integer,Integer> e = new Pair<>(2,15);
 		
-		assertTrue(s.tileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
 		System.out.print("5,10 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
 		System.out.print("10,10 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
 		System.out.print("10,5 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
 		System.out.print("15,5 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
 		System.out.print("Simple path complete");
 	}
 	
@@ -94,15 +94,15 @@ public class MapTest {
 		Pair<Integer,Integer> d = new Pair<>(15,15);
 		Pair<Integer,Integer> e = new Pair<>(2,15);
 		
-		assertTrue(s.tileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
 		System.out.print("5,10 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
 		System.out.print("10,10 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
 		System.out.print("10,5 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
 		System.out.print("15,5 ok\n");
-		assertFalse(s.tileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
+		assertFalse(s.getTileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
 		System.out.print("Normal path complete");
 	}
 	
@@ -116,15 +116,15 @@ public class MapTest {
 		Pair<Integer,Integer> d = new Pair<>(15,10);
 		Pair<Integer,Integer> e = new Pair<>(2,15);
 		
-		assertTrue(s.tileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(a)).getStatus()==Status.PATH);
 		System.out.print("5,10 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(b)).getStatus()==Status.PATH);
 		System.out.print("10,10 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(c)).getStatus()==Status.PATH);
 		System.out.print("10,5 ok\n");
-		assertTrue(s.tileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
+		assertTrue(s.getTileList().get(s.fromPairToInt(d)).getStatus()==Status.PATH);
 		System.out.print("15,5 ok\n");
-		assertFalse(s.tileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
+		assertFalse(s.getTileList().get(s.fromPairToInt(e)).getStatus()==Status.PATH);
 		System.out.print("Normal path complete");
 	}
 

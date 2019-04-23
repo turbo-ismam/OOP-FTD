@@ -20,9 +20,9 @@ public class GameModelTest {
 	public void PlaceAndRemoveTowersTest() {
 		gm.placeTower(new Pair<>(1,2), TowerType.BASIC);
 		assertTrue(gm.getGameStatus()==GameStatus.PLAYING);
-		assertTrue(gm.getMap().entityList().stream().count()==1);
+		assertTrue(gm.getMap().getEntityList().stream().count()==1);
 		gm.removeTower(new Pair<>(1, 2));
-		assertTrue(gm.getMap().entityList().stream().count()==0);
+		assertTrue(gm.getMap().getEntityList().stream().count()==0);
 		
 	}
 	
@@ -35,7 +35,7 @@ public class GameModelTest {
 		for(int i=0; i<=TICKS_ENEMY_WALK*2; i++) {
         	gm.update();
         }
-		assertEquals(gm.getMap().entityList().stream().count(), 2);
+		assertEquals(gm.getMap().getEntityList().stream().count(), 2);
 	}
 	
 	@org.junit.Test
@@ -57,7 +57,7 @@ public class GameModelTest {
                 	gm.update();
                 	
                 }
-                assertEquals(2,gm.getMap().entityList().stream().count());
+                assertEquals(2,gm.getMap().getEntityList().stream().count());
         }
 	
 	
@@ -75,7 +75,7 @@ public class GameModelTest {
         for(int i=0; i<=TICKS_TO_SPAWN_ENEMY*4; i++) {
         	gm.update();
         }
-        for(int i=0; i<=TICKS_ENEMY_WALK*gm.getMap().pathList().size()-1; i++) {
+        for(int i=0; i<=TICKS_ENEMY_WALK*gm.getMap().getPathList().size()-1; i++) {
         	gm.update();
         }
 		assertTrue(gm.getGameStatus()==GameStatus.LOST);

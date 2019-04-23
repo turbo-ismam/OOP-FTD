@@ -44,19 +44,19 @@ public abstract class AbstractMapModel implements Map {
 		return gridSize;
 	}
 
-	public ArrayList<Entity> entityList(){
+	public ArrayList<Entity> getEntityList(){
 		ArrayList<Entity> copia = new ArrayList<>(entity);
 		return copia;
 	}
 	
 	@Override
-	public ArrayList<MapTile> tileList() {
+	public ArrayList<MapTile> getTileList() {
 
 		return (ArrayList<MapTile>) this.grid;
 	}
 	
 	@Override
-	public ArrayList<MapTile> pathList() {
+	public ArrayList<MapTile> getPathList() {
 
 		return (ArrayList<MapTile>) this.enemyPath;
 	}

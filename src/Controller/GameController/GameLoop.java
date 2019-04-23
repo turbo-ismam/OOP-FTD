@@ -35,13 +35,13 @@ public class GameLoop implements Runnable {
 				//model update
 				gm.update();
 				System.out.println("update N-" +i);
-				System.out.println("oggetti nella mappa : " + gm.getMap().entityList().stream().count());
-				if(!gm.getMap().entityList().isEmpty()) {
-					gm.getMap().entityList().stream()
+				System.out.println("oggetti nella mappa : " + gm.getMap().getEntityList().stream().count());
+				if(!gm.getMap().getEntityList().isEmpty()) {
+					gm.getMap().getEntityList().stream()
 					.forEach(e -> System.out.println(e));		
 				}
 				//render view
-				v.render(gm.getMap().entityList());
+				v.render(gm.getMap().getEntityList());
 				i++; //variabili di debug
 				}
 				else { //pause block

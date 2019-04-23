@@ -23,7 +23,7 @@ public class TestEnemies {
 	@org.junit.Test
     public void testRangeAndSplit() {
 		HardMap mappa = new HardMap();
-		monster.setPath(mappa.pathList());
+		monster.setPath(mappa.getPathList());
 		monster.spawn();
 		monster.walk();
 		

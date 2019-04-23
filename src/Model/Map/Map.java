@@ -16,19 +16,19 @@ public interface Map {
 	 * 
 	 * @return an ArrayList that contain all the entities in the map
 	 */
-	public ArrayList<Entity> entityList();
+	public ArrayList<Entity> getEntityList();
 	
 	/**
 	 * 
 	 * @return an ArrayList that contain all the tiles in the map
 	 */
-	public ArrayList<MapTile> tileList();
+	public ArrayList<MapTile> getTileList();
 	
 	/**
 	 * 
 	 * @return an ArrayList that contain the path of the enemy
 	 */
-	public ArrayList<MapTile> pathList();
+	public ArrayList<MapTile> getPathList();
 	
 	/**
 	 * Method to add entity to the EntityList

@@ -5,12 +5,8 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import Model.GameModel;
 import Model.GameModelImpl;
-import Model.Tower.TowerType;
-import Model.Wave.Wave;
 import View.GameView.GameScreen;
 import View.Input.Input;
-import View.Input.InputImpl;
-import View.Input.InputType;
 
 /**
  * 
@@ -38,12 +34,11 @@ public class GameControllerImpl implements GameController {
 	@Override
 	public void startLoop(GameScreen v) {
 		this.v=v;
-		gm.setReadyToSpawn(true);
 		gl = new GameLoop(gm, v);
 		if (!running) {
-			ses.scheduleWithFixedDelay(gl, 0, 500, TimeUnit.MILLISECONDS);
+			ses.scheduleWithFixedDelay(gl, 0, 16, TimeUnit.MILLISECONDS);
 			System.out.println("Game is starting");
-			this.running=true;
+			this.running=true;	
 		}
 	}
 	

@@ -35,7 +35,7 @@ public class GameModelImpl implements GameModel, Observer {
 	public GameModelImpl(int difficulty){
 		p = new PlayerImpl("SexyIsmy",1,300);
 		m = createMap(difficulty);
-		WaveImpl.setPath(m.pathList());
+		WaveImpl.setPath(m.getPathList());
 		p.setWave(1);
 		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
@@ -62,7 +62,7 @@ public class GameModelImpl implements GameModel, Observer {
 		if (p.getCoins()<tt.getCost()){
 			return false;
 		}
-		p.incrementCoins(tt.getCost()); //player PAGA la torre
+		p.incrementCoins(-tt.getCost()); //player PAGA la torre
 		Tower t = new BasicTower(location, tt);
 		((ObservableEntity) t).addObserver(this);
 		m.addEntity(t);
@@ -98,6 +98,7 @@ public class GameModelImpl implements GameModel, Observer {
 	@Override
 	public void nextWave() {
 		w=w.nextWave();
+		p.setWave(w.getWave());
 	}
 	@Override
 	public void setReadyToSpawn(boolean b) {
@@ -112,7 +113,7 @@ public class GameModelImpl implements GameModel, Observer {
 
 	@Override
 	public void update() {
-		m.entityList().forEach(e->e.update());
+		m.getEntityList().forEach(e->e.update());
 		
 		if(w.hasEnemies()) {
 			if (tick>=50 && readyToSpawn) {
@@ -127,12 +128,12 @@ public class GameModelImpl implements GameModel, Observer {
 			setReadyToSpawn(false);
 		}
 		this.tick++;
-		m.entityList().stream()
+		m.getEntityList().stream()
 		.filter(e -> e.ShouldBeRemoved())
 		.forEach(e -> m.removeEntity(e));
-		m.entityList().forEach(e -> {
+		m.getEntityList().forEach(e -> {
 			if (e instanceof Tower) {
-				((Tower) e).setEnemies(m.entityList());
+				((Tower) e).setEnemies(m.getEntityList());
 			}
 		});
 		if (p.getHp()<=0) {
@@ -152,7 +153,7 @@ public class GameModelImpl implements GameModel, Observer {
 		}
 		else if (subject instanceof Enemy ) {
 			Enemy e = (Enemy) subject;
-			if(e.getLocation().equals(m.pathList().get(m.pathList().size()-1).getPosition())) {
+			if(e.getLocation().equals(m.getPathList().get(m.getPathList().size()-1).getPosition())) {
 				p.takeDamage(1);
 				System.out.println("player took 1 damage");
 			}
