@@ -82,10 +82,17 @@ public class MainMenu extends Application{
             
     		
             menu2.getChildren().add(im.getimgv1());
-            menu4.getChildren().addAll(im.getImgv2());
+            menu4.getChildren().add(im.getImgv2());
             menu5.getChildren().add(bg);
             menu6.getChildren().add(im.getImgv3());
             menu7.getChildren().add(im.getImgv7());
+            
+            menu4.setTranslateX(buttonSize*30);
+            menu6.setTranslateX(buttonSize*30);
+            menu3.setTranslateX(buttonSize*30);
+            menu7.setTranslateX(-buttonSize*2);
+            menu7.setTranslateY(buttonSize*30);
+            menu8.setTranslateY(buttonSize*30);
             
             VolumeButton soundback = new VolumeButton("Back");
             VolumeButton low = new VolumeButton("Low");
@@ -119,13 +126,13 @@ public class MainMenu extends Application{
                 root.getChildren().add(menu1);
 
                 TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu7);
-                tt.setToX(menu3.getTranslateX() + width);
+                tt.setToY(menu3.getTranslateY() + height);
 
                 TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
-                tt1.setToX(menu3.getTranslateX());
+                tt1.setToY(menu3.getTranslateY());
                 
                 TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.25), menu8);
-                tt0.setToX(menu6.getTranslateX() - width);
+                tt0.setToY(menu6.getTranslateY() - height);
 
                 tt0.play();
                 tt.play();
@@ -145,14 +152,14 @@ public class MainMenu extends Application{
                 root.getChildren().add(menu8);
 
                 TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
-                tt.setToX(menu1.getTranslateX() - width);
+                tt.setToY(menu1.getTranslateY() - height);
 
                 TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu7);
-                tt1.setToX(menu1.getTranslateX()-width*0.439);
+                tt1.setToY(menu1.getTranslateY()-height*0.439);
                 
                 TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), menu8);
-                tt2.setToX(menu1.getTranslateX());
-
+                tt2.setToY(menu1.getTranslateY()-buttonSize*3);
+                
                 tt.play();
                 tt2.play();
                 tt1.play();
