@@ -47,6 +47,13 @@ public class GameScreen extends Region {
 	private Map mappa; 
 	private boolean type1=false;
 	private boolean type2=false;
+	private boolean type3=false;
+	private boolean remove = false;
+	
+	 private Text text = new Text("COINS"+"  "+ 0);
+	 private Text text1 = new Text("HP" +"  "+ 0);
+	 private Text text2 = new Text("WAVE" + "  " + 0);
+	 private Text text3 = new Text("NAME" + "  " + 0);
 	
 	private Integer i;
 	private Integer j;
@@ -108,31 +115,29 @@ public class GameScreen extends Region {
         /* MENU2: INFO HP, COINS, WAVE */
         VBox menu2 = new VBox();
         
-        menu2.setSpacing(buttonSize);
+        menu2.setSpacing(buttonSize/3);
         menu2.setPrefSize(buttonSize*13, buttonSize*8);
         menu2.setTranslateY(buttonSize*2);
         menu2.setTranslateX(buttonSize);
         menu2.setBackground(Background.EMPTY);
         
-        Text text = new Text("COINS"+"  "+ this.gc.getModel().getPlayer().getCoins());
     	text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
 		text.setFill(Color.GOLD);
-        text.setTranslateY(buttonSize*2);
-        //text.setTranslateX(buttonSize*2);
+        text.setTranslateY(buttonSize);
         
-        Text text1 = new Text("HP" +"  "+ this.gc.getModel().getPlayer().getHp());
     	text1.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
 		text1.setFill(Color.LAWNGREEN);
-        text1.setTranslateY(buttonSize*2);
-        //text1.setTranslateX(buttonSize*2);
+        text1.setTranslateY(buttonSize);
         
-        Text text2 = new Text("WAVE" + "  " +this.gc.getModel().getPlayer().getWave());
     	text2.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
 		text2.setFill(Color.DARKRED);
-        text2.setTranslateY(buttonSize*2);
-        //text2.setTranslateX(buttonSize*2);
+        text2.setTranslateY(buttonSize);
         
-        menu2.getChildren().addAll(text,text1,text2);
+        text3.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+		text3.setFill(Color.DARKBLUE);
+        text3.setTranslateY(buttonSize);
+        
+        menu2.getChildren().addAll(text3,text,text1,text2);
        
         menu2.setStyle(style2);
         flow.getChildren().add(menu2);
@@ -216,12 +221,65 @@ public class GameScreen extends Region {
         					
         					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.RANGED, i, j));
         					System.out.println("droppo torre 2");
-        				}        				
+        				}   
+        				
+        				else if(this.type3) {
+       				     
+        					InputStream ist = null;
+							try {
+								ist = Files.newInputStream(Paths.get("res/tower.png"));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					Image logo = new Image(ist);
+        					try {
+								ist.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					ImageView imgt = new ImageView(logo);
+        					imgt.setFitWidth(buttonSize);
+        					imgt.setFitHeight(buttonSize);
+        					bt.getChildren().add(imgt);
+        					
+        					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.CANNON, i, j));
+        					System.out.println("droppo torre 3");
+        				}
+        				
+        				else if(this.remove) {
+          				     
+        					InputStream ist = null;
+							try {
+								ist = Files.newInputStream(Paths.get("res/grass.jpg"));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					Image logo = new Image(ist);
+        					try {
+								ist.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+        					ImageView imgt = new ImageView(logo);
+        					imgt.setFitWidth(buttonSize);
+        					imgt.setFitHeight(buttonSize);
+        					bt.getChildren().setAll(imgt);
+        					
+        					gc.handleInput(new InputImpl(InputType.REMOVE_TOWER, null, i, j));
+        					System.out.println("rimuovo torre");
+        				}
+        				
         				for(GridButton n:this.btList) {  
         					n.setEffect(null);
         				}
         				this.type1 = false;
         				this.type2 = false;
+        				this.type3 = false;
+        				this.remove = false;
         			}
         		});
         		btList.add(bt);
@@ -277,7 +335,7 @@ public class GameScreen extends Region {
         });
         
         tower3.setOnMouseClicked(event -> {
-        	this.type2 = true;
+        	this.type3 = true;
         	for(GridButton b:this.btList) {
         		 DropShadow drop = new DropShadow(10, Color.WHITE); 
  	            drop.setInput(new Glow());
@@ -285,11 +343,17 @@ public class GameScreen extends Region {
         	}
         });
         
-        System.out.println(GameConstants.height);
-        System.out.println(GameConstants.width);
+        remove.setOnMouseClicked(event -> {
+        	this.remove = true;
+        	for(GridButton b:this.btList) {
+        		 DropShadow drop = new DropShadow(10, Color.WHITE); 
+ 	            drop.setInput(new Glow());
+ 	            b.setEffect(drop); 
+        	}
+        });
         
         start.setOnMouseClicked(event -> {
-        	gc.handleInput(new InputImpl(InputType.START_WAVE,TowerType.RANGED,1,2));
+        	gc.handleInput(new InputImpl(InputType.START_WAVE,null,1,2));
         	this.gc.getModel().nextWave();
         });
         
@@ -304,9 +368,6 @@ public class GameScreen extends Region {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-        		text.setText("COINS"+"  "+ gc.getModel().getPlayer().getCoins());
-        		text1.setText("HP"+"  "+ gc.getModel().getPlayer().getHp());
-        		text2.setText("WAVE"+"  "+ gc.getModel().getPlayer().getWave());
 			}
 			
 		};
@@ -322,9 +383,11 @@ public class GameScreen extends Region {
 		this.mappa = gc.getModel().getMap();
 		this.via= gc.getModel().getMap().pathList();
 		gc.startLoop(this);
+
 	}
 	
-	public void render(ArrayList<Entity> entityList) throws IOException {	
+	
+	public void render(ArrayList<Entity> entityList) throws IOException  {	
 		ArrayList<Enemy> p = new ArrayList<Enemy>();
 		
 		for(Entity e:entityList) {		
@@ -338,7 +401,7 @@ public class GameScreen extends Region {
 					
 					InputStream is = Files.newInputStream(Paths.get("res/path.png"));
 					Image logo = new Image(is);
-					
+					is.close();
 					ImageView img = new ImageView(logo);
 					img.setFitWidth(buttonSize);
 					img.setFitHeight(buttonSize);
@@ -358,6 +421,10 @@ public class GameScreen extends Region {
 				}				
 			}
 		}
+		text.setText("COINS"+"  " + this.gc.getModel().getPlayer().getCoins());
+		text1.setText("HP"+"  " + this.gc.getModel().getPlayer().getHp());
+		text2.setText("WAVE"+"  " + this.gc.getModel().getPlayer().getWave());
+		text3.setText("NAME"+"  " + this.gc.getModel().getPlayer().getName());
 	}
 
 }

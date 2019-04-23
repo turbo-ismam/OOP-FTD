@@ -62,6 +62,7 @@ public class PlayerImpl implements Player{
 	public void setName(String text) {
 
 		this.name=text;
+
 	}
 	
 	

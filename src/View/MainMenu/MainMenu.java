@@ -3,42 +3,26 @@ package View.MainMenu;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-
 import Constants.GameConstants;
-import Controller.GameController.GameController;
-import Controller.GameController.GameControllerImpl;
 import View.GameView.GameScreen;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenu extends Application{
 	
 	private GameScreen game;
-	private Difficulty avviso = new Difficulty();
-	//private GameController gc = new GameControllerImpl();
 	private PlayerName name = new PlayerName();
+	private Difficulty avviso = new Difficulty();;
 	
     static final double buttonSize = GameConstants.buttonSize;
     static final double width = GameConstants.gameWidth;
@@ -65,7 +49,7 @@ public class MainMenu extends Application{
 			String musicFile1 = "res/ZA WARUDO.mp3";
 			Media sound1 = new Media(new File(musicFile1).toURI().toString());
 			MediaPlayer mediaPlayer = new MediaPlayer(sound1);
-			mediaPlayer.setVolume(0.1);
+			mediaPlayer.setVolume(1);
 			mediaPlayer.setStopTime(Duration.seconds(1.5));
 			
 			
@@ -90,6 +74,7 @@ public class MainMenu extends Application{
             VBox menu5 = new VBox(buttonSize);	// rettangolo grigio per rendere bello tutti gli sfondi
             VBox menu6 = new VBox(buttonSize);	// sfondo jotaro
             VBox menu7 = new VBox(buttonSize); //sfondo sound
+
             
             Rectangle bg = new Rectangle(width+buttonSize,height+buttonSize);
             bg.setFill(Color.GREY);
@@ -177,7 +162,6 @@ public class MainMenu extends Application{
                 });
             	
             });
-            
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
             	//gc.startGame();

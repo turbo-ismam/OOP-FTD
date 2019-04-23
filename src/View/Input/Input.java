@@ -32,5 +32,7 @@ public interface Input {
      * @return InputType (ADD,REMOVE)
      */
     InputType getInputType();
+    
+    TowerType getTowerType();
 
 }
