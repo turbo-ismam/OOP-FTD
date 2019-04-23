@@ -1,13 +1,14 @@
 package Controller.GameController;
 
 import Model.GameModel;
+import View.GameView.GameScreen;
 import View.Input.Input;
 
 public interface GameController {
 	/**
 	 * Starts the gameloop
 	 */
-	void startGame();
+	void init();
 	
 	/**
 	 * pauses the game
@@ -31,5 +32,7 @@ public interface GameController {
 	void handleInput(Input i);
 
 	void killGameLoop();
+
+	void startLoop(GameScreen v);
 	
 }

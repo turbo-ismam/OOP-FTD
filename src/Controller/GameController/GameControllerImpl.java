@@ -7,6 +7,7 @@ import Model.GameModel;
 import Model.GameModelImpl;
 import Model.Tower.TowerType;
 import Model.Wave.Wave;
+import View.GameView.GameScreen;
 import View.Input.Input;
 import View.Input.InputImpl;
 import View.Input.InputType;
@@ -18,6 +19,7 @@ import View.Input.InputType;
  */
 public class GameControllerImpl implements GameController {
 	private GameModel gm;
+	private GameScreen v;
 	private final ScheduledThreadPoolExecutor ses;
 	private boolean running; 
 	private int difficulty =3;
@@ -29,15 +31,20 @@ public class GameControllerImpl implements GameController {
 		
 	}
 	@Override
-	public void startGame() {
+	public void init() {
 		gm = new GameModelImpl(difficulty);
-		gl = new GameLoop(gm);
+	}
+	
+	@Override
+	public void startLoop(GameScreen v) {
+		this.v=v;
+		gm.setReadyToSpawn(true);
+		gl = new GameLoop(gm, v);
 		if (!running) {
 			ses.scheduleWithFixedDelay(gl, 0, 50, TimeUnit.MILLISECONDS);
 			System.out.println("Game is starting");
 			this.running=true;
 		}
-		
 	}
 	
 	@Override 
@@ -70,9 +77,9 @@ public class GameControllerImpl implements GameController {
 		
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		GameController gc = new GameControllerImpl();
-		gc.startGame();
+		gc.init();
 		Wave w=gc.getModel().getCurrentWave();
 		
 		/**gc.pauseGame();
@@ -83,7 +90,6 @@ public class GameControllerImpl implements GameController {
 		}
 		w.populate(5, EnemyType.TANK, gm.getMap().pathList());  
 		gc.resumeGame();
-		*/
 		
 		Input i1 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, gc.getModel().getMap().pathList().get(0).getPosition().getX()+1,gc.getModel().getMap().pathList().get(0).getPosition().getY()+1);
 		Input i2 = new InputImpl(InputType.ADD_TOWER, TowerType.BASIC,1, 1);
@@ -96,4 +102,5 @@ public class GameControllerImpl implements GameController {
 		gc.handleInput(new InputImpl(InputType.START_WAVE, TowerType.BASIC, 2, 4));
 		
 	}
+	*/
 }

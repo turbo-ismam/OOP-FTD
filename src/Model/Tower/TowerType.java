@@ -2,7 +2,7 @@ package Model.Tower;
 
 public enum TowerType {
 	
-		BASIC(50, true, 9999, 2),
+		BASIC(50, true, 1, 2),
 		
 		RANGED(100, false, 25, 3),
 	

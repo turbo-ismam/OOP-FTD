@@ -321,6 +321,7 @@ public class GameScreen extends Region {
 		this.gc = gc;
 		this.mappa = gc.getModel().getMap();
 		this.via= gc.getModel().getMap().pathList();
+		gc.startLoop(this);
 	}
 	
 	public void render(ArrayList<Entity> entityList) throws IOException {	

@@ -103,7 +103,7 @@ public class MainMenu extends Application{
             
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            	gc.startGame();
+            	gc.init();
             	game = new GameScreen(gc);
             	try {
 					root.getChildren().setAll(game.createContent());

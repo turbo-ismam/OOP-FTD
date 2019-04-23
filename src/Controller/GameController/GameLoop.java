@@ -1,10 +1,12 @@
 package Controller.GameController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Model.GameModel;
 import Model.Enemy.Enemy;
 import Model.Tower.TowerType;
+import View.GameView.GameScreen;
 import View.Input.Input;
 import utilityClasses.Pair;
 
@@ -14,12 +16,14 @@ public class GameLoop implements Runnable {
 	private int i;
 
 	private ArrayList<Input> inputList;
-	//private View v;
+	private GameScreen v;
  
-	public GameLoop(GameModel gm) {
+	public GameLoop(GameModel gm, GameScreen v) {
 		this.gm=gm;
+		this.v=v;
 		this.inputList = new ArrayList<>();
 		this.running=true;
+
 	}
 	
 	@Override
@@ -37,6 +41,7 @@ public class GameLoop implements Runnable {
 					.forEach(e -> System.out.println(e));		
 				}
 				//render view
+				//v.render(gm.getMap().entityList());
 				i++; //variabili di debug
 				}
 				else { //pause block
@@ -75,6 +80,7 @@ public class GameLoop implements Runnable {
 	                break;
 	            case START_WAVE :
 	            	gm.setReadyToSpawn(true);
+	            	System.out.println("ready");
 	            	break;
 	            default:
 	                break;
