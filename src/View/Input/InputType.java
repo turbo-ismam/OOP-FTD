@@ -18,6 +18,8 @@ public enum InputType {
 	 * Tower removed
 	 */
 	REMOVE_TOWER, 
-	
+	/**
+	 * startss the next wave
+	 */
 	START_WAVE
 }

@@ -8,13 +8,12 @@ import Model.Observer.ObservableEntity;
 import utilityClasses.Pair;
 
 public class EnemyImpl extends ObservableEntity implements Enemy{
-	
 	private static final int TICKS_BEFORE_WALKING = 10;
 	private int hp;
 	private int damage;
 	private int speed;
 	private int value;
-	EnemyType type;
+	private EnemyType type;
 	private boolean alive;
 	public Direction direction;
 	private ArrayList<MapTile> path = null;
@@ -25,7 +24,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 	private int tick = 0;
 
 	public EnemyImpl(EnemyType type) {
-		this.type=type;
+		this.type = type;
 		this.hp = type.getHealth();
 		this.speed = type.getSpeed();
 		this.value = type.getValue();
@@ -40,7 +39,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 	@Override
 	public void update() {
 		this.death();
-		if(tick == TICKS_BEFORE_WALKING) {
+		if (tick == TICKS_BEFORE_WALKING) {
 			this.walk();
 			tick = 0;
 		}
@@ -51,27 +50,26 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 
 	@Override
 	public void walk() {
-		if(path == null) {
+		if (path == null) {
 			throw new NullPointerException();
 		}
 		else {
-			if(x >= path.size()) {
+			if (x >= path.size()) {
 				this.despawn();
 			}
-			
-			if(this.alive == true) {
+			if(alive) {
 				MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),
 											   path.get(x).getPosition().getY());
-				if(next.getPosition().getX() > actual.getPosition().getX()) {
+				if (next.getPosition().getX() > actual.getPosition().getX()) {
 					direction = Direction.RIGHT;
 				}
-				if(next.getPosition().getX() < actual.getPosition().getX()) {
+				if (next.getPosition().getX() < actual.getPosition().getX()) {
 					direction = Direction.LEFT;
 				}
-				if(next.getPosition().getY() > actual.getPosition().getY()) {
+				if (next.getPosition().getY() > actual.getPosition().getY()) {
 					direction = Direction.DOWN;
 				}
-				if(next.getPosition().getY() < actual.getPosition().getY()) {
+				if (next.getPosition().getY() < actual.getPosition().getY()) {
 					direction = Direction.UP;
 				}
 			actual = next;
@@ -93,7 +91,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 
 	@Override
 	public void death() {
-		if(hp <= 0) {
+		if (hp <= 0) {
 			alive = false;
 		}
 	}
@@ -104,10 +102,10 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 	}
 
 	@Override
-	public void setDamage(int damage) {
+	public void setDamage(final int damage) {
 		this.damage = damage;
 		this.hp -= this.damage;
-		if(this.hp <= 0) {
+		if (this.hp <= 0){
 			this.death();
 			notifyObservers();
 		}
@@ -124,9 +122,9 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 	}
 
 	@Override
-	public void setPath(ArrayList<MapTile> sentiero) {
+	public void setPath(final ArrayList<MapTile> sentiero) {
 		this.path = sentiero;	
-		this.actual= sentiero.get(0);
+		this.actual = sentiero.get(0);
 	}
 
 	@Override
@@ -135,7 +133,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy{
 	}
 
 	@Override
-	public boolean ShouldBeRemoved() {
+	public boolean shouldBeRemoved() {
 		return !isAlive();
 	}
 

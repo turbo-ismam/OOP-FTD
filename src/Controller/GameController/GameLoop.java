@@ -1,11 +1,7 @@
 package Controller.GameController;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
 import Model.GameModel;
-import Model.Enemy.Enemy;
-import Model.Tower.TowerType;
 import View.GameView.GameScreen;
 import View.Input.Input;
 import utilityClasses.Pair;
@@ -72,7 +68,7 @@ public class GameLoop implements Runnable {
 			inputList.forEach(e -> {
 	            switch (e.getInputType()) {
 	            case ADD_TOWER :
-	            	gm.placeTower(new Pair<Integer,Integer>(e.getX(), e.getY()), TowerType.BASIC);
+	            	gm.placeTower(new Pair<Integer,Integer>(e.getX(), e.getY()), e.getTowerType());
 	            	System.out.println("torre piazzata in" + e.getX() + ","+ e.getY());
 	                break;
 	            case REMOVE_TOWER :
@@ -80,7 +76,6 @@ public class GameLoop implements Runnable {
 	                break;
 	            case START_WAVE :
 	            	gm.setReadyToSpawn(true);
-	            	System.out.println("ready");
 	            	break;
 	            default:
 	                break;

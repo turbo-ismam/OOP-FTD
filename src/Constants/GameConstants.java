@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 /**
- * This class collects all static parameters of the game
+ * This class collects all static parameters of the game.
  */
 public final class GameConstants {
 	

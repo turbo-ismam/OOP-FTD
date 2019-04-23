@@ -116,7 +116,7 @@ public class GameModelImpl implements GameModel, Observer {
 		m.getEntityList().forEach(e->e.update());
 		
 		if(w.hasEnemies()) {
-			if (tick>=50 && readyToSpawn) {
+			if (tick >= 50 && readyToSpawn) {
 				Enemy e = w.spawn();
 				((ObservableEntity) e).addObserver(this);
 				this.addEntity(e);
@@ -129,7 +129,7 @@ public class GameModelImpl implements GameModel, Observer {
 		}
 		this.tick++;
 		m.getEntityList().stream()
-		.filter(e -> e.ShouldBeRemoved())
+		.filter(e -> e.shouldBeRemoved())
 		.forEach(e -> m.removeEntity(e));
 		m.getEntityList().forEach(e -> {
 			if (e instanceof Tower) {

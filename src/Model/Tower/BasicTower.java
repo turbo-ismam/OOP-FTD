@@ -13,7 +13,7 @@ import utilityClasses.Pair;
 
 public class BasicTower extends ObservableEntity implements Tower {
 	private static final int gridSize = 20;
-	Pair<Integer,Integer> position; 
+	Pair<Integer, Integer> position; 
 	private int damage, range;
 	private float shootTime;
 	private Enemy target;
@@ -30,7 +30,6 @@ public class BasicTower extends ObservableEntity implements Tower {
 
 
 	public BasicTower(Pair<Integer, Integer> position, TowerType type) {
-		
 		this.position = position;
 		this.damage = type.getDamage();
 		this.range = type.getRange();
@@ -44,15 +43,14 @@ public class BasicTower extends ObservableEntity implements Tower {
 	}
 	
 	private void findTarget() {
-		for(Entity e: enemies) {
-			for(int i = 0; i < shootingZone.size(); i++) {
+		for (Entity e: enemies) {
+			for (int i = 0; i < shootingZone.size(); i++) {
 				if (e.getLocation().equals(shootingZone.get(i))) {
-					
-					if(e instanceof Enemy) {
-						this.target =(Enemy) e;
+					if (e instanceof Enemy) {
+						this.target = (Enemy) e;
 						System.out.println("target acquired");
 						return;
-					}else {
+					} else {
 						throw new IllegalArgumentException();
 					}
 				}
@@ -63,43 +61,34 @@ public class BasicTower extends ObservableEntity implements Tower {
 	
 	private void setRange() {
 		
-		for(int i = position.getX() - range; i <= position.getX() + range; i++) {
-			for(int j = position.getY() - range; j <= position.getY() + range; j++) {				
+		for (int i = position.getX() - range; i <= position.getX() + range; i++) {
+			for (int j = position.getY() - range; j <= position.getY() + range; j++) {				
 				if(position.getX() < gridSize && position.getY() < gridSize) {
-					shootingZone.add(new Pair<>(i,j));
+					shootingZone.add(new Pair<>(i, j));
 				}
-				
 			}
 		}
-		
 	}
 	
 	@Override
 	public void setEnemies(ArrayList<Entity> entities) {
-		
 		this.enemies = entities.stream()
 				.filter(e -> e instanceof Enemy)
 				.collect(Collectors.toList());
-		
 	}
 
 	@Override
 	public Pair<Integer, Integer> getLocation() {
-		
-	
 		return position;
 	}
 
 	@Override
 	public void update() {
 		findTarget();
-		if(isTargetSet()) {
+		if (isTargetSet()) {
 			this.projectile = shoot();
 			this.notifyObservers();
-			
 		}
-			
-		
 	}
 
 
@@ -110,14 +99,13 @@ public class BasicTower extends ObservableEntity implements Tower {
 	}
 	
 	@Override
-	public void setType(TowerType type) {
+	public void setType(final TowerType type) {
 		this.type = type;
 	}
 	
 
 	@Override
 	public float getShootTime() {
-		
 		return shootTime;
 	}
 
@@ -125,33 +113,29 @@ public class BasicTower extends ObservableEntity implements Tower {
 
 	private Projectile shoot() {
 		return new Projectile(position, target, damage);
-			
 	}
 
 	@Override
 	public boolean isShooting() {
-				
 		return isShooting;
 	}
 
 	@Override
 	public boolean isTargetSet() {
-		if(target == null) {
+		if (target == null) {
 			return false;
-		}		
+			}
 			return true;	
 	}
 
 	@Override
 	public Enemy getTarget() {
-		
 		return target;
-		
 	}
 
 
 	@Override
-	public boolean ShouldBeRemoved() {
+	public boolean shouldBeRemoved() {
 		return false;
 	}
 	

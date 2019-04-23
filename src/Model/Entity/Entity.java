@@ -10,6 +10,7 @@ public interface Entity {
 	Pair<Integer, Integer> getLocation();
 	
 	/**
+	 * 
 	 * Each entity has its own way to "updatr" itself, and this method describes its behaviour
 	 */
 	void update();
@@ -17,5 +18,5 @@ public interface Entity {
 	 * 
 	 * @return true if the entity should be removed, false otherwise
 	 */
-	boolean ShouldBeRemoved();
+	boolean shouldBeRemoved();
 }
