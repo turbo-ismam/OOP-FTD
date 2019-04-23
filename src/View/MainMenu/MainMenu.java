@@ -20,7 +20,6 @@ import javafx.util.Duration;
 
 public class MainMenu extends Application{
 	
-	private GameScreen game;
 	private PlayerName name = new PlayerName();
 	private Difficulty avviso = new Difficulty();;
 	

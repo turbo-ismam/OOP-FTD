@@ -39,6 +39,7 @@ public class GameScreen extends Region {
 	private static final Image towerlogo2 = new Image("star.png");
 	private static final Image grasslogo = new Image("grass.jpg");
 	private static final Image emerald = new Image("1.png");
+	private static final Image enemy = new Image("dio.png");
 	private ArrayList<GridButton> btList = new ArrayList<>();
 	private ArrayList<MapTile> mappa;
 	private GameController gc;
@@ -297,23 +298,28 @@ public class GameScreen extends Region {
 				if(e instanceof Enemy) {
 					p.add((Enemy) e);
 					for(PathButton b:btlist2) {
-						Rectangle r = new Rectangle();
-						r.setFill(Color.RED);
-						r.setHeight(buttonSize);
-						r.setWidth(buttonSize);
+//						Rectangle r = new Rectangle();
+//						r.setFill(Color.RED);
+//						r.setHeight(buttonSize);
+//						r.setWidth(buttonSize);
+						
+						ImageView r = new ImageView(enemy);
+						r.setFitWidth(buttonSize);
+						r.setFitHeight(buttonSize);
+						
 						ImageView img = new ImageView(logo);
 						img.setFitWidth(buttonSize);
 						img.setFitHeight(buttonSize);
 						
 						if(e.getLocation().equals(b.getPosition())) {
-							b.getChildren().setAll(r);
+							b.getChildren().add(r);
 							
 						}
 						else {
 							b.getChildren().setAll(img);
 							for(Enemy q:p) {
 								if(q.getLocation().equals(b.getPosition())){
-									b.getChildren().setAll(r);
+									b.getChildren().add(r);
 								}
 							}
 						}
@@ -353,17 +359,6 @@ public class GameScreen extends Region {
 							}
 						}
 					}					
-//					for(PathButton b:btlist2) {
-//						
-//						ImageView img = new ImageView(emerald);
-//						img.setFitWidth(buttonSize);
-//						img.setFitHeight(buttonSize);
-//						
-//						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
-//							b.getChildren().setAll(img);
-//							
-//						}				
-//					}	
 				}
 				}
 			if (entityList.isEmpty() || (entityList.get(entityList.size()-1) instanceof Tower)) {
