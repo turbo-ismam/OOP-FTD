@@ -34,9 +34,11 @@ import utilityClasses.Pair;
 
 public class GameScreen extends Region {
 	private static final Image logo = new Image("path.png");
-	private static final Image towerlogo = new Image("tower.png");
+	private static final Image towerlogo = new Image("hierophant.png");
+	private static final Image towerlogo1 = new Image("hierophant.png");
+	private static final Image towerlogo2 = new Image("star.png");
 	private static final Image grasslogo = new Image("grass.jpg");
-	//private static final Image emerald = new Image("emerald.jpg");
+	private static final Image emerald = new Image("1.png");
 	private ArrayList<GridButton> btList = new ArrayList<>();
 	private ArrayList<MapTile> mappa;
 	private GameController gc;
@@ -183,7 +185,7 @@ public class GameScreen extends Region {
         				System.out.println("droppo torre 1 in");
         				}
         				else if(this.type2) {
-        					ImageView imgt = new ImageView(towerlogo);
+        					ImageView imgt = new ImageView(towerlogo1);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -193,7 +195,7 @@ public class GameScreen extends Region {
         				}   
         				
         				else if(this.type3) {
-        					ImageView imgt = new ImageView(towerlogo);
+        					ImageView imgt = new ImageView(towerlogo2);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -284,9 +286,14 @@ public class GameScreen extends Region {
 	
 	public void render(ArrayList<Entity> entityList)  {	
 		ArrayList<Enemy> p = new ArrayList<Enemy>();
+		ArrayList<Projectile> j = new ArrayList<Projectile>();
+		ArrayList<Tower> t = new ArrayList<Tower>();
 		Platform.runLater(() -> {
 		
-			for(Entity e:entityList) {		
+			for(Entity e:entityList) {
+				if(e instanceof Tower) {
+					t.add((Tower) e);
+				}
 				if(e instanceof Enemy) {
 					p.add((Enemy) e);
 					for(PathButton b:btlist2) {
@@ -313,38 +320,75 @@ public class GameScreen extends Region {
 					}			
 				}
 				if(e instanceof Projectile) {
-					
+					j.add((Projectile) e);
 					for(GridButton b:btList) {
 						
-						ImageView img = new ImageView(logo);
+						ImageView img = new ImageView(emerald);
 						img.setFitWidth(buttonSize);
-						img.setFitHeight(buttonSize);
-						
+						img.setFitHeight(buttonSize);					
 						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
-							b.getChildren().setAll(img);
+							b.getChildren().add(img);			
+						}	
+						else {
+							ImageView img1 = new ImageView(grasslogo);
+							img1.setFitWidth(buttonSize);
+							img1.setFitHeight(buttonSize);
 							
-						}				
-					}
-					
-					for(PathButton b:btlist2) {
-						
-						ImageView img = new ImageView(logo);
-						img.setFitWidth(buttonSize);
-						img.setFitHeight(buttonSize);
-						
-						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
-							b.getChildren().setAll(img);
+							ImageView img3= new ImageView(towerlogo);
+							img3.setFitWidth(buttonSize);
+							img3.setFitHeight(buttonSize);						
+							b.getChildren().setAll(img1);
 							
-						}				
-					}
-					
+							for(Tower v:t) {
+								if(v.getLocation().equals(b.getPosition())){
+								
+									b.getChildren().add(img3);
+								}
+							}
+							for(Projectile q:j) {
+								if(q.getLocation().equals(b.getPosition())){
+								
+									b.getChildren().add(img);
+								}
+							}
+						}
+					}					
+//					for(PathButton b:btlist2) {
+//						
+//						ImageView img = new ImageView(emerald);
+//						img.setFitWidth(buttonSize);
+//						img.setFitHeight(buttonSize);
+//						
+//						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
+//							b.getChildren().setAll(img);
+//							
+//						}				
+//					}	
 				}
 				}
 			if (entityList.isEmpty() || (entityList.get(entityList.size()-1) instanceof Tower)) {
-				ImageView img = new ImageView(logo);
-				img.setFitWidth(buttonSize);
-				img.setFitHeight(buttonSize);
-				btlist2.get(btlist2.size()-1).getChildren().setAll(img);
+				for(PathButton b:btlist2) {
+					ImageView img = new ImageView(logo);
+					img.setFitWidth(buttonSize);
+					img.setFitHeight(buttonSize);
+					b.getChildren().setAll(img);
+				}
+
+				for(GridButton d:btList) {
+					for(Tower v:t) {
+						if(v.getLocation().equals(d.getPosition())){
+							ImageView img2 = new ImageView(towerlogo);
+							img2.setFitWidth(buttonSize);
+							img2.setFitHeight(buttonSize);
+							ImageView img4 = new ImageView(grasslogo);
+							img4.setFitWidth(buttonSize);
+							img4.setFitHeight(buttonSize);
+							d.getChildren().setAll(img4);
+							d.getChildren().add(img2);
+						}
+					}
+				}
+				
 			}
 		text.setText("COINS"+"  " + this.gc.getModel().getPlayer().getCoins());
 		text1.setText("HP"+"  " + this.gc.getModel().getPlayer().getHp());
