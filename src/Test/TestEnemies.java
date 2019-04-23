@@ -21,7 +21,7 @@ public class TestEnemies {
 	
 	// verifica dello split in fromRange()
 	@org.junit.Test
-    public void testRangeAndSplit() {
+    public void testWalkingEnemy() {
 		HardMap mappa = new HardMap();
 		monster.setPath(mappa.getPathList());
 		monster.spawn();

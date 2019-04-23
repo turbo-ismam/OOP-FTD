@@ -31,6 +31,11 @@ public interface Input {
      */
     InputType getInputType();
     
+    /**
+     * Method to return the type of Tower
+     * @return the TowerType
+     */
+    
     TowerType getTowerType();
 
 }

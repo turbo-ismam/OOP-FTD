@@ -1,6 +1,6 @@
 package Model.Projectile;
 
-import utilityClasses.*;
+import utilityClasses.Pair;
 import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 
@@ -20,33 +20,25 @@ public class Projectile implements Entity  {
 		this.enemyPosition = enemy.getLocation();
 	}
 	
-	public static boolean CheckCollision(Pair <Integer,Integer> position, Pair<Integer, Integer> enemyPosition) {
-		if(position == enemyPosition)
-			return true;
-		return false;	
-	}
-	
 	@Override
 	public void update() {
-		if(alive) {
+		if(alive){
 				tick++;
-			if(tick == 1) {
+			if(tick == 1){
 				enemy.setDamage(damage);
-				tick=0;
+				tick = 0;
 				alive = false;
 			}
-				
 		}	
 	}
 
 	@Override
 	public Pair<Integer, Integer> getLocation() {
-		
 		return position;
 	}
 
 	@Override
-	public boolean ShouldBeRemoved() {
+	public boolean shouldBeRemoved() {
 		return !alive;
 	}
 }
