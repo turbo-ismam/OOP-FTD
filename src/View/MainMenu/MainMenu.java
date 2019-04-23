@@ -36,7 +36,7 @@ public class MainMenu extends Application{
 			Media sound = new Media(new File(musicFile).toURI().toString());
 			MediaPlayer mediaPlayer1 = new MediaPlayer(sound);
 			this.vol=0;
-			mediaPlayer1.setVolume(0);	//SISTEMA QUI IL VOLUME
+			mediaPlayer1.setVolume(0.1);	//SISTEMA QUI IL VOLUME
 			
 			Pane root = new Pane();
 			root.setPrefSize(width, height);
@@ -148,7 +148,9 @@ public class MainMenu extends Application{
             btnSound.setOnMouseClicked(event -> {
             	mediaPlayer.stop();
             	mediaPlayer.play();
+            	root.getChildren().remove(menu5);
             	root.getChildren().add(menu7);
+            	root.getChildren().add(menu5);
                 root.getChildren().add(menu8);
 
                 TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);

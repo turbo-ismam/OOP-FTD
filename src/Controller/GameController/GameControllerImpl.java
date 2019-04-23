@@ -41,7 +41,7 @@ public class GameControllerImpl implements GameController {
 		gm.setReadyToSpawn(true);
 		gl = new GameLoop(gm, v);
 		if (!running) {
-			ses.scheduleWithFixedDelay(gl, 0, 500, TimeUnit.MILLISECONDS);
+			ses.scheduleWithFixedDelay(gl, 0, 16, TimeUnit.MILLISECONDS);
 			System.out.println("Game is starting");
 			this.running=true;
 		}

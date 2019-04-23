@@ -8,6 +8,8 @@ import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 import Model.Map.Map;
 import Model.Map.MapTile;
+import Model.Projectile.Projectile;
+import Model.Tower.Tower;
 import Model.Tower.TowerType;
 import View.Input.InputImpl;
 import View.Input.InputType;
@@ -35,6 +37,7 @@ public class GameScreen extends Region {
 	private static final Image logo = new Image("path.png");
 	private static final Image towerlogo = new Image("tower.png");
 	private static final Image grasslogo = new Image("grass.jpg");
+	private static final Image emerald = new Image("emerald.jpg");
 	private static final int gridSize=20;
 	private ArrayList<GridButton> btList = new ArrayList<>();
 	private ArrayList<MapTile> via;
@@ -332,8 +335,41 @@ public class GameScreen extends Region {
 								}
 							}
 						}
-					}				
+					}			
 				}
+				if(e instanceof Projectile) {
+					
+					for(GridButton b:btList) {
+						
+						ImageView img = new ImageView(emerald);
+						img.setFitWidth(buttonSize);
+						img.setFitHeight(buttonSize);
+						
+						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
+							b.getChildren().setAll(img);
+							
+						}				
+					}
+					
+					for(PathButton b:btlist2) {
+						
+						ImageView img = new ImageView(emerald);
+						img.setFitWidth(buttonSize);
+						img.setFitHeight(buttonSize);
+						
+						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
+							b.getChildren().setAll(img);
+							
+						}				
+					}
+					
+				}
+				}
+			if (entityList.isEmpty() || (entityList.get(entityList.size()-1) instanceof Tower)) {
+				ImageView img = new ImageView(logo);
+				img.setFitWidth(buttonSize);
+				img.setFitHeight(buttonSize);
+				btlist2.get(btlist2.size()-1).getChildren().setAll(img);
 			}
 		text.setText("COINS"+"  " + this.gc.getModel().getPlayer().getCoins());
 		text1.setText("HP"+"  " + this.gc.getModel().getPlayer().getHp());
