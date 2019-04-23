@@ -1,10 +1,5 @@
 package View.GameView;
 
-import java.io.IOException;
-
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Constants.GameConstants;
@@ -13,12 +8,11 @@ import Model.Enemy.Enemy;
 import Model.Entity.Entity;
 import Model.Map.Map;
 import Model.Map.MapTile;
-import Model.Tower.Tower;
 import Model.Tower.TowerType;
 import View.Input.InputImpl;
 import View.Input.InputType;
 import javafx.animation.AnimationTimer;
-import javafx.geometry.Insets;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -32,14 +26,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import utilityClasses.Pair;
 
 public class GameScreen extends Region {
-	
+	private static final Image logo = new Image("path.png");
+	private static final Image towerlogo = new Image("tower.png");
+	private static final Image grasslogo = new Image("grass.jpg");
 	private static final int gridSize=20;
 	private ArrayList<GridButton> btList = new ArrayList<>();
 	private ArrayList<MapTile> via;
@@ -63,7 +58,7 @@ public class GameScreen extends Region {
         
 	//MainMenu test = new MainMenu();    
         
-	public Parent createContent() throws IOException {
+	public Parent createContent(){
 		
 		 String style3 = "-fx-background-color: rgba(75, 250, 30, 0.5);"; //verde
 		 String style2 = "-fx-background-color: rgba(50, 100, 200, 0.5);"; //trasparente
@@ -73,9 +68,7 @@ public class GameScreen extends Region {
 	/* FINESTRA GENERALE */
         Pane root = new Pane(); 
         root.setPrefSize(buttonSize*38, buttonSize*25);
-        InputStream is = Files.newInputStream(Paths.get("res/gameMenuImage.png"));
-	Image img = new Image(is);
-	is.close();
+	Image img = new Image("gameMenuImage.png");
 	ImageView imgv = new ImageView(img);
 	imgv.setFitWidth(buttonSize*40);
 	imgv.setFitHeight(buttonSize*26);
@@ -177,44 +170,15 @@ public class GameScreen extends Region {
         			}
         			else {
         				if(this.type1) {
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/tower.png"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(towerlogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
         					gc.handleInput(new InputImpl(InputType.ADD_TOWER,TowerType.BASIC, i, j));
-        				System.out.println("droppo torre 1");
+        				System.out.println("droppo torre 1 in" +i + " " + j);
         				}
         				else if(this.type2) {
-        				     
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/tower.png"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(towerlogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -224,22 +188,7 @@ public class GameScreen extends Region {
         				}   
         				
         				else if(this.type3) {
-       				     
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/tower.png"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(towerlogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().add(imgt);
@@ -249,22 +198,7 @@ public class GameScreen extends Region {
         				}
         				
         				else if(this.remove) {
-          				     
-        					InputStream ist = null;
-							try {
-								ist = Files.newInputStream(Paths.get("res/grass.jpg"));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					Image logo = new Image(ist);
-        					try {
-								ist.close();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-        					ImageView imgt = new ImageView(logo);
+        					ImageView imgt = new ImageView(grasslogo);
         					imgt.setFitWidth(buttonSize);
         					imgt.setFitHeight(buttonSize);
         					bt.getChildren().setAll(imgt);
@@ -283,7 +217,7 @@ public class GameScreen extends Region {
         			}
         		});
         		btList.add(bt);
-            	grid.add(bt, j, i);
+            	grid.add(bt,i,j);
         	}
         }
         
@@ -356,24 +290,7 @@ public class GameScreen extends Region {
         	gc.handleInput(new InputImpl(InputType.START_WAVE,null,1,2));
         	this.gc.getModel().nextWave();
         });
-        
-        AnimationTimer gameLoop = new AnimationTimer() {
 
-			@Override
-			public void handle(long now) {				
-
-        		try {
-					render(mappa.entityList());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		};
-		gameLoop.start();
-					
-        
         return root;
 	}
 	
@@ -387,44 +304,41 @@ public class GameScreen extends Region {
 	}
 	
 	
-	public void render(ArrayList<Entity> entityList) throws IOException  {	
+	public void render(ArrayList<Entity> entityList)  {	
 		ArrayList<Enemy> p = new ArrayList<Enemy>();
+		Platform.runLater(() -> {
 		
-		for(Entity e:entityList) {		
-			if(e instanceof Enemy) {
-				p.add((Enemy) e);
-				for(PathButton b:btlist2) {
-					Rectangle r = new Rectangle();
-					r.setFill(Color.RED);
-					r.setHeight(buttonSize);
-					r.setWidth(buttonSize);
-					
-					InputStream is = Files.newInputStream(Paths.get("res/path.png"));
-					Image logo = new Image(is);
-					is.close();
-					ImageView img = new ImageView(logo);
-					img.setFitWidth(buttonSize);
-					img.setFitHeight(buttonSize);
-					
-					if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
-						b.getChildren().setAll(r);
+			for(Entity e:entityList) {		
+				if(e instanceof Enemy) {
+					p.add((Enemy) e);
+					for(PathButton b:btlist2) {
+						Rectangle r = new Rectangle();
+						r.setFill(Color.RED);
+						r.setHeight(buttonSize);
+						r.setWidth(buttonSize);
+						ImageView img = new ImageView(logo);
+						img.setFitWidth(buttonSize);
+						img.setFitHeight(buttonSize);
 						
-					}
-					else {
-						b.getChildren().setAll(img);
-						for(Enemy q:p) {
-							if(q.getLocation().getX() == b.position.getX() && q.getLocation().getY() == b.position.getY()){
-								b.getChildren().setAll(r);
+						if(e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
+							b.getChildren().setAll(r);
+							
+						}
+						else {
+							b.getChildren().setAll(img);
+							for(Enemy q:p) {
+								if(q.getLocation().getX() == b.position.getX() && q.getLocation().getY() == b.position.getY()){
+									b.getChildren().setAll(r);
+								}
 							}
 						}
-					}
-				}				
+					}				
+				}
 			}
-		}
 		text.setText("COINS"+"  " + this.gc.getModel().getPlayer().getCoins());
 		text1.setText("HP"+"  " + this.gc.getModel().getPlayer().getHp());
 		text2.setText("WAVE"+"  " + this.gc.getModel().getPlayer().getWave());
 		text3.setText("NAME"+"  " + this.gc.getModel().getPlayer().getName());
+		});
 	}
-
 }

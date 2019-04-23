@@ -1,10 +1,4 @@
 package View.GameView;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import Constants.GameConstants;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
@@ -19,11 +13,13 @@ import javafx.scene.text.Text;
 import utilityClasses.Pair;
 
 public class GridButton extends StackPane{
+	
+	private static final Image logo = new Image("grass.jpg");
 
 	private Text text;
 	public Pair<Integer,Integer> position;
 	
-	public GridButton(String name) throws IOException {
+	public GridButton(String name){
 		
 		text = new Text(name);
 
@@ -33,9 +29,6 @@ public class GridButton extends StackPane{
 		Rectangle bg = new Rectangle(GameConstants.buttonSize,GameConstants.buttonSize);
 		bg.setOpacity(100);
 		/* grass image */
-		InputStream is = Files.newInputStream(Paths.get("res/grass.jpg"));
-		Image logo = new Image(is);
-		is.close();
 		ImageView img = new ImageView(logo);
 		img.setFitWidth(50);
 		img.setFitHeight(50);
