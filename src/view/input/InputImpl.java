@@ -3,10 +3,8 @@ package view.input;
 import model.tower.TowerType;
 
 /**
- * Public Class fot inputs
- *
+ * This Class implements the interface Input.
  */
-
 public class InputImpl implements Input{
 
 	private final int x;

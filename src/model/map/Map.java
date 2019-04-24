@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import model.entity.Entity;
 import utilityclasses.Pair;
 
+/**
+ * The interaface of the Map
+ */
 public interface Map {
     /**
      * Method to get the entitylist.
@@ -13,13 +16,13 @@ public interface Map {
     ArrayList<Entity> getEntityList();
 
     /**
-     * 
+     * Method to get the tilelist.
      * @return an ArrayList that contain all the tiles in the map
      */
     ArrayList<MapTile> getTileList();
 
     /**
-     * 
+     * Method to get the pathlist.
      * @return an ArrayList that contain the path of the enemy
      */
     ArrayList<MapTile> getPathList();

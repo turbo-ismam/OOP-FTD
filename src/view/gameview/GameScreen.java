@@ -2,12 +2,13 @@ package view.gameview;
 
 import java.util.ArrayList;
 
+
 import constants.GameConstants;
 import controller.gamecontroller.GameController;
 import model.enemy.Enemy;
 import model.entity.Entity;
 import model.map.MapTile;
-import model.map.MapTile.Status;
+import model.map.Status;
 import model.projectile.Projectile;
 import model.tower.Tower;
 import model.tower.TowerType;
