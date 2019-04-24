@@ -26,7 +26,7 @@ public class GridButton extends StackPane{
 		text.setFill(Color.DEEPPINK);
 		
 		/* REALIZZAZIONE DI OGNI TILE */
-		Rectangle bg = new Rectangle(GameConstants.buttonSize,GameConstants.buttonSize);
+		Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE,GameConstants.BUTTON_SIZE);
 		bg.setOpacity(100);
 		/* grass image */
 		ImageView img = new ImageView(logo);

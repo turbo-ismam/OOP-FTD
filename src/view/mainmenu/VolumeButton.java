@@ -17,7 +17,7 @@ private Text text;
 	public VolumeButton(String name) {
 		
 		text = new Text(name);
-		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.buttonSize/2));
+		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE/2));
 		text.setFill(Color.DEEPPINK);
 		
 		Rectangle bg = new Rectangle(300,70);

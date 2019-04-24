@@ -22,9 +22,9 @@ public class MainMenu extends Application{
 	private PlayerName name = new PlayerName();
 	private Difficulty avviso = new Difficulty();;
 	
-    static final double buttonSize = GameConstants.buttonSize;
-    static final double width = GameConstants.gameWidth;
-    static final double height = GameConstants.gameHeight;
+    static final double buttonSize = GameConstants.BUTTON_SIZE;
+    static final double width = GameConstants.GAME_WIDTH;
+    static final double height = GameConstants.GAME_HEIGHT;
     private double vol;
     
 	

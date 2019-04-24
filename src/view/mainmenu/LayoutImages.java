@@ -10,9 +10,9 @@ import javafx.scene.image.ImageView;
  */
 public class LayoutImages {
 	
-	private final static double buttonSize = GameConstants.buttonSize;
-	private static final double width = GameConstants.gameWidth;
-    private static final double height = GameConstants.gameHeight;
+	private final static double buttonSize = GameConstants.BUTTON_SIZE;
+	private static final double width = GameConstants.GAME_WIDTH;
+    private static final double height = GameConstants.GAME_HEIGHT;
     
     /**
      * Empty Constructor.

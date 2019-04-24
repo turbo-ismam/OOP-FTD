@@ -55,7 +55,7 @@ public class GameScreen extends Region {
 	 private Text text3 = new Text("NAME" + "  " + 0);
 	private ArrayList<PathButton> btlist2 = new ArrayList<>();
 	
-    private static final double buttonSize = GameConstants.buttonSize;
+    private static final double buttonSize = GameConstants.BUTTON_SIZE;
         
 	//MainMenu test = new MainMenu();    
         
