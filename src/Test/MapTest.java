@@ -53,8 +53,6 @@ public class MapTest {
 		sa.setTile(tile);
 		assertTrue(sa.getTileList().get(0).getStatus()==Status.WITHTOWER);
 		
-		assertFalse(sa.positionable(sa.fromPairToInt(a)));
-		assertTrue(sa.positionable(1));
 		System.out.print(sa.fromPairToInt(a) + "\n");
 		System.out.println(sa.fromIntToPair(399).toString());
 		
