@@ -19,7 +19,7 @@ public interface Entity {
     void update();
 
     /**
-     * 
+     *  Asks the entity if it should be removed.
      * @return true if the entity should be removed, false otherwise
      */
     boolean shouldBeRemoved();

@@ -31,5 +31,5 @@ public final class GameConstants {
     /**
      * Height of the application.
      */
-    public final static double gameHeight = buttonSize*22;
+    public static final double gameHeight = buttonSize*22;
 }

@@ -69,7 +69,7 @@ public class GameModelImpl implements GameModel, Observer {
         if (p.getCoins() < tt.getCost() && m.positionable(location)) {
             return false;
         }
-        p.incrementCoins( - tt.getCost()); //player PAGA la torre
+        p.incrementCoins(-tt.getCost()); //player PAGA la torre
         Tower t = new BasicTower(location, tt);
         ((ObservableEntity) t).addObserver(this);
         m.addEntity(t);

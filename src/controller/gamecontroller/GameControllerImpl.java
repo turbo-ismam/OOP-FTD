@@ -23,11 +23,17 @@ public class GameControllerImpl implements GameController {
         this.running = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void init() {
         gm = new GameModelImpl(difficulty);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startLoop(final GameScreen v) {
         gl = new GameLoop(gm, v);
@@ -38,31 +44,49 @@ public class GameControllerImpl implements GameController {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override 
     public void pauseGame() {
         gl.pause();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resumeGame() {
         gl.resume();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void killGameLoop() {
         ses.shutdown();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void handleInput(final Input i) {
         gl.addInput(i);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public GameModel getModel() {
         return this.gm;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setDifficulty(final int d) {
         this.difficulty = d;

@@ -45,16 +45,17 @@ public class GameLoop implements Runnable {
             //render view
             v.render(gm.getMap().getEntityList());
             i++; //variabili di debug
-            }
+        }
         else {
             try {
                 Thread.sleep(REFRESH_RATE);
                 System.out.println("PAUSED");
-                } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                     e.printStackTrace();
-                    }
             }
         }
+    }
     /**
      * Resumes the GameLoop.
      */

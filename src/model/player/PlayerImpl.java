@@ -1,71 +1,89 @@
 package model.player;
 
 /**
- * This Class implements the interface Player
+ * This Class implements the interface Player.
  */
-public class PlayerImpl implements Player{
+public class PlayerImpl implements Player {
 
-	private String name;
-	private int hp;
-	private int coins;
-	private int wave;
-	
-	/**
-	 * Constructor to create a player
-	 * @param name
-	 * @param hp
-	 * @param coins
-	 * @param wave
-	 */
-	public PlayerImpl(String name,int hp,int coins) {
-		this.name=name;
-		this.hp=hp;
-		this.coins=coins;
-		this.wave=1;
-	}
-	
-	@Override
-	public String getName() {
-		return name;
-	}
-	
-	@Override
-	public int getHp() {
-		return hp;
-	}
-	
-	@Override
-	public void takeDamage(int damage) {
-		this.hp = this.getHp()-damage;
-	}
-	
-	@Override
-	public int getCoins() {
-		return coins;
-	}
-	
-	@Override
-	public void incrementCoins(int coins) {
-		this.coins = this.coins + coins;
-	}
-	
-	@Override
-	public int getWave() {
-		return wave;
-	}
-	
-	@Override
-	public void setWave(int wave) {
-		this.wave = wave;
-	}
+    private String name;
+    private int hp;
+    private int coins;
+    private int wave;
 
-	@Override
-	public void setName(String text) {
+    /**
+     * Constructor to create a player.
+     * @param name name
+     * @param hp hp
+     * @param coins coins
+     */
+    public PlayerImpl(final String name, final int hp, final int coins) {
+        this.name = name;
+        this.hp = hp;
+        this.coins = coins;
+        this.wave = 1;
+    }
 
-		this.name=text;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	}
-	
-	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getHp() {
+        return hp;
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void takeDamage(final int damage) {
+        this.hp = this.getHp() - damage;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getCoins() {
+        return coins;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void incrementCoins(final int coins) {
+        this.coins = this.coins + coins;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getWave() {
+        return wave;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setWave(final int wave) {
+        this.wave = wave;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setName(final String text) {
+        this.name = text;
+    }
 }

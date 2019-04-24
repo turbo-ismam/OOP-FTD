@@ -6,7 +6,7 @@ import model.entity.Entity;
 import utilityclasses.Pair;
 
 /**
- * The interaface of the Map
+ * The interaface of the Map.
  */
 public interface Map {
     /**

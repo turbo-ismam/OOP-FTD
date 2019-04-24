@@ -20,7 +20,7 @@ public class Projectile implements Entity  {
      * @param enemy target
      * @param damage of the projectile
      */
-    public Projectile(final Pair<Integer, Integer> position, final Enemy enemy, final int damage){
+    public Projectile(final Pair<Integer, Integer> position, final Enemy enemy, final int damage) {
         this.position = position;
         this.damage = damage;
         this.enemy = enemy;
