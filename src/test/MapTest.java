@@ -1,16 +1,15 @@
 package test;
 import static org.junit.Assert.*;
 
-import java.util.*;
 
 import utilityclasses.Pair;
 import model.map.AbstractMapModel;
 import model.map.HardMap;
 import model.map.MapTile;
-import model.map.MapTile.Status;
 import model.map.MapTileImpl;
 import model.map.NormalMap;
 import model.map.SimpleMap;
+import model.map.Status;
 
 public class MapTest {
 	

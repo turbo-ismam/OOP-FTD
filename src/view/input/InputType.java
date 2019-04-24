@@ -1,22 +1,21 @@
 package view.input;
 
 /**
- * Public enumeration to divide the type of inputs
+ * Public enumeration to divide the type of inputs.
  */
-
 public enum InputType {
 
 	/**
-	 * Tower added 
+	 * Tower added .
 	 */
 	ADD_TOWER,
 	
 	/**
-	 * Tower removed
+	 * Tower removed.
 	 */
 	REMOVE_TOWER, 
 	/**
-	 * startss the next wave
+	 * startss the next wave.
 	 */
 	START_WAVE
 }

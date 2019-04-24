@@ -5,16 +5,28 @@ import java.io.IOException;
 import constants.GameConstants;
 import javafx.scene.image.ImageView;
 
+/**
+ * This class contains all the imgaes used in the class MainMenu.
+ */
 public class LayoutImages {
 	
 	private final static double buttonSize = GameConstants.buttonSize;
 	private static final double width = GameConstants.gameWidth;
     private static final double height = GameConstants.gameHeight;
     
+    /**
+     * Empty Constructor.
+     * @throws IOException
+     */
 	public LayoutImages() throws IOException {
 		
 	}
 	
+	/**
+	 * Method to get the logo.
+	 * @return image of the logo
+	 * @throws IOException
+	 */
 	public ImageView getimgv1() throws IOException {
 		
 		ImageLoader imgv1 = new ImageLoader("res/logo.png");
@@ -25,6 +37,11 @@ public class LayoutImages {
 		return imgv1.getImage();
 	}
 	
+	/**
+     * Method to get an image of the menu option.
+     * @return scene image
+     * @throws IOException
+     */
 	public ImageView getImgv2() throws IOException {
 		
 		ImageLoader imgv2 = new ImageLoader("res/giorno.jpg");
@@ -34,6 +51,11 @@ public class LayoutImages {
 		return imgv2.getImage();
 	}
 	
+	/**
+     * Method to get an image of the menu difficulty.
+     * @return scene image
+     * @throws IOException
+     */
 	public ImageView getImgv3() throws IOException {
 		
 		ImageLoader imgv3 = new ImageLoader("res/jotaro.png");
@@ -43,6 +65,11 @@ public class LayoutImages {
 		return imgv3.getImage();
 	}
 	
+	/**
+     * Method to get an image of the main menu.
+     * @return main menu image
+     * @throws IOException
+     */
 	public ImageView getImgv() throws IOException {
 		
 		ImageLoader imgv = new ImageLoader("res/62266.jpg");
@@ -52,6 +79,11 @@ public class LayoutImages {
 		
 	}
 	
+	/**
+     * Method to get an image of the sound menu.
+     * @return scene image
+     * @throws IOException
+     */
 	public ImageView getImgv7() throws IOException {
 		
 		ImageLoader imgv7 = new ImageLoader("res/sound.jpg");
