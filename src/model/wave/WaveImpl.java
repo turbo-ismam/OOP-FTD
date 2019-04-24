@@ -6,41 +6,50 @@ import model.enemy.EnemyImpl;
 import model.enemy.EnemyType;
 import model.map.MapTile;
 
-
-public class WaveImpl implements Wave{
-	
-	static ArrayList<MapTile> path = new ArrayList<>();
-	
-	private ArrayList<Enemy> ondata;
-	private int Numero_Ondata;
-
-	public WaveImpl(int numero_Ondata) {
+/**
+ * 
+ * 
+ *
+ */
+public class WaveImpl implements Wave {
+    private static ArrayList<MapTile> path = new ArrayList<>();
+    private ArrayList<Enemy> ondata;
+    private int numeroOndata;
+/**
+ * 
+ * @param numeroOndata
+ */
+	public WaveImpl(int numeroOndata) {
 		super();
 		ondata = new ArrayList<>();
-		Numero_Ondata = numero_Ondata;
-		populate((1+numero_Ondata)*2, EnemyType.SIMPLE);
-		
-		
+		numeroOndata = numeroOndata;
+		populate((1+numeroOndata)*2, EnemyType.SIMPLE);
 	}
-
+/**
+ * 
+ */
 	@Override
 	public int getWave() {
-		return this.Numero_Ondata;
+		return this.numeroOndata;
 	}
-
+/**
+ * {@inheritDoc}
+ */
 	@Override
-	public void populate(int quantity, EnemyType type) {
+	public void populate(final int quantity,final EnemyType type) {
 		for(int a=0; a<quantity; a++) {
 				Enemy e = new EnemyImpl(type);
 				e.setPath(path);
 				ondata.add(e);
 		}
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Enemy spawn() {
 		Enemy e = null;
-		if(!ondata.isEmpty()) {
+		if (!ondata.isEmpty()) {
 		e = ondata.get(0);
 		e.spawn();
 		ondata.remove(0);
@@ -48,18 +57,25 @@ public class WaveImpl implements Wave{
 		}
 		throw new NullPointerException();
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean hasEnemies() {
 		return !ondata.isEmpty();
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Wave nextWave() {
-		return new WaveImpl(this.getWave()+1);
+		return new WaveImpl(this.getWave() + 1);
 	}
-	
-	static public void setPath(ArrayList<MapTile> path) {
-		WaveImpl.path=path;
+	/**
+	 * 
+	 * @param path path
+	 */
+	static public void setPath(final ArrayList<MapTile> path) {
+		WaveImpl.path = path;
 	}
 }
