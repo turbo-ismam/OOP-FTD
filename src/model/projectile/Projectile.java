@@ -8,7 +8,6 @@ public class Projectile implements Entity  {
 	Pair<Integer,Integer> position;
 	
 	private Enemy enemy;
-	Pair<Integer, Integer> enemyPosition;
 	private int damage, tick;
 	private boolean alive;
 	
@@ -17,7 +16,6 @@ public class Projectile implements Entity  {
 		this.damage = damage;
 		this.enemy = enemy;
 		this.alive = true;
-		this.enemyPosition = enemy.getLocation();
 	}
 	
 	@Override
