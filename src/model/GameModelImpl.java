@@ -42,8 +42,7 @@ public class GameModelImpl implements GameModel, Observer {
         p = new PlayerImpl("SexyIsmy", INITIAL_HP, INITIAL_COINS);
         m = createMap(difficulty);
         WaveImpl.setPath(m.getPathList());
-        p.setWave(1);
-        w = new WaveImpl(1);
+        w = new WaveImpl(0);
         gs = GameStatus.PLAYING;
         this.readyToSpawn = false;
     }

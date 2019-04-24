@@ -20,7 +20,8 @@ import javafx.util.Duration;
 public class MainMenu extends Application{
 	
 	private PlayerName name = new PlayerName();
-	private Difficulty avviso = new Difficulty();;
+	private Difficulty avviso = new Difficulty();
+	private QuitHandler quitHandler = new QuitHandler(name.getgc());
 	
     static final double buttonSize = GameConstants.buttonSize;
     static final double width = GameConstants.gameWidth;
@@ -171,8 +172,6 @@ public class MainMenu extends Application{
             });
             MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-            	//gc.startGame();
-            	//game = new GameScreen(gc);
             	try {
 					root.getChildren().setAll(name.createContent());
 				} catch (IOException e) {
@@ -363,6 +362,7 @@ public class MainMenu extends Application{
 	        primaryStage.setTitle("Jojo Menu");
 	        primaryStage.setScene(scene);
 	        primaryStage.setResizable(false);
+	        primaryStage.setOnCloseRequest(quitHandler);
 	        primaryStage.show();
 		
 	}
