@@ -3,42 +3,59 @@ package model.projectile;
 import utilityclasses.Pair;
 import model.enemy.Enemy;
 import model.entity.Entity;
-
+/**
+ * class for projectile.
+ * 
+ *
+ */
 public class Projectile implements Entity  {
-	Pair<Integer,Integer> position;
-	
-	private Enemy enemy;
-	Pair<Integer, Integer> enemyPosition;
-	private int damage, tick;
-	private boolean alive;
-	
-	public Projectile(Pair <Integer,Integer> position, Enemy enemy, int damage){
-		this.position = position;
-		this.damage = damage;
-		this.enemy = enemy;
-		this.alive = true;
-		this.enemyPosition = enemy.getLocation();
-	}
-	
-	@Override
-	public void update() {
-		if (alive){
-				tick++;
-			if (tick == 1){
-				enemy.setDamage(damage);
-				tick = 0;
-				alive = false;
-			}
-		}	
-	}
+    private Pair<Integer, Integer> position;
 
-	@Override
-	public Pair<Integer, Integer> getLocation() {
-		return position;
-	}
+    private Enemy enemy;
+    private int damage, tick;
+    private boolean alive;
 
-	@Override
-	public boolean shouldBeRemoved() {
-		return !alive;
-	}
+    /**
+     * costructor of projectile.
+     * @param position of the projectile
+     * @param enemy target
+     * @param damage of the projectile
+     */
+    public Projectile(final Pair<Integer, Integer> position, final Enemy enemy, final int damage){
+        this.position = position;
+        this.damage = damage;
+        this.enemy = enemy;
+        this.alive = true;
+}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update() {
+        if (alive) {
+            tick++;
+            if (tick == 1) {
+                enemy.setDamage(damage);
+                tick = 0;
+                alive = false;
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Pair<Integer, Integer> getLocation() {
+        return position;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean shouldBeRemoved() {
+        return !alive;
+    }
 }

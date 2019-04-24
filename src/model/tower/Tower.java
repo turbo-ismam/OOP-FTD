@@ -6,58 +6,63 @@ import model.enemy.Enemy;
 import model.entity.Entity;
 import model.projectile.Projectile;
 
+/**
+ * Tower interface.
+ * 
+ *
+ */
 public interface Tower extends Entity {
 
-	/**
-	 * 
-	 * @return
-	 */
-	float getShootTime(); 
-	
-	/**
-	 * 
-	 * @return
-	 */
-	boolean isShooting();
-	
-	
-	/**
-	 * 
-	 * @return target
-	 */
-	Enemy getTarget();
+    /**
+     * get the shoot time.
+     * @return shoot time
+     */
 
-	/**
-	 * set type of tower
-	 * @param type
-	 */
-	void setType(TowerType type);
+    float getShootTime();
 
-	/**
-	 * choose type of tower
-	 * @return
-	 */
-	TowerType getType();
-	
-	/**
-	 * filter of enemies
-	 * @param entities
-	 */
-	public void setEnemies(ArrayList<Entity> entities);
+    /**
+     * check if the tower is shooting.
+     * @return isShooting
+     */
+    boolean isShooting();
 
-	/**
-	 * to verify the presence of the target
-	 * @return
-	 */
-	boolean isTargetSet();
-	
-	/**
-	 * 
-	 * @return the projectile that the tower has just shot
-	 */
-	Projectile getProjectile();
-	
-	
-	
-	
+    /**
+     * find the target.
+     * @return target
+     */
+    Enemy getTarget();
+
+    /**
+     * set type of tower.
+     * @param type of the tower
+     */
+    void setType(TowerType type);
+
+    /**
+     * choose type of tower.
+     * @return type
+     **/
+    TowerType getType();
+
+    /**
+     * filter of enemies.
+     * @param entities of enemies
+     **/
+    void setEnemies(ArrayList<Entity> entities);
+
+    /**
+     * to verify the presence of the target.
+     * @return isTargetSet
+     */
+    boolean isTargetSet();
+
+    /**
+     * 
+     * @return the projectile that the tower has just shot.
+     **/
+    Projectile getProjectile();
+
+
+
+
 }
