@@ -1,16 +1,18 @@
 package model;
-
+/**
+ * This enum determines the Status of the game throughout.
+ */
 public enum GameStatus {
     /**
-     * Specifies that the game is currently being played.
+     * The game is being played.
      */
     PLAYING,
     /**
-     * Specifies that the player has won the game (level).
+     * Player won the game.
      */
     WON,
     /**
-     * Specifies that the player has lost the game (level).
+     * Player lost the game.
      */
     LOST
 }

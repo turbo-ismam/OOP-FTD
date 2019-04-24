@@ -1,8 +1,11 @@
 package model.observer;
-import model.observer.ObservableEntity;
 /**
- * Interface for the Observer
+ * Interface for the Observer.
  */
 public interface Observer {
-	public void update(ObservableEntity subject);
+    /**
+     * method called when the observer has to do something (update something).
+     * @param subject the subject who notified the Observer
+     */
+    void update(ObservableEntity subject);
 }

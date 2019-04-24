@@ -18,152 +18,175 @@ import model.wave.WaveImpl;
 import utilityclasses.Pair;
 
 /**
- * 
- * Implementation of the GameModel
- *
+ * Implementation of the GameModel.
  */
 
 public class GameModelImpl implements GameModel, Observer {
-	private static final int INITIAL_COINS = 300;
-	private static final int INITIAL_HP = 5;
-	private static final int ENEMY_SPAWN_RATE = 50;
-	private static final int WAVES_TO_WIN = 20;
-	private Map m;
-	private Player p;
-	private Wave w;
-	private GameStatus gs;
-	private int tick = 0;
-	private boolean readyToSpawn;
-	
-	/**
-	 * Constructor
-	 * @param difficulty the difficulty of the game
-	 */
+    private static final int INITIAL_COINS = 300;
+    private static final int INITIAL_HP = 5;
+    private static final int ENEMY_SPAWN_RATE = 50;
+    private static final int WAVES_TO_WIN = 20;
+    private Map m;
+    private Player p;
+    private Wave w;
+    private GameStatus gs;
+    private int tick = 0;
+    private boolean readyToSpawn;
 
-	public GameModelImpl(int difficulty){
-		p = new PlayerImpl("SexyIsmy", INITIAL_HP, INITIAL_COINS);
-		m = createMap(difficulty);
-		WaveImpl.setPath(m.getPathList());
-		p.setWave(1);
-		w = new WaveImpl(1);
-		gs = GameStatus.PLAYING;
-		this.readyToSpawn = false;
-	}
+    /**
+     * Constructor of the GameModel.
+     * @param difficulty the difficulty of the game
+     */
 
-	private Map createMap(final int difficulty) {
-		switch (difficulty) {
-		case 1:
-			return new SimpleMap();
-		case 2:
-			return new NormalMap();
-		case 3:
-			return new HardMap();
-		default:
-			throw new IllegalArgumentException();
-		}
-	}
-	
-	@Override
-	public boolean placeTower(final Pair<Integer, Integer> location, final TowerType tt) {
-		if (p.getCoins() < tt.getCost()){
-			return false;
-		}
-		p.incrementCoins(-tt.getCost()); //player PAGA la torre
-		Tower t = new BasicTower(location, tt);
-		((ObservableEntity) t).addObserver(this);
-		m.addEntity(t);
-		return true;
-		}
+    public GameModelImpl(final int difficulty) {
+        p = new PlayerImpl("SexyIsmy", INITIAL_HP, INITIAL_COINS);
+        m = createMap(difficulty);
+        WaveImpl.setPath(m.getPathList());
+        p.setWave(1);
+        w = new WaveImpl(1);
+        gs = GameStatus.PLAYING;
+        this.readyToSpawn = false;
+    }
 
-	@Override
-	public void removeTower(final Pair<Integer, Integer> location) {
-		m.removeEntity(location);
-		}
-	
-	@Override
-	public GameStatus getGameStatus() {
-		return this.gs;
-		}
-	
-	@Override
-	public Player getPlayer() {
-		return this.p;
-		}
-	
-	@Override
-	public Wave getCurrentWave() {
-		return this.w;
-		}
-	
-	@Override
-	public Map getMap() {
-	    return this.m;
-		}
-	
-	@Override
-	public void nextWave() {
-		w = w.nextWave();
-		p.setWave(w.getWave());
-		}
-	
-	@Override
-	public void setReadyToSpawn(final boolean b) {
-		this.readyToSpawn = b;
-		}
-	
-	private void addEntity(final Entity e) {
-	    m.addEntity(e);
-		}
+    private Map createMap(final int difficulty) {
+        switch (difficulty) {
+            case 1:
+                return new SimpleMap();
+            case 2:
+                return new NormalMap();
+            case 3:
+                return new HardMap();
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean placeTower(final Pair<Integer, Integer> location, final TowerType tt) {
+        if (p.getCoins() < tt.getCost() && m.positionable(location)) {
+            return false;
+        }
+        p.incrementCoins( - tt.getCost()); //player PAGA la torre
+        Tower t = new BasicTower(location, tt);
+        ((ObservableEntity) t).addObserver(this);
+        m.addEntity(t);
+        return true;
+    }
 
-	@Override
-	public void update() {
-		m.getEntityList().forEach(e -> e.update());
-		if (w.hasEnemies()) {
-			if (tick >= ENEMY_SPAWN_RATE && readyToSpawn) {
-				Enemy e = w.spawn();
-				((ObservableEntity) e).addObserver(this);
-				this.addEntity(e);
-				tick = 0;
-				}
-			}
-		else {
-			setReadyToSpawn(false);
-			}
-		this.tick++;
-		m.getEntityList().stream()
-						 .filter(e -> e.shouldBeRemoved())
-						 .forEach(e -> m.removeEntity(e));
-		m.getEntityList().forEach(e -> {
-			if (e instanceof Tower) {
-				((Tower) e).setEnemies(m.getEntityList());
-				}
-			});
-		if (p.getHp() <= 0) {
-			this.gs = GameStatus.LOST;
-			return;
-			}
-		if (p.getWave() > WAVES_TO_WIN) {
-			this.gs = GameStatus.WON;
-			return;
-			}
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeTower(final Pair<Integer, Integer> location) {
+        m.removeEntity(location);
+    }
 
-	@Override
-	public void update(final ObservableEntity subject) {
-		if (subject instanceof Tower) {
-			addEntity(((Tower) subject).getProjectile());
-			}
-		else if (subject instanceof Enemy) {
-			Enemy e = (Enemy) subject;
-			if (e.getLocation().equals(m.getPathList().get(m.getPathList().size() - 1).getPosition())) {
-				p.takeDamage(1);
-				System.out.println("player took 1 damage");
-				}
-			else {
-				p.incrementCoins(e.getValue());
-				}
-			}
-		}
-	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GameStatus getGameStatus() {
+        return this.gs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Player getPlayer() {
+        return this.p;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Wave getCurrentWave() {
+        return this.w;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map getMap() {
+        return this.m;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void nextWave() {
+        w = w.nextWave();
+        p.setWave(w.getWave());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setReadyToSpawn(final boolean b) {
+        this.readyToSpawn = b;
+    }
+    private void addEntity(final Entity e) {
+        m.addEntity(e);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update() {
+        m.getEntityList().forEach(e -> e.update());
+        if (w.hasEnemies()) {
+            if (tick >= ENEMY_SPAWN_RATE && readyToSpawn) {
+                Enemy e = w.spawn();
+                ((ObservableEntity) e).addObserver(this);
+                this.addEntity(e);
+                tick = 0;
+            }
+        }
+        else {
+            setReadyToSpawn(false);
+        }
+        this.tick++;
+        m.getEntityList().stream()
+        .filter(e -> e.shouldBeRemoved())
+        .forEach(e -> m.removeEntity(e));
+        m.getEntityList().forEach(e -> {
+            if (e instanceof Tower) {
+                ((Tower) e).setEnemies(m.getEntityList());
+            }
+        });
+        if (p.getHp() <= 0) {
+            this.gs = GameStatus.LOST;
+            return;
+        }
+        if (p.getWave() > WAVES_TO_WIN) {
+            this.gs = GameStatus.WON;
+            return;
+        }
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(final ObservableEntity subject) {
+        if (subject instanceof Tower) {
+            addEntity(((Tower) subject).getProjectile());
+        }
+        else if (subject instanceof Enemy) {
+            Enemy e = (Enemy) subject;
+            if (e.getLocation().equals(m.getPathList().get(m.getPathList().size() - 1).getPosition())) {
+                p.takeDamage(1);
+            }
+            else {
+                p.incrementCoins(e.getValue());
+            }
+        }
+    }
 }
