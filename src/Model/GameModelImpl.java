@@ -1,52 +1,57 @@
-package Model;
+package model;
 
-import Model.Enemy.Enemy;
-import Model.Entity.Entity;
-import Model.Map.HardMap;
-import Model.Map.Map;
-import Model.Map.NormalMap;
-import Model.Map.SimpleMap;
-import Model.Observer.ObservableEntity;
-import Model.Observer.Observer;
-import Model.Player.Player;
-import Model.Player.PlayerImpl;
-import Model.Tower.BasicTower;
-import Model.Tower.Tower;
-import Model.Tower.TowerType;
-import Model.Wave.Wave;
-import Model.Wave.WaveImpl;
-import utilityClasses.Pair;
+import model.enemy.Enemy;
+import model.entity.Entity;
+import model.map.HardMap;
+import model.map.Map;
+import model.map.NormalMap;
+import model.map.SimpleMap;
+import model.observer.ObservableEntity;
+import model.observer.Observer;
+import model.player.Player;
+import model.player.PlayerImpl;
+import model.tower.BasicTower;
+import model.tower.Tower;
+import model.tower.TowerType;
+import model.wave.Wave;
+import model.wave.WaveImpl;
+import utilityclasses.Pair;
 
 /**
  * 
- * @author marco
+ * Implementation of the GameModel
  *
  */
+
 public class GameModelImpl implements GameModel, Observer {
-	
+	private static final int INITIAL_COINS = 300;
+	private static final int INITIAL_HP = 5;
+	private static final int ENEMY_SPAWN_RATE = 50;
+	private static final int WAVES_TO_WIN = 20;
 	private Map m;
 	private Player p;
 	private Wave w;
 	private GameStatus gs;
-	private int tick=0;
+	private int tick = 0;
 	private boolean readyToSpawn;
 	
-    
+	/**
+	 * Constructor
+	 * @param difficulty the difficulty of the game
+	 */
+
 	public GameModelImpl(int difficulty){
-		p = new PlayerImpl("SexyIsmy",1,300);
+		p = new PlayerImpl("SexyIsmy", INITIAL_HP, INITIAL_COINS);
 		m = createMap(difficulty);
 		WaveImpl.setPath(m.getPathList());
 		p.setWave(1);
 		w = new WaveImpl(1);
 		gs = GameStatus.PLAYING;
-		this.readyToSpawn=false;
-		
-		
-		
+		this.readyToSpawn = false;
 	}
 
-	private Map createMap(int difficulty) {
-		switch(difficulty) {
+	private Map createMap(final int difficulty) {
+		switch (difficulty) {
 		case 1:
 			return new SimpleMap();
 		case 2:
@@ -57,9 +62,10 @@ public class GameModelImpl implements GameModel, Observer {
 			throw new IllegalArgumentException();
 		}
 	}
+	
 	@Override
-	public boolean placeTower(Pair<Integer, Integer> location, TowerType tt) {
-		if (p.getCoins()<tt.getCost()){
+	public boolean placeTower(final Pair<Integer, Integer> location, final TowerType tt) {
+		if (p.getCoins() < tt.getCost()){
 			return false;
 		}
 		p.incrementCoins(-tt.getCost()); //player PAGA la torre
@@ -70,99 +76,94 @@ public class GameModelImpl implements GameModel, Observer {
 		}
 
 	@Override
-	public void removeTower(Pair<Integer, Integer> location) {
+	public void removeTower(final Pair<Integer, Integer> location) {
 		m.removeEntity(location);
-		
-	}
+		}
 	
 	@Override
 	public GameStatus getGameStatus() {
 		return this.gs;
-	}
+		}
 	
 	@Override
 	public Player getPlayer() {
 		return this.p;
-	}
+		}
 	
 	@Override
 	public Wave getCurrentWave() {
 		return this.w;
-	}
+		}
 	
 	@Override
 	public Map getMap() {
 	    return this.m;
-	}
+		}
 	
 	@Override
 	public void nextWave() {
-		w=w.nextWave();
+		w = w.nextWave();
 		p.setWave(w.getWave());
-	}
-	@Override
-	public void setReadyToSpawn(boolean b) {
-		this.readyToSpawn=b;
-	}
+		}
 	
-	private void addEntity(Entity e) {
+	@Override
+	public void setReadyToSpawn(final boolean b) {
+		this.readyToSpawn = b;
+		}
+	
+	private void addEntity(final Entity e) {
 	    m.addEntity(e);
-
-	}
+		}
 
 
 	@Override
 	public void update() {
-		m.getEntityList().forEach(e->e.update());
-		
-		if(w.hasEnemies()) {
-			if (tick >= 50 && readyToSpawn) {
+		m.getEntityList().forEach(e -> e.update());
+		if (w.hasEnemies()) {
+			if (tick >= ENEMY_SPAWN_RATE && readyToSpawn) {
 				Enemy e = w.spawn();
 				((ObservableEntity) e).addObserver(this);
 				this.addEntity(e);
-				tick=0;
-
+				tick = 0;
+				}
 			}
-		}
 		else {
 			setReadyToSpawn(false);
-		}
+			}
 		this.tick++;
 		m.getEntityList().stream()
-		.filter(e -> e.shouldBeRemoved())
-		.forEach(e -> m.removeEntity(e));
+						 .filter(e -> e.shouldBeRemoved())
+						 .forEach(e -> m.removeEntity(e));
 		m.getEntityList().forEach(e -> {
 			if (e instanceof Tower) {
 				((Tower) e).setEnemies(m.getEntityList());
+				}
+			});
+		if (p.getHp() <= 0) {
+			this.gs = GameStatus.LOST;
+			return;
 			}
-		});
-		if (p.getHp()<=0) {
-			this.gs=GameStatus.LOST;
+		if (p.getWave() > WAVES_TO_WIN) {
+			this.gs = GameStatus.WON;
 			return;
+			}
 		}
-		if (p.getWave()>20) {
-			this.gs=GameStatus.WON;
-			return;
-		}
-	}
 
 	@Override
-	public void update(ObservableEntity subject) {
+	public void update(final ObservableEntity subject) {
 		if (subject instanceof Tower) {
 			addEntity(((Tower) subject).getProjectile());
-		}
-		else if (subject instanceof Enemy ) {
+			}
+		else if (subject instanceof Enemy) {
 			Enemy e = (Enemy) subject;
-			if(e.getLocation().equals(m.getPathList().get(m.getPathList().size()-1).getPosition())) {
+			if (e.getLocation().equals(m.getPathList().get(m.getPathList().size() - 1).getPosition())) {
 				p.takeDamage(1);
 				System.out.println("player took 1 damage");
-			}
+				}
 			else {
 				p.incrementCoins(e.getValue());
+				}
 			}
-			
 		}
-		
-	}
 	
 }

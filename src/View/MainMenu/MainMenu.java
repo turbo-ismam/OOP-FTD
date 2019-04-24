@@ -1,10 +1,9 @@
-
-package View.MainMenu;
+package view.mainmenu;
 
 import java.io.File;
 import java.io.IOException;
-import Constants.GameConstants;
-import View.GameView.GameScreen;
+import constants.GameConstants;
+import view.gameview.GameScreen;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Parent;

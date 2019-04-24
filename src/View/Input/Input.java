@@ -1,12 +1,9 @@
-package View.Input;
+package view.input;
 
-import Model.Tower.TowerType;
+import model.tower.TowerType;
 
 /**
- * 
- * @author ismam
  * Public Classfor inputs
- *
  */
 public interface Input {
 	

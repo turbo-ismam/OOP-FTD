@@ -1,4 +1,4 @@
-package Model.Tower;
+package model.tower;
 
 public enum TowerType {
 	
@@ -10,7 +10,6 @@ public enum TowerType {
 	
 	private int cost, damage, range;
     private boolean canAttack;
-    
     TowerType(final int towerCost, final boolean canAttack, int damage, int range){
     	 this.cost = towerCost;
          this.canAttack = canAttack;

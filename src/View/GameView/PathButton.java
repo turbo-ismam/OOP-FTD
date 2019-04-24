@@ -1,6 +1,6 @@
-package View.GameView;
+package view.gameview;
 
-import Constants.GameConstants;
+import constants.GameConstants;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import utilityClasses.Pair;
+import utilityclasses.Pair;
 
 public class PathButton extends StackPane {
 	private static final Image logo = new Image("path.png");

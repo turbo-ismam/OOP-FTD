@@ -1,8 +1,8 @@
-package Model.Observer;
+package model.observer;
 
 import java.util.ArrayList;
 
-import Model.Entity.Entity;
+import model.entity.Entity;
 
 public abstract class ObservableEntity implements Entity {
 	

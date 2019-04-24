@@ -1,30 +1,24 @@
-package Controller.GameController;
+package controller.gamecontroller;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import java.util.concurrent.TimeUnit;
-import Model.GameModel;
-import Model.GameModelImpl;
-import View.GameView.GameScreen;
-import View.Input.Input;
+import model.GameModel;
+import model.GameModelImpl;
+import view.gameview.GameScreen;
+import view.input.Input;
 
-/**
- * 
- * @author marco
- *
- */
 public class GameControllerImpl implements GameController {
 	private GameModel gm;
 	private GameScreen v;
 	private final ScheduledThreadPoolExecutor ses;
 	private boolean running; 
-	private int difficulty =3;
+	private int difficulty = 3;
 	GameLoop gl;
 	
 	public GameControllerImpl() {
 		this.ses =new ScheduledThreadPoolExecutor(1);
 		this.running = false;
-		
 	}
 	@Override
 	public void init() {

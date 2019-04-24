@@ -1,6 +1,6 @@
-package Model.Map;
+package model.map;
 
-import Model.Map.MapTile.Status;
+import model.map.MapTile.Status;
 
 /**
  * 

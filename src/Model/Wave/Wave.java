@@ -1,12 +1,7 @@
-package Model.Wave;
+package model.wave;
 
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyType;
-/**
- * 
- * @author Vlad
- *
- */
+import model.enemy.Enemy;
+import model.enemy.EnemyType;
 public interface Wave {
 
 	int getWave();

@@ -1,10 +1,7 @@
-package View.Input;
+package view.input;
 
 /**
- * 
- * @author ismam
  * Public enumeration to divide the type of inputs
- * 
  */
 
 public enum InputType {

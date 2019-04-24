@@ -1,11 +1,11 @@
-package Test;
+package test;
 import static org.junit.Assert.*;
 
 
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyImpl;
-import Model.Enemy.EnemyType;
-import Model.Map.HardMap;
+import model.enemy.Enemy;
+import model.enemy.EnemyImpl;
+import model.enemy.EnemyType;
+import model.map.HardMap;
 
 public class TestEnemies {
 	

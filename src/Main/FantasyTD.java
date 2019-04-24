@@ -1,10 +1,17 @@
-package Main;
-import View.MainMenu.MainMenu;
+package main;
+import view.mainmenu.MainMenu;
 import javafx.application.Application;
-
-public class FantasyTD{
-	
-	public static void main(String[] args){
-		Application.launch(MainMenu.class);
-	}
+/**
+ * Main class, entry point of the program.
+ */
+public final class FantasyTD {
+    private FantasyTD() {
+    }
+    /**
+     * starts the Application, launching the MainMenu class.
+     * @param args of main
+     */
+    public static void main(final String[] args) {
+        Application.launch(MainMenu.class);
+    }
 }

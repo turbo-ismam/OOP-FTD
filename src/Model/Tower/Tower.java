@@ -1,16 +1,10 @@
-package Model.Tower;
+package model.tower;
 
 import java.util.ArrayList;
 
-import Model.Enemy.Enemy;
-import Model.Entity.Entity;
-import Model.Projectile.Projectile;
-
-/**
- * 
- * @author zheliang
- *
- */
+import model.enemy.Enemy;
+import model.entity.Entity;
+import model.projectile.Projectile;
 
 public interface Tower extends Entity {
 
@@ -19,7 +13,6 @@ public interface Tower extends Entity {
 	 * @return
 	 */
 	float getShootTime(); 
-			
 	
 	/**
 	 * 

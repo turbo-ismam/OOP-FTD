@@ -1,75 +1,69 @@
-package Model.Map;
+package model.map;
 
 import java.util.ArrayList;
 
-import Model.Entity.Entity;
-import utilityClasses.Pair;
+import model.entity.Entity;
+import utilityclasses.Pair;
 
-/**
- * 
- * @author ismam
- *
- */
 public interface Map {
-	
 	/**
 	 * 
 	 * @return an ArrayList that contain all the entities in the map
 	 */
-	public ArrayList<Entity> getEntityList();
+	ArrayList<Entity> getEntityList();
 	
 	/**
 	 * 
 	 * @return an ArrayList that contain all the tiles in the map
 	 */
-	public ArrayList<MapTile> getTileList();
+	ArrayList<MapTile> getTileList();
 	
 	/**
 	 * 
 	 * @return an ArrayList that contain the path of the enemy
 	 */
-	public ArrayList<MapTile> getPathList();
+	ArrayList<MapTile> getPathList();
 	
 	/**
 	 * Method to add entity to the EntityList
 	 * @param e 
 	 */
-	public void addEntity(Entity e);
+	void addEntity(Entity e);
 	
 	/**
 	 * Method to remove an entity from the EntityList
 	 * @param location
 	 */
-	public void removeEntity(Pair<Integer, Integer> location);
+	void removeEntity(Pair<Integer, Integer> location);
 	
 	/**
 	 * @return the map size
 	 */
-	public int getGridSize();
+	int getGridSize();
 	
 	/**
 	 * 
 	 * @return the initial position
 	 */
-	public MapTile initialPosition();
+	MapTile initialPosition();
 	
 	/**
 	 * 
 	 * @return the end of the path
 	 */
-	public MapTile finalPosition();
+	MapTile finalPosition();
 	
 	/**
 	 * @param position
 	 * @return true if you can place a tower
 	 */
-	public boolean positionable(int position);
+	boolean positionable(int position);
 	
 	/**
 	 * 
 	 * @return the tile
 	 */
-	public MapTile getTileInt(int position);
+	MapTile getTileInt(int position);
 	
 	/**
 	 * 
@@ -85,7 +79,7 @@ public interface Map {
 	public void setTile(MapTile tile);
 	
 	/**
-	 * from the arraylist position return a Pair
+	 * from the arraylist position return a Pair.
 	 * @param position
 	 * @return Pair<Integer,Integer>
 	 */
@@ -96,8 +90,11 @@ public interface Map {
 	 * @param position
 	 * @return
 	 */
-	public int fromPairToInt(Pair<Integer,Integer> position);
-
-	public void removeEntity(Entity e);
+	int fromPairToInt(Pair<Integer,Integer> position);
+	/**
+	 * removes the entity from the entityList.
+	 * @param e entity to remove
+	 */
+	void removeEntity(Entity e);
 	
 }

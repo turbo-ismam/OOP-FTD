@@ -1,68 +1,68 @@
-package Model;
+package model;
 
-import Model.Map.Map;
-import Model.Player.Player;
-import Model.Tower.TowerType;
-import Model.Wave.Wave;
-import utilityClasses.Pair;
+import model.map.Map;
+import model.player.Player;
+import model.tower.TowerType;
+import model.wave.Wave;
+import utilityclasses.Pair;
 /**
  * 
- * @author marco
- *
+ * This interface defines the core of the game, methods to interact with the
+ * game.
+ * 
  */
-
 public interface GameModel {
-	
+
 	/**
 	 * Places a Tower in the current playing map
 	 * @param location x, y position of the Tower
 	 * @param tt Type of the tower that is going to be placed
 	 * @return  True if the player has enought money, false otherwise
 	 */
-	public boolean placeTower(Pair<Integer, Integer> location, TowerType tt);
+	boolean placeTower(Pair<Integer, Integer> location, TowerType tt);
 	
 	/**
 	 * Removes a Tower from the map
 	 * @param location x, y position of the Tower
 	 */
-	public void removeTower(Pair<Integer, Integer> location);
+	void removeTower(Pair<Integer, Integer> location);
 	
 	/**
 	 * 
 	 * @return the GameStatus
 	 */
-	public GameStatus getGameStatus();
+	GameStatus getGameStatus();
 	
 	/**
 	 * 
 	 * @return return the Player
 	 */
-	public Player getPlayer();
+	Player getPlayer();
 	
 	/**
 	 * 
 	 * @return return the Current Wave
 	 */
-	public Wave getCurrentWave();
+	Wave getCurrentWave();
 	
 	/**
 	 * Starts the next Wave
 	 */
-	public void nextWave();
+	void nextWave();
 	
 	/**
-	 * Update everything and moves the game forward by one tick
+	 *Update everything and moves the game forward by one tick
 	 */
-	public void update();
+	void update();
 	
 	/**
-	 *  Returns the map of the game
+	 *  Returns the map of the game.
 	 * @return the current Map
 	 */
-    public Map getMap();
-    
+    Map getMap();
+
     /**
-     *  if true, starts the current wave
+     *  if true, starts the current wave.
      * @param b boolean
      */
 	void setReadyToSpawn(boolean b);

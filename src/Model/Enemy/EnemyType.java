@@ -1,4 +1,4 @@
-package Model.Enemy;
+package model.enemy;
 
 public enum EnemyType {
 	
@@ -7,7 +7,6 @@ public enum EnemyType {
 		TANK(200, 3, 40);
 	
 	private int health, speed, value;
-    
     EnemyType(int health, int speed, int value){
     	 this.health = health;
          this.speed = speed;

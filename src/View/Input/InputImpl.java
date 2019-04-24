@@ -1,6 +1,6 @@
-package View.Input;
+package view.input;
 
-import Model.Tower.TowerType;
+import model.tower.TowerType;
 
 /**
  * Public Class fot inputs

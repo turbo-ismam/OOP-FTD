@@ -1,11 +1,11 @@
-package Model.Enemy;
+package model.enemy;
 
 import java.util.ArrayList;
 
-import Model.Map.MapTile;
-import Model.Map.MapTileImpl;
-import Model.Observer.ObservableEntity;
-import utilityClasses.Pair;
+import model.map.MapTile;
+import model.map.MapTileImpl;
+import model.observer.ObservableEntity;
+import utilityclasses.Pair;
 
 public class EnemyImpl extends ObservableEntity implements Enemy{
 	private static final int TICKS_BEFORE_WALKING = 10;

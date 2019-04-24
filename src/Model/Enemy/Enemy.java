@@ -1,19 +1,14 @@
 /**
  * 
  */
-package Model.Enemy;
+package model.enemy;
 
 import java.util.ArrayList;
 
-import Model.Entity.Entity;
-import Model.Map.MapTile;
+import model.entity.Entity;
+import model.map.MapTile;
 
-/**
- * @author Vlad
- *
- */
 public interface Enemy extends Entity{
-	
 	public enum Direction {
 		UP,
 		DOWN,

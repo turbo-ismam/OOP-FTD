@@ -1,7 +1,7 @@
-package View.MainMenu;
+package view.mainmenu;
 
-import Constants.GameConstants;
-import View.GameView.GameScreen;
+import constants.GameConstants;
+import view.gameview.GameScreen;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;

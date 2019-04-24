@@ -1,11 +1,11 @@
-package Model.Map;
+package model.map;
 
 import java.util.ArrayList;
 import java.util.List;
-import Model.Tower.Tower;
-import Model.Entity.Entity;
-import Model.Map.MapTile.Status;
-import utilityClasses.Pair;
+import model.tower.Tower;
+import model.entity.Entity;
+import model.map.MapTile.Status;
+import utilityclasses.Pair;
 
 public abstract class AbstractMapModel implements Map {
 
@@ -22,16 +22,14 @@ public abstract class AbstractMapModel implements Map {
 	public AbstractMapModel() {
 
 		generateGrid();	//i metodi abstract dovrebbero essere di strategy, controlla
-		
 		generatePath();
-		
 	}
 	
 	private void generateGrid() {
 		
-		for (int i=0;i<gridSize;i++) {		//idea, fai un costruttore che richiama 2 metodi privati che fanno questi 2 cicli for
-			for (int j=0;j<gridSize;j++) {
-				MapTile tile = new MapTileImpl(i,j);
+		for (int i = 0; i < gridSize; i++) {		//idea, fai un costruttore che richiama 2 metodi privati che fanno questi 2 cicli for
+			for (int j = 0; j < gridSize; j++) {
+				MapTile tile = new MapTileImpl(i, j);
 				grid.add(tile);
 			}
 		}
@@ -40,7 +38,6 @@ public abstract class AbstractMapModel implements Map {
 	abstract void generatePath();
 	
 	public int getGridSize() {
-		
 		return gridSize;
 	}
 

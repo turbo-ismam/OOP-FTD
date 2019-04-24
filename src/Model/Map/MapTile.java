@@ -1,14 +1,8 @@
-package Model.Map;
+package model.map;
 
-import utilityClasses.Pair;
+import utilityclasses.Pair;
 
-/**
- * 
- * @author ismam
- *
- */
 public interface MapTile {
-	
 		public enum Status {
 			EMPTY,
 			PATH,

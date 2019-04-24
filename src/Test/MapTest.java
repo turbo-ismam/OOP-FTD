@@ -1,16 +1,16 @@
-package Test;
+package test;
 import static org.junit.Assert.*;
 
 import java.util.*;
 
-import utilityClasses.Pair;
-import Model.Map.AbstractMapModel;
-import Model.Map.HardMap;
-import Model.Map.MapTile;
-import Model.Map.MapTile.Status;
-import Model.Map.MapTileImpl;
-import Model.Map.NormalMap;
-import Model.Map.SimpleMap;
+import utilityclasses.Pair;
+import model.map.AbstractMapModel;
+import model.map.HardMap;
+import model.map.MapTile;
+import model.map.MapTile.Status;
+import model.map.MapTileImpl;
+import model.map.NormalMap;
+import model.map.SimpleMap;
 
 public class MapTest {
 	

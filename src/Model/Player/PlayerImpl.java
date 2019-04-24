@@ -1,10 +1,4 @@
-package Model.Player;
-
-/**
- * 
- * @author ismam
- *
- */
+package model.player;
 
 public class PlayerImpl implements Player{
 

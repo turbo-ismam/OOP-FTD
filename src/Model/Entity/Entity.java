@@ -1,6 +1,6 @@
-package Model.Entity;
+package model.entity;
 
-import utilityClasses.Pair;
+import utilityclasses.Pair;
 
 public interface Entity {
 	/**

@@ -1,8 +1,8 @@
-package View.MainMenu;
+package view.mainmenu;
 
 import java.io.IOException;
 
-import Constants.GameConstants;
+import constants.GameConstants;
 import javafx.scene.image.ImageView;
 
 public class LayoutImages {

@@ -1,15 +1,15 @@
-package Model.Tower;
+package model.tower;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Model.Enemy.Enemy;
-import Model.Entity.Entity;
-import Model.Observer.ObservableEntity;
-import Model.Projectile.Projectile;
-import utilityClasses.Pair;
+import model.enemy.Enemy;
+import model.entity.Entity;
+import model.observer.ObservableEntity;
+import model.projectile.Projectile;
+import utilityclasses.Pair;
 
 public class BasicTower extends ObservableEntity implements Tower {
 	private static final int gridSize = 20;

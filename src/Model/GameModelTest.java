@@ -1,13 +1,13 @@
-package Model;
+package model;
 
 import static org.junit.Assert.*;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
-import Model.Enemy.EnemyType;
-import Model.Tower.TowerType;
-import Model.Wave.Wave;
-import utilityClasses.Pair;
+import model.enemy.EnemyType;
+import model.tower.TowerType;
+import model.wave.Wave;
+import utilityclasses.Pair;
 
 public class GameModelTest {
 	

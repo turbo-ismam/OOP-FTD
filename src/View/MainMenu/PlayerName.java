@@ -1,11 +1,11 @@
-package View.MainMenu;
+package view.mainmenu;
 
 import java.io.IOException;
 
-import Constants.GameConstants;
-import Controller.GameController.GameController;
-import Controller.GameController.GameControllerImpl;
-import View.GameView.GameScreen;
+import constants.GameConstants;
+import controller.gamecontroller.GameController;
+import controller.gamecontroller.GameControllerImpl;
+import view.gameview.GameScreen;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;

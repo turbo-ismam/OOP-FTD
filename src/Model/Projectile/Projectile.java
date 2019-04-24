@@ -1,8 +1,8 @@
-package Model.Projectile;
+package model.projectile;
 
-import utilityClasses.Pair;
-import Model.Enemy.Enemy;
-import Model.Entity.Entity;
+import utilityclasses.Pair;
+import model.enemy.Enemy;
+import model.entity.Entity;
 
 public class Projectile implements Entity  {
 	Pair<Integer,Integer> position;
@@ -22,9 +22,9 @@ public class Projectile implements Entity  {
 	
 	@Override
 	public void update() {
-		if(alive){
+		if (alive){
 				tick++;
-			if(tick == 1){
+			if (tick == 1){
 				enemy.setDamage(damage);
 				tick = 0;
 				alive = false;

@@ -1,18 +1,18 @@
-package View.GameView;
+package view.gameview;
 
 import java.util.ArrayList;
 
-import Constants.GameConstants;
-import Controller.GameController.GameController;
-import Model.Enemy.Enemy;
-import Model.Entity.Entity;
-import Model.Map.MapTile;
-import Model.Map.MapTile.Status;
-import Model.Projectile.Projectile;
-import Model.Tower.Tower;
-import Model.Tower.TowerType;
-import View.Input.InputImpl;
-import View.Input.InputType;
+import constants.GameConstants;
+import controller.gamecontroller.GameController;
+import model.enemy.Enemy;
+import model.entity.Entity;
+import model.map.MapTile;
+import model.map.MapTile.Status;
+import model.projectile.Projectile;
+import model.tower.Tower;
+import model.tower.TowerType;
+import view.input.InputImpl;
+import view.input.InputType;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.effect.DropShadow;
@@ -30,7 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import utilityClasses.Pair;
+import utilityclasses.Pair;
 
 public class GameScreen extends Region {
 	private static final Image logo = new Image("path.png");

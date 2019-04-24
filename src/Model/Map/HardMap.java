@@ -1,17 +1,11 @@
-package Model.Map;
+package model.map;
 
-import Model.Map.MapTile.Status;
+import model.map.MapTile.Status;
 
-/**
- * 
- * @author ismam
- *
- */
 public class HardMap extends AbstractMapModel {
 
 	@Override
 	void generatePath() {
-		
 		//dovrebbe creare un percorso, in questo caso una linea orizzontale dritta
 				for (int i=0;i<gridSize*gridSize;i++) {			//provalo, non sono convinto
 					if (grid.get(i).getPosition().getY()==10) {

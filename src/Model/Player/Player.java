@@ -1,10 +1,5 @@
-package Model.Player;
+package model.player;
 
-/**
- * 
- * @author ismam
- *
- */
 public interface Player {
 
 	public String getName();

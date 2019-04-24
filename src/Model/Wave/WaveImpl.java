@@ -1,10 +1,10 @@
-package Model.Wave;
+package model.wave;
 
 import java.util.ArrayList;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyImpl;
-import Model.Enemy.EnemyType;
-import Model.Map.MapTile;
+import model.enemy.Enemy;
+import model.enemy.EnemyImpl;
+import model.enemy.EnemyType;
+import model.map.MapTile;
 
 
 public class WaveImpl implements Wave{

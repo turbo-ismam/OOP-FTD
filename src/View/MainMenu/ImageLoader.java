@@ -1,4 +1,4 @@
-package View.MainMenu;
+package view.mainmenu;
 
 import java.io.IOException;
 import java.io.InputStream;

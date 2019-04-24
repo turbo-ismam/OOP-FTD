@@ -1,12 +1,7 @@
-package Model.Map;
+package model.map;
 
-import utilityClasses.Pair;
+import utilityclasses.Pair;
 
-/**
- * 
- * @author ismam
- *
- */
 public class MapTileImpl implements MapTile {
 
 
