@@ -40,7 +40,9 @@ public class GameLoop implements Runnable {
             System.out.println("oggetti nella mappa : " + gm.getMap().getEntityList().stream().count());
             if (!gm.getMap().getEntityList().isEmpty()) {
                 gm.getMap().getEntityList().stream()
-                .forEach(e -> System.out.println(e));
+                .forEach(e -> {
+                    System.out.println(e);
+                });
             }
             //render view
             v.render(gm.getMap().getEntityList());

@@ -33,12 +33,11 @@ public class Projectile implements Entity  {
     @Override
     public void update() {
         if (alive) {
-            tick++;
-            if (tick == 1) {
+            if (tick > 1) {
                 enemy.setDamage(damage);
-                tick = 0;
-                alive = false;
+                this.alive = false;
             }
+            this.tick++;
         }
     }
 

@@ -316,14 +316,14 @@ public class GameScreen extends Region {
                         img.setFitHeight(BUTTONSIZE);
 
                         if (e.getLocation().equals(b.getPosition())) {
-                            b.getChildren().add(r);
+                            b.getChildren().setAll(r);
 
                         }
                         else {
                             b.getChildren().setAll(img);
                             for (Enemy q:p) {
                                 if (q.getLocation().equals(b.getPosition())) {
-                                    b.getChildren().add(r);
+                                    b.getChildren().setAll(r);
                                 }
                             }
                         }

@@ -38,7 +38,7 @@ public class GameControllerImpl implements GameController {
     public void startLoop(final GameScreen v) {
         gl = new GameLoop(gm, v);
         if (!running) {
-            ses.scheduleWithFixedDelay(gl, 0, 16, TimeUnit.MILLISECONDS);
+            ses.scheduleWithFixedDelay(gl, 0, 10, TimeUnit.MILLISECONDS);
             this.running = true;
         }
     }

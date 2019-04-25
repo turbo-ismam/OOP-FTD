@@ -141,6 +141,14 @@ public class GameModelImpl implements GameModel, Observer {
     @Override
     public void update() {
         m.getEntityList().forEach(e -> e.update());
+        m.getEntityList().stream()
+        .filter(e -> e.shouldBeRemoved())
+        .forEach(e -> m.removeEntity(e));
+        m.getEntityList().forEach(e -> {
+            if (e instanceof Tower) {
+                ((Tower) e).setEnemies(m.getEntityList());
+            }
+        });
         if (w.hasEnemies()) {
             if (tick >= ENEMY_SPAWN_RATE && readyToSpawn) {
                 Enemy e = w.spawn();
@@ -152,15 +160,6 @@ public class GameModelImpl implements GameModel, Observer {
         else {
             setReadyToSpawn(false);
         }
-        this.tick++;
-        m.getEntityList().stream()
-        .filter(e -> e.shouldBeRemoved())
-        .forEach(e -> m.removeEntity(e));
-        m.getEntityList().forEach(e -> {
-            if (e instanceof Tower) {
-                ((Tower) e).setEnemies(m.getEntityList());
-            }
-        });
         if (p.getHp() <= 0) {
             this.gs = GameStatus.LOST;
             return;
@@ -169,6 +168,7 @@ public class GameModelImpl implements GameModel, Observer {
             this.gs = GameStatus.WON;
             return;
         }
+        this.tick++;
     }
     /**
      * {@inheritDoc}

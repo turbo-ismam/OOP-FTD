@@ -20,7 +20,8 @@ public class BasicTower extends ObservableEntity implements Tower {
     private static final int GRID_SIZE = 20;
     private Pair<Integer, Integer> position; 
     private int damage, range;
-    private float shootTime;
+    private int shootTime;
+    private int tick;
     private Enemy target;
     private TowerType type;
     private boolean isShooting;
@@ -60,7 +61,6 @@ public class BasicTower extends ObservableEntity implements Tower {
                 if (e.getLocation().equals(shootingZone.get(i))) {
                     if (e instanceof Enemy) {
                         this.target = (Enemy) e;
-                        System.out.println("target acquired");
                         return;
                     } else {
                         throw new IllegalArgumentException();
@@ -106,10 +106,12 @@ public class BasicTower extends ObservableEntity implements Tower {
     @Override
     public void update() {
         findTarget();
-        if (isTargetSet()) {
+        if (isTargetSet() && this.tick >= shootTime) {
             this.projectile = shoot();
+            this.tick = 0;
             this.notifyObservers();
         }
+        this.tick++;
     }
 
 
