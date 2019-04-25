@@ -2,7 +2,11 @@ package view.mainmenu;
 
 import java.io.File;
 import java.io.IOException;
+
+import constants.GameConstants;
 import constants.ViewConstants;
+import controller.gamecontroller.GameController;
+import controller.gamecontroller.GameControllerImpl;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -18,14 +22,16 @@ import javafx.util.Duration;
 
 
 public class MainMenu extends Application{
-
-    private final PlayerName name = new PlayerName();
-    private final QuitHandler quitHandler = new QuitHandler(name.getgc());
+    private double volume = 0.1;
+    private GameController gc = new GameControllerImpl();
+    private final QuitHandler quitHandler = new QuitHandler(gc);
+    private PlayerName name;
     private final Difficulty avviso = new Difficulty();
 
     static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
     static final double WIDTH = ViewConstants.GAME_WIDTH;
     static final double HEIGHT = ViewConstants.GAME_HEIGHT;
+
     private double vol;
 
 /**
@@ -104,23 +110,23 @@ public class MainMenu extends Application{
             final VolumeButton mute = new VolumeButton("Mute");
 
             low.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(0.1);
+                volume = 0.1;
+            mediaPlayer1.setVolume(0.1);
             });
 
             medium.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(0.5);
+                volume = 0.5;
+            mediaPlayer1.setVolume(0.5);
             });
 
             high.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(1);
+                volume = 1;
+            mediaPlayer1.setVolume(1);
             });
 
             mute.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(0);
+                volume = 0;
+            mediaPlayer1.setVolume(0);
             });
 
             soundback.setOnMouseClicked(event -> {
@@ -176,6 +182,7 @@ public class MainMenu extends Application{
             });
             final MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
+                name = new PlayerName(gc, volume);
                 try {
                     root.getChildren().setAll(name.createContent());
                 } catch (IOException e) {

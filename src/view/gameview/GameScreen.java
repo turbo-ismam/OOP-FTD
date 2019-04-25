@@ -1,5 +1,6 @@
 package view.gameview;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -65,7 +68,10 @@ public class GameScreen extends Region {
     private static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
     private final Win vittoria = new Win();
     private final Lose sconfitta = new Lose();
-    //MainMenu test = new MainMenu();
+    private final double volume;
+    private static final String MUSICFILE = "res/ost.mp3";
+    private final Media sound = new Media(new File(MUSICFILE).toURI().toString());
+    private final MediaPlayer mediaPlayer = new MediaPlayer(sound);
 /**
  * Main method to create the view.
  * @return root pane
@@ -283,6 +289,8 @@ public class GameScreen extends Region {
             gc.handleInput(new InputImpl(InputType.START_WAVE, null, 1, 2));
             this.gc.getModel().nextWave();
         });
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.setAutoPlay(true);
 
         return root;
     }
@@ -290,9 +298,9 @@ public class GameScreen extends Region {
      *  constructor.
      * @param gc game controller
      */
-    public GameScreen(final GameController gc) {
 
-        super();
+    public GameScreen(final GameController gc,double volume) {
+        this.volume = volume;
         this.gc = gc;
         this.mappa = gc.getModel().getMap().getTileList();
         gc.startLoop(this);
