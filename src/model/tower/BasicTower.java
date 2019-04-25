@@ -18,12 +18,12 @@ import utilityclasses.Pair;
  */
 public class BasicTower extends ObservableEntity implements Tower {
     private static final int GRID_SIZE = 20;
-    private Pair<Integer, Integer> position; 
-    private int damage, range;
-    private float shootTime;
+    private final Pair<Integer, Integer> position; 
+    private final int damage, range;
+    private final float shootTime;
     private Enemy target;
     private TowerType type;
-    private boolean isShooting;
+    private final boolean shooting;
     private ArrayList<Pair<Integer, Integer>> shootingZone;
     private List<Entity> enemies; 
     private Projectile projectile;
@@ -64,14 +64,14 @@ public class BasicTower extends ObservableEntity implements Tower {
         this.target = null;
         this.shootTime = 10;
         this.type = type;
-        this.isShooting = false;
+        this.shooting = false;
         this.shootingZone = new ArrayList<Pair<Integer, Integer>>();
         setRange();
         this.enemies = new ArrayList<>();
     }
 
     private void findTarget() {
-        for (Entity e: enemies) {
+        for (final Entity e: enemies) {
             for (int i = 0; i < shootingZone.size(); i++) {
                 if (e.getLocation().equals(shootingZone.get(i))) {
                     if (e instanceof Enemy) {
@@ -166,7 +166,7 @@ public class BasicTower extends ObservableEntity implements Tower {
      */
     @Override
     public boolean isShooting() {
-        return isShooting;
+        return shooting;
     }
 
     /**
