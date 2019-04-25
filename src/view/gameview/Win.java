@@ -1,6 +1,7 @@
 package view.gameview;
 
 import constants.ViewConstants;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
@@ -50,6 +51,7 @@ public class Win extends Region{
 
         final Scene scene = new Scene(pane);
             primaryStage.setTitle("Difficulty");
+            primaryStage.setOnCloseRequest(e -> Platform.exit());
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
             primaryStage.show();

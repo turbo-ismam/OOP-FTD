@@ -1,5 +1,5 @@
 package model.tower;
-
+import constants.GameConstants;
 /**
  * types of tower.
  * 
@@ -10,23 +10,26 @@ public enum TowerType {
     /**
      * basic tower.
      */
-    BASIC(50, true, 1, 2),
+    BASIC(  GameConstants.BASIC_TOWER_COST,
+            GameConstants.BASIC_TOWER_DAMAGE,
+            GameConstants.BASIC_TOWER_RANGE),
 
     /**
      * tower with higher range.
      */
-    RANGED(100, false, 25, 3),
-
+    RANGED( GameConstants.RANGED_TOWER_COST,
+            GameConstants.RANGED_TOWER_DAMAGE,
+            GameConstants.RANGED_TOWER_RANGE),
     /**
      * tower with higher damage.
      */
-    CANNON(120, false, 50, 2);
+    CANNON( GameConstants.CANNON_TOWER_COST,
+            GameConstants.CANNON_TOWER_DAMAGE,
+            GameConstants.CANNON_TOWER_RANGE);
 
     private int cost, damage, range;
-    private boolean canAttack;
-    TowerType(final int towerCost, final boolean canAttack, final int damage, final int range) {
+    TowerType(final int towerCost, final int damage, final int range) {
          this.cost = towerCost;
-         this.canAttack = canAttack;
          this.damage = damage;
          this.range = range;
     }
@@ -37,14 +40,6 @@ public enum TowerType {
      */
     public int getCost() {
         return this.cost;
-    }
-
-    /**
-     * check if the tower can attack.
-     * @return canAttack
-     */
-    public boolean canAttack() {
-        return this.canAttack;
     }
 
     /**

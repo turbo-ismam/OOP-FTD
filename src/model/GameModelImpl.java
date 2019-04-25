@@ -121,8 +121,10 @@ public class GameModelImpl implements GameModel, Observer {
      */
     @Override
     public void nextWave() {
-        w = w.nextWave();
-        p.setWave(w.getWave());
+        if(!w.hasEnemies()) {
+            w = w.nextWave();
+            p.setWave(w.getWave());
+        }
     }
 
     /**

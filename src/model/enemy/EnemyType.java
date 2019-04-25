@@ -1,18 +1,24 @@
 package model.enemy;
+import constants.GameConstants;
 /**
  * 
  * Type of enemy.
  *
  */
+
 public enum EnemyType {
     /**
      * Basic type of enemy.
      */
-        SIMPLE(100, 5, 20),
+        SIMPLE( GameConstants.SIMPLE_ENEMY_HP,
+                GameConstants.SIMPLE_ENEMY_SPEED,
+                GameConstants.SIMPLE_ENEMY_VALUE),
         /**
          * Enemy with more hp but slower.
          */
-        TANK(200, 3, 40);
+        TANK(   GameConstants.TANK_ENEMY_HP,
+                GameConstants.TANK_ENEMY_SPEED,
+                GameConstants.TANK_ENEMY_VALUE);
     private int health, speed, value;
     /**
      * 
