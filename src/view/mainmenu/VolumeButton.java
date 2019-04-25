@@ -1,6 +1,6 @@
 package view.mainmenu;
 
-import constants.GameConstants;
+import constants.ViewConstants;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -24,7 +24,7 @@ private final Text text;
     public VolumeButton(final String name) {
         super();
         text = new Text(name);
-        text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE / 2)); 
+        text.setFont(Font.loadFont("file:res/JOJO____.ttf", ViewConstants.BUTTON_SIZE / 2)); 
         text.setFill(Color.DEEPPINK);
 
         final Rectangle bg = new Rectangle(300,70);

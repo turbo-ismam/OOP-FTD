@@ -6,25 +6,28 @@ import model.entity.Entity;
 import utilityclasses.Pair;
 
 /**
- * The interaface of the Map.
+ * The interaface of the Map
  */
 public interface Map {
     /**
      * Method to get the entitylist.
      * @return an ArrayList that contain all the entities in the map
      */
+    @SuppressWarnings("PMD.LooseCoupling")
     ArrayList<Entity> getEntityList();
 
     /**
      * Method to get the tilelist.
      * @return an ArrayList that contain all the tiles in the map
      */
+    @SuppressWarnings("PMD.LooseCoupling")
     ArrayList<MapTile> getTileList();
 
     /**
      * Method to get the pathlist.
      * @return an ArrayList that contain the path of the enemy
      */
+    @SuppressWarnings("PMD.LooseCoupling")
     ArrayList<MapTile> getPathList();
 
     /**

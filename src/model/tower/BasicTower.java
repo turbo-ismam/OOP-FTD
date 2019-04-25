@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import constants.TicksConstants;
+import constants.GameConstants;
 import model.enemy.Enemy;
 import model.entity.Entity;
 import model.observer.ObservableEntity;
@@ -22,7 +22,7 @@ public class BasicTower extends ObservableEntity implements Tower {
     private final Pair<Integer, Integer> position; 
     private final int damage;
     private final int range;
-    private final int shootTime = TicksConstants.TOWER_SHOOT_RATE;
+    private final int shootTime = GameConstants.TOWER_SHOOT_RATE;
     private Enemy target;
     private TowerType type;
     private boolean isShooting;

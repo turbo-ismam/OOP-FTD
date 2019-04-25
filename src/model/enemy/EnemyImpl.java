@@ -2,7 +2,7 @@ package model.enemy;
 
 import java.util.List;
 
-import constants.TicksConstants;
+import constants.GameConstants;
 import model.map.MapTile;
 import model.map.MapTileImpl;
 import model.observer.ObservableEntity;
@@ -13,7 +13,7 @@ import utilityclasses.Pair;
  *
  */
 public class EnemyImpl extends ObservableEntity implements Enemy {
-    private static final int TICKS_BEFORE_WALKING = TicksConstants.MONSTER_WALK_RATE;
+    private static final int TICKS_BEFORE_WALKING = GameConstants.MONSTER_WALK_RATE;
     private int hp;
     private final int speed;
     private final int value;

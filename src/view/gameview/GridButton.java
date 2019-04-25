@@ -1,5 +1,5 @@
 package view.gameview;
-import constants.GameConstants;
+import constants.ViewConstants;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -14,28 +14,26 @@ import utilityclasses.Pair;
 
 public class GridButton extends StackPane{
 	
-	private static final Image logo = new Image("grass.jpg");
+    private static final Image LOGO = new Image("grass.jpg");
 
-	private Text text;
-	public Pair<Integer,Integer> position;
-	
-	public GridButton(String name){
-		
-		text = new Text(name);
-
-		text.setFill(Color.DEEPPINK);
-		
-		/* REALIZZAZIONE DI OGNI TILE */
-		Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE,GameConstants.BUTTON_SIZE);
-		bg.setOpacity(100);
-		/* grass image */
-		ImageView img = new ImageView(logo);
-		img.setFitWidth(50);
-		img.setFitHeight(50);
-		bg.setFill(new ImagePattern(logo));
-		
-		
-		  setAlignment(Pos.CENTER);
+    private final Text text;
+    public Pair<Integer,Integer> position;
+    	
+    public GridButton(final String name){
+        super();
+        text = new Text(name);
+        text.setFill(Color.DEEPPINK);
+        /* REALIZZAZIONE DI OGNI TILE */
+        final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE,ViewConstants.BUTTON_SIZE);
+        bg.setOpacity(100);
+        /* grass image */
+        final ImageView img = new ImageView(LOGO);
+        img.setFitWidth(50);
+        img.setFitHeight(50);
+        bg.setFill(new ImagePattern(LOGO));
+        
+        
+        setAlignment(Pos.CENTER);
             setRotate(-0.5);
             getChildren().addAll(bg, text);
 
@@ -48,23 +46,23 @@ public class GridButton extends StackPane{
             setOnMouseExited(event -> {
                 bg.setTranslateX(0);
                 text.setTranslateX(0);
-                bg.setFill(new ImagePattern(logo));
+                bg.setFill(new ImagePattern(LOGO));
                 text.setFill(Color.DEEPPINK);
             });
 
-            DropShadow drop = new DropShadow(50, Color.WHITE);
+            final DropShadow drop = new DropShadow(50, Color.WHITE);
             drop.setInput(new Glow());
 
             setOnMousePressed(event -> setEffect(drop));
             setOnMouseReleased(event -> setEffect(null));  
-	}
-	
-	public void setPosition(Pair<Integer, Integer> p){
-		this.position=p;
-	}
-	
-	public Pair<Integer, Integer> getPosition() {
-		return this.position;
-	}
+            }
+    
+    public void setPosition(final Pair<Integer, Integer> p){
+        this.position=p;
+    }
+    
+    public Pair<Integer, Integer> getPosition() {
+        return this.position;
+    }
 }
 

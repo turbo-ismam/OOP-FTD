@@ -2,7 +2,7 @@ package view.mainmenu;
 
 import java.io.File;
 import java.io.IOException;
-import constants.GameConstants;
+import constants.ViewConstants;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -23,9 +23,9 @@ public class MainMenu extends Application{
     private final QuitHandler quitHandler = new QuitHandler(name.getgc());
     private final Difficulty avviso = new Difficulty();
 
-    static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
-    static final double WIDTH = GameConstants.GAME_WIDTH;
-    static final double HEIGHT = GameConstants.GAME_HEIGHT;
+    static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
+    static final double WIDTH = ViewConstants.GAME_WIDTH;
+    static final double HEIGHT = ViewConstants.GAME_HEIGHT;
     private double vol;
 
 /**

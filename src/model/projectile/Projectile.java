@@ -1,6 +1,6 @@
 package model.projectile;
 
-import constants.TicksConstants;
+import constants.GameConstants;
 import utilityclasses.Pair;
 import model.enemy.Enemy;
 import model.entity.Entity;
@@ -10,7 +10,7 @@ import model.entity.Entity;
  *
  */
 public class Projectile implements Entity  {
-    private static final int PROJECTILE_HIT_ENEMY = TicksConstants.PROJECTILE_HIT_ENEMY;
+    private static final int PROJECTILE_HIT_ENEMY = GameConstants.PROJECTILE_HIT_ENEMY;
     private final Pair<Integer, Integer> position;
     private final Enemy enemy;
     private final int damage;

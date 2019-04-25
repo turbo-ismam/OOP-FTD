@@ -1,6 +1,6 @@
 package view.gameview;
 
-import constants.GameConstants;
+import constants.ViewConstants;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
@@ -19,26 +19,26 @@ import view.mainmenu.ImageLoader;
 
 public class Lose extends Region{
     
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
         
-        Pane pane = new Pane();
+        final Pane pane = new Pane();
         pane.setPrefSize(1920, 1080);
-        Text text = new Text("Yare Yare Daze...\n    Game Lost!\n      Loooser!");
+        final Text text = new Text("Yare Yare Daze...\n    Game Lost!\n      Loooser!");
         text.setFont(Font.loadFont("file:res/JOJO____.ttf", 40));
         text.setFill(Color.FUCHSIA);
         
-        VBox space = new VBox();
+        final VBox space = new VBox();
         
-        ImageLoader im = new ImageLoader("res/lose.jpg");
+        final ImageLoader im = new ImageLoader("res/lose.jpg");
 
         pane.getChildren().add(im.getImage());
         
-        ButtonD bt = new ButtonD("Press here\n   Loser!");
+        final ButtonD bt = new ButtonD("Press here\n   Loser!");
         bt.setOnMouseClicked(event -> {
             System.exit(0);
         });     
         
-        Rectangle bg = new Rectangle(1920,1080);
+        final Rectangle bg = new Rectangle(1920,1080);
         bg.setFill(Color.GREY);
         bg.setOpacity(0.4);
          
@@ -48,7 +48,7 @@ public class Lose extends Region{
         space.getChildren().addAll(bg,text,bt);
         pane.getChildren().add(space);
 
-         Scene scene = new Scene(pane);
+        final Scene scene = new Scene(pane);
             primaryStage.setTitle("Difficulty");
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
@@ -58,15 +58,15 @@ public class Lose extends Region{
     
     public class ButtonD extends StackPane{
 
-        private Text text;
+        private final Text text;
         
-        public ButtonD(String name) {
+        public ButtonD(final String name) {
             
             text = new Text(name);
             text.setFont(Font.loadFont("file:res/JOJO____.ttf", 30));
             text.setFill(Color.DEEPPINK);
             
-            Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE*10,GameConstants.BUTTON_SIZE*3);
+            final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE*10,ViewConstants.BUTTON_SIZE*3);
             bg.setOpacity(0.8);
             bg.setFill(Color.CYAN);
             
@@ -84,7 +84,7 @@ public class Lose extends Region{
                     text.setFill(Color.DEEPPINK);
                 });
 
-                DropShadow drop = new DropShadow(50, Color.WHITE);
+                final DropShadow drop = new DropShadow(50, Color.WHITE);
                 drop.setInput(new Glow());
 
                 setOnMousePressed(event -> setEffect(drop));

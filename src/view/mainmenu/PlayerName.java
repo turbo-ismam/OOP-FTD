@@ -2,7 +2,7 @@ package view.mainmenu;
 
 import java.io.IOException;
 
-import constants.GameConstants;
+import constants.ViewConstants;
 import controller.gamecontroller.GameController;
 import controller.gamecontroller.GameControllerImpl;
 import view.gameview.GameScreen;
@@ -38,33 +38,33 @@ public class PlayerName extends Region {
         final Pane root = new Pane();
 
         final TextField box = new TextField();
-        box.setPrefSize(GameConstants.BUTTON_SIZE * 7, GameConstants.BUTTON_SIZE);
-        box.setTranslateX(GameConstants.BUTTON_SIZE * 16);
-        box.setTranslateY(GameConstants.BUTTON_SIZE * 13);
+        box.setPrefSize(ViewConstants.BUTTON_SIZE * 7, ViewConstants.BUTTON_SIZE);
+        box.setTranslateX(ViewConstants.BUTTON_SIZE * 16);
+        box.setTranslateY(ViewConstants.BUTTON_SIZE * 13);
 
-        final Rectangle bg = new Rectangle(GameConstants.GAME_WIDTH + GameConstants.BUTTON_SIZE, GameConstants.GAME_HEIGHT + GameConstants.BUTTON_SIZE);
+        final Rectangle bg = new Rectangle(ViewConstants.GAME_WIDTH + ViewConstants.BUTTON_SIZE, ViewConstants.GAME_HEIGHT + ViewConstants.BUTTON_SIZE);
         bg.setFill(Color.GREY);
         bg.setOpacity(0.5);
 
         final Text tx = new Text("Inserisci il\ntuo nome!");
-        tx.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE));
+        tx.setFont(Font.loadFont("file:res/JOJO____.ttf", ViewConstants.BUTTON_SIZE));
         tx.setFill(Color.INDIGO);
-        tx.setTranslateY(GameConstants.BUTTON_SIZE * 5);
-        tx.setTranslateX(GameConstants.BUTTON_SIZE * 2);
+        tx.setTranslateY(ViewConstants.BUTTON_SIZE * 5);
+        tx.setTranslateX(ViewConstants.BUTTON_SIZE * 2);
 
         final ImageLoader im = new ImageLoader("res/player.png");
-        im.getImage().prefHeight(GameConstants.HEIGHT);
-        im.getImage().prefWidth(GameConstants.WIDTH);
-        //root.setPrefSize(GameConstants.gameWidth, GameConstants.gameHeight);
+        im.getImage().prefHeight(ViewConstants.HEIGHT);
+        im.getImage().prefWidth(ViewConstants.WIDTH);
+        //root.setPrefSize(ViewConstants.gameWidth, ViewConstants.gameHeight);
 
-        final VBox mn = new VBox(GameConstants.BUTTON_SIZE);
-        mn.setPrefSize(GameConstants.WIDTH, GameConstants.HEIGHT);
+        final VBox mn = new VBox(ViewConstants.BUTTON_SIZE);
+        mn.setPrefSize(ViewConstants.WIDTH, ViewConstants.HEIGHT);
         mn.getChildren().add(im.getImage());
         root.getChildren().add(mn);
 
         final ButtonD d = new ButtonD("start");
-        d.setTranslateX(GameConstants.BUTTON_SIZE * 16.5);
-        d.setTranslateY(GameConstants.BUTTON_SIZE * 16);
+        d.setTranslateX(ViewConstants.BUTTON_SIZE * 16.5);
+        d.setTranslateY(ViewConstants.BUTTON_SIZE * 16);
         d.setOnMouseClicked(event -> {
             gc.init();
             game = new GameScreen(gc);
@@ -92,10 +92,10 @@ public class PlayerName extends Region {
         public ButtonD(final String name) {
             super();
             text = new Text(name);
-            text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE));
+            text.setFont(Font.loadFont("file:res/JOJO____.ttf", ViewConstants.BUTTON_SIZE));
             text.setFill(Color.INDIGO);
 
-            final Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE * 6, GameConstants.BUTTON_SIZE * 3);
+            final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE * 6, ViewConstants.BUTTON_SIZE * 3);
             bg.setOpacity(0.8);
             bg.setFill(Color.CYAN);
 

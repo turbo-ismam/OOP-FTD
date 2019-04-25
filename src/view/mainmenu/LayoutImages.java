@@ -2,7 +2,7 @@ package view.mainmenu;
 
 import java.io.IOException;
 
-import constants.GameConstants;
+import constants.ViewConstants;
 import javafx.scene.image.ImageView;
 
 /**
@@ -10,9 +10,9 @@ import javafx.scene.image.ImageView;
  */
 public class LayoutImages {
 
-    private static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
-    private static final double WIDTH = GameConstants.GAME_WIDTH;
-    private static final double HEIGHT = GameConstants.GAME_HEIGHT;
+    private static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
+    private static final double WIDTH = ViewConstants.GAME_WIDTH;
+    private static final double HEIGHT = ViewConstants.GAME_HEIGHT;
 
     /**
      * Empty Constructor.

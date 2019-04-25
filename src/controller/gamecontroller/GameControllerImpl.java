@@ -3,7 +3,7 @@ package controller.gamecontroller;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import constants.TicksConstants;
+import constants.GameConstants;
 import model.GameModel;
 import model.GameModelImpl;
 import view.gameview.GameScreen;
@@ -12,7 +12,7 @@ import view.input.Input;
  * Implementation of the Controller of the game.
  */
 public class GameControllerImpl implements GameController {
-    private static final int GAME_SPEED = TicksConstants.GAME_SPEED;
+    private static final int GAME_SPEED = GameConstants.GAME_SPEED;
 
     private GameModel gm;
     private final ScheduledThreadPoolExecutor ses;
