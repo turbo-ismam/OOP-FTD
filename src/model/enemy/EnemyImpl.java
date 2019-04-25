@@ -15,7 +15,7 @@ import utilityclasses.Pair;
 public class EnemyImpl extends ObservableEntity implements Enemy {
     private static final int TICKS_BEFORE_WALKING = GameConstants.MONSTER_WALK_RATE;
     private int hp;
-    private final int speed;
+    private int speed;
     private final int value;
     private boolean alive;
     private Direction direction;
@@ -142,6 +142,11 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
     @Override
     public int getSpeed() {
         return this.speed;
+    }
+    
+    @Override
+    public void setSpeed(int value) {
+        this.speed=this.speed+value;
     }
 /**
  * {@inheritDoc}

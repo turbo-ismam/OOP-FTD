@@ -14,14 +14,14 @@ public final class GameConstants {
 
     //*****PLAYER PARAMETERS*****//
     /** Initial coins of the player.*/
-    public static final int INITIAL_COINS = 1000;
+    public static final int INITIAL_COINS = 250;
 
     /** Initial hp of the player.*/
     public static final int INITIAL_HP = 10;
 
     //*****ENEMY PARAMETERS*****//
     /** Ticks that a monster need to wait before spawning.*/
-    public static final int MONSTER_SPAWN_RATE = 50;
+    public static final int MONSTER_SPAWN_RATE = 25;
 
     /** Ticks before a monster can move forward.*/
     public static final int MONSTER_WALK_RATE = 10;
@@ -34,7 +34,7 @@ public final class GameConstants {
     public static final int SIMPLE_ENEMY_SPEED = 0;
 
     /** value of the SIMPLE enemy.*/
-    public static final int SIMPLE_ENEMY_VALUE = 20;
+    public static final int SIMPLE_ENEMY_VALUE = 25;
 
     //TANK
     /** Hp of the TANK enemy.*/
@@ -44,53 +44,53 @@ public final class GameConstants {
     public static final int TANK_ENEMY_SPEED = 0;
 
     /** value of the TANK enemy.*/
-    public static final int TANK_ENEMY_VALUE = 40;
+    public static final int TANK_ENEMY_VALUE = 30;
 
     //*****TOWER PARAMETERS*****//
     /** Ticks a basic tower need to wait before shooting the next projectile.*/
-    public static final int TOWER_SHOOT_RATE = 35;
+    public static final int TOWER_SHOOT_RATE = 25;
 
     /** Ticks between the projectile being shot and enemy hit.*/
     public static final int PROJECTILE_HIT_ENEMY = 1;
 
     //BASIC 1
     /** cost of the BASIC tower.*/
-    public static final int BASIC_TOWER_COST = 50;
+    public static final int BASIC_TOWER_COST = 60;
 
     /** damage of the BASIC tower.*/
-    public static final int BASIC_TOWER_DAMAGE = 20;
+    public static final int BASIC_TOWER_DAMAGE = 25;
 
     /** range of the BASIC tower.*/
-    public static final int BASIC_TOWER_RANGE = 5;
+    public static final int BASIC_TOWER_RANGE = 1;
 
     /** shootspeed of the BASIC tower.*/
-    public static final int BASIC_TOWER_SPEED = 2;
+    public static final int BASIC_TOWER_SPEED = 10;
 
     //RANGED
     /** cost of the RANGED tower.*/
     public static final int RANGED_TOWER_COST = 75;
 
     /** damage of the RANGED tower.*/
-    public static final int RANGED_TOWER_DAMAGE = 30;
+    public static final int RANGED_TOWER_DAMAGE = 25;
 
     /** range of the RANGED tower.*/
-    public static final int RANGED_TOWER_RANGE = 5;
+    public static final int RANGED_TOWER_RANGE = 2;
 
     /** shootspeed of the RANGED tower.*/
-    public static final int RANGED_TOWER_SPEED = 2;
+    public static final int RANGED_TOWER_SPEED = 25;
 
     //CANNON 3
     /** cost of the CANNON tower.*/
-    public static final int CANNON_TOWER_COST = 150;
+    public static final int CANNON_TOWER_COST = 200;
 
     /** damage of the CANNON tower.*/
     public static final int CANNON_TOWER_DAMAGE = 50;
 
     /** range of the CANNON tower.*/
-    public static final int CANNON_TOWER_RANGE = 7;
+    public static final int CANNON_TOWER_RANGE = 3;
 
     /** shootspeed of the BASIC tower.*/
-    public static final int CANNON_TOWER_SPEED = 2;
+    public static final int CANNON_TOWER_SPEED = 30;
 
     private GameConstants() { }
 }

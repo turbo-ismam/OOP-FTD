@@ -47,6 +47,12 @@ public interface Enemy extends Entity {
    */
   int getSpeed();
   /**
+   * Method to increment the speed of enemy
+   * @param value
+   * @return
+   */
+  void setSpeed(int value);
+  /**
    * Method to set the damage inflict to an enemy.
    * @param damage damage.
    */
