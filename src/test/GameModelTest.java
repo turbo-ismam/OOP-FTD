@@ -1,19 +1,27 @@
-package model;
+package test;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+
+import constants.GameConstants;
+
 import static org.junit.Assert.assertEquals;
-import model.enemy.EnemyType;
+
+import model.GameModel;
+import model.GameModelImpl;
+import model.GameStatus;
 import model.tower.TowerType;
 import model.wave.Wave;
+
 import utilityclasses.Pair;
 /**
  * Test class for the Game logics and functionality.
  */
 public class GameModelTest {
-    private static final int TICKS_TO_SPAWN_ENEMY = 10 + 1;
-    private static final int TICKS_ENEMY_WALK = 10 + 1;
-    private static final int WAVE_TO_WIN = 20 + 1;
+    private static final int TICKS_TO_SPAWN_ENEMY = GameConstants.MONSTER_SPAWN_RATE;
+    private static final int TICKS_ENEMY_WALK = GameConstants.MONSTER_WALK_RATE + 1;
+    private static final int WAVE_TO_WIN = GameConstants.WAVES_TO_WIN + 1;
+    private static final int LOTS_OF_DAMAGE = 999;
     private final GameModel gm = new GameModelImpl(1);
 
     /**
@@ -27,9 +35,9 @@ public class GameModelTest {
     public void placeAndRemoveTowersTest() {
         gm.placeTower(new Pair<>(1, 2), TowerType.BASIC);
         assertSame("Status should be equal", gm.getGameStatus(), GameStatus.PLAYING);
-        assertSame("Entity shuold be increased to 1", gm.getMap().getEntityList().stream().count(), 1);
+        assertSame("Entity shuold be increased to 1", 1L, gm.getMap().getEntityList().stream().count());
         gm.removeTower(new Pair<>(1, 2));
-        assertSame("entity should be 0 now", gm.getMap().getEntityList().stream().count(), 0);
+        assertSame("entity should be 0 now", 0L, gm.getMap().getEntityList().stream().count());
     }
     /**
      * Test case :
@@ -41,10 +49,13 @@ public class GameModelTest {
         final Wave w = gm.getCurrentWave();
         assertTrue("wave should contain enemies", w.hasEnemies());
         gm.setReadyToSpawn(true);
+        for (int i = 0; i <= TICKS_TO_SPAWN_ENEMY * 2; i++) {
+            gm.update();
+        }
         for (int i = 0; i <= TICKS_ENEMY_WALK * 2; i++) {
             gm.update();
         }
-        assertEquals("Entity should be 2", gm.getMap().getEntityList().stream().count(), 2);
+        assertEquals("Entity should be 2", 2L, gm.getMap().getEntityList().stream().count());
     }
 
     /**
@@ -55,8 +66,9 @@ public class GameModelTest {
     public void goToNextWaveTest() {
         gm.nextWave();
         final Wave w = gm.getCurrentWave();
-        w.populate(1, EnemyType.TANK);
-        assertSame("correct wave number", w.getWave(), 2);
+        w.clearWave();
+        gm.nextWave();
+        assertSame("correct wave number", 1, gm.getPlayer().getWave());
     }
 
     /**
@@ -65,14 +77,13 @@ public class GameModelTest {
      */
     @org.junit.Test
         public void enemyWalkTest() {
-                gm.nextWave();
                 final Wave w = gm.getCurrentWave(); 
                 gm.setReadyToSpawn(true);
-                assertSame("correct wave number", w.getWave(), 2);
+                assertSame("correct wave number", w.getWave(), 0);
                 for (int i = 0; i <= TICKS_TO_SPAWN_ENEMY * 2; i++) {
                     gm.update();
                 }
-                assertSame("maps entity object count equal", 2, gm.getMap().getEntityList().stream().count());
+                assertSame("maps entity object count equal", 2L, gm.getMap().getEntityList().stream().count());
         }
 
     /**
@@ -93,12 +104,8 @@ public class GameModelTest {
     @org.junit.Test
     public void gameLostTest() {
         gm.setReadyToSpawn(true);
-        for (int i = 0; i <= TICKS_TO_SPAWN_ENEMY * 4; i++) {
-            gm.update();
-        }
-        for (int i = 0; i <= TICKS_ENEMY_WALK * gm.getMap().getPathList().size() - 1; i++) {
-            gm.update();
-        }
+       gm.getPlayer().takeDamage(LOTS_OF_DAMAGE);
+       gm.update();
         assertSame("status equal", gm.getGameStatus(), GameStatus.LOST);
     }
 }

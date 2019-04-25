@@ -1,8 +1,9 @@
 package controller.gamecontroller;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import model.GameModel;
-import model.GameStatus;
 import view.gameview.GameScreen;
 import view.input.Input;
 import utilityclasses.Pair;
@@ -16,7 +17,7 @@ public class GameLoop implements Runnable {
     private boolean running;
     private int i;
 
-    private ArrayList<Input> inputList;
+    private final List<Input> inputList;
 
     /**
      * Constructor of GameLoop, creates the GameLoop.
@@ -37,14 +38,14 @@ public class GameLoop implements Runnable {
             this.processInput();
             //model update
             gm.update();
-            System.out.println("update N-" + i);
+            /*System.out.println("update N-" + i); //DEBUG PRINTS
             System.out.println("oggetti nella mappa : " + gm.getMap().getEntityList().stream().count());
             if (!gm.getMap().getEntityList().isEmpty()) {
                 gm.getMap().getEntityList().stream()
                 .forEach(e -> {
                     System.out.println(e);
                 });
-            }
+            }*/
             //render view
             v.render(gm.getMap().getEntityList(), gm.getGameStatus());
             i++; //variabili di debug
@@ -52,7 +53,7 @@ public class GameLoop implements Runnable {
         else {
             try {
                 Thread.sleep(REFRESH_RATE);
-                System.out.println("PAUSED");
+                //System.out.println("PAUSED");
             }
             catch (InterruptedException e) {
                     e.printStackTrace();

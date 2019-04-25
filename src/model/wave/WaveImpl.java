@@ -87,4 +87,11 @@ public class WaveImpl implements Wave {
     public static void setPath(final List<MapTile> path) {
         WaveImpl.path = path;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void clearWave() {
+        this.ondata.clear();
+    }
 }

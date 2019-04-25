@@ -1,6 +1,8 @@
 package model;
 
 import constants.GameConstants;
+import model.GameModel;
+import model.GameStatus;
 import model.enemy.Enemy;
 import model.entity.Entity;
 import model.map.HardMap;
@@ -121,7 +123,7 @@ public class GameModelImpl implements GameModel, Observer {
      */
     @Override
     public void nextWave() {
-        if(!w.hasEnemies()) {
+        if (!w.hasEnemies()) {
             w = w.nextWave();
             p.setWave(w.getWave());
         }

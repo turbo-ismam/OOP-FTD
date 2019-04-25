@@ -35,4 +35,10 @@ public interface Wave {
  */
     boolean hasEnemies();
 
+
+    /**
+     * clear the current wave's enemy.
+     */
+    void clearWave();
+
 }
