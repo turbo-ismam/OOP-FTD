@@ -18,22 +18,23 @@ import utilityclasses.Pair;
  */
 public class BasicTower extends ObservableEntity implements Tower {
     private static final int GRID_SIZE = 20;
-    private Pair<Integer, Integer> position; 
-    private int damage, range;
-    private int shootTime;
-    private int tick;
+    private final Pair<Integer, Integer> position; 
+    private final int damage;
+    private final int range;
+    private final int shootTime;
     private Enemy target;
     private TowerType type;
     private boolean isShooting;
-    private ArrayList<Pair<Integer, Integer>> shootingZone;
+    private List<Pair<Integer, Integer>> shootingZone;
     private List<Entity> enemies; 
     private Projectile projectile;
+    private int tick;
 
     /**
      * 
      * @return array of range positions.
      */
-    public ArrayList<Pair<Integer, Integer>> getShootingZone() {
+    public List<Pair<Integer, Integer>> getShootingZone() {
         return shootingZone;
     }
 
@@ -41,7 +42,7 @@ public class BasicTower extends ObservableEntity implements Tower {
      * 
      * @param shootingZone setted.
      */
-    public void setShootingZone(final ArrayList<Pair<Integer, Integer>> shootingZone) {
+    public void setShootingZone(final List<Pair<Integer, Integer>> shootingZone) {
         this.shootingZone = shootingZone;
     }
 
@@ -59,6 +60,7 @@ public class BasicTower extends ObservableEntity implements Tower {
      * @param type of the tower
      */
     public BasicTower(final Pair<Integer, Integer> position, final TowerType type) {
+        super();
         this.position = position;
         this.damage = type.getDamage();
         this.range = type.getRange();
@@ -72,7 +74,7 @@ public class BasicTower extends ObservableEntity implements Tower {
     }
 
     private void findTarget() {
-        for (Entity e: enemies) {
+        for (final Entity e: enemies) {
             for (int i = 0; i < shootingZone.size(); i++) {
                 if (e.getLocation().equals(shootingZone.get(i))) {
                     if (e instanceof Enemy) {
