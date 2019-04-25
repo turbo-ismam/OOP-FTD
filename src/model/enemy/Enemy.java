@@ -71,4 +71,9 @@ public interface Enemy extends Entity {
    * Method to despawn an enemy.
    */
   void despawn();
+/**
+ * 
+ * @return enemy type
+ */
+  EnemyType getEnemyType();
 }
