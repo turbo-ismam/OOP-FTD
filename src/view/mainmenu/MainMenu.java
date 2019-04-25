@@ -25,7 +25,7 @@ public class MainMenu extends Application{
     private double volume = 0.1;
     private GameController gc = new GameControllerImpl();
     private final QuitHandler quitHandler = new QuitHandler(gc);
-    private PlayerName name;
+    private PlayerName name = new PlayerName(gc, volume);
     private final Difficulty avviso = new Difficulty();
 
     static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
@@ -110,22 +110,22 @@ public class MainMenu extends Application{
             final VolumeButton mute = new VolumeButton("Mute");
 
             low.setOnMouseClicked(event -> {
-                volume = 0.1;
+                this.volume = 0.1;
             mediaPlayer1.setVolume(0.1);
             });
 
             medium.setOnMouseClicked(event -> {
-                volume = 0.5;
+                this.volume = 0.5;
             mediaPlayer1.setVolume(0.5);
             });
 
             high.setOnMouseClicked(event -> {
-                volume = 1;
+                this.volume = 1;
             mediaPlayer1.setVolume(1);
             });
 
             mute.setOnMouseClicked(event -> {
-                volume = 0;
+                this.volume = 0;
             mediaPlayer1.setVolume(0);
             });
 

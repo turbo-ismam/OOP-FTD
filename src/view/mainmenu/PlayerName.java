@@ -72,7 +72,7 @@ public class PlayerName extends Region {
         d.setTranslateY(ViewConstants.BUTTON_SIZE * 16);
         d.setOnMouseClicked(event -> {
             gc.init();
-            game = new GameScreen(gc,volume);
+            game = new GameScreen(gc, volume);
             gc.getModel().getPlayer().setName(box.getText());
             root.getChildren().setAll(game.createContent());
         });
@@ -133,5 +133,4 @@ public class PlayerName extends Region {
         return this.gc;
     }
 
-    
 }
