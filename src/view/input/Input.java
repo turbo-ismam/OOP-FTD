@@ -3,7 +3,7 @@ package view.input;
 import model.tower.TowerType;
 
 /**
- * Public Classfor inputs
+ * Public Classfor inputs.
  */
 public interface Input {
 	
@@ -26,7 +26,7 @@ public interface Input {
     InputType getInputType();
     
     /**
-     * Method to return the type of Tower
+     * Method to return the type of Tower.
      * @return the TowerType
      */
     

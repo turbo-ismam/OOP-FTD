@@ -1,17 +1,17 @@
 package constants;
 
 import java.awt.Dimension;
+
 import java.awt.Toolkit;
 
 /**
  * This class collects all static parameters of the game.
  */
 public final class GameConstants {
-    private GameConstants() { }
     /**
      * ScreenSize of the current monitor.
      */
-    public final static Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
     /**
      * Width of the current monitor.
      */
@@ -32,4 +32,9 @@ public final class GameConstants {
      * Height of the application.
      */
     public final static double GAME_HEIGHT = BUTTON_SIZE*22;
+    
+    /**
+     * Empty Constructor
+     */
+    private GameConstants() { }
 }

@@ -12,15 +12,15 @@ import javafx.scene.text.Text;
 
 public class MenuButton extends StackPane{
 
-	private Text text;
+	private final Text text;
 	
-	public MenuButton(String name) {
+	public MenuButton(final String name) {
 		
 		text = new Text(name);
 		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE/2));
 		text.setFill(Color.BLACK);
 		
-		Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE*3.75,GameConstants.BUTTON_SIZE*3.75);
+		final Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE*3.75,GameConstants.BUTTON_SIZE*3.75);
 		bg.setOpacity(0.8);
 		bg.setFill(Color.CRIMSON);
 		
@@ -38,7 +38,7 @@ public class MenuButton extends StackPane{
                 text.setFill(Color.BLACK);
             });
 
-            DropShadow drop = new DropShadow(50, Color.WHITE);
+            final DropShadow drop = new DropShadow(50, Color.WHITE);
             drop.setInput(new Glow());
 
             setOnMousePressed(event -> setEffect(drop));

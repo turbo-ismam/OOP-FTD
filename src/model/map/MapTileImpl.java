@@ -13,7 +13,7 @@ public class MapTileImpl implements MapTile {
 	/**
      * Constructor with position and status
      */
-	public MapTileImpl(int x,int y) {
+	public MapTileImpl(final int x,final int y) {
 		
 		position = new Pair<>(x,y);
 		status = Status.EMPTY;
@@ -32,7 +32,7 @@ public class MapTileImpl implements MapTile {
 	}
 	
 	@Override
-	public void setPosition(Pair<Integer, Integer> position) {
+	public void setPosition(final Pair<Integer, Integer> position) {
 		this.position = position;
 	}
 	
@@ -42,7 +42,7 @@ public class MapTileImpl implements MapTile {
 	}
 	
 	@Override
-	public void setStatus(Status status) {
+	public void setStatus(final Status status) {
 		this.status = status;
 	}
 	

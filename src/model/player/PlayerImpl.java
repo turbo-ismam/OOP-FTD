@@ -17,7 +17,7 @@ public class PlayerImpl implements Player{
 	 * @param coins
 	 * @param wave
 	 */
-	public PlayerImpl(String name,int hp,int coins) {
+	public PlayerImpl(final String name,final int hp,final int coins) {
 		this.name=name;
 		this.hp=hp;
 		this.coins=coins;
@@ -35,7 +35,7 @@ public class PlayerImpl implements Player{
 	}
 	
 	@Override
-	public void takeDamage(int damage) {
+	public void takeDamage(final int damage) {
 		this.hp = this.getHp()-damage;
 	}
 	
@@ -45,7 +45,7 @@ public class PlayerImpl implements Player{
 	}
 	
 	@Override
-	public void incrementCoins(int coins) {
+	public void incrementCoins(final int coins) {
 		this.coins = this.coins + coins;
 	}
 	
@@ -55,12 +55,12 @@ public class PlayerImpl implements Player{
 	}
 	
 	@Override
-	public void setWave(int wave) {
+	public void setWave(final int wave) {
 		this.wave = wave;
 	}
 
 	@Override
-	public void setName(String text) {
+	public void setName(final String text) {
 
 		this.name=text;
 

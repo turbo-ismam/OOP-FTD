@@ -10,10 +10,10 @@ import utilityclasses.Pair;
  */
 public abstract class AbstractMapModel implements Map {
 
-    private List<MapTile> grid = new ArrayList<>();
-    private List<MapTile> enemyPath = new ArrayList<>();
-    private ArrayList<Entity> entity = new ArrayList<>();
-    protected final int gridSize = 20;
+    private final List<MapTile> grid = new ArrayList<>();
+    private final List<MapTile> enemyPath = new ArrayList<>();
+    private final List<Entity> entity = new ArrayList<>();
+    protected static final int GRID_SIZE = 20;
 
     /**
      * Constructor to generate a grid with a path
@@ -29,9 +29,9 @@ public abstract class AbstractMapModel implements Map {
      * Method to generate the grid.
      */
     private void generateGrid() {
-        for (int i = 0; i < gridSize; i++) { 
-            for (int j = 0; j < gridSize; j++) {
-                MapTile tile = new MapTileImpl(i, j);
+        for (int i = 0; i < GRID_SIZE; i++) { 
+            for (int j = 0; j < GRID_SIZE; j++) {
+                final MapTile tile = new MapTileImpl(i, j);
                 grid.add(tile);
             }
         }
@@ -44,13 +44,12 @@ public abstract class AbstractMapModel implements Map {
 
     @Override
     public int getGridSize() {
-        return gridSize;
+        return GRID_SIZE;
     }
 
     @Override
     public ArrayList<Entity> getEntityList(){
-        ArrayList<Entity> copia = new ArrayList<>(entity);
-        return copia;
+        return (ArrayList<Entity>) this.entity;
     }
 
     @Override
@@ -90,7 +89,7 @@ public abstract class AbstractMapModel implements Map {
 
     @Override
     public boolean positionable(final Pair<Integer, Integer> position) {
-        MapTile m = getTilePair(position);
+        final MapTile m = getTilePair(position);
         return m.getStatus() == Status.EMPTY;
     }
 
@@ -101,7 +100,7 @@ public abstract class AbstractMapModel implements Map {
 
     @Override
     public MapTile getTilePair(final Pair<Integer, Integer> position) {
-        for (int i = 0; i < this.gridSize * this.gridSize; i++) {
+        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
             if (this.grid.get(i).getPosition().equals(position)) {
                 return this.grid.get(i);
             }
@@ -111,21 +110,21 @@ public abstract class AbstractMapModel implements Map {
 
     @Override
     public void setTile(final MapTile tile) {
-        int tmp = tile.getPosition().getX() * this.gridSize + tile.getPosition().getY(); 
+        final int tmp = tile.getPosition().getX() * GRID_SIZE + tile.getPosition().getY(); 
         grid.remove(tmp);
         grid.add(tmp, tile);
     }
 
     @Override
     public Pair<Integer, Integer> fromIntToPair(final int position) {
-        int x = position / this.gridSize;
-        int y = position % this.gridSize;
+        final int x = position / GRID_SIZE;
+        final int y = position % GRID_SIZE;
         return new Pair<>(x, y);
     }
 
     @Override
     public int fromPairToInt(final Pair<Integer, Integer> position) {
-        return position.getX() * this.gridSize + position.getY();
+        return position.getX() * GRID_SIZE + position.getY();
     }
 }
 

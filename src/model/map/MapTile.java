@@ -11,24 +11,24 @@ public interface MapTile {
          * Method to get the position
          * @return the position of the tile.
          */
-		public Pair<Integer, Integer> getPosition();
+		Pair<Integer, Integer> getPosition();
 		
 		/**
 		 * Method to set the position of the tile
 		 * @param position.
 		 */
-		public void setPosition(Pair<Integer, Integer> position);
+		void setPosition(Pair<Integer, Integer> position);
 		
 		/**
 		 * Method to get the status
 		 * @return the status of the tile.
 		 */
-		public Status getStatus();
+		Status getStatus();
 		
 		/**
 		 * Method to set the status of the tile
 		 * @param status.
 		 */
-		public void setStatus(Status status);
+		void setStatus(Status status);
 		
 	}
