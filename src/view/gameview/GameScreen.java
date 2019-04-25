@@ -41,10 +41,12 @@ public class GameScreen extends Region {
 
     private static final Image LOGO = new Image("path.png");
     private static final Image TOWERLOGO = new Image("hierophant.png");
-    private static final Image TOWERLOGO1 = new Image("hierophant.png");
+    private static final Image TOWERLOGO1 = new Image("magician.png");
     private static final Image TOWERLOGO2 = new Image("star.png");
     private static final Image GRASSLOGO = new Image("grass.jpg");
     private static final Image EMERALD = new Image("1.png");
+    private static final Image RUBY = new Image("ruby.jpg");
+    private static final Image AMETHYST = new Image("amethyst.jpg");
     private static final Image ENEMY = new Image("dio.png");
     private ArrayList<GridButton> btList = new ArrayList<>();
     private ArrayList<MapTile> mappa;
@@ -359,6 +361,12 @@ public class GameScreen extends Region {
                                         img4.setFitWidth(BUTTONSIZE);
                                         img4.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img4);
+                                    }
+                                    if (v.getType() == TowerType.RANGED) {
+                                        ImageView img5 = new ImageView(TOWERLOGO1);
+                                        img5.setFitWidth(BUTTONSIZE);
+                                        img5.setFitHeight(BUTTONSIZE);
+                                        b.getChildren().add(img5);
                                     }
                                 }
                             }

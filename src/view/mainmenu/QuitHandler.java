@@ -9,6 +9,10 @@ import javafx.stage.WindowEvent;
  */
 public class QuitHandler implements EventHandler<WindowEvent> {
     private final GameController gc;
+    /**
+     * 
+     * @param gc game controller
+     */
     public QuitHandler(final GameController gc) {
         this.gc = gc;
     }

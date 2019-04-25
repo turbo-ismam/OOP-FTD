@@ -8,22 +8,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
+/**
+ * 
+ * MenuButton.
+ *
+ */
 public class MenuButton extends StackPane {
-	
-	private Text text;
-	
-	public MenuButton(String name) {
-		
-		text = new Text(name);
-		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE/2));
-		text.setFill(Color.DEEPPINK);
-		
-		Rectangle bg = new Rectangle(300,70);
-		bg.setOpacity(0.8);
-		bg.setFill(Color.CYAN);
-		
-		  setAlignment(Pos.CENTER);
+
+    private final Text text;
+    /**
+     * Menu button.
+     * @param name name
+     */
+    public MenuButton(final String name) {
+        super();
+        text = new Text(name);
+        text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE / 2));
+        text.setFill(Color.DEEPPINK);
+
+        final Rectangle bg = new Rectangle(300, 70); 
+        bg.setOpacity(0.8);
+        bg.setFill(Color.CYAN);
+
+        setAlignment(Pos.CENTER);
             setRotate(-0.5);
             getChildren().addAll(bg, text);
 
@@ -41,11 +48,11 @@ public class MenuButton extends StackPane {
                 text.setFill(Color.DEEPPINK);
             });
 
-            DropShadow drop = new DropShadow(50, Color.WHITE);
+            final DropShadow drop = new DropShadow(50, Color.WHITE);
             drop.setInput(new Glow());
 
             setOnMousePressed(event -> setEffect(drop));
-            setOnMouseReleased(event -> setEffect(null));  
-	}
+            setOnMouseReleased(event -> setEffect(null));
+    }
 }
 
