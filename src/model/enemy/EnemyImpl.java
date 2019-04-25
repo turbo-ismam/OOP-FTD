@@ -30,7 +30,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
     public EnemyImpl(final EnemyType type) {
         super();
         this.hp = type.getHealth();
-        this.speed = type.getSpeed();
+        this.speed = TICKS_BEFORE_WALKING + type.getSpeed();
         this.value = type.getValue();
         this.alive = false;
     }
@@ -47,7 +47,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
     @Override
     public void update() {
         this.death();
-        if (tick == TICKS_BEFORE_WALKING) {
+        if (tick >= speed) {
             this.walk();
             tick = 0;
         }

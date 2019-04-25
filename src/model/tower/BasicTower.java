@@ -22,7 +22,7 @@ public class BasicTower extends ObservableEntity implements Tower {
     private final Pair<Integer, Integer> position; 
     private final int damage;
     private final int range;
-    private final int shootTime = GameConstants.TOWER_SHOOT_RATE;
+    private final int shootTime;
     private Enemy target;
     private TowerType type;
     private boolean isShooting;
@@ -67,6 +67,7 @@ public class BasicTower extends ObservableEntity implements Tower {
         this.range = type.getRange();
         this.target = null;
         this.type = type;
+        this.shootTime = GameConstants.TOWER_SHOOT_RATE + type.getSpeed();
         this.isShooting = false;
         this.shootingZone = new ArrayList<Pair<Integer, Integer>>();
         setRange();

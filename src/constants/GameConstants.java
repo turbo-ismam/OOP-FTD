@@ -4,7 +4,7 @@ package constants;
  * This class collects the tick time that controls the game.
  */
 public final class GameConstants {
-    
+
     //*****GAME PARAMETERS*****//
     /** Milliseconds of each update. */
     public static final int GAME_SPEED = 16;
@@ -63,6 +63,9 @@ public final class GameConstants {
     /** range of the BASIC tower.*/
     public static final int BASIC_TOWER_RANGE = 2;
 
+    /** shootspeed of the BASIC tower.*/
+    public static final int BASIC_TOWER_SPEED = 2;
+
     //RANGED
     /** cost of the RANGED tower.*/
     public static final int RANGED_TOWER_COST = 60;
@@ -72,6 +75,9 @@ public final class GameConstants {
 
     /** range of the RANGED tower.*/
     public static final int RANGED_TOWER_RANGE = 2;
+    
+    /** shootspeed of the RANGED tower.*/
+    public static final int RANGED_TOWER_SPEED = 2;
 
     //CANNON
     /** cost of the CANNON tower.*/
@@ -83,4 +89,7 @@ public final class GameConstants {
     /** range of the CANNON tower.*/
     public static final int CANNON_TOWER_RANGE = 2;
     private GameConstants() { }
+
+    /** shootspeed of the BASIC tower.*/
+    public static final int CANNON_TOWER_SPEED = 2;
 }
