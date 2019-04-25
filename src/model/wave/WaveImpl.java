@@ -10,7 +10,6 @@ import model.map.MapTile;
 
 /**
  * 
- * 
  *
  */
 public class WaveImpl implements Wave {
@@ -26,6 +25,11 @@ public class WaveImpl implements Wave {
         ondata = new ArrayList<>();
         this.numeroOndata = numeroOndata;
         populate((1 + numeroOndata) * 2, EnemyType.SIMPLE);
+        if (this.numeroOndata > 10) {
+            populate((numeroOndata)/2, EnemyType.TANK);
+            populate((1 + numeroOndata) * 3, EnemyType.SIMPLE);
+            
+        }
     }
 /**
  * 
@@ -41,6 +45,9 @@ public class WaveImpl implements Wave {
     public void populate(final int quantity, final EnemyType type) {
         for (int a = 0; a < quantity; a++) {
             final Enemy e = new EnemyImpl(type);
+            if (this.numeroOndata>10) {
+                e.setSpeed(e.getSpeed()*2);
+            }
             e.setPath(path);
             ondata.add(e);
         }
