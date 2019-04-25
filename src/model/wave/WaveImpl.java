@@ -24,11 +24,14 @@ public class WaveImpl implements Wave {
         super();
         ondata = new ArrayList<>();
         this.numeroOndata = numeroOndata;
+        if (this.numeroOndata>15) {
+            populate((numeroOndata)*3, EnemyType.TANK);
+            populate((numeroOndata)*2, EnemyType.SIMPLE);
+        }
         populate((1 + numeroOndata) * 2, EnemyType.SIMPLE);
         if (this.numeroOndata > 10) {
             populate((numeroOndata)/2, EnemyType.TANK);
-            populate((1 + numeroOndata) * 3, EnemyType.SIMPLE);
-            
+            populate((numeroOndata) *2, EnemyType.SIMPLE);
         }
     }
 /**
