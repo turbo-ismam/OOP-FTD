@@ -17,10 +17,10 @@ public class MenuButton extends StackPane{
 	public MenuButton(String name) {
 		
 		text = new Text(name);
-		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.buttonSize/2));
+		text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE/2));
 		text.setFill(Color.BLACK);
 		
-		Rectangle bg = new Rectangle(GameConstants.buttonSize*3.75,GameConstants.buttonSize*3.75);
+		Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE*3.75,GameConstants.BUTTON_SIZE*3.75);
 		bg.setOpacity(0.8);
 		bg.setFill(Color.CRIMSON);
 		

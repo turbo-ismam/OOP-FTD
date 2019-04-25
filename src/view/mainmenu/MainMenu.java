@@ -23,9 +23,9 @@ public class MainMenu extends Application{
 	private Difficulty avviso = new Difficulty();
 	private QuitHandler quitHandler = new QuitHandler(name.getgc());
 	
-    static final double buttonSize = GameConstants.buttonSize;
-    static final double width = GameConstants.gameWidth;
-    static final double height = GameConstants.gameHeight;
+    static final double buttonSize = GameConstants.BUTTON_SIZE;
+    static final double width = GameConstants.GAME_WIDTH;
+    static final double height = GameConstants.GAME_HEIGHT;
     private double vol;
     
 	

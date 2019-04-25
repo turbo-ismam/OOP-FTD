@@ -65,7 +65,7 @@ public class Win extends Region{
             text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
             text.setFill(Color.DEEPPINK);
             
-            Rectangle bg = new Rectangle(GameConstants.buttonSize*10,GameConstants.buttonSize*3);
+            Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE * 10, GameConstants.BUTTON_SIZE * 3);
             bg.setOpacity(0.8);
             bg.setFill(Color.CYAN);
             

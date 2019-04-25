@@ -17,10 +17,10 @@ public class PlaceTowerButton extends StackPane{
 		public PlaceTowerButton(String name) {
 			
 			text = new Text(name);
-			text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.buttonSize/2));
+			text.setFont(Font.loadFont("file:res/JOJO____.ttf", GameConstants.BUTTON_SIZE/2));
 			text.setFill(Color.BLACK);
 			
-			Rectangle bg = new Rectangle(GameConstants.buttonSize*5,GameConstants.buttonSize*2);
+			Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE*5,GameConstants.BUTTON_SIZE*2);
 			bg.setOpacity(0.8);
 			bg.setFill(Color.DARKORANGE);
 			
