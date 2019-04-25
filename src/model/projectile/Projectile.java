@@ -9,9 +9,10 @@ import model.entity.Entity;
  *
  */
 public class Projectile implements Entity  {
-    private Pair<Integer, Integer> position;
-    private Enemy enemy;
-    private int damage, tick;
+    private final Pair<Integer, Integer> position;
+    private final Enemy enemy;
+    private final int damage;
+    private int tick;
     private boolean alive;
 
     /**

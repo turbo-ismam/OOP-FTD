@@ -11,7 +11,7 @@ public final class GameConstants {
     /**
      * ScreenSize of the current monitor.
      */
-    public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    public final static Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
     /**
      * Width of the current monitor.
      */
@@ -23,13 +23,13 @@ public final class GameConstants {
     /**
      * Wight and Height of a single square.
      */
-    public static final double BUTTON_SIZE = HEIGHT / 30;
+    public static final double BUTTON_SIZE = HEIGHT/30;
     /**
      * Width of the application.
      */
-    public static final double GAME_WIDTH = BUTTON_SIZE * 38;
+    public static final double GAME_WIDTH = BUTTON_SIZE*38;
     /**
      * Height of the application.
      */
-    public final static double GAME_HEIGHT = BUTTON_SIZE * 22;
+    public final static double GAME_HEIGHT = BUTTON_SIZE*22;
 }

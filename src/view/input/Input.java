@@ -3,11 +3,10 @@ package view.input;
 import model.tower.TowerType;
 
 /**
- * Public Classfor inputs
+ * Public Classfor inputs.
  */
 public interface Input {
-	
-	/**
+    /**
      * Returns the horizontal position of the player's click in the window.
      * @return x position
      */

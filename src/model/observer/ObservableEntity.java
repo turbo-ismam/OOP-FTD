@@ -1,6 +1,8 @@
 package model.observer;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import model.entity.Entity;
 /**
  * this class represents the Observable object and has
@@ -9,7 +11,7 @@ import model.entity.Entity;
  */
 public abstract class ObservableEntity implements Entity {
 
-    private ArrayList<Observer> observers = new ArrayList<>();
+    private final List<Observer> observers = new ArrayList<>();
 
     /**
      * Method to add an observer.
@@ -23,7 +25,7 @@ public abstract class ObservableEntity implements Entity {
      * notify the observers who are watching this subject.
      */
     public void notifyObservers() {
-        for (Observer observer : observers) {
+        for (final Observer observer : observers) {
             observer.update(this);
         }
     }

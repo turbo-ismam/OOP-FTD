@@ -26,11 +26,11 @@ public class GameModelImpl implements GameModel, Observer {
     private static final int INITIAL_HP = 5;
     private static final int ENEMY_SPAWN_RATE = 50;
     private static final int WAVES_TO_WIN = 20;
-    private Map m;
-    private Player p;
+    private final Map m;
+    private final Player p;
     private Wave w;
     private GameStatus gs;
-    private int tick = 0;
+    private int tick;
     private boolean readyToSpawn;
 
     /**
@@ -69,7 +69,7 @@ public class GameModelImpl implements GameModel, Observer {
             return false;
         }
         p.incrementCoins(-tt.getCost()); //player PAGA la torre
-        Tower t = new BasicTower(location, tt);
+        final Tower t = new BasicTower(location, tt);
         ((ObservableEntity) t).addObserver(this);
         m.addEntity(t);
         return true;
@@ -151,7 +151,7 @@ public class GameModelImpl implements GameModel, Observer {
         });
         if (w.hasEnemies()) {
             if (tick >= ENEMY_SPAWN_RATE && readyToSpawn) {
-                Enemy e = w.spawn();
+                final Enemy e = w.spawn();
                 ((ObservableEntity) e).addObserver(this);
                 this.addEntity(e);
                 tick = 0;
@@ -179,7 +179,7 @@ public class GameModelImpl implements GameModel, Observer {
             addEntity(((Tower) subject).getProjectile());
         }
         else if (subject instanceof Enemy) {
-            Enemy e = (Enemy) subject;
+            final Enemy e = (Enemy) subject;
             if (e.getLocation().equals(m.getPathList().get(m.getPathList().size() - 1).getPosition())) {
                 p.takeDamage(1);
             }
