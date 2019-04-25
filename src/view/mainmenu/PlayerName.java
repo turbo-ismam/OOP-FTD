@@ -28,6 +28,11 @@ public class PlayerName extends Region {
 
     private GameScreen game;
     private final GameController gc = new GameControllerImpl();
+    private double volume;
+    
+    public PlayerName(final double d) {
+        volume = d;
+    }
     /**
      * 
      * @return pane
@@ -67,7 +72,7 @@ public class PlayerName extends Region {
         d.setTranslateY(GameConstants.BUTTON_SIZE * 16);
         d.setOnMouseClicked(event -> {
             gc.init();
-            game = new GameScreen(gc);
+            game = new GameScreen(gc,volume);
             gc.getModel().getPlayer().setName(box.getText());
             root.getChildren().setAll(game.createContent());
         });
@@ -128,4 +133,5 @@ public class PlayerName extends Region {
         return this.gc;
     }
 
+    
 }

@@ -15,12 +15,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import view.gameview.GameScreen;
 
 
 public class MainMenu extends Application{
-
-    private final PlayerName name = new PlayerName();
-    private final QuitHandler quitHandler = new QuitHandler(name.getgc());
+    private double volume = 0.1;
+    private PlayerName name;
+    private QuitHandler quitHandler;
     private final Difficulty avviso = new Difficulty();
 
     static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
@@ -104,23 +105,23 @@ public class MainMenu extends Application{
             final VolumeButton mute = new VolumeButton("Mute");
 
             low.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(0.1);
+                volume = 0.1;
+            mediaPlayer1.setVolume(0.1);
             });
 
             medium.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(0.5);
+                volume = 0.5;
+            mediaPlayer1.setVolume(0.5);
             });
 
             high.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(1);
+                volume = 1;
+            mediaPlayer1.setVolume(1);
             });
 
             mute.setOnMouseClicked(event -> {
-
-            mediaPlayer.setVolume(0);
+                volume = 0;
+            mediaPlayer1.setVolume(0);
             });
 
             soundback.setOnMouseClicked(event -> {
@@ -176,6 +177,8 @@ public class MainMenu extends Application{
             });
             final MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
+                name = new PlayerName(volume);
+                quitHandler = new QuitHandler(name.getgc());
                 try {
                     root.getChildren().setAll(name.createContent());
                 } catch (IOException e) {
