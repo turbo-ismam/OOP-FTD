@@ -6,14 +6,14 @@ import model.entity.Entity;
 import utilityclasses.Pair;
 
 /**
- * This class implements the interface Map.
+ * This class implements the interface Map
  */
 public abstract class AbstractMapModel implements Map {
 
-    private List<MapTile> grid = new ArrayList<>();
-    private List<MapTile> enemyPath = new ArrayList<>();
-    private ArrayList<Entity> entity = new ArrayList<>();
-    private final int gridSize = 20;
+    private final List<MapTile> grid = new ArrayList<>();
+    private final List<MapTile> enemyPath = new ArrayList<>();
+    private final List<Entity> entity = new ArrayList<>();
+    protected static final int GRID_SIZE = 20;
 
     /**
      * Constructor to generate a grid with a path
@@ -29,115 +29,78 @@ public abstract class AbstractMapModel implements Map {
      * Method to generate the grid.
      */
     private void generateGrid() {
-        for (int i = 0; i < gridSize; i++) { 
-            for (int j = 0; j < gridSize; j++) {
-                MapTile tile = new MapTileImpl(i, j);
+        for (int i = 0; i < GRID_SIZE; i++) { 
+            for (int j = 0; j < GRID_SIZE; j++) {
+                final MapTile tile = new MapTileImpl(i, j);
                 grid.add(tile);
             }
         }
     }
-
+    
     /**
      * This method is an abstract method, other classes that extend this class will implement this method.
      */
     abstract void generatePath();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getGridSize() {
-        return gridSize;
+        return GRID_SIZE;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<Entity> getEntityList(){
-        ArrayList<Entity> copia = new ArrayList<>(entity);
-        return copia;
+        return (ArrayList<Entity>) this.entity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<MapTile> getTileList() {
         return (ArrayList<MapTile>) this.grid;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ArrayList<MapTile> getPathList() {
         return (ArrayList<MapTile>) this.enemyPath;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addEntity(final Entity e) {
         this.entity.add(e);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void removeEntity(final Pair<Integer, Integer> location) {
         entity.removeIf(e -> e.getLocation().equals(location));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void removeEntity(final Entity e) {
         entity.remove(e);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public MapTile initialPosition() {
         return enemyPath.get(0);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public MapTile finalPosition() {
         return enemyPath.get(enemyPath.size());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean positionable(final Pair<Integer, Integer> position) {
-        MapTile m = getTilePair(position);
+        final MapTile m = getTilePair(position);
         return m.getStatus() == Status.EMPTY;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public MapTile getTileInt(final int position) {
         return grid.get(position);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public MapTile getTilePair(final Pair<Integer, Integer> position) {
-        for (int i = 0; i < this.gridSize * this.gridSize; i++) {
+        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
             if (this.grid.get(i).getPosition().equals(position)) {
                 return this.grid.get(i);
             }
@@ -145,32 +108,23 @@ public abstract class AbstractMapModel implements Map {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void setTile(final MapTile tile) {
-        int tmp = tile.getPosition().getX() * this.gridSize + tile.getPosition().getY(); 
+        final int tmp = tile.getPosition().getX() * GRID_SIZE + tile.getPosition().getY(); 
         grid.remove(tmp);
         grid.add(tmp, tile);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Pair<Integer, Integer> fromIntToPair(final int position) {
-        int x = position / this.gridSize;
-        int y = position % this.gridSize;
+        final int x = position / GRID_SIZE;
+        final int y = position % GRID_SIZE;
         return new Pair<>(x, y);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int fromPairToInt(final Pair<Integer, Integer> position) {
-        return position.getX() * this.gridSize + position.getY();
+        return position.getX() * GRID_SIZE + position.getY();
     }
 }
 
