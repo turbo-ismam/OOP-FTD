@@ -29,6 +29,22 @@ public class BasicTower extends ObservableEntity implements Tower {
     private Projectile projectile;
 
     /**
+     * 
+     * @return array of range positions.
+     */
+    public ArrayList<Pair<Integer, Integer>> getShootingZone() {
+        return shootingZone;
+    }
+
+    /**
+     * 
+     * @param shootingZone setted.
+     */
+    public void setShootingZone(final ArrayList<Pair<Integer, Integer>> shootingZone) {
+        this.shootingZone = shootingZone;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

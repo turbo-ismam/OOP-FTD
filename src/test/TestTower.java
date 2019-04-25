@@ -1,44 +1,54 @@
-//package Test;
-//
-//import static org.junit.Assert.*;
-//import java.util.ArrayList;
-//import Model.Tower.*;
-//import Model.Enemy.Enemy;
-//import Model.Map.MapTile;
-//import Model.Map.MapTileImpl;
-//import Model.Projectile.*;
-//import utilityClasses.Pair;
-//
-//public class TestTower {
-//	
-//	private Tower t = new BasicTower(new Pair<>(1, 2), TowerType.BASIC);
-//	private ArrayList<Pair<Integer, Integer>> shootingZone;
-//	private int range = 2;
-//	MapTile m = new MapTileImpl(1, 2);
-//	private Enemy target; 
-//	Projectile p = new Projectile(null, target, range);
-//	
-//	@org.junit.Test
-//	public void testLocation(){
-//		
-//		//check the tower position
-//		assertEquals(m.getPosition(), t.getLocation());
-//		Pair<Integer,Integer> b = new Pair<>(1,3);
-//		
-//		//check the tower range
-//		for(int i = t.getLocation().getX() - range; i <= t.getLocation().getX() + range; i++) {
-//			for(int j = t.getLocation().getY() - range; j <= t.getLocation().getY() + range; j++) {	
-//					shootingZone.add(new Pair<>(i,j));
-//					if(shootingZone.contains(b)) {
-//						System.out.println("ok");
-//				}
-//			}
-//		}	
-//	}
-//	
-//	public void testShoot() {
-//		t.update();
-//		
-//	}
-//	
-//}
+package test;
+
+import static org.junit.Assert.assertEquals;
+
+
+import model.enemy.Enemy;
+import model.map.MapTile;
+import model.map.MapTileImpl;
+import model.projectile.Projectile;
+import model.tower.BasicTower;
+import model.tower.TowerType;
+import utilityclasses.Pair;
+
+/**
+ * test for tower.
+ * 
+ *
+ */
+public class TestTower {
+
+    private BasicTower t = new BasicTower(new Pair<>(1, 2), TowerType.BASIC);
+    private MapTile m = new MapTileImpl(1, 2);
+    private Enemy target; 
+    private Projectile p = new Projectile(new Pair<>(2, 3), target, TowerType.BASIC.getRange());
+    private MapTile mp = new MapTileImpl(2, 3);
+
+    /**
+     * test if the tower is placed in the right position of the map.
+     */
+    @org.junit.Test
+    public void testLocation() {
+
+        //check the tower position
+        assertEquals(m.getPosition(), t.getLocation());
+        Pair<Integer, Integer> b = new Pair<>(1, 3);
+
+        //check the tower range
+            for (int i = 0; i < t.getShootingZone().size(); i++) {
+                Pair<Integer, Integer> s = t.getShootingZone().get(i);
+                if (s.equals(b)) {
+                    System.out.println(s);
+                }
+        }
+    }
+
+    /**
+     * test if tower shoots.
+     */
+    @org.junit.Test
+    public void testShoot() {
+        t.update();
+        assertEquals(p.getLocation(), mp.getPosition());
+    }
+}
