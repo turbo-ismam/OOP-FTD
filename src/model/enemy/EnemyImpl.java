@@ -2,6 +2,7 @@ package model.enemy;
 
 import java.util.ArrayList;
 
+import constants.TicksConstants;
 import model.map.MapTile;
 import model.map.MapTileImpl;
 import model.observer.ObservableEntity;
@@ -12,17 +13,16 @@ import utilityclasses.Pair;
  *
  */
 public class EnemyImpl extends ObservableEntity implements Enemy {
-    private static final int TICKS_BEFORE_WALKING = 10;
+    private static final int TICKS_BEFORE_WALKING = TicksConstants.MONSTER_WALK_RATE;
     private int hp;
-    private int damage;
-    private int speed;
-    private int value;
+    private final int speed;
+    private final int value;
     private boolean alive;
     private Direction direction;
-    private ArrayList<MapTile> path = null;
+    private ArrayList<MapTile> path;
     private MapTile actual;
     private int x = 1;
-    private int tick = 0;
+    private int tick;
 /**
  * 
  * @param type type
@@ -122,8 +122,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
  */
     @Override
     public void setDamage(final int damage) {
-        this.damage = damage;
-        this.hp -= this.damage;
+        this.hp -= damage;
         if (this.hp <= 0) { 
             this.death();
             notifyObservers();

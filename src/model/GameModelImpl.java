@@ -1,5 +1,6 @@
 package model;
 
+import constants.TicksConstants;
 import model.enemy.Enemy;
 import model.entity.Entity;
 import model.map.HardMap;
@@ -22,10 +23,10 @@ import utilityclasses.Pair;
  */
 
 public class GameModelImpl implements GameModel, Observer {
-    private static final int INITIAL_COINS = 300;
-    private static final int INITIAL_HP = 5;
-    private static final int ENEMY_SPAWN_RATE = 50;
-    private static final int WAVES_TO_WIN = 20;
+    private static final int INITIAL_COINS = TicksConstants.INITIAL_COINS;
+    private static final int INITIAL_HP = TicksConstants.INITIAL_HP;
+    private static final int ENEMY_SPAWN_RATE = TicksConstants.MONSTER_SPAWN_RATE;
+    private static final int WAVES_TO_WIN = TicksConstants.WAVES_TO_WIN;
     private final Map m;
     private final Player p;
     private Wave w;

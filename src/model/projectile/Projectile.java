@@ -1,5 +1,6 @@
 package model.projectile;
 
+import constants.TicksConstants;
 import utilityclasses.Pair;
 import model.enemy.Enemy;
 import model.entity.Entity;
@@ -9,6 +10,7 @@ import model.entity.Entity;
  *
  */
 public class Projectile implements Entity  {
+    private static final int PROJECTILE_HIT_ENEMY = TicksConstants.PROJECTILE_HIT_ENEMY;
     private final Pair<Integer, Integer> position;
     private final Enemy enemy;
     private final int damage;
@@ -34,7 +36,7 @@ public class Projectile implements Entity  {
     @Override
     public void update() {
         if (alive) {
-            if (tick > 1) {
+            if (tick > PROJECTILE_HIT_ENEMY) {
                 enemy.setDamage(damage);
                 this.alive = false;
             }

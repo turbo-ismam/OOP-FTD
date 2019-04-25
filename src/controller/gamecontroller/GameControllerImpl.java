@@ -2,6 +2,8 @@ package controller.gamecontroller;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import constants.TicksConstants;
 import model.GameModel;
 import model.GameModelImpl;
 import view.gameview.GameScreen;
@@ -10,6 +12,8 @@ import view.input.Input;
  * Implementation of the Controller of the game.
  */
 public class GameControllerImpl implements GameController {
+    private static final int GAME_SPEED = TicksConstants.GAME_SPEED;
+
     private GameModel gm;
     private final ScheduledThreadPoolExecutor ses;
     private boolean running; 
@@ -38,7 +42,7 @@ public class GameControllerImpl implements GameController {
     public void startLoop(final GameScreen v) {
         gl = new GameLoop(gm, v);
         if (!running) {
-            ses.scheduleWithFixedDelay(gl, 0, 10, TimeUnit.MILLISECONDS);
+            ses.scheduleWithFixedDelay(gl, 0, GAME_SPEED, TimeUnit.MILLISECONDS);
             this.running = true;
         }
     }
