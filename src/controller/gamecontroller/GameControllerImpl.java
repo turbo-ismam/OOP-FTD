@@ -17,7 +17,7 @@ public class GameControllerImpl implements GameController {
     private GameModel gm;
     private final ScheduledThreadPoolExecutor ses;
     private boolean running; 
-    private int difficulty = 3;
+    private int difficulty = 2;
     private GameLoop gl;
     /**
      * Constructor for the GameController.

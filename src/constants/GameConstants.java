@@ -31,65 +31,66 @@ public final class GameConstants {
     public static final int SIMPLE_ENEMY_HP = 100;
 
     /** speed of the SIMPLE enemy.*/
-    public static final int SIMPLE_ENEMY_SPEED = -4;
+    public static final int SIMPLE_ENEMY_SPEED = 0;
 
     /** value of the SIMPLE enemy.*/
     public static final int SIMPLE_ENEMY_VALUE = 20;
 
     //TANK
     /** Hp of the TANK enemy.*/
-    public static final int TANK_ENEMY_HP = 100;
+    public static final int TANK_ENEMY_HP = 200;
 
     /** speed of the TANK enemy.*/
-    public static final int TANK_ENEMY_SPEED = 4;
+    public static final int TANK_ENEMY_SPEED = 0;
 
     /** value of the TANK enemy.*/
     public static final int TANK_ENEMY_VALUE = 40;
 
     //*****TOWER PARAMETERS*****//
     /** Ticks a basic tower need to wait before shooting the next projectile.*/
-    public static final int TOWER_SHOOT_RATE = 5;
+    public static final int TOWER_SHOOT_RATE = 35;
 
     /** Ticks between the projectile being shot and enemy hit.*/
     public static final int PROJECTILE_HIT_ENEMY = 1;
 
-    //BASIC
+    //BASIC 1
     /** cost of the BASIC tower.*/
     public static final int BASIC_TOWER_COST = 50;
 
     /** damage of the BASIC tower.*/
-    public static final int BASIC_TOWER_DAMAGE = 1;
+    public static final int BASIC_TOWER_DAMAGE = 20;
 
     /** range of the BASIC tower.*/
-    public static final int BASIC_TOWER_RANGE = 2;
+    public static final int BASIC_TOWER_RANGE = 5;
 
     /** shootspeed of the BASIC tower.*/
     public static final int BASIC_TOWER_SPEED = 2;
 
     //RANGED
     /** cost of the RANGED tower.*/
-    public static final int RANGED_TOWER_COST = 60;
+    public static final int RANGED_TOWER_COST = 75;
 
     /** damage of the RANGED tower.*/
-    public static final int RANGED_TOWER_DAMAGE = 1;
+    public static final int RANGED_TOWER_DAMAGE = 30;
 
     /** range of the RANGED tower.*/
-    public static final int RANGED_TOWER_RANGE = 2;
-    
+    public static final int RANGED_TOWER_RANGE = 5;
+
     /** shootspeed of the RANGED tower.*/
     public static final int RANGED_TOWER_SPEED = 2;
 
-    //CANNON
+    //CANNON 3
     /** cost of the CANNON tower.*/
-    public static final int CANNON_TOWER_COST = 70;
+    public static final int CANNON_TOWER_COST = 150;
 
     /** damage of the CANNON tower.*/
-    public static final int CANNON_TOWER_DAMAGE = 1;
+    public static final int CANNON_TOWER_DAMAGE = 50;
 
     /** range of the CANNON tower.*/
-    public static final int CANNON_TOWER_RANGE = 2;
-    private GameConstants() { }
+    public static final int CANNON_TOWER_RANGE = 7;
 
     /** shootspeed of the BASIC tower.*/
     public static final int CANNON_TOWER_SPEED = 2;
+
+    private GameConstants() { }
 }
