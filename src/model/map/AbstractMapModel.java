@@ -40,6 +40,7 @@ public abstract class AbstractMapModel implements Map {
     /**
      * This method is an abstract method, other classes that extend this class will implement this method.
      */
+    @SuppressWarnings("PMD.DefaultPackage")
     abstract void generatePath();
 
     @Override
@@ -49,8 +50,7 @@ public abstract class AbstractMapModel implements Map {
 
     @Override
     public ArrayList<Entity> getEntityList(){
-        final ArrayList<Entity> copia = new ArrayList<>(entity);
-        return copia;
+        return new ArrayList<>(entity);
     }
 
     @Override

@@ -90,7 +90,7 @@ public final class GameConstants {
     public static final int CANNON_TOWER_RANGE = 3;
 
     /** shootspeed of the BASIC tower.*/
-    public static final int CANNON_TOWER_SPEED = 30;
+    public static final int CANNON_TOWER_SPEED = 40;
 
     private GameConstants() { }
 }
