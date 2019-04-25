@@ -397,7 +397,7 @@ public class GameScreen extends Region {
                                         b.getChildren().add(img4);
                                     }
                                 }
-                            }                           
+                            }
                         }
                         else {
                             final ImageView img1 = new ImageView(GRASSLOGO);
@@ -421,7 +421,7 @@ public class GameScreen extends Region {
                                         b.getChildren().add(img4);
                                     }
                                     if (v.getType() == TowerType.RANGED) {
-                                        ImageView img5 = new ImageView(TOWERLOGO1);
+                                        final ImageView img5 = new ImageView(TOWERLOGO1);
                                         img5.setFitWidth(BUTTONSIZE);
                                         img5.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img5);
@@ -452,7 +452,7 @@ public class GameScreen extends Region {
                                                 b.getChildren().add(img4);
                                             }
                                         }
-                                    }                           
+                                    }
                                 }
                             }
                         }

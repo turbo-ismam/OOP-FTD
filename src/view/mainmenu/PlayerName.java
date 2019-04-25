@@ -82,6 +82,9 @@ public class PlayerName extends Region {
 
         return root;
     }
+    public void setVol(double d) {
+        this.volume = d;
+    }
 /**
  * 
  * Button style.
@@ -132,5 +135,4 @@ public class PlayerName extends Region {
     public GameController getgc() {
         return this.gc;
     }
-
 }

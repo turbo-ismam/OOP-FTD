@@ -28,9 +28,9 @@ public class MainMenu extends Application{
     private PlayerName name = new PlayerName(gc, volume);
     private final Difficulty avviso = new Difficulty();
 
-    static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
-    static final double WIDTH = ViewConstants.GAME_WIDTH;
-    static final double HEIGHT = ViewConstants.GAME_HEIGHT;
+    private static final double BUTTONSIZE = ViewConstants.BUTTON_SIZE;
+    private static final double WIDTH = ViewConstants.GAME_WIDTH;
+    private static final double HEIGHT = ViewConstants.GAME_HEIGHT;
 
     private double vol;
 
@@ -45,7 +45,7 @@ public class MainMenu extends Application{
             final Media sound = new Media(new File(musicFile).toURI().toString());
             final MediaPlayer mediaPlayer1 = new MediaPlayer(sound);
             this.vol = 0;
-            mediaPlayer1.setVolume(0.1); //SISTEMA QUI IL VOLUME
+            mediaPlayer1.setVolume(0.1); 
 
             final Pane root = new Pane();
             root.setPrefSize(WIDTH, HEIGHT);
@@ -182,7 +182,7 @@ public class MainMenu extends Application{
             });
             final MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-                name = new PlayerName(gc, volume);
+                name.setVol(volume);
                 try {
                     root.getChildren().setAll(name.createContent());
                 } catch (IOException e) {
