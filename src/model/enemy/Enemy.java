@@ -48,7 +48,7 @@ public interface Enemy extends Entity {
   int getSpeed();
   /**
    * Method to increment the speed of enemy
-   * @param value
+   * @param value value
    * @return
    */
   void setSpeed(int value);
@@ -71,4 +71,9 @@ public interface Enemy extends Entity {
    * Method to despawn an enemy.
    */
   void despawn();
+/**
+ * 
+ * @return enemy type
+ */
+  EnemyType getEnemyType();
 }

@@ -8,6 +8,7 @@ import constants.ViewConstants;
 import controller.gamecontroller.GameController;
 import model.GameStatus;
 import model.enemy.Enemy;
+import model.enemy.EnemyType;
 import model.entity.Entity;
 import model.map.MapTile;
 import model.map.Status;
@@ -53,13 +54,14 @@ public class GameScreen extends Region {
     private static final Image RUBY = new Image("ruby.png");
     private static final Image AMETHYST = new Image("amethyst2.png");
     private static final Image ENEMY = new Image("dio.png");
+    private static final Image TANK = new Image("stand.png");
     private final List<GridButton> btList = new ArrayList<>();
     private final List<MapTile> mappa;
     private final GameController gc;
-    private boolean type1 ;
-    private boolean type2 ;
-    private boolean type3 ;
-    private boolean remove ;
+    private boolean type1;
+    private boolean type2;
+    private boolean type3;
+    private boolean remove;
     private final Text text = new Text("COINS" + "  " +  0);
     private final Text text1 = new Text("HP" + "  " + 0);
     private final Text text2 = new Text("WAVE" + "  " + 0);
@@ -162,11 +164,11 @@ public class GameScreen extends Region {
         //menu3.setPadding(new Insets(buttonSize,buttonSize,buttonSize,buttonSize));
         menu3.setHgap(BUTTONSIZE);
         menu3.setVgap(BUTTONSIZE);
-        final PlaceTowerButton tower1 = new PlaceTowerButton("type 1");
+        final PlaceTowerButton tower1 = new PlaceTowerButton("Basic");
         menu3.getChildren().add(tower1);
-        final PlaceTowerButton tower2 = new PlaceTowerButton("type 2");
+        final PlaceTowerButton tower2 = new PlaceTowerButton("Ranged");
         menu3.getChildren().add(tower2);
-        final PlaceTowerButton tower3 = new PlaceTowerButton("Type 3");
+        final PlaceTowerButton tower3 = new PlaceTowerButton("Cannon");
         menu3.getChildren().add(tower3);
         final PlaceTowerButton remove = new PlaceTowerButton("remove");
         menu3.getChildren().add(remove);
@@ -337,10 +339,10 @@ public class GameScreen extends Region {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                   
+
                 }
             }
-            
+
             for (Entity e:entityList) {
                 if (e instanceof Tower) {
                     t.add((Tower) e);
@@ -348,23 +350,43 @@ public class GameScreen extends Region {
                 if (e instanceof Enemy) {
                     p.add((Enemy) e);
                     for (final PathButton b:btlist2) {
-                        final ImageView r = new ImageView(ENEMY);
-                        r.setFitWidth(BUTTONSIZE);
-                        r.setFitHeight(BUTTONSIZE);
-
-                        final ImageView img = new ImageView(LOGO);
-                        img.setFitWidth(BUTTONSIZE);
-                        img.setFitHeight(BUTTONSIZE);
-
                         if (e.getLocation().equals(b.getPosition())) {
-                            b.getChildren().setAll(r);
+                            final ImageView r = new ImageView(ENEMY);
+                            r.setFitWidth(BUTTONSIZE);
+                            r.setFitHeight(BUTTONSIZE);
 
+                            final ImageView r2 = new ImageView(TANK);
+                            r2.setFitWidth(BUTTONSIZE);
+                            r2.setFitHeight(BUTTONSIZE);
+
+                            if (((Enemy) e).getEnemyType() == EnemyType.SIMPLE) {
+                            b.getChildren().add(r);
+                            }
+                            else {
+                                b.getChildren().add(r2);
+                            }
                         }
                         else {
+                            final ImageView img = new ImageView(LOGO);
+                            img.setFitWidth(BUTTONSIZE);
+                            img.setFitHeight(BUTTONSIZE);
                             b.getChildren().setAll(img);
                             for (final Enemy q:p) {
                                 if (q.getLocation().equals(b.getPosition())) {
-                                    b.getChildren().setAll(r);
+                                    final ImageView r = new ImageView(ENEMY);
+                                    r.setFitWidth(BUTTONSIZE);
+                                    r.setFitHeight(BUTTONSIZE);
+
+                                    final ImageView r2 = new ImageView(TANK);
+                                    r2.setFitWidth(BUTTONSIZE);
+                                    r2.setFitHeight(BUTTONSIZE);
+
+                                    if (((Enemy) e).getEnemyType() == EnemyType.SIMPLE) {
+                                    b.getChildren().add(r);
+                                    }
+                                    else {
+                                        b.getChildren().add(r2);
+                                    }
                                 }
                             }
                         }

@@ -23,12 +23,14 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
     private MapTile actual;
     private int x = 1;
     private int tick;
+    private EnemyType type;
 /**
  * 
  * @param type type
  */
     public EnemyImpl(final EnemyType type) {
         super();
+        this.type = type;
         this.hp = type.getHealth();
         this.speed = TICKS_BEFORE_WALKING + type.getSpeed();
         this.value = type.getValue();
@@ -176,5 +178,11 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
  */
     public boolean isAlive() {
         return alive;
+    }
+/**
+ * {@inheritDoc}
+ */
+    public EnemyType getEnemyType() {
+        return this.type; 
     }
 }

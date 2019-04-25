@@ -26,9 +26,9 @@ public class WaveImpl implements Wave {
         this.numeroOndata = numeroOndata;
         populate((1 + numeroOndata) * 2, EnemyType.SIMPLE);
         if (this.numeroOndata > 10) {
-            populate((numeroOndata)/2, EnemyType.TANK);
+            populate((numeroOndata) / 2, EnemyType.TANK);
             populate((1 + numeroOndata) * 3, EnemyType.SIMPLE);
-            
+
         }
     }
 /**
