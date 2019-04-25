@@ -25,13 +25,13 @@ import javafx.scene.text.Text;
  *
  */
 public class PlayerName extends Region {
-
+    private GameController gc;
     private GameScreen game;
-    private final GameController gc = new GameControllerImpl();
     private double volume;
     
-    public PlayerName(final double d) {
-        volume = d;
+    public PlayerName(final GameController gc, final double d) {
+        this.gc = gc;
+        this.volume = d;
     }
     /**
      * 

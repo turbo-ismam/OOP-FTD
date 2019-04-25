@@ -3,6 +3,8 @@ package view.mainmenu;
 import java.io.File;
 import java.io.IOException;
 import constants.GameConstants;
+import controller.gamecontroller.GameController;
+import controller.gamecontroller.GameControllerImpl;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -15,18 +17,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import view.gameview.GameScreen;
 
 
 public class MainMenu extends Application{
     private double volume = 0.1;
+    private GameController gc = new GameControllerImpl();
+    private final QuitHandler quitHandler = new QuitHandler(gc);
     private PlayerName name;
-    private QuitHandler quitHandler;
     private final Difficulty avviso = new Difficulty();
 
-    static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
-    static final double WIDTH = GameConstants.GAME_WIDTH;
-    static final double HEIGHT = GameConstants.GAME_HEIGHT;
+    private static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
+    private static final double WIDTH = GameConstants.GAME_WIDTH;
+    private static final double HEIGHT = GameConstants.GAME_HEIGHT;
     private double vol;
 
 /**
@@ -177,8 +179,7 @@ public class MainMenu extends Application{
             });
             final MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
-                name = new PlayerName(volume);
-                quitHandler = new QuitHandler(name.getgc());
+                name = new PlayerName(gc, volume);
                 try {
                     root.getChildren().setAll(name.createContent());
                 } catch (IOException e) {
