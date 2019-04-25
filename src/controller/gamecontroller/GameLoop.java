@@ -2,6 +2,7 @@ package controller.gamecontroller;
 
 import java.util.ArrayList;
 import model.GameModel;
+import model.GameStatus;
 import view.gameview.GameScreen;
 import view.input.Input;
 import utilityclasses.Pair;
@@ -45,7 +46,7 @@ public class GameLoop implements Runnable {
                 });
             }
             //render view
-            v.render(gm.getMap().getEntityList());
+            v.render(gm.getMap().getEntityList(), gm.getGameStatus());
             i++; //variabili di debug
         }
         else {
