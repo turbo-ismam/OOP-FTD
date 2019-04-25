@@ -27,6 +27,7 @@ public class BasicTower extends ObservableEntity implements Tower {
     private ArrayList<Pair<Integer, Integer>> shootingZone;
     private List<Entity> enemies; 
     private Projectile projectile;
+    private int tick;
 
     /**
      * {@inheritDoc}
@@ -107,8 +108,12 @@ public class BasicTower extends ObservableEntity implements Tower {
     public void update() {
         findTarget();
         if (isTargetSet()) {
-            this.projectile = shoot();
-            this.notifyObservers();
+            tick++;
+            if (tick == 25) {
+                this.projectile = shoot();
+                this.notifyObservers();
+            }
+            tick = 0;
         }
     }
 
