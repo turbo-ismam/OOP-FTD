@@ -1,6 +1,8 @@
 package model.wave;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import model.enemy.Enemy;
 import model.enemy.EnemyImpl;
 import model.enemy.EnemyType;
@@ -12,9 +14,9 @@ import model.map.MapTile;
  *
  */
 public class WaveImpl implements Wave {
-    private static ArrayList<MapTile> path = new ArrayList<>();
-    private ArrayList<Enemy> ondata;
-    private int numeroOndata;
+    private static List<MapTile> path = new ArrayList<>();
+    private final List<Enemy> ondata;
+    private final int numeroOndata;
 /**
  * 
  * @param numeroOndata numeroOndata
@@ -38,7 +40,7 @@ public class WaveImpl implements Wave {
     @Override
     public void populate(final int quantity, final EnemyType type) {
         for (int a = 0; a < quantity; a++) {
-            Enemy e = new EnemyImpl(type);
+            final Enemy e = new EnemyImpl(type);
             e.setPath(path);
             ondata.add(e);
         }
@@ -75,7 +77,7 @@ public class WaveImpl implements Wave {
      * 
      * @param path path
      */
-    public static void setPath(final ArrayList<MapTile> path) {
+    public static void setPath(final List<MapTile> path) {
         WaveImpl.path = path;
     }
 }

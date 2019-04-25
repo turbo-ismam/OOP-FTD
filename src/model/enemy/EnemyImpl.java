@@ -1,6 +1,6 @@
 package model.enemy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import constants.TicksConstants;
 import model.map.MapTile;
@@ -19,7 +19,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
     private final int value;
     private boolean alive;
     private Direction direction;
-    private ArrayList<MapTile> path;
+    private List<MapTile> path;
     private MapTile actual;
     private int x = 1;
     private int tick;
@@ -28,6 +28,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
  * @param type type
  */
     public EnemyImpl(final EnemyType type) {
+        super();
         this.hp = type.getHealth();
         this.speed = type.getSpeed();
         this.value = type.getValue();
@@ -67,7 +68,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
                 this.despawn();
             }
             if (alive) {
-                MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),
+                final MapTile next = new MapTileImpl(path.get(x).getPosition().getX(),
                     path.get(x).getPosition().getY());
                 if (next.getPosition().getX() > actual.getPosition().getX()) {
                     direction = Direction.RIGHT;
@@ -146,7 +147,7 @@ public class EnemyImpl extends ObservableEntity implements Enemy {
  * {@inheritDoc}
  */
     @Override
-    public void setPath(final ArrayList<MapTile> sentiero) {
+    public void setPath(final List<MapTile> sentiero) {
         this.path = sentiero;
         this.actual = sentiero.get(0);
     }

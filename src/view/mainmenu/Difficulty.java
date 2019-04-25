@@ -16,34 +16,42 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+/**
+ * 
+ * Difficulty buttons.
+ *
+ */
+public class Difficulty extends Region {
+/**
+ * Difficulty buttons.
+ * @param primaryStage stage
+ * @throws Exception exception
+ */
+    public void start(final Stage primaryStage) throws Exception {
 
-public class Difficulty extends Region{
-
-    public void start(Stage primaryStage) throws Exception {
-
-        Pane pane = new Pane();
+        final Pane pane = new Pane();
         pane.setPrefSize(GameConstants.GAME_WIDTH / 2, GameConstants.GAME_HEIGHT / 2);
-        Text text = new Text("Difficulty changed!");
+        final Text text = new Text("Difficulty changed!");
         text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
         text.setFill(Color.WHITE);
 
-        VBox space = new VBox();
+        final VBox space = new VBox();
         space.setTranslateX((GameConstants.GAME_WIDTH / 2) / 2 - GameConstants.BUTTON_SIZE * 2.75);
         space.setTranslateY((GameConstants.GAME_HEIGHT / 2) / 2 - GameConstants.BUTTON_SIZE * 1.5);
 
-        ImageLoader im = new ImageLoader("res/difficoulty.jpg");
+        final ImageLoader im = new ImageLoader("res/difficoulty.jpg");
         im.getImage().prefHeight(GameConstants.GAME_HEIGHT / 8);
         im.getImage().prefWidth(GameConstants.GAME_WIDTH / 8);
 
         pane.getChildren().add(im.getImage());
-        String style3 = "-fx-background-color: rgba(0, 0, 0, 0.5);"; //verde
+        final String style3 = "-fx-background-color: rgba(0, 0, 0, 0.5);"; //verde
         pane.setStyle(style3);
 
-        ButtonD bt = new ButtonD("Ok");
+        final ButtonD bt = new ButtonD("Ok");
         bt.setOnMouseClicked(event -> {
             primaryStage.close();
         });
-        Rectangle bg = new Rectangle(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
+        final Rectangle bg = new Rectangle(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
         bg.setFill(Color.GREY);
         bg.setOpacity(0.5);
         bg.setTranslateX(-GameConstants.BUTTON_SIZE * 10);
@@ -56,23 +64,31 @@ public class Difficulty extends Region{
         space.getChildren().addAll(bg, text, bt);
         pane.getChildren().add(space);
 
-         Scene scene = new Scene(pane);
+        final Scene scene = new Scene(pane);
             primaryStage.setTitle("Difficulty");
             primaryStage.setScene(scene);
             primaryStage.setResizable(true);
             primaryStage.show();
     }
-    public class ButtonD extends StackPane{
+    /**
+     * 
+     * Button style.
+     *
+     */
+    public class ButtonD extends StackPane {
 
-        private Text text;
-
+        private final Text text;
+/**
+ * Button style.
+ * @param name name
+ */
         public ButtonD(final String name) {
-
+            super();
             text = new Text(name);
             text.setFont(Font.loadFont("file:res/JOJO____.ttf", 15));
             text.setFill(Color.DEEPPINK);
 
-            Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE * 6,GameConstants.BUTTON_SIZE*3);
+            final Rectangle bg = new Rectangle(GameConstants.BUTTON_SIZE * 6, GameConstants.BUTTON_SIZE * 3);
             bg.setOpacity(0.8);
             bg.setFill(Color.CYAN);
 
@@ -90,11 +106,11 @@ public class Difficulty extends Region{
                 text.setFill(Color.DEEPPINK);
             });
 
-            DropShadow drop = new DropShadow(50, Color.WHITE);
+            final DropShadow drop = new DropShadow(50, Color.WHITE);
             drop.setInput(new Glow());
 
             setOnMousePressed(event -> setEffect(drop));
-            setOnMouseReleased(event -> setEffect(null));  
+            setOnMouseReleased(event -> setEffect(null));
         }
     }
 }

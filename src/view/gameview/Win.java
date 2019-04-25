@@ -28,7 +28,7 @@ public class Win extends Region{
         
         VBox space = new VBox();
         
-        ImageLoader im = new ImageLoader("res/lose.jpg");
+        ImageLoader im = new ImageLoader("res/win.jpg");
 
         pane.getChildren().add(im.getImage());
         

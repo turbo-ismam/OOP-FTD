@@ -1,6 +1,6 @@
 package model.enemy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import model.entity.Entity;
 import model.map.MapTile;
@@ -53,9 +53,9 @@ public interface Enemy extends Entity {
   void setDamage(int damage);
 /**
  * Method to set the map path.
- * @param sentiero sentiero
+ * @param path sentiero
  */
-  void setPath(ArrayList<MapTile> sentiero);
+  void setPath(List<MapTile> path);
   /**
    * 
    * @return Direction.

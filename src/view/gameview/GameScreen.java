@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import constants.GameConstants;
 import controller.gamecontroller.GameController;
+import model.GameStatus;
 import model.enemy.Enemy;
 import model.entity.Entity;
 import model.map.MapTile;
@@ -30,6 +31,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import utilityclasses.Pair;
 
 /**
@@ -41,10 +43,12 @@ public class GameScreen extends Region {
 
     private static final Image LOGO = new Image("path.png");
     private static final Image TOWERLOGO = new Image("hierophant.png");
-    private static final Image TOWERLOGO1 = new Image("hierophant.png");
+    private static final Image TOWERLOGO1 = new Image("magician.png");
     private static final Image TOWERLOGO2 = new Image("star.png");
     private static final Image GRASSLOGO = new Image("grass.jpg");
     private static final Image EMERALD = new Image("1.png");
+    private static final Image RUBY = new Image("ruby.png");
+    private static final Image AMETHYST = new Image("amethyst2.png");
     private static final Image ENEMY = new Image("dio.png");
     private ArrayList<GridButton> btList = new ArrayList<>();
     private ArrayList<MapTile> mappa;
@@ -59,6 +63,8 @@ public class GameScreen extends Region {
     private Text text3 = new Text("NAME" + "  " + 0);
     private ArrayList<PathButton> btlist2 = new ArrayList<>();
     private static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
+    private final Win vittoria = new Win();
+    private final Lose sconfitta = new Lose();
     //MainMenu test = new MainMenu();
 /**
  * Main method to create the view.
@@ -294,12 +300,36 @@ public class GameScreen extends Region {
      * Game render.
      * @param entityList EntityList
      */
-    public void render(final ArrayList<Entity> entityList) {
+    public void render(final ArrayList<Entity> entityList,final GameStatus status) {
         ArrayList<Enemy> p = new ArrayList<Enemy>();
         ArrayList<Projectile> j = new ArrayList<Projectile>();
         ArrayList<Tower> t = new ArrayList<Tower>();
         Platform.runLater(() -> {
 
+            if(status.WON == gc.getModel().getGameStatus()) {
+                final Stage stage = new Stage();
+                gc.killGameLoop();
+                try {
+                    vittoria.start(stage);
+                } catch (Exception e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+            else {
+                if (status.LOST == gc.getModel().getGameStatus()) {
+                    final Stage stage = new Stage();
+                    gc.killGameLoop();
+                    try {
+                        sconfitta.start(stage);
+                    } catch (Exception e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                   
+                }
+            }
+            
             for (Entity e:entityList) {
                 if (e instanceof Tower) {
                     t.add((Tower) e);
@@ -333,11 +363,31 @@ public class GameScreen extends Region {
                     j.add((Projectile) e);
                     for (GridButton b:btList) {
 
-                        ImageView img = new ImageView(EMERALD);
-                        img.setFitWidth(BUTTONSIZE);
-                        img.setFitHeight(BUTTONSIZE);
                         if (e.getLocation().getX() == b.position.getX() && e.getLocation().getY() == b.position.getY()) {
-                            b.getChildren().add(img);
+
+
+                            for (Tower v:t) {
+                                if (v.getLocation().equals(b.getPosition())) {
+                                    if (v.getType() == TowerType.BASIC) {
+                                        final ImageView img = new ImageView(EMERALD);
+                                        img.setFitWidth(BUTTONSIZE);
+                                        img.setFitHeight(BUTTONSIZE);
+                                        b.getChildren().add(img);
+                                    }
+                                    if (v.getType() == TowerType.CANNON) {
+                                        final ImageView img2 = new ImageView(AMETHYST);
+                                        img2.setFitWidth(BUTTONSIZE);
+                                        img2.setFitHeight(BUTTONSIZE);
+                                        b.getChildren().add(img2);
+                                    }
+                                    if (v.getType() == TowerType.RANGED) {
+                                        final ImageView img4 = new ImageView(RUBY);
+                                        img4.setFitWidth(BUTTONSIZE);
+                                        img4.setFitHeight(BUTTONSIZE);
+                                        b.getChildren().add(img4);
+                                    }
+                                }
+                            }                           
                         }
                         else {
                             ImageView img1 = new ImageView(GRASSLOGO);
@@ -360,12 +410,39 @@ public class GameScreen extends Region {
                                         img4.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img4);
                                     }
+                                    if (v.getType() == TowerType.RANGED) {
+                                        ImageView img5 = new ImageView(TOWERLOGO1);
+                                        img5.setFitWidth(BUTTONSIZE);
+                                        img5.setFitHeight(BUTTONSIZE);
+                                        b.getChildren().add(img5);
+                                    }
                                 }
                             }
                             for (Projectile q:j) {
                                 if (q.getLocation().equals(b.getPosition())) {
 
-                                    b.getChildren().add(img);
+                                    for (Tower v:t) {
+                                        if (v.getLocation().equals(b.getPosition())) {
+                                            if (v.getType() == TowerType.BASIC) {
+                                                final ImageView img = new ImageView(EMERALD);
+                                                img.setFitWidth(BUTTONSIZE);
+                                                img.setFitHeight(BUTTONSIZE);
+                                                b.getChildren().add(img);
+                                            }
+                                            if (v.getType() == TowerType.CANNON) {
+                                                final ImageView img2 = new ImageView(AMETHYST);
+                                                img2.setFitWidth(BUTTONSIZE);
+                                                img2.setFitHeight(BUTTONSIZE);
+                                                b.getChildren().add(img2);
+                                            }
+                                            if (v.getType() == TowerType.RANGED) {
+                                                final ImageView img4 = new ImageView(RUBY);
+                                                img4.setFitWidth(BUTTONSIZE);
+                                                img4.setFitHeight(BUTTONSIZE);
+                                                b.getChildren().add(img4);
+                                            }
+                                        }
+                                    }                           
                                 }
                             }
                         }

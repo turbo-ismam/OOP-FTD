@@ -19,9 +19,9 @@ import javafx.util.Duration;
 
 public class MainMenu extends Application{
 
-    private PlayerName name = new PlayerName();
-    private QuitHandler quitHandler = new QuitHandler(name.getgc());
-    private Difficulty avviso = new Difficulty();
+    private final PlayerName name = new PlayerName();
+    private final QuitHandler quitHandler = new QuitHandler(name.getgc());
+    private final Difficulty avviso = new Difficulty();
 
     static final double BUTTONSIZE = GameConstants.BUTTON_SIZE;
     static final double WIDTH = GameConstants.GAME_WIDTH;
@@ -35,51 +35,51 @@ public class MainMenu extends Application{
  */
     public Parent createContent() throws IOException {
 
-            String musicFile = "res/Jojo.mp3";
-            Media sound = new Media(new File(musicFile).toURI().toString());
-            MediaPlayer mediaPlayer1 = new MediaPlayer(sound);
+            final String musicFile = "res/Jojo.mp3";
+            final Media sound = new Media(new File(musicFile).toURI().toString());
+            final MediaPlayer mediaPlayer1 = new MediaPlayer(sound);
             this.vol = 0;
             mediaPlayer1.setVolume(0.1); //SISTEMA QUI IL VOLUME
 
-            Pane root = new Pane();
+            final Pane root = new Pane();
             root.setPrefSize(WIDTH, HEIGHT);
 
-            LayoutImages im = new LayoutImages();
+            final LayoutImages im = new LayoutImages();
 
             root.getChildren().add(im.getImgv());
 
             /* Effetto sonoro per i bottoni */
-            String musicFile1 = "res/ZA WARUDO.mp3";
-            Media sound1 = new Media(new File(musicFile1).toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(sound1);
+            final String musicFile1 = "res/ZA WARUDO.mp3";
+            final Media sound1 = new Media(new File(musicFile1).toURI().toString());
+            final MediaPlayer mediaPlayer = new MediaPlayer(sound1);
             mediaPlayer.setVolume(1);
             mediaPlayer.setStopTime(Duration.seconds(1.5));
 
 
-            VBox menu0 = new VBox(BUTTONSIZE); // box bottoni start-options-exit
+            final VBox menu0 = new VBox(BUTTONSIZE); // box bottoni start-options-exit
             menu0.setTranslateX(BUTTONSIZE * 19.5 - BUTTONSIZE * 5); 
             menu0.setTranslateY(BUTTONSIZE * 11.5 - BUTTONSIZE * 2); 
 
-            VBox menu1 = new VBox(BUTTONSIZE); // box bottoni back-sound-difficoulty
+            final VBox menu1 = new VBox(BUTTONSIZE); // box bottoni back-sound-difficoulty
             menu1.setTranslateX(BUTTONSIZE * 19.5 - BUTTONSIZE * 5); 
             menu1.setTranslateY(BUTTONSIZE * 11.5 - BUTTONSIZE * 2);
 
-            VBox menu3 = new VBox(BUTTONSIZE); //box bottoni back-easy-medium-hard
+            final VBox menu3 = new VBox(BUTTONSIZE); //box bottoni back-easy-medium-hard
             menu3.setTranslateX(BUTTONSIZE * 19.5 - BUTTONSIZE * 5); 
             menu3.setTranslateY(BUTTONSIZE * 11.5 - BUTTONSIZE * 2);
 
-            VBox menu8 = new VBox(BUTTONSIZE); //box bottoni volume low-medium-high
+            final VBox menu8 = new VBox(BUTTONSIZE); //box bottoni volume low-medium-high
             menu8.setTranslateX(BUTTONSIZE * 19.5 - BUTTONSIZE * 5); 
             menu8.setTranslateY(BUTTONSIZE * 11.5 - BUTTONSIZE * 2);
 
-            VBox menu4 = new VBox(BUTTONSIZE); // sfondo giorno
-            VBox menu2 = new VBox(BUTTONSIZE); // logo prima schermata
-            VBox menu5 = new VBox(BUTTONSIZE); // rettangolo grigio per rendere bello tutti gli sfondi
-            VBox menu6 = new VBox(BUTTONSIZE); // sfondo jotaro
-            VBox menu7 = new VBox(BUTTONSIZE); //sfondo sound
+            final VBox menu4 = new VBox(BUTTONSIZE); // sfondo giorno
+            final VBox menu2 = new VBox(BUTTONSIZE); // logo prima schermata
+            final VBox menu5 = new VBox(BUTTONSIZE); // rettangolo grigio per rendere bello tutti gli sfondi
+            final VBox menu6 = new VBox(BUTTONSIZE); // sfondo jotaro
+            final VBox menu7 = new VBox(BUTTONSIZE); //sfondo sound
 
 
-            Rectangle bg = new Rectangle(WIDTH + BUTTONSIZE, HEIGHT + BUTTONSIZE);
+            final Rectangle bg = new Rectangle(WIDTH + BUTTONSIZE, HEIGHT + BUTTONSIZE);
             bg.setFill(Color.GREY);
             bg.setOpacity(0.4);
 
@@ -97,11 +97,11 @@ public class MainMenu extends Application{
             menu7.setTranslateY(BUTTONSIZE * 30);
             menu8.setTranslateY(BUTTONSIZE * 30);
 
-            VolumeButton soundback = new VolumeButton("Back");
-            VolumeButton low = new VolumeButton("Low");
-            VolumeButton medium = new VolumeButton("Medium");
-            VolumeButton high = new VolumeButton("High");
-            VolumeButton mute = new VolumeButton("Mute");
+            final VolumeButton soundback = new VolumeButton("Back");
+            final VolumeButton low = new VolumeButton("Low");
+            final VolumeButton medium = new VolumeButton("Medium");
+            final VolumeButton high = new VolumeButton("High");
+            final VolumeButton mute = new VolumeButton("Mute");
 
             low.setOnMouseClicked(event -> {
 
@@ -128,13 +128,13 @@ public class MainMenu extends Application{
             mediaPlayer.play();
                 root.getChildren().add(menu1);
 
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu7);
+                final TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu7);
                 tt.setToY(menu3.getTranslateY() + HEIGHT);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
+                final TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
                 tt1.setToY(menu3.getTranslateY());
 
-                TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.25), menu8);
+                final TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.25), menu8);
                 tt0.setToY(menu6.getTranslateY() - HEIGHT);
 
                 tt0.play();
@@ -147,7 +147,7 @@ public class MainMenu extends Application{
                 });
             });
 
-            MenuButton btnSound = new MenuButton("sound");
+            final MenuButton btnSound = new MenuButton("sound");
             btnSound.setOnMouseClicked(event -> {
                 mediaPlayer.stop();
                 mediaPlayer.play();
@@ -156,13 +156,13 @@ public class MainMenu extends Application{
                 root.getChildren().add(menu5);
                 root.getChildren().add(menu8);
 
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
+                final TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
                 tt.setToY(menu1.getTranslateY() - HEIGHT);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu7);
+                final TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu7);
                 tt1.setToY(menu1.getTranslateY() - HEIGHT * 0.439);
 
-                TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), menu8);
+                final TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), menu8);
                 tt2.setToY(menu1.getTranslateY() - BUTTONSIZE * 3);
 
                 tt.play();
@@ -174,7 +174,7 @@ public class MainMenu extends Application{
                 });
 
             });
-            MenuButton btnResume = new MenuButton("play");
+            final MenuButton btnResume = new MenuButton("play");
             btnResume.setOnMouseClicked(event -> {
                 try {
                     root.getChildren().setAll(name.createContent());
@@ -186,7 +186,7 @@ public class MainMenu extends Application{
             });
 
             /* ANIMAZIONI BOTTONI */
-            MenuButton btnOptions = new MenuButton("options");
+            final MenuButton btnOptions = new MenuButton("options");
             btnOptions.setOnMouseClicked(event -> {
                 mediaPlayer.stop();
                 mediaPlayer.play();
@@ -195,16 +195,16 @@ public class MainMenu extends Application{
                 root.getChildren().add(menu5);
                 root.getChildren().add(menu1);
 
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu0);
+                final TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu0);
                 tt.setToX(menu0.getTranslateX() - WIDTH);
 
-                TranslateTransition t0 = new TranslateTransition(Duration.seconds(0.25), menu2);
+                final TranslateTransition t0 = new TranslateTransition(Duration.seconds(0.25), menu2);
                 t0.setToX(menu2.getTranslateX() - WIDTH);
 
-                TranslateTransition t4 = new TranslateTransition(Duration.seconds(0.5), menu4);
+                final TranslateTransition t4 = new TranslateTransition(Duration.seconds(0.5), menu4);
                 t4.setToX(menu0.getTranslateX() - WIDTH * 0.439);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
+                final TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
                 tt1.setToX(menu0.getTranslateX());
 
                 tt.play();
@@ -218,28 +218,28 @@ public class MainMenu extends Application{
                 });
             });
 
-            MenuButton btnExit = new MenuButton("exit");
+            final MenuButton btnExit = new MenuButton("exit");
             btnExit.setOnMouseClicked(event -> {
                 System.exit(0);
             });
 
-            MenuButton btnBack = new MenuButton("back");
+            final MenuButton btnBack = new MenuButton("back");
             btnBack.setOnMouseClicked(event -> {
                 mediaPlayer.stop();
                 mediaPlayer.play();
                 root.getChildren().add(menu2);
                 root.getChildren().add(menu0);
 
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
+                final TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
                 tt.setToX(menu1.getTranslateX() + WIDTH);
 
-                TranslateTransition t4 = new TranslateTransition(Duration.seconds(0.25), menu4);
+                final TranslateTransition t4 = new TranslateTransition(Duration.seconds(0.25), menu4);
                 t4.setToX(menu4.getTranslateX() + WIDTH);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu0);
+                final TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu0);
                 tt1.setToX(menu1.getTranslateX());
 
-                TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.5), menu2);
+                final TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.5), menu2);
                 tt0.setToX(menu1.getTranslateX() - WIDTH / 2.25);
 
                 t4.play();
@@ -253,20 +253,20 @@ public class MainMenu extends Application{
                 });
             });
 
-            MenuButton btnDiff = new MenuButton("difficulty");
+            final MenuButton btnDiff = new MenuButton("difficulty");
             btnDiff.setOnMouseClicked(event -> {
                 mediaPlayer.stop();
                 mediaPlayer.play();
                 root.getChildren().add(menu6);
                 root.getChildren().add(menu3);
 
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
+                final TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
                 tt.setToX(menu1.getTranslateX() - WIDTH);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu3);
+                final TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu3);
                 tt1.setToX(menu1.getTranslateX());
 
-                TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), menu6);
+                final TranslateTransition tt2 = new TranslateTransition(Duration.seconds(0.5), menu6);
                 tt2.setToX(menu1.getTranslateX() - WIDTH / 2.265);
 
                 tt.play();
@@ -279,23 +279,23 @@ public class MainMenu extends Application{
                 });
             });
 
-            MenuButton btnEasy = new MenuButton("easy");
-            MenuButton btnMedium = new MenuButton("medium");
-            MenuButton btnHard = new MenuButton("hard");
-            MenuButton btnBack1 = new MenuButton("back");
+            final MenuButton btnEasy = new MenuButton("easy");
+            final MenuButton btnMedium = new MenuButton("medium");
+            final MenuButton btnHard = new MenuButton("hard");
+            final MenuButton btnBack1 = new MenuButton("back");
 
             btnBack1.setOnMouseClicked(event -> {
                 mediaPlayer.stop();
                 mediaPlayer.play();
                 root.getChildren().add(menu1);
 
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu3);
+                final TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu3);
                 tt.setToX(menu3.getTranslateX() + WIDTH);
 
-                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
+                final TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu1);
                 tt1.setToX(menu3.getTranslateX());
 
-                TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.25), menu6);
+                final TranslateTransition tt0 = new TranslateTransition(Duration.seconds(0.25), menu6);
                 tt0.setToX(menu6.getTranslateX() + WIDTH);
 
                 tt0.play();
@@ -312,7 +312,7 @@ public class MainMenu extends Application{
             btnEasy.setOnMouseClicked(event -> {
                 name.getgc().setDifficulty(1);
                 System.out.println("facile");
-                Stage stage = new Stage();
+                final Stage stage = new Stage();
                 try {
                     avviso.start(stage);
                 } catch (Exception e) {
@@ -324,7 +324,7 @@ public class MainMenu extends Application{
             btnMedium.setOnMouseClicked(event -> {
                 name.getgc().setDifficulty(2);
                 System.out.println("normale");
-                Stage stage = new Stage();
+                final Stage stage = new Stage();
                 try {
                     avviso.start(stage);
                 } catch (Exception e) {
@@ -336,7 +336,7 @@ public class MainMenu extends Application{
             btnHard.setOnMouseClicked(event -> {
                 name.getgc().setDifficulty(3);
                 System.out.println("difficile");
-                Stage stage = new Stage();
+                final Stage stage = new Stage();
                 try {
                     avviso.start(stage);
                 } catch (Exception e) {
@@ -361,7 +361,7 @@ public class MainMenu extends Application{
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
-        Scene scene = new Scene(createContent());
+        final Scene scene = new Scene(createContent());
         primaryStage.setTitle("Jojo Menu");
         primaryStage.setOnCloseRequest(quitHandler);
         primaryStage.setScene(scene);
