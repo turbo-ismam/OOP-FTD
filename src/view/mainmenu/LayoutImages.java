@@ -3,6 +3,7 @@ package view.mainmenu;
 import java.io.IOException;
 
 import constants.ViewConstants;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -27,7 +28,8 @@ public class LayoutImages {
      */
     public ImageView getimgv1() throws IOException {
 
-        final ImageLoader imgv1 = new ImageLoader("res/logo.png");
+        //final Image imgv1 = new Image(this.getClass().getResourceAsStream("/logo.png"));
+        final ImageLoader imgv1 = new ImageLoader("/logo.png");
         imgv1.getImage().setFitWidth(BUTTONSIZE * 13);
         imgv1.getImage().setFitHeight(BUTTONSIZE * 5);
         imgv1.getImage().setTranslateX(BUTTONSIZE * 13);
@@ -42,7 +44,7 @@ public class LayoutImages {
      */
     public ImageView getImgv2() throws IOException {
 
-        final ImageLoader imgv2 = new ImageLoader("res/giorno.jpg");
+        final ImageLoader imgv2 = new ImageLoader("/giorno.jpg");
         imgv2.getImage().setFitWidth(BUTTONSIZE * 39); 
         imgv2.getImage().setFitHeight(BUTTONSIZE * 23); 
         imgv2.getImage().setTranslateX(BUTTONSIZE * 1.45); 
@@ -56,7 +58,7 @@ public class LayoutImages {
      */
     public ImageView getImgv3() throws IOException {
 
-        final ImageLoader imgv3 = new ImageLoader("res/jotaro.png");
+        final ImageLoader imgv3 = new ImageLoader("/jotaro.png");
         imgv3.getImage().setFitWidth(BUTTONSIZE * 39); 
         imgv3.getImage().setFitHeight(BUTTONSIZE * 23); 
         imgv3.getImage().setTranslateX(BUTTONSIZE * 1.45); 
@@ -70,7 +72,7 @@ public class LayoutImages {
      */
     public ImageView getImgv() throws IOException {
 
-        final ImageLoader imgv = new ImageLoader("res/62266.jpg");
+        final ImageLoader imgv = new ImageLoader("/62266.jpg");
         imgv.getImage().setFitWidth(WIDTH + BUTTONSIZE / 2);
         imgv.getImage().setFitHeight(HEIGHT + BUTTONSIZE / 2);
         return imgv.getImage();
@@ -84,7 +86,7 @@ public class LayoutImages {
      */
     public ImageView getImgv7() throws IOException {
 
-        final ImageLoader imgv7 = new ImageLoader("res/sound.jpg");
+        final ImageLoader imgv7 = new ImageLoader("/sound.jpg");
         imgv7.getImage().setFitWidth(BUTTONSIZE * 39);
         imgv7.getImage().setFitHeight(BUTTONSIZE * 23);
         imgv7.getImage().setTranslateX(BUTTONSIZE * 1.45);

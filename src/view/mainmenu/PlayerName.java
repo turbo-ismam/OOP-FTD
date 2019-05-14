@@ -1,6 +1,7 @@
 package view.mainmenu;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import constants.ViewConstants;
 import controller.gamecontroller.GameController;
@@ -52,12 +53,13 @@ public class PlayerName extends Region {
         bg.setOpacity(0.5);
 
         final Text tx = new Text("Inserisci il\ntuo nome!");
-        tx.setFont(Font.loadFont("file:res/JOJO____.ttf", ViewConstants.BUTTON_SIZE));
+        final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+        tx.setFont(Font.loadFont(is, ViewConstants.BUTTON_SIZE));
         tx.setFill(Color.INDIGO);
         tx.setTranslateY(ViewConstants.BUTTON_SIZE * 5);
         tx.setTranslateX(ViewConstants.BUTTON_SIZE * 2);
 
-        final ImageLoader im = new ImageLoader("res/player.png");
+        final ImageLoader im = new ImageLoader("/player.png");
         im.getImage().prefHeight(ViewConstants.HEIGHT);
         im.getImage().prefWidth(ViewConstants.WIDTH);
         //root.setPrefSize(ViewConstants.gameWidth, ViewConstants.gameHeight);
@@ -99,8 +101,9 @@ public class PlayerName extends Region {
  */
         public ButtonD(final String name) {
             super();
+            final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
             text = new Text(name);
-            text.setFont(Font.loadFont("file:res/JOJO____.ttf", ViewConstants.BUTTON_SIZE));
+            text.setFont(Font.loadFont(is, ViewConstants.BUTTON_SIZE));
             text.setFill(Color.INDIGO);
 
             final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE * 6, ViewConstants.BUTTON_SIZE * 3);

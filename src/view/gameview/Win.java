@@ -1,11 +1,15 @@
 package view.gameview;
 
+import java.io.InputStream;
+
 import constants.ViewConstants;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -25,14 +29,14 @@ public class Win extends Region{
         final Pane pane = new Pane();
         pane.setPrefSize(1920, 1080);
         final Text text = new Text("Yare Yare Daze... You win!");
-        text.setFont(Font.loadFont("file:res/JOJO____.ttf", 40));
+        final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+        text.setFont(Font.loadFont(is, 40));
         text.setFill(Color.FUCHSIA);
         
         final VBox space = new VBox();
-        
-        ImageLoader im = new ImageLoader("res/win.jpg");
-
-        pane.getChildren().add(im.getImage());
+        final Image img = new Image(this.getClass().getResourceAsStream("/lose.jpg"));
+        final ImageView imgv = new ImageView(img);
+        pane.getChildren().add(imgv);
         
         final ButtonD bt = new ButtonD("Play again\nIts a bait");
         bt.setOnMouseClicked(event -> {
@@ -65,7 +69,8 @@ public class Win extends Region{
         public ButtonD(final String name) {
             super();
             text = new Text(name);
-            text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+            final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+            text.setFont(Font.loadFont(is, 25));
             text.setFill(Color.DEEPPINK);
             
             final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE * 10, ViewConstants.BUTTON_SIZE * 3);

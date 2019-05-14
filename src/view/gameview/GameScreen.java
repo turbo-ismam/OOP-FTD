@@ -1,6 +1,8 @@
 package view.gameview;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,17 +46,17 @@ import utilityclasses.Pair;
  *
  */
 public class GameScreen extends Region {
-
-    private static final Image LOGO = new Image("path.png");
-    private static final Image TOWERLOGO = new Image("hierophant.png");
-    private static final Image TOWERLOGO1 = new Image("magician.png");
-    private static final Image TOWERLOGO2 = new Image("star.png");
-    private static final Image GRASSLOGO = new Image("grass.jpg");
-    private static final Image EMERALD = new Image("1.png");
-    private static final Image RUBY = new Image("ruby.png");
-    private static final Image AMETHYST = new Image("amethyst2.png");
-    private static final Image ENEMY = new Image("dio.png");
-    private static final Image TANK = new Image("stand.png");
+    
+    private final Image logo = new Image(this.getClass().getResourceAsStream("/path.png"));
+    private final Image towerlogo = new Image(this.getClass().getResourceAsStream("/hierophant.png"));
+    private final Image towerlogo1 = new Image(this.getClass().getResourceAsStream("/magician.png"));
+    private final Image towerlogo2 = new Image(this.getClass().getResourceAsStream("/star.png"));
+    private final Image grasslogo = new Image(this.getClass().getResourceAsStream("/grass.jpg"));
+    private final Image emerald = new Image(this.getClass().getResourceAsStream("/1.png"));
+    private final Image ruby = new Image(this.getClass().getResourceAsStream("/ruby.png"));
+    private final Image amethyst = new Image(this.getClass().getResourceAsStream("/amethyst2.png"));
+    private final Image enemy = new Image(this.getClass().getResourceAsStream("/dio.png"));
+    private final Image tank = new Image(this.getClass().getResourceAsStream("/stand.png"));
     private final List<GridButton> btList = new ArrayList<>();
     private final List<MapTile> mappa;
     private final GameController gc;
@@ -71,9 +73,7 @@ public class GameScreen extends Region {
     private final Win vittoria = new Win();
     private final Lose sconfitta = new Lose();
     private final double volume;
-    private static final String MUSICFILE = "res/ost.mp3";
-    private final Media sound = new Media(new File(MUSICFILE).toURI().toString());
-    private final MediaPlayer mediaPlayer = new MediaPlayer(sound);
+   
 /**
  * Main method to create the view.
  * @return root pane
@@ -81,13 +81,22 @@ public class GameScreen extends Region {
     @SuppressWarnings({ "PMD.AvoidDuplicateLiterals", "PMD.AvoidThrowingNullPointerException" })
     public Parent createContent() {
         
+        Media sound = null;
+        try {
+            sound = new Media(this.getClass().getResource("/ost.mp3").toURI().toString());
+        } catch (URISyntaxException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        final MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        
         final String style2 = "-fx-background-color: rgba(50, 100, 200, 0.5);"; //trasparente
         final String style = "-fx-background-color: rgba(150, 100, 50, 0.5);"; //marrone
         
         /* FINESTRA GENERALE */
         final Pane root = new Pane(); 
         root.setPrefSize(BUTTONSIZE * 38, BUTTONSIZE * 25);
-        final Image img = new Image("gameMenuImage.png");
+        final Image img = new Image("/gameMenuImage.png");
         final ImageView imgv = new ImageView(img);
         imgv.setFitWidth(BUTTONSIZE * 40);
         imgv.setFitHeight(BUTTONSIZE * 26);
@@ -132,20 +141,21 @@ public class GameScreen extends Region {
         menu2.setTranslateY(BUTTONSIZE * 2);
         menu2.setTranslateX(BUTTONSIZE);
         menu2.setBackground(Background.EMPTY);
-
-        text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+        final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+        final Font f = Font.loadFont(is, 25);
+        text.setFont(f);
         text.setFill(Color.GOLD);
         text.setTranslateY(BUTTONSIZE);
 
-        text1.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+        text1.setFont(f);
         text1.setFill(Color.LAWNGREEN);
         text1.setTranslateY(BUTTONSIZE);
 
-        text2.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+        text2.setFont(f);
         text2.setFill(Color.DARKRED);
         text2.setTranslateY(BUTTONSIZE);
 
-        text3.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+        text3.setFont(f);
         text3.setFill(Color.DARKBLUE);
         text3.setTranslateY(BUTTONSIZE);
 
@@ -197,14 +207,14 @@ public class GameScreen extends Region {
                     }
                     else {
                         if (this.type1) {
-                            final ImageView imgt = new ImageView(TOWERLOGO);
+                            final ImageView imgt = new ImageView(towerlogo);
                             imgt.setFitWidth(BUTTONSIZE);
                             imgt.setFitHeight(BUTTONSIZE);
                             bt.getChildren().add(imgt);
                             gc.handleInput(new InputImpl(InputType.ADD_TOWER, TowerType.BASIC, x, y));
                         }
                         else if (this.type2) {
-                            final ImageView imgt = new ImageView(TOWERLOGO1);
+                            final ImageView imgt = new ImageView(towerlogo1);
                             imgt.setFitWidth(BUTTONSIZE);
                             imgt.setFitHeight(BUTTONSIZE);
                             bt.getChildren().add(imgt);
@@ -213,7 +223,7 @@ public class GameScreen extends Region {
                         }
 
                         else if (this.type3) {
-                            final ImageView imgt = new ImageView(TOWERLOGO2);
+                            final ImageView imgt = new ImageView(towerlogo2);
                             imgt.setFitWidth(BUTTONSIZE);
                             imgt.setFitHeight(BUTTONSIZE);
                             bt.getChildren().add(imgt);
@@ -222,7 +232,7 @@ public class GameScreen extends Region {
                         }
 
                         else if (this.remove) {
-                            final ImageView imgt = new ImageView(GRASSLOGO);
+                            final ImageView imgt = new ImageView(grasslogo);
                             imgt.setFitWidth(BUTTONSIZE);
                             imgt.setFitHeight(BUTTONSIZE);
                             bt.getChildren().setAll(imgt);
@@ -348,11 +358,11 @@ public class GameScreen extends Region {
                     p.add((Enemy) e);
                     for (final PathButton b:btlist2) {
                         if (e.getLocation().equals(b.getPosition())) {
-                            final ImageView r = new ImageView(ENEMY);
+                            final ImageView r = new ImageView(enemy);
                             r.setFitWidth(BUTTONSIZE);
                             r.setFitHeight(BUTTONSIZE);
 
-                            final ImageView r2 = new ImageView(TANK);
+                            final ImageView r2 = new ImageView(tank);
                             r2.setFitWidth(BUTTONSIZE);
                             r2.setFitHeight(BUTTONSIZE);
 
@@ -364,17 +374,17 @@ public class GameScreen extends Region {
                             }
                         }
                         else {
-                            final ImageView img = new ImageView(LOGO);
+                            final ImageView img = new ImageView(logo);
                             img.setFitWidth(BUTTONSIZE);
                             img.setFitHeight(BUTTONSIZE);
                             b.getChildren().setAll(img);
                             for (final Enemy q:p) {
                                 if (q.getLocation().equals(b.getPosition())) {
-                                    final ImageView r = new ImageView(ENEMY);
+                                    final ImageView r = new ImageView(enemy);
                                     r.setFitWidth(BUTTONSIZE);
                                     r.setFitHeight(BUTTONSIZE);
 
-                                    final ImageView r2 = new ImageView(TANK);
+                                    final ImageView r2 = new ImageView(tank);
                                     r2.setFitWidth(BUTTONSIZE);
                                     r2.setFitHeight(BUTTONSIZE);
 
@@ -398,19 +408,19 @@ public class GameScreen extends Region {
                             for (Tower v:t) {
                                 if (v.getLocation().equals(b.getPosition())) {
                                     if (v.getType() == TowerType.BASIC) {
-                                        final ImageView img = new ImageView(EMERALD);
+                                        final ImageView img = new ImageView(emerald);
                                         img.setFitWidth(BUTTONSIZE);
                                         img.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img);
                                     }
                                     if (v.getType() == TowerType.CANNON) {
-                                        final ImageView img2 = new ImageView(AMETHYST);
+                                        final ImageView img2 = new ImageView(amethyst);
                                         img2.setFitWidth(BUTTONSIZE);
                                         img2.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img2);
                                     }
                                     if (v.getType() == TowerType.RANGED) {
-                                        final ImageView img4 = new ImageView(RUBY);
+                                        final ImageView img4 = new ImageView(ruby);
                                         img4.setFitWidth(BUTTONSIZE);
                                         img4.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img4);
@@ -419,11 +429,11 @@ public class GameScreen extends Region {
                             }
                         }
                         else {
-                            final ImageView img1 = new ImageView(GRASSLOGO);
+                            final ImageView img1 = new ImageView(grasslogo);
                             img1.setFitWidth(BUTTONSIZE);
                             img1.setFitHeight(BUTTONSIZE);
 
-                            final ImageView img3 = new ImageView(TOWERLOGO);
+                            final ImageView img3 = new ImageView(towerlogo);
                             img3.setFitWidth(BUTTONSIZE);
                             img3.setFitHeight(BUTTONSIZE);
                             b.getChildren().setAll(img1);
@@ -434,13 +444,13 @@ public class GameScreen extends Region {
                                         b.getChildren().add(img3);
                                     }
                                     if (v.getType() == TowerType.CANNON) {
-                                        final ImageView img4 = new ImageView(TOWERLOGO2);
+                                        final ImageView img4 = new ImageView(towerlogo2);
                                         img4.setFitWidth(BUTTONSIZE);
                                         img4.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img4);
                                     }
                                     if (v.getType() == TowerType.RANGED) {
-                                        final ImageView img5 = new ImageView(TOWERLOGO1);
+                                        final ImageView img5 = new ImageView(towerlogo1);
                                         img5.setFitWidth(BUTTONSIZE);
                                         img5.setFitHeight(BUTTONSIZE);
                                         b.getChildren().add(img5);
@@ -453,19 +463,19 @@ public class GameScreen extends Region {
                                     for (Tower v:t) {
                                         if (v.getLocation().equals(b.getPosition())) {
                                             if (v.getType() == TowerType.BASIC) {
-                                                final ImageView img = new ImageView(EMERALD);
+                                                final ImageView img = new ImageView(emerald);
                                                 img.setFitWidth(BUTTONSIZE);
                                                 img.setFitHeight(BUTTONSIZE);
                                                 b.getChildren().add(img);
                                             }
                                             if (v.getType() == TowerType.CANNON) {
-                                                final ImageView img2 = new ImageView(AMETHYST);
+                                                final ImageView img2 = new ImageView(amethyst);
                                                 img2.setFitWidth(BUTTONSIZE);
                                                 img2.setFitHeight(BUTTONSIZE);
                                                 b.getChildren().add(img2);
                                             }
                                             if (v.getType() == TowerType.RANGED) {
-                                                final ImageView img4 = new ImageView(RUBY);
+                                                final ImageView img4 = new ImageView(ruby);
                                                 img4.setFitWidth(BUTTONSIZE);
                                                 img4.setFitHeight(BUTTONSIZE);
                                                 b.getChildren().add(img4);
@@ -480,7 +490,7 @@ public class GameScreen extends Region {
             }
             if (entityList.isEmpty() || (entityList.get(entityList.size() - 1) instanceof Tower)) {
                 for (final PathButton b:btlist2) {
-                    final ImageView img = new ImageView(LOGO);
+                    final ImageView img = new ImageView(logo);
                     img.setFitWidth(BUTTONSIZE);
                     img.setFitHeight(BUTTONSIZE);
                     b.getChildren().setAll(img);
@@ -488,19 +498,19 @@ public class GameScreen extends Region {
                 for (final GridButton d:btList) {
                     for (final Tower v:t) {
                         if (v.getLocation().equals(d.getPosition())) {
-                            final ImageView img2 = new ImageView(TOWERLOGO);
+                            final ImageView img2 = new ImageView(towerlogo);
                             img2.setFitWidth(BUTTONSIZE);
                             img2.setFitHeight(BUTTONSIZE);
 
-                            final ImageView img3 = new ImageView(TOWERLOGO2);
+                            final ImageView img3 = new ImageView(towerlogo2);
                             img3.setFitWidth(BUTTONSIZE);
                             img3.setFitHeight(BUTTONSIZE);
 
-                            final ImageView img5 = new ImageView(TOWERLOGO1);
+                            final ImageView img5 = new ImageView(towerlogo1);
                             img5.setFitWidth(BUTTONSIZE);
                             img5.setFitHeight(BUTTONSIZE);
 
-                            final ImageView img4 = new ImageView(GRASSLOGO);
+                            final ImageView img4 = new ImageView(grasslogo);
                             img4.setFitWidth(BUTTONSIZE);
                             img4.setFitHeight(BUTTONSIZE);
                             d.getChildren().setAll(img4);

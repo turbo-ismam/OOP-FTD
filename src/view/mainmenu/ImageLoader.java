@@ -22,9 +22,10 @@ public class ImageLoader {
      */
     public ImageLoader(final String directory) throws IOException {
 
-        final InputStream is = Files.newInputStream(Paths.get(directory));
-        final Image logo = new Image(is);
-        is.close();
+        //final InputStream is = Files.newInputStream(Paths.get(directory));
+        //final Image logo = new Image(is);
+        //is.close();
+        final Image logo = new Image(this.getClass().getResourceAsStream(directory));
         this.imgv1 = new ImageView(logo);
     }
 

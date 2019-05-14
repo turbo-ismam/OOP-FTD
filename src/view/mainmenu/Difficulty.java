@@ -1,5 +1,7 @@
 package view.mainmenu;
 
+import java.io.InputStream;
+
 import constants.ViewConstants;
 import view.gameview.GameScreen;
 import view.gameview.Lose.ButtonD;
@@ -32,14 +34,15 @@ public class Difficulty extends Region {
         final Pane pane = new Pane();
         pane.setPrefSize(ViewConstants.GAME_WIDTH / 2, ViewConstants.GAME_HEIGHT / 2);
         final Text text = new Text("Difficulty changed!");
-        text.setFont(Font.loadFont("file:res/JOJO____.ttf", 25));
+        final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+        text.setFont(Font.loadFont(is, 25));
         text.setFill(Color.WHITE);
 
         final VBox space = new VBox();
         space.setTranslateX((ViewConstants.GAME_WIDTH / 2) / 2 - ViewConstants.BUTTON_SIZE * 2.75);
         space.setTranslateY((ViewConstants.GAME_HEIGHT / 2) / 2 - ViewConstants.BUTTON_SIZE * 1.5);
 
-        final ImageLoader im = new ImageLoader("res/difficoulty.jpg");
+        final ImageLoader im = new ImageLoader("/difficoulty.jpg");
         im.getImage().prefHeight(ViewConstants.GAME_HEIGHT / 8);
         im.getImage().prefWidth(ViewConstants.GAME_WIDTH / 8);
 
@@ -67,7 +70,7 @@ public class Difficulty extends Region {
         final Scene scene = new Scene(pane);
             primaryStage.setTitle("Difficulty");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(true);
+            primaryStage.setResizable(false);
             primaryStage.show();
     }
     /**
@@ -84,8 +87,10 @@ public class Difficulty extends Region {
  */
         public ButtonD(final String name) {
             super();
+            final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
             text = new Text(name);
-            text.setFont(Font.loadFont("file:res/JOJO____.ttf", 15));
+            
+            text.setFont(Font.loadFont(is, 15));
             text.setFill(Color.DEEPPINK);
 
             final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE * 6, ViewConstants.BUTTON_SIZE * 3);

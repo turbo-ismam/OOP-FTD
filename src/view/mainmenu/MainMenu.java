@@ -2,6 +2,7 @@ package view.mainmenu;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import constants.GameConstants;
 import constants.ViewConstants;
@@ -40,9 +41,13 @@ public class MainMenu extends Application{
  * @throws IOException 
  */
     public Parent createContent() throws IOException {
-
-            final String musicFile = "res/Jojo.mp3";
-            final Media sound = new Media(new File(musicFile).toURI().toString());
+            Media sound = null;
+            try {
+                sound = new Media(this.getClass().getResource("/Jojo.mp3").toURI().toString());
+            } catch (URISyntaxException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
             final MediaPlayer mediaPlayer1 = new MediaPlayer(sound);
             this.vol = 0;
             mediaPlayer1.setVolume(0.1); 
@@ -55,8 +60,13 @@ public class MainMenu extends Application{
             root.getChildren().add(im.getImgv());
 
             /* Effetto sonoro per i bottoni */
-            final String musicFile1 = "res/ZA WARUDO.mp3";
-            final Media sound1 = new Media(new File(musicFile1).toURI().toString());
+            Media sound1 = null;
+            try {
+                sound1 = new Media(this.getClass().getResource("/ZA WARUDO.mp3").toURI().toString());
+            } catch (URISyntaxException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
             final MediaPlayer mediaPlayer = new MediaPlayer(sound1);
             mediaPlayer.setVolume(1);
             mediaPlayer.setStopTime(Duration.seconds(1.5));

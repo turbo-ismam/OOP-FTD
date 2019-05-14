@@ -1,4 +1,6 @@
 package view.mainmenu;
+import java.io.InputStream;
+
 import constants.ViewConstants;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
@@ -23,7 +25,8 @@ public class MenuButton extends StackPane {
     public MenuButton(final String name) {
         super();
         text = new Text(name);
-        text.setFont(Font.loadFont("file:res/JOJO____.ttf", ViewConstants.BUTTON_SIZE / 2));
+        final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+        text.setFont(Font.loadFont(is, ViewConstants.BUTTON_SIZE / 2));
         text.setFill(Color.DEEPPINK);
 
         final Rectangle bg = new Rectangle(300, 70); 

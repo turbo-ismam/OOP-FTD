@@ -1,11 +1,15 @@
 package view.gameview;
 
+import java.io.InputStream;
+
 import constants.ViewConstants;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -25,14 +29,14 @@ public class Lose extends Region{
         final Pane pane = new Pane();
         pane.setPrefSize(1920, 1080);
         final Text text = new Text("Yare Yare Daze...\n    Game Lost!\n      Loooser!");
-        text.setFont(Font.loadFont("file:res/JOJO____.ttf", 40));
+        final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
+        text.setFont(Font.loadFont(is, 40));
         text.setFill(Color.FUCHSIA);
         
         final VBox space = new VBox();
-        
-        final ImageLoader im = new ImageLoader("res/lose.jpg");
-
-        pane.getChildren().add(im.getImage());
+        final Image img = new Image(this.getClass().getResourceAsStream("/lose.jpg"));
+        final ImageView imgv = new ImageView(img);
+        pane.getChildren().add(imgv);
         
         final ButtonD bt = new ButtonD("Press here\n   Loser!");
         bt.setOnMouseClicked(event -> {
