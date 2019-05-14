@@ -1,12 +1,12 @@
 package view.gameview;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import constants.ViewConstants;
+import constants.GameConstants;
 import controller.gamecontroller.GameController;
 import model.GameStatus;
 import model.enemy.Enemy;
@@ -174,11 +174,11 @@ public class GameScreen extends Region {
         //menu3.setPadding(new Insets(buttonSize,buttonSize,buttonSize,buttonSize));
         menu3.setHgap(BUTTONSIZE);
         menu3.setVgap(BUTTONSIZE);
-        final PlaceTowerButton tower1 = new PlaceTowerButton("Basic");
+        final PlaceTowerButton tower1 = new PlaceTowerButton("Basic (" + GameConstants.BASIC_TOWER_COST + ")");
         menu3.getChildren().add(tower1);
-        final PlaceTowerButton tower2 = new PlaceTowerButton("Ranged");
+        final PlaceTowerButton tower2 = new PlaceTowerButton("Ranged ("+ GameConstants.RANGED_TOWER_COST + ")");
         menu3.getChildren().add(tower2);
-        final PlaceTowerButton tower3 = new PlaceTowerButton("Cannon");
+        final PlaceTowerButton tower3 = new PlaceTowerButton("Cannon ("+ GameConstants.CANNON_TOWER_COST + ")");
         menu3.getChildren().add(tower3);
         final PlaceTowerButton remove = new PlaceTowerButton("remove");
         menu3.getChildren().add(remove);
