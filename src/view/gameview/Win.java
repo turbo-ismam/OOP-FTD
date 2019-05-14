@@ -34,7 +34,7 @@ public class Win extends Region{
         text.setFill(Color.FUCHSIA);
         
         final VBox space = new VBox();
-        final Image img = new Image(this.getClass().getResourceAsStream("/lose.jpg"));
+        final Image img = new Image(this.getClass().getResourceAsStream("/win.jpg"));
         final ImageView imgv = new ImageView(img);
         pane.getChildren().add(imgv);
         

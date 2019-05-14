@@ -20,7 +20,7 @@ public class PlaceTowerButton extends StackPane{
             super();
             text = new Text(name);
             final InputStream is = this.getClass().getResourceAsStream("/JOJO____.ttf");
-            text.setFont(Font.loadFont(is, ViewConstants.BUTTON_SIZE/2));
+            text.setFont(Font.loadFont(is, ViewConstants.BUTTON_SIZE/2.7));
             text.setFill(Color.BLACK);
 
             final Rectangle bg = new Rectangle(ViewConstants.BUTTON_SIZE*5,ViewConstants.BUTTON_SIZE*2);
